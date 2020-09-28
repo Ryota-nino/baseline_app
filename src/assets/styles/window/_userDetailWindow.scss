@@ -1,0 +1,45 @@
+.userDetail-window {
+    background-color: $cWhite;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 27px 24px 36px 31px;
+    &__container {
+        display: flex;
+        align-items: center;
+        &> img {
+         width: 50px;   
+         height: 50px;
+        }
+        & > div {
+            margin-left: 16px;
+        }
+    }
+    &__wrap , &__list {
+        display: flex;
+        align-items: center;
+        color: $cGray1;
+    }
+    &__wrap {
+        margin-bottom: 2px;
+    }
+    &__name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-right: 12px;
+        color: $cBlack;
+    }
+    &__id {
+        font-size: 1.3rem;   
+    }
+
+    &__right-col {
+        display: flex;
+        align-items: center;
+    }
+    .btn--action {
+        height: 42px;
+        margin-left: 8px;
+    }
+}

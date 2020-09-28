@@ -1,0 +1,34 @@
+.studentListTable {
+    background-color: $cWhite;
+    border-radius: 10px;   
+    color: $cGray1;
+    padding: 24px 16px;
+    &__head {
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid #EBECED;
+        
+    }
+    &__head > ul {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        max-width: 690px;
+        margin: 0 auto;
+        
+    }
+    &__heading {
+        color: #98A1A9;
+        font-weight: normal;
+        width: 25%;
+    }
+    &__wrapper {
+        max-width: 748px;
+        margin: 0 auto;
+        
+    }
+    .studentCard-item {
+        margin-bottom: 16px;
+        max-width: 688px;
+    }
+}

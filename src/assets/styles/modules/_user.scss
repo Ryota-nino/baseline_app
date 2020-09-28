@@ -1,0 +1,22 @@
+.myAvatar {
+    display: flex;
+    align-items: center;
+    max-width: 158px;
+    position: relative;
+    cursor: pointer;
+    &__wrap {
+        margin-left: 16px;
+    }
+    &__name {
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+    &__id {
+        font-size: 1.1rem;
+        margin-top: 2px;
+        opacity: .5;
+    }
+    &__arrow {
+        margin-left: 24px;
+    }
+}

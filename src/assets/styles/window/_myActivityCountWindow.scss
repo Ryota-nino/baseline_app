@@ -1,0 +1,12 @@
+.myActivity-count {
+    background-color: $cWhite;
+    border-radius: 24px;
+    padding: 38px 58px 38px 52px;
+    .heading6 {
+        margin-bottom: 4px;
+    }
+    &__txt {
+        color: $cGray1;
+        margin-bottom: 8px;
+    }
+}

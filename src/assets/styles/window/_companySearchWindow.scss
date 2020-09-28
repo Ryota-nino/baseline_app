@@ -1,0 +1,26 @@
+.sideSearchBar {
+    background-color: $cWhite;
+    border-radius: 14px;
+    padding: 24px 18px 48px;
+    .search-item {
+        margin-bottom: 24px;
+    }
+    .checkbox-list {
+        font-size: 1.3rem;
+        &__heading {
+            margin-bottom: 10px;
+        }
+        &__wrap {
+            padding-left: 8px;   
+            height: 149px;
+            overflow-y: hidden;
+            transition: 0.3s ease;
+        }
+        .checkbox-item {
+            margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

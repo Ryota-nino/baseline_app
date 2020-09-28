@@ -1,0 +1,87 @@
+
+.activity-modal {
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+    width: 578px;
+    background-color: $cWhite;
+    border-radius: 10px;
+    padding-bottom: 12px;
+    line-height: 1.75;
+    
+
+    &.hide {
+        // transition: 0.3s ease;
+        display: none;
+        // opacity: 0;
+        // z-index: -100;
+    }
+
+    .closeIcon-btn {
+        position: fixed;
+        top: 26px;
+        right: 26px;
+        &::before, &::after {
+
+        }
+    }
+
+    .heading4 {
+        padding: 20px 0 18px;
+        text-align: center;
+        border-bottom: 1px solid $cBorder1;
+        margin-bottom: 16px;
+    }
+    &__input-area {
+        display: flex;
+        margin: 0 32px 0 24px;
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    &__textarea {
+        width: calc(100% - 60px);
+        margin-left: auto;
+        height: 195px;
+        padding: 0 10px;
+        overflow-x: none;
+        outline: none;
+    }
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        margin: 0 auto;
+        border-top: 1px solid $cBorder1;
+        padding: 8px 0 0 8px;
+        p {
+            cursor: pointer;
+        }
+        div {
+            display: flex;
+            color: $cGray1;
+            align-items: center;
+            button {
+                margin-left: 24px;
+            }
+        }
+    }
+}
+
+.modal-background {
+    background-color: rgba(0,0,0,.6);
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    &.hide {
+        transition: 0.3s ease;
+        opacity: 0;
+        z-index: -100;
+    }
+}

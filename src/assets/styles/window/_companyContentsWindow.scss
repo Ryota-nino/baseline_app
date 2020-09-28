@@ -1,0 +1,125 @@
+.companyContentsWindow {
+    background-color: $cWhite;
+    border-radius: 10px;
+    padding: 32px 0 48px;
+    &__wrapper {
+        max-width: 85%;
+        margin: 0 auto;
+    }
+    &__update {
+        font-size: 1.3rem;
+        color: $cGray1;
+        border-bottom: 1px solid $cBorder1;
+        padding-bottom: 8px;
+        text-align: right;
+    }
+    &__list {
+        border-bottom: 2px solid #EBECED;
+        ul {
+            color: $cYetLink;
+            display: flex;
+            padding-left: 32px;
+        }
+        li {
+            cursor: pointer;
+            width: 138px;
+            text-align: center;
+            margin-left: 24px;
+            a {
+                display: block;
+                
+                padding-bottom: 16px;
+            }
+            &:not(.current) {
+                transition: 0.3s ease;
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+            &.current {
+                font-weight: bold;
+                color: $cBlack;
+                position: relative;
+                &::after {
+                    content: "";
+                    display: block;
+                    height: 3px;
+                    width: 100%;
+                    background-color: $cMain;
+                    border-radius: 20px;
+                    position: absolute;
+                    bottom: -2px;
+                }
+            }
+        }
+        
+    }
+}
+
+.companyDetail-contents {
+    &.about {max-width: 80%;}
+    &:not(.about) {
+        max-width: 95%;
+    }
+    margin: 42px auto 0;
+    &__section {
+        margin-bottom: 32px;
+        & > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+    }
+    .company-detailItem {
+        margin-bottom: 16px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .heading6 {
+        margin-bottom: 8px;
+    }
+    
+    
+}
+
+
+.aboutCompany-item {
+    display: flex;
+    justify-content: space-between;
+    color: $cGray1;
+    border-bottom: 1px solid $cBorder1;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+    line-height: 1.75;
+    &__left-col {
+        flex: 0 1 102px;
+    }
+    &__right-col {
+        flex: 0 1 80%;
+    }
+    .heading5 {
+        line-height: 1.5;
+        color: $cBlack;
+    }
+    &__job {
+        margin-top: 6px;
+    }
+}
+.aboutCompany-Content {
+    padding-right: 110px;
+    &:not(:last-child) {
+        padding-bottom: 32px;
+        margin-bottom: 32px;
+        border-bottom: 1px solid $cBorder1;
+    }
+    .heading5 {
+        margin-bottom: 16px;
+    }
+    section {
+        margin-bottom: 24px;
+    }
+}
+
+

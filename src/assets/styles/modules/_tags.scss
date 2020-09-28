@@ -1,0 +1,21 @@
+.graduationYear-tag {
+    background-color: $cAccent3;
+    border-radius: 100px;
+    color: $cWhite;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: normal;
+    justify-content: center;
+    max-width: 54px;
+    height: 24px;
+}
+
+.pass-tag {
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 1.3rem;
+    background-color: $cAccent3;
+    color: $cWhite;
+    border-radius: 50px;
+}

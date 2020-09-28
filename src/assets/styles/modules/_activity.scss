@@ -1,0 +1,53 @@
+
+.activity-item {
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    & > img {
+        width: 36px;
+        height: 36px;
+        margin-right: 20px;
+    }
+    &__content {
+        
+    }   
+    &__head {
+        display: flex;
+        margin-bottom: 8px;
+    }
+    &__name {
+        margin-right: 10px;
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        color: $cGray1;
+    }
+    &__arrow {
+        position: absolute;
+        top:0;
+        right:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+    &__txt {
+        color: $cGray1;
+        font-size: 1.4rem;
+        line-height: 1.75;
+        padding-bottom: 40px;
+        border-bottom: 1px solid $cBorder1;
+        margin-bottom: 32px;
+        a {
+            color: $cLink;
+        }
+    }
+    &:last-child .activity-item__txt {
+        border: none;
+        padding: 0;
+    }
+}

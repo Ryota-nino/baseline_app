@@ -160,3 +160,48 @@
         }
     }
 }
+
+.user-card {
+    & > a {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding: 28px 0;
+        border-radius: 20px;
+        transition: 0.3s ease;
+        &::before {
+            content: "";
+            opacity: 0;
+            transition: 0.3s ease;
+        }
+        &:hover {
+            box-shadow: 0 0 30px rgba(0,0,0,.06);
+            &::before {
+                opacity: 1;
+                display: block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: $cLink;
+                position: absolute;
+                top: 18px;
+                right: 22px;
+            }
+        }
+    }
+    &__name {
+        font-weight: bold;
+    }
+    img {
+        margin-right: 16px;
+    }
+    &__wrap {
+        display: flex;
+        color: $cGray1;
+        p {
+            margin-right: 8px;
+        }
+    }
+
+    
+}

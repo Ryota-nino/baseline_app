@@ -1,11 +1,20 @@
-import React from 'react';
-import {TrashIcon} from '../../assets/images/index';
+import React, {useState} from 'react';
+import {GearIcon} from '../../assets/images/index';
+import {Link} from 'react-router-dom';
 import {UserDetailWindow} from '../user';
 import {MyActivityCountWindow} from '../activity';
 import {UserComment} from '../user';
-import { AnimatePresence,motion } from 'framer-motion';
+import {Modal} from '../modal';
+import { motion } from 'framer-motion';
 
-const UserPage:React.FC = () => {
+interface Props {
+  type: 'user' | 'mypage';
+  match?: any;
+}
+
+const UserPage:React.FC<Props> = props => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  let isUsrPage = props.type === 'user';
   const pageTransition = {
     in: {
       opacity: 1,
@@ -20,21 +29,25 @@ const UserPage:React.FC = () => {
     },
   }
   return (
-    <motion.section className="app-main mypage single" initial="out" animate="in" exit="out" variants={pageTransition}>
-      <h2 className="heading1">マイページ</h2>
-      <UserDetailWindow />
-      <p className="attention-txt"><img src={TrashIcon} alt="" />アカウントを削除する</p>
-      <MyActivityCountWindow />
-      <div className="activity-list">
-        <UserComment isArrow={true} />
-        <UserComment isArrow={true} />
-        <UserComment isArrow={true} />
-        <UserComment isArrow={true} />
-        <UserComment isArrow={true} />
-        <UserComment isArrow={true} />
-        <UserComment isArrow={true} />
-      </div>
-    </motion.section>
+    <>
+      <motion.section className={`app-main ${isUsrPage ? 'userpage' : 'mypage'} single`} initial="out" animate="in" exit="out" variants={pageTransition}>
+        <h2 className="heading1">{isUsrPage ? `${props.match.params.id}さんのページ` : 'マイページ' }</h2>
+        <UserDetailWindow />
+        {/* {!isUsrPage && <p className="attention-txt"><img src={TrashIcon} alt="" />アカウントを削除する</p>} */}
+        {!isUsrPage && <Link to="/01/account-setting" className="icon-txt icon-txt--normal"><img src={GearIcon} alt="" />アカウント設定へ</Link>}
+        <MyActivityCountWindow />
+        <div className="activity-list">
+          <UserComment isArrow={true} />
+          <UserComment isArrow={true} />
+          <UserComment isArrow={true} />
+          <UserComment isArrow={true} />
+          <UserComment isArrow={true} />
+          <UserComment isArrow={true} />
+          <UserComment isArrow={true} />
+        </div>
+      </motion.section>
+      <Modal type="delete-account" showModal={showModal} setShowModal={setShowModal}/>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {CameraIcon} from '../../assets/images/index';
 
 const ThumbnailUploadInput:React.FC = props => {

@@ -8,3 +8,6 @@ export {default as CompanyInsert} from './CompanyInsert';
 export {default as CompanyInfo} from './CompanyInfo';
 export {default as CompanyInfoEdit} from './CompanyInfoEdit';
 export {default as ProfileEdit} from './ProfileEdit';
+export {default as CompanyInsertUsers} from './CompanyInsertUsers';
+export {default as AccountSetting} from './AccountSetting';
+export {default as AccountSettingContent} from './AccountSettingContent';

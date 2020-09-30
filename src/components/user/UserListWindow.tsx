@@ -2,14 +2,23 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Avatar} from '../../assets/images/index';
 
+interface Props {
+    thisPage: string;
+}
 
-
-const UserListWindow:React.FC = () => {
-
+const UserListWindow:React.FC<Props> = props => {
+    let pageTtl, linkTo;
+    if(props.thisPage === 'insert-users') {
+        pageTtl = 'この会社に就職した方';
+        linkTo = 'company-users';
+    } else if (props.thisPage === 'company-users') {
+         pageTtl = '情報提供に協力した方';
+         linkTo = 'insert-users';
+    }
     
     return(
         <article className="contentBox userListWindow">
-            <h1 className="heading5">情報提供に協力した方</h1>
+            <h1 className="heading5">{pageTtl}</h1>
             <ul className="userListWindow__list">
                 <li className="user-excerpt">
                     <Link to="">
@@ -61,7 +70,7 @@ const UserListWindow:React.FC = () => {
                 </li>
                 
             </ul>
-            <Link className="userListWindow__link" to="">さらに表示する</Link>
+            <Link className="userListWindow__link" to={`/${linkTo}`}>さらに表示する</Link>
         </article>
     );
 };

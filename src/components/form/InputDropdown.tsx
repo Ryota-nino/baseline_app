@@ -1,16 +1,27 @@
 import React from 'react';
+import SelectBox from './SelectBox';
 
-const InputDropdown:React.FC = props => {
+interface Props {
+  ttl: string;
+  selectObj: {value: string}[];
+}
+
+const InputDropdown:React.FC<Props> = props => {
   
+  
+  const renderSelectItem = ()=> {
+    
+    return Object.values(props.selectObj).map((data, index) => {
+      return <option value={data.value}>{data.value}</option>;
+    })
+  };
+
   return (
     <div className="input-dropdown">
-        <p className="input-dropdown__heading">従業員数</p>
+        {props.ttl != '' && <p className="input-dropdown__heading">{props.ttl}</p>}
         <div className="input-dropdown__wrap">
             <select>
-              <option value="100-200">100~200人</option>
-              <option value="100-200">200~300人</option>
-              <option value="100-200">300~400人</option>
-              <option value="100-200">400~500人</option>
+              {renderSelectItem()}
             </select>
         </div>
         </div>

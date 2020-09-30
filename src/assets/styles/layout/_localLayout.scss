@@ -43,14 +43,23 @@
 
 
 .mypage {
-    .attention-txt {
-        margin: 8px 0 32px;
+    .icon-txt {
+        margin: 0 0 32px;
         justify-content: flex-end;
         cursor: pointer;
         transition: .3s ease;
         &:hover {
             opacity: .7;
         }
+    }
+    .userDetail-window {
+        margin-bottom: 8px;
+    }
+}
+.userpage {
+    .userDetail-window {
+        margin-bottom: 16px;
+        
     }
 }
 .activity-list {
@@ -65,6 +74,9 @@
 
 .company-detail {
     .company-bar {
+        margin-bottom: 24px;
+    }
+    .user-card {
         margin-bottom: 24px;
     }
 }
@@ -164,6 +176,26 @@
 }
 
 .companyDetail-contents {
+    background-color: $cWhite;
+    border-radius: 10px;
+    &.about {max-width: 80%;}
+    &:not(.about) { max-width: 95%; }
+    &.userCard {
+        padding: 32px 28px 32px;
+        max-width: 100%;
+    }
+    .userCard-list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .user-card > a  {
+            width: 222px;
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
     .aboutCompany-bar {
         margin-bottom: 24px;
     }
@@ -241,3 +273,47 @@
         right: 24px;
     }
 }
+
+.profile-edit {
+    .input--big {
+        margin-bottom: 18px;
+        width: 300px;
+    }
+    .input-dropdown {
+        margin-bottom: 24px;
+        width: 300px;
+    }
+    .contentBox {
+        margin-bottom: 24px;
+        &:last-child {
+            padding-bottom: 24px;
+        }
+        .userEdit-header {
+            margin-top: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &__left-col {
+                width: 40%;   
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            &__right-col {
+                width: 355px;
+            }
+        }
+        &__wrap {
+            justify-content: flex-end;
+            align-items: center;
+            
+        }
+        &__cansel > a{
+            cursor: pointer;
+            color: $cGray1;
+            margin-right: 24px;
+        }
+    }
+}
+

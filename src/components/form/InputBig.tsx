@@ -9,6 +9,7 @@ interface Props {
     isIcon: boolean;
     iconUrl?: string;
     className?: string;
+    value?: string;
 }
 
 const InsertBig:React.FC<Props> = props => {
@@ -36,6 +37,7 @@ const InsertBig:React.FC<Props> = props => {
                 type={props.type} 
                 required={props.isRequired} 
                 placeholder={props.placeholderTxt}
+                value={props.value}
             />
             {hasErrorCheck()}
         </label>

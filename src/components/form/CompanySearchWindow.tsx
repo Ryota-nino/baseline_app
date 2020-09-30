@@ -1,31 +1,26 @@
 import React from 'react';
 import { SearchBar, InputCheckRadio } from './index.js';
 import PrefecturesData from '../../assets/data/prefectures';
-import { render } from '@testing-library/react';
 
 interface Props {
   className?: string;
 }
 
 const CompanySearchWindow:React.FC<Props> = props => {
-  let dataShowNum = PrefecturesData['prefectures'].length;
   let isShow = false;
-  const renderPrefecturesList = (isAllShow: boolean) => {
-    return PrefecturesData['prefectures'].map(data => {
-      if(data.code < dataShowNum) {
-        if(data.code === 0) {
-          return (
-            <p className="checkbox-list__heading">{data.name}</p>
-          )
-        } else {
-          return (
-            <InputCheckRadio keyName={data.code.toString()} className={"checkbox-item"} type={"checkbox"} txt={data.name} />
-          );  
-        }
-      }
-    })
 
-  }
+  const renderPrefecturesList = (isAllShow: boolean) => {
+    return Object.entries(PrefecturesData['prefectures']).map(([key,value]) => {
+      return (
+        <>
+          <p className="checkbox-list__heading">{key}</p>
+          {value.map(data => {
+            return <InputCheckRadio keyName={data.code.toString()} className={"checkbox-item"} type={"checkbox"} txt={data.name} />
+          })}
+        </>
+      );
+    });
+  };
 
   const showList = () => {
     const isListBtn = document.getElementById('isShow-ListBtn') as HTMLButtonElement;
@@ -42,6 +37,7 @@ const CompanySearchWindow:React.FC<Props> = props => {
     }
     isShow = !isShow;
   };
+  
   return (
     <div className={`sideSearchBar ${props.className}`}>
 

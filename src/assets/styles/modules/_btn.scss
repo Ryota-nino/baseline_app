@@ -65,7 +65,8 @@
     }
 
     &--rounded {
-        width: 112px;
+        // width: 112px;
+        padding: 0 40px;
         height: 40px;
         border-radius: 50px;
         border: 1px solid $cAccent3;

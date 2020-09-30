@@ -18,5 +18,7 @@ export {default as PenIcon} from './icon-pen.svg';
 export {default as StepIcon} from './icon-step.svg';
 export {default as PaperIcon} from './icon-paper.svg';
 export {default as BagIcon} from './icon-bag.svg';
+export {default as MenuDownIcon} from './icon-menuDown.svg';
+export {default as GearIcon} from './icon-gear.svg';
 
 

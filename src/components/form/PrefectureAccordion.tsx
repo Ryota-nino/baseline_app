@@ -1,34 +1,30 @@
 import React from 'react';
 import {InputCheckRadio} from '../form';
+import PrefecturesData from '../../assets/data/prefectures';
 
 const PrefectureAccordion:React.FC = props => {
+
+  const renderPrefecturesList = ()=> {
+    return Object.entries(PrefecturesData['prefectures']).map(([key,value]) => {
+      return (
+        <li className="prefecture-accordion__item">
+          <p className="prefecture-accordion__category">{key}</p>
+          <ul className="prefecture-accordion__child-item">
+            {value.map(data => {
+              return <li><InputCheckRadio type="checkbox" txt={data.name}/></li>
+            })}
+          </ul>
+        </li>
+      );
+      
+    })
+  }
   
   return (
     <div className="prefecture-accordion">
         <p className="prefecture-accordion__heading">地域選択</p>
         <ul className="prefecture-accordion__select-list">
-            <li className="prefecture-accordion__item">
-            <p className="prefecture-accordion__category">北海道・登録</p>
-            <ul className="prefecture-accordion__child-item">
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-            </ul>
-            </li>
-            <li className="prefecture-accordion__item">
-            <p className="prefecture-accordion__category">北海道・登録</p>
-            <ul className="prefecture-accordion__child-item">
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-                <li><InputCheckRadio type="checkbox" txt="北海道"/></li>
-            </ul>
-            </li>
+          {renderPrefecturesList()}
         </ul>
     </div>
   );

@@ -9,7 +9,13 @@ const CompanyInsert:React.FC = () => {
       {isEmpty1: false},
       {isEmpty2: false},
       {isEmpty3: false}
-  ]
+  ];
+  const employeesObj = [
+    {value: '100~200人'},
+    {value: '200~300人'},
+    {value: '300~400人'},
+    {value: '400~500人'}
+  ];
   return (
     <section className="app-main company-insert single">
         <h2 className="heading1">企業登録</h2>
@@ -24,11 +30,11 @@ const CompanyInsert:React.FC = () => {
 
           <PrefectureAccordion />
 
-          <InputDropdown />
+          <InputDropdown ttl="従業員数" selectObj={employeesObj}/>
 
           <div className="company-insert__enter">
             <p className="company-insert__cancel">キャンセル</p>
-            <ActionBtn txt="確認画面へ" isPlus={false} linkUrl=""/>
+            <ActionBtn txt="確認画面へ" isPlus={false} linkUrl="#"/>
           </div>
 
         </div>

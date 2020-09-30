@@ -4,12 +4,12 @@ import {Header, HeaderSide} from './common/index';
 import {Modal} from './modal';
 import * as Page from './pages/index';
 import { AnimatePresence } from 'framer-motion';
-
 import '../assets/styles/App.scss';
 
 const App = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
+
   return (
     <div className="App">
         <div className="container">
@@ -28,10 +28,13 @@ const App = () => {
 
                 <main className="main">
                   <div className="main__container">
+
                     <Route exact path="/" component={Page.Top}></Route>
+
                     <Route path="/search-company" component={Page.SearchCompany}></Route>
                     <Route path="/search-student" component={Page.SearchStudent}></Route>
-                    <Route path="/mypage" component={Page.UserPage}></Route>
+                    <Route path="/user/:id" render={ (props) => <Page.UserPage type="user" {...props} />}></Route>
+                    <Route path="/mypage" render={ () => <Page.UserPage type="mypage" />}></Route>
 
                     <Route path="/company-detail/:id/about" render={ () => <Page.CompanyDetail thisPage="about" /> }></Route>
                     <Route path="/company-detail/:id/step" render={ () => <Page.CompanyDetail thisPage="step" /> }></Route>
@@ -45,6 +48,12 @@ const App = () => {
                     <Route exact path="/company-info" render={ () => <Page.CompanyInfo />} ></Route>
                     <Route path="/profile-edit" component={Page.ProfileEdit}></Route>
                     {/* <Route><h2>ページは存在しません</h2></Route> */}
+
+                    <Route path="/insert-users" render={ ()=> <Page.CompanyInsertUsers thisPage="insert-users" /> }></Route>
+                    <Route path="/company-users" render={ ()=> <Page.CompanyInsertUsers thisPage="company-users" /> }></Route>
+
+                    <Route exact path="/:user/account-setting" render={ ()=> <Page.AccountSetting /> }></Route>
+                    <Route exact path="/:user/account-setting/:type" render={ ()=> <Page.AccountSettingContent /> }></Route>
                   </div>
                 </main>
               </Switch>

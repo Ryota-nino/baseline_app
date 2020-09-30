@@ -25,10 +25,16 @@
     display: block;
     text-align: center;
 }
-.attention-txt {
-    color: $cAttention;
+.icon-txt {
     font-size: 1.3rem;
     display: flex;
+    align-items: center;
+    &--attention {
+        color: $cAttention;
+    }
+    &--normal {
+        color: $cGray1;
+    }
     img {
         margin-right: 4px;
     }

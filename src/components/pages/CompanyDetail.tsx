@@ -14,8 +14,8 @@ const CompanyDetail:React.FC<Props> = props => {
             <CompanyContentsWindow thisPage={props.thisPage}/>
         </div>
         <div className="right-col">
-            <UserListWindow />
-            <UserListWindow />
+            <UserListWindow thisPage="insert-users"/>
+            <UserListWindow thisPage="company-users"/>
         </div>
     </section>
   );

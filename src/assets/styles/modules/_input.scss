@@ -303,3 +303,78 @@
     }
 }
 
+
+.gender-select {
+    
+    &-list {
+        display: flex;
+        input {
+            visibility: hidden;
+            height: 0;
+            width: 0;
+        }
+        li {
+            margin-right: 8px;
+        }
+    }
+    &__heading {
+        font-weight: bold;
+        font-size: 1.3rem;
+        color: $cBlack;
+        margin-bottom: 12px;
+    }
+}
+.select-btn {
+    display: block;
+    padding: 10px 40px;
+    font-size: 1.3rem;
+    color: $cGray1;
+    background-color: #EBF0F2;
+    cursor: pointer;
+    border-radius: 4px;
+    &.current {
+        color: $cWhite;
+        background-color: $cAccent3;
+    }
+}
+
+.select-image {
+    color: $cWhite;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.3s ease;
+    label {display: inline-block;}
+    &:hover {
+        opacity: .8;
+    }
+    input[type="file"] {
+        display: none;
+    }
+    &__wrap {
+        position: relative;
+    }
+    &__avatar {
+        width: 106px;
+        height: 106px;
+    }
+    &__overlay {
+        color: $cWhite;
+        opacity: .8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    &__icon {
+        width: 32px;
+    }
+    &__txt {
+
+    }
+}

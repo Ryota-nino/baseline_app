@@ -1,63 +1,114 @@
-import React from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {useHistory, Link} from 'react-router-dom';
 import {InputBig , InputDropdown} from '../form';
-import {ActionBtn} from '../btn';
+import {ActionBtn, RoundedBtn} from '../btn';
 import {Avatar, CameraIcon} from '../../assets/images/index';
 
 const ProfileEdit:React.FC = () => {
 const history = useHistory();
+const handleLink = (path:string) => history.push(path);
 const isError = [
     {isEmpty1: false},
     {isEmpty2: false},
     {isEmpty3: false}
-]
-  return (
+];
+const yearList = [
+    {value: '21卒'},
+    {value: '22卒'},
+    {value: '23卒'},
+    {value: '24卒'},
+    {value: '25卒'},
+    {value: '26卒'},
+];
+const jobList = [
+    {value: '企画職'},
+    {value: 'デザイナー'},
+    {value: 'エンジニア'},
+    
+];
+
+useEffect( ()=> {
+    selectBtnChanges();
+    
+}, [])
+
+const selectBtnChanges = () => {
+    const selectBtns = document.querySelectorAll('.select-btn');
+    console.log(selectBtns)
+    selectBtns.forEach(btn => {
+        btn.classList.remove('current');
+        btn.addEventListener('click', ()=> {
+            btn.classList.add('current');
+        });
+    });
+};
+
+return (
     <section className="app-main profile-edit single">
         <button className="btn pageBack-link" onClick={() => history.goBack()}><span className="heading4">マイページへ</span></button>
-        <div className="contentBox">
-          <h2 className="heading4">プロフィール編集</h2>
-            <form action="">
-                <InputBig type="text" labelTxt="名前" isRequired={false} placeholderTxt="山本 仁" isError={isError} isIcon={false} />
-                <InputBig type="number" labelTxt="学籍番号" isRequired={false} placeholderTxt="2180098" isError={isError} isIcon={false} />
-                <div className="gender-select">
-                    <p className="gender-select__heading">学籍番号</p>
-                    <ul className="gender-select-list">
-                        <li>
-                            <label className="select-btn">
-                                <span>男性</span>
-                                <input type="checkbox" name=""/>
-                            </label>
-                        </li>
-                        <li>
-                            <label className="select-btn">
-                                <span>女性</span>
-                                <input type="checkbox" name=""/>
-                            </label>
-                        </li>
-                        <li>
-                            <label className="select-btn">
-                                <span>その他</span>
-                                <input type="checkbox" name=""/>
-                            </label>
-                        </li>
-                    </ul>
+        <form>
+          <div className="contentBox contentBox--big">
+                <h2 className="heading4">プロフィール編集</h2>
+
+                <div className="userEdit-header">
+
+                    <div className="userEdit-header__left-col">
+                        <label className="select-image">
+                            <div className="select-image__wrap">
+                                <img className="select-image__avatar" src={Avatar} alt=""/>
+                                <div className="select-image__overlay">
+                                    <img className="select-image__icon" src={CameraIcon} alt=""/>
+                                    <span className="select-image__txt">画像を選択</span>
+                                </div>
+                            </div>
+                            <input type="file"/>
+                        </label>
+                    </div>
+
+                    <div className="userEdit-header__right-col">
+                        <InputBig type="text" labelTxt="名前" isRequired={false} placeholderTxt="山本 仁" isError={isError} isIcon={false} />
+                        <div className="gender-select">
+                            <p className="gender-select__heading">性別</p>
+                            <ul className="gender-select-list">
+                                <li>
+                                    <label className="btn select-btn current">
+                                        <span>男性</span>
+                                        <input type="checkbox" name=""/>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label className="btn select-btn">
+                                        <span>女性</span>
+                                        <input type="checkbox" name=""/>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label className="btn select-btn">
+                                        <span>その他</span>
+                                        <input type="checkbox" name=""/>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
 
-                <label className="select-image">
-                    <p className="select-image__heading">サムネイル画像</p>
-                    <div className="select-image__wrap">
-                        <img src={Avatar} alt=""/>
-                        <img className="select-image__icon" src={CameraIcon} alt=""/>
-                        <span>画像を選択</span>
-                    </div>
-                    <input type="file"/>
-                </label>
+            </div>
 
-                <InputDropdown />
-                <InputDropdown />
-                <ActionBtn txt="プロフィールを変更" isPlus={false} linkUrl=""/>
-            </form>
-        </div>
+            <div className="contentBox contentBox--big">
+                <InputBig type="number" labelTxt="学籍番号" isRequired={false} placeholderTxt="2180098" isError={isError} isIcon={false} />
+                <InputDropdown ttl="希望職種" selectObj={jobList}/>
+                <InputDropdown ttl="卒業年次" selectObj={yearList}/>
+                <div className="contentBox__wrap">
+                    <p className="contentBox__cansel btn"><Link to="/mypage">キャンセル</Link></p>
+                    <div onClick={ () => handleLink('/mypage')}>
+                        <RoundedBtn txt="変更する"/>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
     </section>
   );
 }

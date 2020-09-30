@@ -25,7 +25,7 @@ const StudentAboutCompanyBar:React.FC = props => {
                     </ul>
                 </div>
             </div>
-            <ActionBtn txt="就活履歴を見る" isPlus={false} linkUrl="#"/>
+            <ActionBtn txt="就活履歴を見る" isPlus={false} linkUrl="user"/>
         </div>
 
         <CompanyExcerptCard />

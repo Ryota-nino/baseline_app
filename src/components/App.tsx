@@ -3,7 +3,7 @@ import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {Header, HeaderSide} from './common/index';
 import {Modal} from './modal';
 import * as Page from './pages/index';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, } from 'framer-motion';
 import '../assets/styles/App.scss';
 
 const App = () => {

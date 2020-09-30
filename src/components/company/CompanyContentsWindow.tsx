@@ -4,12 +4,26 @@ import {Modal} from '../modal';
 import {WriteIcon} from '../../assets/images/index';
 import {Link} from 'react-router-dom';
 import {CompanyDetailItem} from './index';
+import { AnimatePresence,motion } from 'framer-motion';
 
 interface Props {
     thisPage: string;
 }
 
 const CompanyContentsWindow:React.FC<Props> = props => {
+    const pageTransition = {
+        in: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.2
+          }
+        },
+        out: {
+          x: -20,
+          opacity: 0,
+        },
+      }
     const [showModal, setShowModal] = useState<boolean>(false);
     const renderTabMenuList = () => {
         return (
@@ -28,7 +42,7 @@ const CompanyContentsWindow:React.FC<Props> = props => {
         if(props.thisPage === 'about') {
             return (
                 <>
-                    <div className="companyDetail-contents about">
+                    <motion.div className="companyDetail-contents about" initial="out" animate="in" exit="out" variants={pageTransition}>
                         <section className="companyDetail-contents__section">
                             <h2 className="heading6">事業内容</h2>
                             <p className="company">UI/UXデザイン、ビジネスモデルデザイン、ブランド体験デザイン、組織デザイン、ソフトウェア開発</p>
@@ -47,33 +61,33 @@ const CompanyContentsWindow:React.FC<Props> = props => {
                             <UserComment isArrow={false} />
                             <UserComment isArrow={false} />
                         </section>
-                    </div>
+                    </motion.div>
                     <Modal type="write-comment" showModal={showModal} setShowModal={setShowModal}/>
                 </>
             );
         } else if(props.thisPage === 'step') {
             return (
-                <div className="companyDetail-contents step">
+                <motion.div className="companyDetail-contents step" initial="out" animate="in" exit="out" variants={pageTransition}>
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
-                </div>
+                </motion.div>
             );
         } else if(props.thisPage === 'entry') {
             return (
-                <div className="companyDetail-contents step">
+                <motion.div className="companyDetail-contents step" initial="out" animate="in" exit="out" variants={pageTransition}>
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="サマーインターンシップ(22卒)" isPass={true} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
-                </div>
+                </motion.div>
             );
         } else if(props.thisPage === 'interview') {
             return (
-                <div className="companyDetail-contents step">
+                <motion.div className="companyDetail-contents step" initial="out" animate="in" exit="out" variants={pageTransition}>
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="サマーインターンシップ(22卒)" isPass={true} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
-                </div>
+                </motion.div>
             );
         }
 

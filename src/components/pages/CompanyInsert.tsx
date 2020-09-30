@@ -2,7 +2,7 @@ import React from 'react';
 import {CameraIcon , LinkIcon} from '../../assets/images/index';
 import {InputBig, ThumbnailUploadInput, PrefectureAccordion, InputDropdown} from '../form';
 import {ActionBtn} from '../btn';
-
+import { AnimatePresence,motion } from 'framer-motion';
 
 const CompanyInsert:React.FC = () => {
   const isError = [
@@ -16,8 +16,21 @@ const CompanyInsert:React.FC = () => {
     {value: '300~400人'},
     {value: '400~500人'}
   ];
+  const pageTransition = {
+    in: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.2
+      }
+    },
+    out: {
+      x: -20,
+      opacity: 0,
+    },
+  }
   return (
-    <section className="app-main company-insert single">
+    <motion.section className="app-main company-insert single" initial="out" animate="in" exit="out" variants={pageTransition}>
         <h2 className="heading1">企業登録</h2>
         <div className="companyInsert-window">
           <InputBig type="text" labelTxt="企業名" isRequired={true} placeholderTxt="ビジョナル株式会社" isError={isError} isIcon={false}/>
@@ -38,7 +51,7 @@ const CompanyInsert:React.FC = () => {
           </div>
 
         </div>
-    </section>
+    </motion.section>
   );
 }
 

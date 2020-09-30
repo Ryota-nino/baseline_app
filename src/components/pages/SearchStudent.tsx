@@ -33,14 +33,14 @@ const SearchStudent:React.FC = () => {
                   <li className="studentListTable__heading">更新日時</li>
                 </ul>
               </div>
-              <div className="studentListTable__wrapper">
+              <motion.div className="studentListTable__wrapper" initial="out" animate="in" exit="out" variants={pageTransition}>
                 <StudentListCard />
                 <StudentListCard />
                 <StudentListCard />
                 <StudentListCard />
                 <StudentListCard />
                 <StudentListCard />
-              </div>
+              </motion.div>
               <Pagenation />
             </div>  
           </div>

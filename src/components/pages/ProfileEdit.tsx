@@ -2,9 +2,23 @@ import React, {useEffect} from 'react';
 import {useHistory, Link} from 'react-router-dom';
 import {InputBig , InputDropdown} from '../form';
 import {ActionBtn, RoundedBtn} from '../btn';
+import { AnimatePresence,motion } from 'framer-motion';
 import {Avatar, CameraIcon} from '../../assets/images/index';
 
 const ProfileEdit:React.FC = () => {
+    const pageTransition = {
+        in: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.2
+          }
+        },
+        out: {
+          x: -20,
+          opacity: 0,
+        },
+      }
 const history = useHistory();
 const handleLink = (path:string) => history.push(path);
 const isError = [
@@ -44,7 +58,7 @@ const selectBtnChanges = () => {
 };
 
 return (
-    <section className="app-main profile-edit single">
+    <motion.section className="app-main profile-edit single" initial="out" animate="in" exit="out" variants={pageTransition}>
         <button className="btn pageBack-link" onClick={() => history.goBack()}><span className="heading4">マイページへ</span></button>
         <form>
           <div className="contentBox contentBox--big">
@@ -109,7 +123,7 @@ return (
             </div>
             
         </form>
-    </section>
+    </motion.section>
   );
 }
 

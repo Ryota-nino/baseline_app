@@ -4,8 +4,7 @@ import {CompanyBar, CompanyDetailItem,} from '../company';
 import {InputCheckRadio, FreeWordInput} from '../form';
 import {ActionBtn, RoundedBtn} from '../btn';
 import { Modal } from '../modal';
-import { propTypes } from 'react-addons-css-transition-group';
-
+import { AnimatePresence,motion } from 'framer-motion';
 interface Props {
   // showModal?: any;
   // setShowModal?: any;
@@ -14,9 +13,22 @@ interface Props {
 const CompanyInfo:React.FC<Props> = props => {
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const pageTransition = {
+    in: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.2
+      }
+    },
+    out: {
+      x: -20,
+      opacity: 0,
+    },
+  }
   return (
     <>
-      <section className="app-main company-info single">
+      <motion.section className="app-main company-info single" initial="out" animate="in" exit="out" variants={pageTransition}>
           <button className="btn pageBack-link" onClick={() => history.goBack()}><span className="heading4">企業詳細へ</span></button>
           <CompanyBar hasActionBtn={false}/>
           <div className="contentBox2">
@@ -43,7 +55,7 @@ const CompanyInfo:React.FC<Props> = props => {
               <li><CompanyDetailItem ttl="本選考 (22卒)" isPass={false} job="デザイナー" userName="山本 仁"/></li>
             </ul>
           </div>
-      </section>
+      </motion.section>
       <Modal type="select-post-category" showModal={showModal} setShowModal={setShowModal}/>
     </>
   );

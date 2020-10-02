@@ -176,7 +176,6 @@
 }
 
 .companyDetail-contents {
-    background-color: $cWhite;
     border-radius: 10px;
     &.about {max-width: 80%;}
     &:not(.about) { max-width: 95%; }

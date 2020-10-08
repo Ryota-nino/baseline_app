@@ -75,15 +75,17 @@ const CompanyContentsWindow:React.FC<Props> = props => {
             );
         } else if(props.thisPage === 'entry') {
             return (
-                <motion.div className="companyDetail-contents step" initial="out" animate="in" exit="out" variants={pageTransition}>
-                    <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
-                    <CompanyDetailItem ttl="サマーインターンシップ(22卒)" isPass={true} job="デザイナー" userName="山本 敦" />
-                    <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
-                </motion.div>
+                <>
+                    <motion.div className="companyDetail-contents entry" initial="out" animate="in" exit="out" variants={pageTransition}>
+                        <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
+                        <CompanyDetailItem ttl="サマーインターンシップ(22卒)" isPass={true} job="デザイナー" userName="山本 敦" />
+                        <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
+                    </motion.div>
+                </>
             );
         } else if(props.thisPage === 'interview') {
             return (
-                <motion.div className="companyDetail-contents step" initial="out" animate="in" exit="out" variants={pageTransition}>
+                <motion.div className="companyDetail-contents interview" initial="out" animate="in" exit="out" variants={pageTransition}>
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="サマーインターンシップ(22卒)" isPass={true} job="デザイナー" userName="山本 敦" />
                     <CompanyDetailItem ttl="本選考(22卒)" isPass={false} job="デザイナー" userName="山本 敦" />
@@ -94,10 +96,10 @@ const CompanyContentsWindow:React.FC<Props> = props => {
     }
 
     return(
-        <div className="companyContentsWindow">
+        <motion.div className="companyContentsWindow" initial="out" animate="in" exit="out" variants={pageTransition}>
             {renderTabMenuList()}
             {renderContents()}
-        </div>
+        </motion.div>
     );
 };
 

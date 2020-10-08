@@ -7,8 +7,7 @@ import { AnimatePresence,motion } from 'framer-motion';
 import { CompanyCard, NewsBars, ActivityCard } from '../card/index';
 
 
-
-const Top:React.FC = () => {
+const Top:React.FC = props => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 

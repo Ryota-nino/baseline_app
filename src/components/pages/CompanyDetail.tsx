@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {UserListWindow} from '../user';
 import {CompanyContentsWindow,CompanyBar} from '../company';
 import { AnimatePresence,motion } from 'framer-motion';
 
 interface Props {
-  thisPage: string;
+  // thisPage: string;
+  match?: any;
 }
 
 const CompanyDetail:React.FC<Props> = props => {
+  const thisPage = props.match.params.category;
   const pageTransition = {
     in: {
       opacity: 1,
@@ -20,18 +22,20 @@ const CompanyDetail:React.FC<Props> = props => {
       x: -20,
       opacity: 0,
     },
-  }
+  };
+
   return (
-    <section className="app-main company-detail">
+    <motion.section className="app-main company-detail" initial="out" animate="in" exit="out" variants={pageTransition}>
         <div className="left-col">
             <CompanyBar hasActionBtn={true} />
-            <CompanyContentsWindow thisPage={props.thisPage}/>
+            {/* <CompanyContentsWindow thisPage={props.thisPage}/> */}
+            <CompanyContentsWindow thisPage={thisPage}/>
         </div>
         <div className="right-col">
             <UserListWindow thisPage="insert-users"/>
             <UserListWindow thisPage="company-users"/>
         </div>
-    </section>
+    </motion.section>
   );
 }
 

@@ -1,11 +1,26 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { AnimatePresence,motion } from 'framer-motion';
 
 interface Props {
     thisPage: string;
 }
 
 const CompanyDetailContentsWindow:React.FC<Props> = props => {
+    const pageTransition = {
+        in: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.2
+          }
+        },
+        out: {
+          x: -20,
+          opacity: 0,
+        },
+      };
+
     const renderTabMenuList = () => {
         return (
             <div className="companyContentsWindow__list">
@@ -20,7 +35,7 @@ const CompanyDetailContentsWindow:React.FC<Props> = props => {
     const renderContents = () => {
         if(props.thisPage === 'step') {
             return (
-                <>
+                <motion.div initial="out" animate="in" exit="out" variants={pageTransition}>
                     <p className="companyContentsWindow__update">2020.09.18更新</p>         
                     <div className="aboutCompany-item">
                         <div className="aboutCompany-item__left-col">
@@ -90,11 +105,12 @@ const CompanyDetailContentsWindow:React.FC<Props> = props => {
                             </ol>
                         </div>
                     </div>
-                </>
+                </motion.div>
             );
         } else if(props.thisPage === 'entry') {
             return (
                 <>
+                <motion.div initial="out" animate="in" exit="out" variants={pageTransition}>
                     <p className="companyContentsWindow__update">2020.09.18更新</p>         
                     <div className="aboutCompany-item">
                         <div className="aboutCompany-item__left-col">
@@ -133,11 +149,12 @@ const CompanyDetailContentsWindow:React.FC<Props> = props => {
                             </section>
                         </div>
                     </div>
+                </motion.div>
                 </>
             );
         } else if(props.thisPage === 'interview') {
             return (
-                <>
+                <motion.div initial="out" animate="in" exit="out" variants={pageTransition}>
                     <p className="companyContentsWindow__update">2020.09.18更新</p>         
                     <div className="aboutCompany-item">
                         <div className="aboutCompany-item__left-col">
@@ -195,7 +212,7 @@ const CompanyDetailContentsWindow:React.FC<Props> = props => {
                             </div>
                         </div>
                     </div>
-                </>
+                </motion.div>
             )
         }
     }

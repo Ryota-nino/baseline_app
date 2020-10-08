@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
 import { TrashIcon, PenIcon } from '../../assets/images/index';
@@ -12,19 +12,6 @@ interface Props {
 }
 
 const CompanyInfoEdit:React.FC<Props> = props => {
-    const pageTransition = {
-        in: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.2
-          }
-        },
-        out: {
-          y: -20,
-          opacity: 0,
-        },
-      }
     const isError = [
         {isEmpty1: false},
         {isEmpty2: false},
@@ -44,6 +31,21 @@ const CompanyInfoEdit:React.FC<Props> = props => {
         {value: '11月'},
         {value: '12月'},
       ];
+
+    const addTabBtn = useRef<HTMLButtonElement>(null);
+    const insertTab = useRef<HTMLOListElement>(null);
+    useEffect(() => {
+        addTabBtn.current?.addEventListener('click', ()=> {
+            const tabs = document.querySelectorAll('.insert-tab__item');
+            console.log(tabs);
+            const li = document.createElement('li');
+            li.classList.add('insert-tab__item');
+            li.textContent = '二次面接';
+            insertTab.current?.append(li);
+
+        });
+    }, []);
+
     const renderContents = () => {
         if(props.thisPage === 'step') {
             return (
@@ -51,7 +53,7 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <article className="contentBox contentBox--big step">
                         <h1 className="heading4">選考ステップ1</h1>
                         <div className="contentBox__wrap">
-                            <InputBig type="string" labelTxt="タイトル" isRequired={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                            <InputBig type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
                             <InputDropdown ttl="" selectObj={calendarObj}/>
                         </div>
                         <div className="input-txtarea">
@@ -63,7 +65,7 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <article className="contentBox contentBox--big step">
                         <h1 className="heading4">選考ステップ2</h1>
                         <div className="contentBox__wrap">
-                            <InputBig type="string" labelTxt="タイトル" isRequired={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                            <InputBig type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
                             <InputDropdown ttl="" selectObj={calendarObj} />
                         </div>
                         <InputTextArea ttl="本文" placeholder="本文を記入"/>
@@ -86,12 +88,12 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                 <>
                     <article className="contentBox contentBox--big entry">
                         <h1 className="heading4">エントリーシート</h1>
-                        <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                        <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
                         <InputTextArea ttl="本文" placeholder="本文を記入"/>
                         <div className="btn btn--delete"><img src={TrashIcon} alt=""/></div>
                     </article>
                     <article className="contentBox contentBox--big entry">
-                        <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                        <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
                         <InputTextArea ttl="本文" placeholder="本文を記入"/>
                         <div className="btn btn--delete"><img src={TrashIcon} alt=""/></div>
                     </article>
@@ -165,13 +167,13 @@ const CompanyInfoEdit:React.FC<Props> = props => {
         <>
             {props.thisPage === 'interview' && (
                 <div className="insert-tab">
-                    <ol className="insert-tab__wrap">
+                    <ol ref={insertTab} className="insert-tab__wrap">
                         <li className="insert-tab__item current">
                             <span>一次面接<img src={PenIcon} alt=""/></span>
                         </li>
-                        <li className="insert-tab__item">二次面接</li>
+                        {/* <li className="insert-tab__item">二次面接</li> */}
                     </ol>
-                    <button className="btn btn--plus"></button>
+                    <button ref={addTabBtn} className="btn btn--plus"></button>
                 </div>
             )}
             <main className="main company-info-edit">
@@ -180,7 +182,7 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <div className="company-info-edit__container">
                         <div className="company-info-edit__left-col">
                             {renderSummary()}
-                        {renderContents()}
+                            {renderContents()}
                             <InsertAddBtn txt="項目を追加"/>
                         </div>
                         <CompanyDetailCard/>

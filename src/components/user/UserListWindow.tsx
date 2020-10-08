@@ -21,7 +21,7 @@ const UserListWindow:React.FC<Props> = props => {
             <h1 className="heading5">{pageTtl}</h1>
             <ul className="userListWindow__list">
                 <li className="user-excerpt">
-                    <Link to="">
+                    <Link to="/user/01">
                         <img src={Avatar} alt=""/>
                         <div className="user-excerpt__wrap">
                             <p className="user-excerpt__name">山本 人</p>
@@ -33,7 +33,7 @@ const UserListWindow:React.FC<Props> = props => {
                     </Link>
                 </li>
                 <li className="user-excerpt">
-                    <Link to="">
+                    <Link to="/user/01">
                         <img src={Avatar} alt=""/>
                         <div className="user-excerpt__wrap">
                             <p className="user-excerpt__name">山本 人</p>
@@ -45,7 +45,7 @@ const UserListWindow:React.FC<Props> = props => {
                     </Link>
                 </li>
                 <li className="user-excerpt">
-                    <Link to="">
+                    <Link to="/user/01">
                         <img src={Avatar} alt=""/>
                         <div className="user-excerpt__wrap">
                             <p className="user-excerpt__name">山本 人</p>
@@ -57,7 +57,7 @@ const UserListWindow:React.FC<Props> = props => {
                     </Link>
                 </li>
                 <li className="user-excerpt">
-                    <Link to="">
+                    <Link to="/user/01">
                         <img src={Avatar} alt=""/>
                         <div className="user-excerpt__wrap">
                             <p className="user-excerpt__name">山本 人</p>

@@ -14,7 +14,7 @@ const CompanyBar:React.FC<Props> = props => {
                 <div className="company-bar__inner">
                     <h1 className="heading4">ビジョナル株式会社</h1>
                     <div>
-                        <p className="company-bar__link"><a href="https://visional.inc/">https://visional.inc/</a></p>
+                        <p className="company-bar__link"><a target="_blank" href="https://visional.inc/">https://visional.inc/</a></p>
                         <p className="company-bar__address">東京</p>
                     </div>
                 </div>

@@ -33,13 +33,13 @@ const CompanyInsert:React.FC = () => {
     <motion.section className="app-main company-insert single" initial="out" animate="in" exit="out" variants={pageTransition}>
         <h2 className="heading1">企業登録</h2>
         <div className="companyInsert-window">
-          <InputBig type="text" labelTxt="企業名" isRequired={true} placeholderTxt="ビジョナル株式会社" isError={isError} isIcon={false}/>
-          <InputBig type="text" labelTxt="フリガナ" isRequired={true} placeholderTxt="カブシキガイシャビジョナル" isError={isError} isIcon={false}/>
+          <InputBig type="text" labelTxt="企業名" isRequired={true} isRequiredTxt={true}  placeholderTxt="ビジョナル株式会社" isError={isError} isIcon={false}/>
+          <InputBig type="text" labelTxt="フリガナ" isRequired={true} isRequiredTxt={true}  placeholderTxt="カブシキガイシャビジョナル" isError={isError} isIcon={false}/>
           
           <ThumbnailUploadInput />
 
-          <InputBig type="text" labelTxt="企業URL" isRequired={true} placeholderTxt="https://www.google.com" isError={isError} isIcon={true} iconUrl={LinkIcon}/>
-          <InputBig type="text" labelTxt="事業内容" isRequired={false} placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発" isError={isError} isIcon={false}/>
+          <InputBig type="text" labelTxt="企業URL" isRequired={true} isRequiredTxt={true}  placeholderTxt="https://www.google.com" isError={isError} isIcon={true} iconUrl={LinkIcon}/>
+          <InputBig type="text" labelTxt="事業内容" isRequired={false} isRequiredTxt={false} placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発" isError={isError} isIcon={false}/>
 
           <PrefectureAccordion />
 

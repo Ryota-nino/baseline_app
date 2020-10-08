@@ -72,6 +72,10 @@
         border: 1px solid $cAccent3;
         font-weight: bold;
         color: $cAccent3;
+        &.delete {
+            color: $cAttention;
+            border: 1px solid $cAttention;
+        }
     }
     &--delete {
         display: flex;

@@ -78,6 +78,10 @@
     font-weight: bold;
     display: block;
     border-bottom: 1px solid $cPlaceHolder;
+    input[type="password"] {
+        font-weight: bold;
+        font-family: 'Montserrat' ,sans-serif;
+    }
     input {
         width: 100%;
         display: block;
@@ -290,7 +294,7 @@
 .free-word {
     display: block;
     input {
-        background-color: #F8F9F9;
+        background-color: $cInputBg;
         width: 72px;
         height: 42px;
         border-radius: 8px;
@@ -376,5 +380,49 @@
     }
     &__txt {
 
+    }
+}
+
+.setting-list {
+    
+}
+.setting-item {
+    a, &.delete {
+        font-size: 1.3rem;
+        padding: 24px 16px;
+        border-bottom: 1px solid #CFD2D8;
+        position: relative;
+        transition: 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            opacity: .5;
+            .setting-item__arrow {
+                transform: rotate(-90deg) translateY(10px);
+            }
+        }
+        
+    }
+    &__label {
+        color: $cGray1;
+        width: 20%;
+        
+    }
+    &__value {
+        color: $cBlack;
+        font-size: 1.5rem;
+        width: 80%;
+    }
+    &__arrow {
+        position: absolute;
+        height: 20px;
+        right: 16px;
+        top:0;
+        bottom:0;
+        margin: auto;
+        transition: 0.3s ease;
+        transform: rotate(-90deg) translateY(0);
+    }
+    a {
+        display: flex;
     }
 }

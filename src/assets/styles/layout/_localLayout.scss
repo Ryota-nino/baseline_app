@@ -182,6 +182,7 @@
     &.userCard {
         padding: 32px 28px 32px;
         max-width: 100%;
+        background-color: $cWhite;
     }
     .userCard-list {
         display: flex;
@@ -228,12 +229,9 @@
         &__flex {
             display: flex;
             align-items: flex-end;
-            div {
+            & > div {
                 margin-right: 32px;
             }
-        }
-        &:last-child {
-            margin-bottom: 0;
         }
         .heading4 {
             margin-bottom: 42px;
@@ -316,3 +314,37 @@
     }
 }
 
+
+.account-setting {
+    .contentBox {
+        max-width: 694px;
+    }
+}
+.accountSetting-content {
+    .contentBox {
+        max-width: 694px;
+        padding-bottom: 24px;
+        &.password {
+            .heading4 {
+                margin-bottom: 32px;
+            }
+            .input--big {
+                margin-bottom: 24px;
+            }
+            
+        }
+    }
+    &__bottom {
+        margin-top: 16px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        & > p > a {
+            margin-right: 18px;
+            transition: 0.3s ease;
+            &:hover {
+                opacity: .6;
+            }
+        }
+    }
+}

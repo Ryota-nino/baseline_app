@@ -12,6 +12,49 @@
         padding-bottom: 12px;
         line-height: 1.75;
     }
+    &--accountDelete {
+        padding: 40px 40px 18px;
+        max-width: 480px;
+        .accountDelete-user {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            margin-bottom: 24px;
+            &__avatar {
+                width: 48px;
+                height: 48px;
+                margin-right: 12px;
+            }
+            &__name {
+                font-weight: bold;
+                margin-bottom: 4px;
+            }
+            &__stundet-number {
+                color: $cGray1;
+                opacity: .5;
+            }
+        }
+        .heading4 {
+            margin-bottom: 10px;
+        }
+        .txt {
+            color: $cGray1;
+            max-width: 360px;
+            margin-bottom: 40px;
+        }
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 1px solid $cBorder1;
+            padding-top: 16px;
+            & > p {
+                color: $cGray1;
+                margin-right: 24px;
+                cursor: pointer;
+            }
+        }
+    }
     &.hide { display: none; }
     &.scroll > .scrollContent {
         height: 250px;
@@ -177,4 +220,100 @@
     .modal__bottom {
         justify-content: flex-end;
     }
+}
+
+.selectPost-caegoryList {
+    display: flex;
+    justify-content: center;
+    padding: 48px 0;
+    &__item {
+        margin-right: 32px;
+        
+        &:first-child {
+            &:hover > a::before{
+                background: url('../../images/icon-step_white.svg')
+            }
+            a::before {
+                background: url('../../images/icon-step_black.svg') no-repeat;
+            }
+        }
+        &:nth-child(2) {
+            &:hover > a::before {
+                background: url('../../images/icon-paper_white.svg')
+            }
+            a::before {
+                background: url('../../images/icon-paper_black.svg') no-repeat;
+            }
+        }
+        &:last-child {
+            margin-right: 0;
+            &:hover > a::before {
+                background: url('../../images/icon-bag_white.svg')
+            }
+            a::before {
+                background: url('../../images/icon-bag_black.svg') no-repeat;
+            }
+
+        }
+        a {
+            display: block;
+            width: 134px;
+            height: 134px;
+            border-radius: 10px;
+            background-color: $bgColor;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.2s ease;
+            &:hover {
+                background-color: $cAccent3;
+                color: $cWhite;
+            }
+            &::before {
+                content: "";
+                display: block;
+                width: 48px;
+                height: 48px;
+                margin-bottom: 4px;
+            }
+        }
+
+    }
+}
+
+.update-bar, .error-bar {
+    cursor: pointer;
+    &__wrap {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 48px;    
+        margin: auto;
+        width: 310px;
+        padding: 13px 33px 13px 17px;
+        background-color: $cWhite;
+        font-size: 1.3rem;
+        font-weight: bold;
+        box-shadow: 0px 8px 30px rgba(132, 141, 182, 0.3);
+        backdrop-filter: blur(2.71828px);
+        border-radius: 28px;
+        opacity: 0.9;
+    }
+    &__icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 14px;
+    }
+}
+.update-bar__icon {
+    background-color: $cAccent2;
+}
+.error-bar__icon {
+    background-color: $cAttention;
 }

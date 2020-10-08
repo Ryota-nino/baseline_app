@@ -19,10 +19,20 @@
         }
         &.current {
             span {
+                transition: 0.3s ease;
                 color: $cMain;
                 font-weight: bold;
                 position: relative;
                 padding: 0 4px 0 6px;
+                &::after {
+                    content: "";
+                    display: inline-block;
+                    width: 18px;
+                    height: 20px;
+                    background: url('../../images/icon-pen.svg');
+                    margin-left: 2px;
+                    transform: translateY(2px);
+                }
             }
             img {
                 margin-left: 2px;

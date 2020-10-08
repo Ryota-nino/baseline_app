@@ -4,12 +4,14 @@ interface Props {
     type: string;
     labelTxt: string;
     isRequired: boolean;
+    isRequiredTxt: boolean;
     placeholderTxt: string;
     isError: any;
     isIcon: boolean;
     iconUrl?: string;
     className?: string;
-    value?: string;
+    defaultValue?: string;
+    readonly?: boolean;
 }
 
 const InsertBig:React.FC<Props> = props => {
@@ -31,13 +33,14 @@ const InsertBig:React.FC<Props> = props => {
         <label className={`input--big ${props.className}`}>
             <div className="input--big__wrap">
                 {props.isIcon && <img src={props.iconUrl} alt="" />}
-                <span className="input--big__label">{props.labelTxt}</span>{props.isRequired && <span className="cAttention">*</span>}
+                <span className="input--big__label">{props.labelTxt}</span>{props.isRequiredTxt && <span className="cAttention">*</span>}
             </div>
             <input 
                 type={props.type} 
                 required={props.isRequired} 
                 placeholder={props.placeholderTxt}
-                value={props.value}
+                defaultValue={props.defaultValue}
+                readOnly={props.readonly}
             />
             {hasErrorCheck()}
         </label>

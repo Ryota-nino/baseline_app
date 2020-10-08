@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { AnimatePresence,motion } from 'framer-motion';
 import {RoundedBtn} from '../btn';
 import {Avatar, StepIcon, PaperIcon ,BagIcon, TrashIcon, CheckIcon_Green, MenuDownIcon} from '../../assets/images/index';
-// import {Avatar, StepIcon, PaperIcon ,BagIcon} from 'react-svg-loader!../../../src/assets/images/index';
 
 const backdrop = {
     visible: { opacity: 1 },
@@ -23,6 +22,7 @@ const modal = {
     }
 }
 
+
 interface Props {
     showModal: any;
     setShowModal: any;
@@ -32,20 +32,44 @@ interface Props {
 const Modal:React.FC<Props> = props => {
 
     const [saveTextModal, setSaveTextModal] = useState<boolean>(false);
+    const [inputText, setInputText ] = useState({
+        count: 0,
+        textValue: 'initial value'
+    });
+
+    const handleTextChange = (textValue:string)=> {
+        setInputText({
+            count: inputText.count,
+            textValue: textValue
+        });
+    }
+    const handleCountChange = (textLength:number)=> {
+        setInputText({
+            count: textLength,
+            textValue: inputText.textValue
+        });
+    }
 
     const commentWindowRender = (ttl:string) =>  (
         <>
-            <motion.div className="modal modal--normal" variants={modal}>
+            <motion.div className="modal modal--normal" variants={modal} onClick={(event)=> event.stopPropagation()}>
                 <div className="modal__header modal__header--normal">
                     <p className="heading4">{ ttl }</p>
                 </div>
                 <div className="btn closeIcon-btn" onClick={() => props.setShowModal(false)}></div>
                 <div className="modal__input-area">
-                <img src={Avatar} alt=""/>
-                <textarea className="modal__textarea"></textarea>
+                    <img src={Avatar} alt=""/>
+                    <textarea className="modal__textarea" 
+                        onChange={e => handleTextChange(e.target.value)} 
+                        onKeyUp={e => handleCountChange(e.currentTarget.value.length)}
+                    ></textarea>
                 </div>
                 <div className="modal__bottom">
-                    <p className="text-count"><span className="text-count__current-num">10</span>/200</p>
+                    <p className="text-count">
+                        <span 
+                            className={`text-count__current-num ${inputText.count > 200 && 'cAttention'}`}>{inputText.count}
+                        </span>
+                        &nbsp;/ 200</p>
                     <div>
                         <p onClick={()=> setSaveTextModal(true)}>下書き</p>
                         <RoundedBtn txt="投稿" />
@@ -67,9 +91,9 @@ const Modal:React.FC<Props> = props => {
                         <p className="heading4">どの項目の情報を追加しますか？</p>
                     </div>
                     <ul className="selectPost-caegoryList">
-                        <li className="selectPost-caegoryList__item current"><Link to="/company-info/edit/step"><img src={StepIcon} alt=""/>選考ステップ</Link></li>
-                        <li className="selectPost-caegoryList__item"><Link to="/company-info/edit/entry"><img src={PaperIcon} alt=""/>エントリーシート</Link></li>
-                        <li className="selectPost-caegoryList__item"><Link to="/company-info/edit/interview"><img src={BagIcon} alt=""/>面接情報</Link></li>
+                        <li className="selectPost-caegoryList__item"><Link to="/company-info/edit/step">選考ステップ</Link></li>
+                        <li className="selectPost-caegoryList__item"><Link to="/company-info/edit/entry">エントリーシート</Link></li>
+                        <li className="selectPost-caegoryList__item"><Link to="/company-info/edit/interview">面接情報</Link></li>
                     </ul>
                     <div className="btn closeIcon-btn" onClick={() => props.setShowModal(false)}></div>
                 </motion.div>
@@ -80,7 +104,7 @@ const Modal:React.FC<Props> = props => {
             );
         } else if (props.type === 'company-level') {
             return (
-                <motion.div className="modal modal--normal company-level" variants={modal}>
+                <motion.div className="modal modal--normal company-level" variants={modal} onClick={(event)=> event.stopPropagation()}>
                     <div className="modal__header modal__header--normal">
                         <p className="heading4">企業の閲覧には情報の投稿が必要です</p>
                     </div>
@@ -111,11 +135,29 @@ const Modal:React.FC<Props> = props => {
                     </div>
                     <div className="modal__bottom">
                         <div>
-                            <Link to="/" >マイページ</Link>
+                            <Link to="/mypage" >マイページ</Link>
                             <RoundedBtn txt="OK" />
                         </div>
                     </div>
                     <div className="btn closeIcon-btn" onClick={() => props.setShowModal(false)}></div>
+                </motion.div>
+            );
+        } else if('account-delete') {
+            return (
+                <motion.div className="modal modal--normal modal--accountDelete" variants={modal} onClick={(event)=> event.stopPropagation()}>
+                    <div className="accountDelete-user">
+                        <img className="accountDelete-user__avatar" src={Avatar} alt=""/>
+                        <div>
+                            <p className="accountDelete-user__name">山本 仁</p>
+                            <p className="accountDelete-user__stundet-number">@2180075</p>
+                        </div>
+                    </div>
+                    <p className="heading4">アカウントが削除されます</p>
+                    <p className="txt">今まで投稿した活動履歴が全て削除されます。投稿した企業情報については削除されません。</p>
+                    <div className="flex">
+                        <p onClick={() => props.setShowModal(false)}>キャンセル</p>
+                        <RoundedBtn txt="アカウントを削除" isDelete={'true'} />
+                    </div>
                 </motion.div>
             );
         }
@@ -123,74 +165,72 @@ const Modal:React.FC<Props> = props => {
 
     const saveTextModalRender = () => {
         return(
-            <motion.div className="modal modal--normal scroll" variants={modal}>
-                    <div className="modal__header modal__header--side">
-                        <div onClick={()=> setSaveTextModal(false)}>
-                            <img src={MenuDownIcon} alt=""/>
-                            <p className="heading5">戻る</p>
+            <motion.div className="modal modal--normal scroll" onClick={(event)=> event.stopPropagation()}>
+                <div className="modal__header modal__header--side">
+                    <div onClick={()=> setSaveTextModal(false)}>
+                        <img src={MenuDownIcon} alt=""/>
+                        <p className="heading5">戻る</p>
+                    </div>
+                    <RoundedBtn txt="保存" />
+                </div>
+                <div className="scrollContent">
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
                         </div>
-                        <RoundedBtn txt="保存" />
-                    </div>
-                    <div className="scrollContent">
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                        <article className="saveText-item">
-                            <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
-                            <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
-                            <div className="saveText-item__wrap">
-                                <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
-                                <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
-                            </div>
-                        </article>
-                    </div>
-                    
-                
+                    </article>
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
+                        </div>
+                    </article>
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
+                        </div>
+                    </article>
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
+                        </div>
+                    </article>
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
+                        </div>
+                    </article>
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
+                        </div>
+                    </article>
+                    <article className="saveText-item">
+                        <p className="saveText-item__time"><time dateTime="2020-09-12-07-07">2020.09.12</time></p>
+                        <p className="saveText-item__txt">一次面接を10:00~から受けて面接官と話したが、...</p>
+                        <div className="saveText-item__wrap">
+                            <button className="btn saveText-item__deleteBtn"><img src={TrashIcon} alt=""/></button>
+                            <button onClick={()=> setSaveTextModal(false)} className="btn saveText-item__useBtn"><img src={CheckIcon_Green} alt=""/></button>
+                        </div>
+                    </article>
+                </div>
             </motion.div>
         );
     }
@@ -206,7 +246,7 @@ const Modal:React.FC<Props> = props => {
     return (
         <AnimatePresence exitBeforeEnter>
             { props.showModal && (
-                <motion.div className="modal-background" variants={backdrop} initial="hidden" animate="visible" exit="hidden">
+                <motion.div className="modal-background" onClick={()=> props.setShowModal(false)} variants={backdrop} initial="hidden" animate="visible" exit="hidden">
                     {renderModal()}
                 </motion.div>
             )}

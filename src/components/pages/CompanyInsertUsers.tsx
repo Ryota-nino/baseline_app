@@ -25,7 +25,7 @@ const CompanyInsertUsers:React.FC<Props> = props => {
                     <h2 className="heading4 withAccent">{pageTtl}</h2>
                     <div className="userCard-list">
                         <article className="user-card">
-                            <Link to="">
+                            <Link to="/user/01">
                                 <img src={Avatar} alt=""/>
                                 <div className="user-card__wrapper">
                                     <h1 className="user-card__name">山本 仁</h1>
@@ -37,32 +37,7 @@ const CompanyInsertUsers:React.FC<Props> = props => {
                             </Link>
                         </article>
                         <article className="user-card">
-                            <Link to="">
-                                <img src={Avatar} alt=""/>
-                                <div className="user-card__wrapper">
-                                    <h1 className="user-card__name">山本 仁</h1>
-                                    <div className="user-card__wrap">
-                                        <p>22卒</p>
-                                        <p>デザイナー希望</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </article>
-
-                        <article className="user-card">
-                            <Link to="">
-                                <img src={Avatar} alt=""/>
-                                <div className="user-card__wrapper">
-                                    <h1 className="user-card__name">山本 仁</h1>
-                                    <div className="user-card__wrap">
-                                        <p>22卒</p>
-                                        <p>デザイナー希望</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </article>
-                        <article className="user-card">
-                            <Link to="">
+                            <Link to="/user/01">
                                 <img src={Avatar} alt=""/>
                                 <div className="user-card__wrapper">
                                     <h1 className="user-card__name">山本 仁</h1>
@@ -75,7 +50,7 @@ const CompanyInsertUsers:React.FC<Props> = props => {
                         </article>
 
                         <article className="user-card">
-                            <Link to="">
+                            <Link to="/user/01">
                                 <img src={Avatar} alt=""/>
                                 <div className="user-card__wrapper">
                                     <h1 className="user-card__name">山本 仁</h1>
@@ -87,7 +62,32 @@ const CompanyInsertUsers:React.FC<Props> = props => {
                             </Link>
                         </article>
                         <article className="user-card">
-                            <Link to="">
+                            <Link to="/user/01">
+                                <img src={Avatar} alt=""/>
+                                <div className="user-card__wrapper">
+                                    <h1 className="user-card__name">山本 仁</h1>
+                                    <div className="user-card__wrap">
+                                        <p>22卒</p>
+                                        <p>デザイナー希望</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </article>
+
+                        <article className="user-card">
+                            <Link to="/user/01">
+                                <img src={Avatar} alt=""/>
+                                <div className="user-card__wrapper">
+                                    <h1 className="user-card__name">山本 仁</h1>
+                                    <div className="user-card__wrap">
+                                        <p>22卒</p>
+                                        <p>デザイナー希望</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </article>
+                        <article className="user-card">
+                            <Link to="/user/01">
                                 <img src={Avatar} alt=""/>
                                 <div className="user-card__wrapper">
                                     <h1 className="user-card__name">山本 仁</h1>

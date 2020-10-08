@@ -1,13 +1,14 @@
 import React from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {ArrowIcon, TrashIcon} from '../../assets/images';
 import {InputBig} from '../form';
-import {ActionBtn} from '../btn';
-import { AnimatePresence,motion } from 'framer-motion';
+import {RoundedBtn} from '../btn';
+import { motion } from 'framer-motion';
 
+interface Props {
+  thisPage: string;
+}
 
-
-const AccountSettingContent:React.FC = props => {
+const AccountSettingContent:React.FC<Props> = props => {
     const history = useHistory();
     const isError = [
         {isEmpty1: false},
@@ -27,25 +28,75 @@ const AccountSettingContent:React.FC = props => {
           opacity: 0,
         },
     }
-  return (
-    <>
-        <motion.section className="app-main account-setting" initial="out" animate="in" exit="out" variants={pageTransition}>
-        <button className="btn pageBack-link" onClick={() => history.goBack()}><span className="heading4">設定一覧へ</span></button>
-            <section className="contentBox contentBox--big step">
+    const renderContent = () => {
+      if(props.thisPage === 'student-number') {
+        return (
+          <section className="contentBox contentBox--big student-number">
                 <h3 className="heading4">学籍番号を変更</h3>
                 <InputBig
                     type="number" 
                     labelTxt="学籍番号" 
-                    isRequired={false} 
+                    isRequired={true} 
+                    isRequiredTxt={false} 
                     placeholderTxt=""
                     isError={isError}
                     isIcon={false}
+                    defaultValue="21800098"
                 />
-                <div>
-                    <p>キャンセル</p>
-                    <ActionBtn txt="保存" isPlus={false} />
+                <div className="accountSetting-content__bottom">
+                    <p><Link to="/:user/account-setting">キャンセル</Link></p>
+                    <RoundedBtn txt="保存" />
                 </div>
             </section>
+        );
+      } else if (props.thisPage === 'password') {
+        return (
+          <section className="contentBox contentBox--big password">
+                <h3 className="heading4">パスワードを変更</h3>
+                <InputBig
+                    type="password" 
+                    labelTxt="現在のパスワード" 
+                    isRequired={true} 
+                    isRequiredTxt={false} 
+                    placeholderTxt=""
+                    isError={isError}
+                    isIcon={false}
+                    defaultValue="21800098"
+                    readonly={true}
+                />
+                <InputBig
+                    type="password" 
+                    labelTxt="新しいパスワード" 
+                    isRequired={true} 
+                    isRequiredTxt={false} 
+                    placeholderTxt=""
+                    isError={isError}
+                    isIcon={false}
+                    defaultValue=""
+                />
+                <InputBig
+                    type="password" 
+                    labelTxt="パスワードを確認" 
+                    isRequired={true} 
+                    isRequiredTxt={false} 
+                    placeholderTxt=""
+                    isError={isError}
+                    isIcon={false}
+                    defaultValue=""
+                />
+                <div className="accountSetting-content__bottom">
+                    <p><Link to="/:user/account-setting">キャンセル</Link></p>
+                    <RoundedBtn txt="保存" />
+                </div>
+            </section>
+        );
+      }
+    };
+  return (
+    <>
+        <motion.section className="app-main accountSetting-content" initial="out" animate="in" exit="out" variants={pageTransition}>
+          <button className="btn pageBack-link" onClick={() => history.goBack()}><span className="heading4">設定一覧へ</span></button>
+          {renderContent()}
         </motion.section>
     </>
   );

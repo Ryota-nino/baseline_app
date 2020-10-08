@@ -8,7 +8,7 @@ const CompanyDetailCard:React.FC = props => {
                 <figure className="comapay-detailCard__img"><img src={Goodpatch} alt=""/></figure>
                 <h1 className="comapay-detailCard__name">株式会社Visional</h1>
             </Link>
-            <p className="comapay-detailCard__link"><a href="https://visional.inc/">https://visional.inc/</a></p>
+            <p className="comapay-detailCard__link"><a target="_blank" href="https://visional.inc/">https://visional.inc/</a></p>
         </article>
   );
 }

@@ -15,6 +15,7 @@ export {default as WriteIcon} from './icon-write.svg';
 export {default as CameraIcon} from './icon-camera.svg';
 export {default as LinkIcon} from './icon-link.svg';
 export {default as PenIcon} from './icon-pen.svg';
+export {default as PencilIcon} from './icon-pencil.svg';
 export {default as StepIcon} from './icon-step_black.svg';
 export {default as PaperIcon} from './icon-paper_black.svg';
 export {default as BagIcon} from './icon-bag_black.svg';

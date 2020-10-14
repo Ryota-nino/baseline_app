@@ -76,6 +76,10 @@
             color: $cAttention;
             border: 1px solid $cAttention;
         }
+        &.invalid {
+            opacity: 0.5;
+            pointer-events: none;
+        }
     }
     &--delete {
         display: flex;

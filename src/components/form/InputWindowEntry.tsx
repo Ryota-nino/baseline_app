@@ -9,6 +9,19 @@ interface Props {
 
 
 const InputWindowStep:React.FC<Props> = props => {
+    const pageTransition = {
+        in: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.8
+          }
+        },
+        out: {
+          x: 20,
+          opacity: 0,
+        },
+    }
     const isError = [
         {isEmpty1: false},
         {isEmpty2: false},
@@ -38,12 +51,15 @@ const InputWindowStep:React.FC<Props> = props => {
 
     return(
         <>
-        <article id={`inputWindow-${props.id}`} key={props.id} className="contentBox contentBox--big entry">
+        <motion.article id={`inputWindow-${props.id}`} key={props.id} className="contentBox contentBox--big entry" initial="out" animate="in" exit="out" variants={pageTransition}>
             {props.id === 1 && <h1 className="heading4">エントリーシート</h1>}
             <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
             <InputTextArea ttl="本文" placeholder="本文を記入"/>
-            <div className="btn btn--delete"><img src={TrashIcon} alt=""/></div>
-        </article>
+            {
+                props.id !== 1 && <div className="btn btn--delete" onClick={deleteHandler}><img src={TrashIcon} alt=""/></div>
+            }
+            
+        </motion.article>
         </>
     );
 };

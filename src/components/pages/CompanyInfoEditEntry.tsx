@@ -8,6 +8,19 @@ import { AnimatePresence,motion } from 'framer-motion';
 
 
 const CompanyInfoEditEntry:React.FC = props => {
+    const pageTransition = {
+        in: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.8
+          }
+        },
+        out: {
+          x: 20,
+          opacity: 0,
+        },
+    }
 
 
     let [inputWindow, setInputWindow] = useState([
@@ -25,7 +38,7 @@ const CompanyInfoEditEntry:React.FC = props => {
     }
 
     return(
-            <main className="main company-info-edit">
+            <motion.main className="main company-info-edit" initial="out" animate="in" exit="out" variants={pageTransition}>
                 
                 <div className="main__container">
                     <Link to="/company-info" className="btn pageBack-link"><span className="heading4">情報一覧へ</span></Link>
@@ -56,7 +69,7 @@ const CompanyInfoEditEntry:React.FC = props => {
                         <CompanyDetailCard/>
                     </div>
                 </div>
-            </main>
+            </motion.main>
     );
 };
 

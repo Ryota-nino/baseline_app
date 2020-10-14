@@ -72,7 +72,7 @@ const Modal:React.FC<Props> = props => {
                         &nbsp;/ 200</p>
                     <div>
                         <p onClick={()=> setSaveTextModal(true)}>下書き</p>
-                        <RoundedBtn txt="投稿" />
+                        <RoundedBtn txt="投稿" className={inputText.count > 200 ? 'invalid' : ''} />
                     </div>
                 </div>
             </motion.div>

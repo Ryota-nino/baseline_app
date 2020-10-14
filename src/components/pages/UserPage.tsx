@@ -28,6 +28,7 @@ const UserPage:React.FC<Props> = props => {
       opacity: 0,
     },
   }
+  
   return (
     <>
       <motion.section className={`app-main ${isUsrPage ? 'userpage' : 'mypage'} single`} initial="out" animate="in" exit="out" variants={pageTransition}>
@@ -37,13 +38,13 @@ const UserPage:React.FC<Props> = props => {
         {!isUsrPage && <Link to="/01/account-setting" className="icon-txt icon-txt--normal"><img src={GearIcon} alt="" />アカウント設定へ</Link>}
         <MyActivityCountWindow />
         <div className="activity-list">
-          <UserComment isArrow={true} />
-          <UserComment isArrow={true} />
-          <UserComment isArrow={true} />
-          <UserComment isArrow={true} />
-          <UserComment isArrow={true} />
-          <UserComment isArrow={true} />
-          <UserComment isArrow={true} />
+          <UserComment isArrow={true}/>
+          <UserComment isArrow={true}/>
+          <UserComment isArrow={true}/>
+          <UserComment isArrow={true}/>
+          <UserComment isArrow={true}/>
+          <UserComment isArrow={true}/>
+          <UserComment isArrow={true}/>
         </div>
       </motion.section>
       <Modal type="delete-account" showModal={showModal} setShowModal={setShowModal}/>

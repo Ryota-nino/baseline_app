@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState, useRef} from 'react';
 import {useLocation, HashRouter as Router} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {Logo} from '../../assets/images/index';
@@ -37,6 +37,13 @@ const Header:React.FC<Props> = props => {
           break;
       }
     }
+
+    const myAvatarMenu = useRef(null);
+    let [viewMenu, setViewMenu] = useState(false);
+    const toggleUserMenu = () => {
+      setViewMenu(!viewMenu);
+    }
+
     return(
         <header className="header">
           <div className="header__wrap">
@@ -51,7 +58,15 @@ const Header:React.FC<Props> = props => {
               </ul>
             <PrimaryBtn setShowModal={props.setShowModal}/>
           </div>
-          <MyAvatar ml="" isArrow={true}/>
+          <MyAvatar ml="" isArrow={true} clickFunc={toggleUserMenu}/>
+
+          <div ref={myAvatarMenu} className={`myAvatar-menu ${viewMenu && 'view'}`}>
+            <ul className="myAvatar-menu__wrap">
+              <li className="myAvatar-menu__item"><Link to="/:user/account-setting">設定</Link></li>
+              <li className="myAvatar-menu__item cAttention">ログアウト</li>
+            </ul>
+          </div>
+
         </header>
     );
 };

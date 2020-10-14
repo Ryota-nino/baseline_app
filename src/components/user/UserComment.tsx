@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {Avatar,ArrowIcon} from '../../assets/images/index';
+import React, {useEffect,useState, useRef} from 'react';
+import {Avatar,ArrowIcon, PencilIcon, TrashIcon} from '../../assets/images/index';
 
 interface Props {
     isArrow: boolean;
@@ -19,10 +19,15 @@ const ActivityItem:React.FC<Props> = props => {
         setUrlText();
     }, []);
 
+    let [toggleMenu, setToggleMenu] = useState(false);
+    const arrowClickHandler = () :void => {
+        setToggleMenu(!toggleMenu);
+    }
+
     const isArrowRender = () => {
         if(props.isArrow) {
             return (
-                <div className="activity-item__arrow"><img src={ArrowIcon} alt=""/></div>
+                <div className={`activity-item__arrow`} onClick={arrowClickHandler}><img src={ArrowIcon} alt=""/></div>
             )
         }
     }
@@ -42,6 +47,10 @@ const ActivityItem:React.FC<Props> = props => {
                 </div>
                 <p ref={activityTxtEl} className="activity-item__txt">マイナビ就職セミナーに行って来た話した企業、goodpatch DeNAgoodpatchとは9/12に面談予定。参加したセミナー: https://sbfl.net/blog/2019/11/12/react-hooks-introduction/</p>
             </div>
+            <ul className={`activity-item-menu ${toggleMenu && 'view'}`}>
+                <li className="activity-item-menu__item"><img src={PencilIcon} alt=""/><span>編集</span></li>
+                <li className="activity-item-menu__item cAttention"><img src={TrashIcon} alt=""/><span>削除</span></li>
+            </ul>
         </article>
     );
 };

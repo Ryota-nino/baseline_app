@@ -15,3 +15,5 @@ export {default as ProfileEdit} from './ProfileEdit';
 export {default as CompanyInsertUsers} from './CompanyInsertUsers';
 export {default as AccountSetting} from './AccountSetting';
 export {default as AccountSettingContent} from './AccountSettingContent';
+
+export {default as Register} from './Register';

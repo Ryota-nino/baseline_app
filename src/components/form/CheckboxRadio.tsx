@@ -12,12 +12,15 @@ const Checkbox:React.FC<Props> = props => {
     if(props.type === 'checkbox') {
         typeClass = 'input-checkbox input-checkbox--normal';
     }
-  return (
-    <>
-        <input id={`input-${props.keyName}`} className="check-radio-input" type={props.type}/>
-        <label htmlFor={`input-${props.keyName}`} className={`${typeClass}`}><img src={CheckIcon} alt="" /></label>
-    </>
-  );
+    const checkHandler = (e:any)=> {
+      console.log(e.target.value)
+    }
+    return (
+      <>
+          <input onChange={checkHandler} id={`input-${props.keyName}`} className="check-radio-input" type={props.type} value={props.keyName}/>
+          <label htmlFor={`input-${props.keyName}`} className={`${typeClass}`}><img src={CheckIcon} alt="" /></label>
+      </>
+    );
 }
 
 export default Checkbox;

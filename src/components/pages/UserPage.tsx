@@ -38,16 +38,17 @@ const UserPage:React.FC<Props> = props => {
         {!isUsrPage && <Link to="/01/account-setting" className="icon-txt icon-txt--normal"><img src={GearIcon} alt="" />アカウント設定へ</Link>}
         <MyActivityCountWindow />
         <div className="activity-list">
-          <UserComment isArrow={true}/>
-          <UserComment isArrow={true}/>
-          <UserComment isArrow={true}/>
-          <UserComment isArrow={true}/>
-          <UserComment isArrow={true}/>
-          <UserComment isArrow={true}/>
-          <UserComment isArrow={true}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+          <UserComment isArrow={true} type={props.type}　clickFunc={setShowModal}/>
         </div>
       </motion.section>
-      <Modal type="delete-account" showModal={showModal} setShowModal={setShowModal}/>
+      {/* <Modal type="delete-account" showModal={showModal} setShowModal={setShowModal}/> */}
+      <Modal type="activity-edit" showModal={showModal} setShowModal={setShowModal}/>
     </>
   );
 }

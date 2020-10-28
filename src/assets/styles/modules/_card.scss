@@ -13,7 +13,13 @@
         }
     }
     &__img {
-        max-width: 238px;
+        width: 238px;
+        height: 174px;
+        img {
+            object-fit: cover;
+            display: block;
+            height: 100%;
+        }
     }
     &__name {
         font-weight: bold;

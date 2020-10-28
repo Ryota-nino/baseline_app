@@ -2,15 +2,39 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { Goodpatch } from '../../assets/images/index';
 
-const CompanyCard:React.FC = () => {
+interface Props {
+  class: string;
+  name:string;
+  business:string;
+  pref: [];
+  registerTime: number;
+  img: string;
+}
+
+const CompanyCard:React.FC<Props> = (props) => {
+  const checkTextLength = ()=> {
+      const MAX_LENGTH = 60;
+      if (props.business.length > MAX_LENGTH) {
+        return props.business.substr(0, MAX_LENGTH) + '...';
+      }
+      return props.business;
+  }
+  const checkPrefLength = ()=> {
+    const MAX_LENGTH = 4;
+    if (props.pref.length > MAX_LENGTH) {
+      const output = String(props.pref.slice(0, MAX_LENGTH) + '...');
+      return output.replace(/,/g, ' ');
+    }
+    return props.pref;
+  }
   return (
-        <article className="company-card">
+        <article className={`company-card ${props.class}`}>
             <Link to="/company-detail/01/about">
-              <figure className="company-card__img"><img src={Goodpatch} alt=""/></figure>
-              <h3 className="company-card__name">株式会社グッドパッチ</h3>
-              <p className="company-card__desc">UI/UXデザイン、ビジネスモデルデザイン、ブランド体験デザイン、組織デザイン、ソフトウェア開発...</p>
-              <p className="company-card__address">東京</p>
-              <p className="company-card__time"><time dateTime="">2020.09.02</time></p>
+              <figure className="company-card__img"><img src={props.img} alt=""/></figure>
+              <h3 className="company-card__name">{props.name}</h3>
+              <p className="company-card__desc">{checkTextLength()}</p>
+              <p className="company-card__address">{checkPrefLength()}</p>
+              <p className="company-card__time"><time dateTime="">{props.registerTime}</time></p>
             </Link>
         </article>
   );

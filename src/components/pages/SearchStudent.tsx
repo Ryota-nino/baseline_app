@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import StudentSearchWindow from '../form/StudentSearchWindow';
 import {StudentListCard} from '../card';
 import {Pagenation} from '../common';
 import { AnimatePresence,motion } from 'framer-motion';
+import axios from "axios";
 
 const SearchStudent:React.FC = () => {
+
   const pageTransition = {
     in: {
       opacity: 1,
@@ -18,6 +20,19 @@ const SearchStudent:React.FC = () => {
       opacity: 0,
     },
   }
+
+  const [students, setStudents] = useState<any>();
+  useEffect( ()=> {
+
+    const url = "./students.json";
+    axios.get(url).then(res => {
+      const output = res.data;
+      setStudents(
+        output,
+      );
+    })
+  }, []);
+  
   return (
     <motion.section className="app-main searchStudent" initial="out" animate="in" exit="out" variants={pageTransition}>
       <h2 className="heading1">他者の就活を探す</h2>
@@ -34,14 +49,14 @@ const SearchStudent:React.FC = () => {
                 </ul>
               </div>
               <motion.div className="studentListTable__wrapper" initial="out" animate="in" exit="out" variants={pageTransition}>
-                <StudentListCard />
-                <StudentListCard />
-                <StudentListCard />
-                <StudentListCard />
-                <StudentListCard />
-                <StudentListCard />
+                {/* {students.map((data:any) => (
+                  <StudentListCard />
+                ))} */}
+                {console.log(students)}
+                
               </motion.div>
-              <Pagenation />
+              {/* <Pagenation pageNum={pageNum} setPageNum={setPageNum}/> */}
+              <Pagenation/>
             </div>  
           </div>
       </div>

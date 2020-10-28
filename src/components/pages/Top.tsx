@@ -1,15 +1,27 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { SearchBar } from '../form/index';
 import { ActionBtn } from '../btn/index';
 import { Modal } from '../modal';
 import { AnimatePresence,motion } from 'framer-motion';
 import { CompanyCard, NewsBars, ActivityCard } from '../card/index';
-
+import axios from "axios";
 
 const Top:React.FC = props => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [companies, setCompanies] = useState<any>([]);
+
+  useEffect( ()=> {
+    const url = "./companies.json";
+    axios.get(url).then(res => {
+      setCompanies({
+        data: res.data,
+      });
+      
+    })
+  }, [])
+  
 
   const pageTransition = {
     in: {
@@ -35,10 +47,14 @@ const Top:React.FC = props => {
         </div>
 
         <div className="company-list">
+          {console.log(companies.data)}
+          {/* {companies.data.map((data:any) => (
+            <CompanyCard class={"item"} name={data.name}　business={data.business} pref={data.pref} registerTime={data.registerTime} img={data.image} />
+          ))} */}
+          {/* <CompanyCard />
           <CompanyCard />
           <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
+          <CompanyCard /> */}
         </div>
 
         <div className="activity-column">

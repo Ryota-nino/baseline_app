@@ -2,7 +2,7 @@ import React, { useState, } from 'react';
 import {Link} from 'react-router-dom';
 import { AnimatePresence,motion } from 'framer-motion';
 import {RoundedBtn} from '../btn';
-import {Avatar, StepIcon, PaperIcon ,BagIcon, TrashIcon, CheckIcon_Green, MenuDownIcon} from '../../assets/images/index';
+import {Avatar,TrashIcon, CheckIcon_Green, MenuDownIcon} from '../../assets/images/index';
 
 const backdrop = {
     visible: { opacity: 1 },
@@ -101,6 +101,10 @@ const Modal:React.FC<Props> = props => {
         } else if (props.type === 'write-comment') {
             return (
                 commentWindowRender('会社に対するコメントを書く')
+            );
+        }else if(props.type === 'activity-edit') {
+            return (
+                commentWindowRender('アクティビティを編集')
             );
         } else if (props.type === 'company-level') {
             return (

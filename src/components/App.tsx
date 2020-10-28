@@ -15,8 +15,9 @@ const App = () => {
         <div className="container">
           <Router>
             <Switch>
+              <Route path="/register" component={Page.Register}></Route>
               <Route path="/company-info/edit" component={HeaderSide}></Route>
-              <Route path="/" render={ () => <Header setShowModal={setShowModal} /> }></Route>
+              <Route path="/" render={ () =>  <Header setShowModal={setShowModal} /> }></Route>
             </Switch>
 
             <AnimatePresence exitBeforeEnter />
@@ -24,7 +25,8 @@ const App = () => {
 
                 {/* <Route path="/company-info/edit/step" render={ () => <Page.CompanyInfoEdit thisPage="step" /> }></Route> */}
                 {/* <Route path="/company-info/edit/step" render={ () => <Page.CompanyInfoEditStep /> }></Route> */}
-                
+
+
                 <Route path="/company-info/edit/step" component={Page.CompanyInfoEditStep}></Route>
                 <Route path="/company-info/edit/interview" component={Page.CompanyInfoEditInterview}></Route>
                 <Route path="/company-info/edit/entry" component={Page.CompanyInfoEditEntry}></Route>

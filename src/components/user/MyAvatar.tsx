@@ -16,7 +16,6 @@ const MyAvatar:React.FC<Props> = props => {
             )   
         }
     }
-
     return(
         <div className="myAvatar" onClick={props.clickFunc}>
             <img src={AccountDefaultIcon} alt=""/>

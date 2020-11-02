@@ -5,6 +5,7 @@ import { isLabeledStatement } from 'typescript';
 interface Props {
   txt: string;
   isPlus: boolean;
+  type: 'button' | 'submit';
   linkUrl?: string;
   showModal?: any;
   setShowModal?: any;
@@ -36,7 +37,13 @@ const Action:React.FC<Props> = props => {
   }
 
   return (
-    <button onClick={onClickHandelr} className="btn btn--action">{isPlusRender()}{props.txt}</button>
+    <button 
+      type={props.type} 
+      onClick={()=> {if(props.type == 'button') {onClickHandelr()}}} 
+      className="btn btn--action"
+    >
+        {isPlusRender()}{props.txt}
+    </button>
   );
   
 }

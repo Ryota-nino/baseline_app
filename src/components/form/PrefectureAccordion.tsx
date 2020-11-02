@@ -11,7 +11,7 @@ const PrefectureAccordion:React.FC = props => {
           <p className="prefecture-accordion__category">{key}</p>
           <ul className="prefecture-accordion__child-item">
             {value.map(data => {
-              return <li><InputCheckRadio type="checkbox" txt={data.name}/></li>
+              return <li><InputCheckRadio keyName={data.name} type="checkbox" txt={data.name}/></li>
             })}
           </ul>
         </li>

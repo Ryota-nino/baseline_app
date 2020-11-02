@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useLocation, useHistory} from 'react-router-dom';
 import {CompanyBar, CompanyDetailItem,} from '../company';
 import {InputCheckRadio, FreeWordInput} from '../form';
 import {ActionBtn, RoundedBtn} from '../btn';
@@ -13,6 +13,10 @@ interface Props {
 const CompanyInfo:React.FC<Props> = props => {
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
+  
+  const location = useLocation();
+  const companyId = location.pathname.split("/")[2];
+
   const pageTransition = {
     in: {
       opacity: 1,
@@ -30,7 +34,7 @@ const CompanyInfo:React.FC<Props> = props => {
     <>
       <motion.section className="app-main company-info single" initial="out" animate="in" exit="out" variants={pageTransition}>
           <button className="btn pageBack-link" onClick={() => history.goBack()}><span className="heading4">企業詳細へ</span></button>
-          <CompanyBar hasActionBtn={false}/>
+          <CompanyBar thisPage="info" companyId={companyId} hasActionBtn={false}/>
           <div className="contentBox2">
             <h2 className="heading4">共通情報</h2>
             <div className="company-info__form">
@@ -47,7 +51,7 @@ const CompanyInfo:React.FC<Props> = props => {
           <div className="contentBox2 added-info">
             <div>
               <h2 className="heading4">あなたが記入した情報</h2>
-              <ActionBtn txt="情報を追加する" isPlus={false} showModal={showModal} setShowModal={setShowModal} />
+              <ActionBtn type="button" txt="情報を追加する" isPlus={false} showModal={showModal} setShowModal={setShowModal} />
             </div>
             <ul className="company-info__added">
               <li><CompanyDetailItem ttl="本選考 (22卒)" isPass={false} job="デザイナー" userName="山本 仁"/></li>
@@ -56,7 +60,7 @@ const CompanyInfo:React.FC<Props> = props => {
             </ul>
           </div>
       </motion.section>
-      <Modal type="select-post-category" showModal={showModal} setShowModal={setShowModal}/>
+      <Modal type="select-post-category" showModal={showModal} setShowModal={setShowModal} companyId={companyId}/>
     </>
   );
 }

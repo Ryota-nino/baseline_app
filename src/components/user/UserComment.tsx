@@ -2,6 +2,9 @@ import React, {useEffect,useState, useRef} from 'react';
 import {Avatar,ArrowIcon, PencilIcon, TrashIcon} from '../../assets/images/index';
 
 interface Props {
+    year: string;
+    txt: string;
+    updateTime: string;
     isArrow: boolean;
     type?: 'user' | 'mypage';
     clickFunc?: any;
@@ -41,13 +44,13 @@ const ActivityItem:React.FC<Props> = props => {
                 <div className="activity-item__head">
                     <h1 className="activity-item__name">山本 仁</h1>
                     <ul className="activity-item__list">
-                        <li>1年次</li>
+                        <li>{props.year}</li>
                         <li>&nbsp;|&nbsp;</li>
-                        <li><span>今日</span> <time dateTime="2020-09-20T13:30">13:30</time></li>
+                        <li><time dateTime="2020-09-20T13:30">{props.updateTime}</time></li>
                     </ul>
                     {props.type === 'mypage' && isArrowRender()}
                 </div>
-                <p ref={activityTxtEl} className="activity-item__txt">マイナビ就職セミナーに行って来た話した企業、goodpatch DeNAgoodpatchとは9/12に面談予定。参加したセミナー: https://sbfl.net/blog/2019/11/12/react-hooks-introduction/</p>
+                <p ref={activityTxtEl} className="activity-item__txt">{props.txt}</p>
             </div>
             {   props.type === 'mypage' &&
                 <ul className={`activity-item-menu ${toggleMenu && 'view'}`}>

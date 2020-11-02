@@ -2,6 +2,8 @@ import React from 'react';
 import {AccountDefaultIcon, ArrowIcon} from '../../assets/images/index';
 
 interface Props {
+    name: string;
+    student_number: string;
     ml: string;
     isArrow: boolean;
     clickFunc?: any;
@@ -20,8 +22,8 @@ const MyAvatar:React.FC<Props> = props => {
         <div className="myAvatar" onClick={props.clickFunc}>
             <img src={AccountDefaultIcon} alt=""/>
             <div className="myAvatar__wrap" style={{ marginLeft: props.ml }}>
-                <p className="myAvatar__name">山本 仁</p>
-                <p className="myAvatar__id">@2180075</p>
+                <p className="myAvatar__name">{props.name}</p>
+                <p className="myAvatar__id">@{props.student_number}</p>
             </div>
             <div className="myAvatar__arrow">{isArrowRender()}</div>
         </div>

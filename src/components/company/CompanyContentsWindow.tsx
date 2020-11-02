@@ -1,38 +1,64 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {UserComment} from '../user';
 import {Modal} from '../modal';
 import {WriteIcon} from '../../assets/images/index';
 import {Link} from 'react-router-dom';
 import {CompanyDetailItem} from './index';
 import { AnimatePresence,motion } from 'framer-motion';
+import axios from "axios";
 
 interface Props {
     thisPage: string;
+    companyId: any;
 }
 
 const CompanyContentsWindow:React.FC<Props> = props => {
-    const pageTransition = {
-        in: {
-          opacity: 1,
-          x: 0,
-          transition: {
-            duration: 0.2
-          }
-        },
-        out: {
-          x: -20,
-          opacity: 0,
-        },
-      }
+const pageTransition = {
+    in: {
+        opacity: 1,
+        x: 0,
+        transition: {
+        duration: 0.2
+        }
+    },
+    out: {
+        x: -20,
+        opacity: 0,
+    },
+    }
+    const [activity, setActivity] = useState<any>();
+    const [companies, setCompanies] = useState<any>([]);
+    const [companyComment, setCompanyComment] = useState<any>([]);
+    let companyId = Number(props.companyId) - 1;;
+    useEffect( ()=> {
+        const url1 = "./activity.json";
+        axios.get(url1).then(res => {
+            const output = res.data;
+            setActivity(output);
+        })
+        const url2 = "./database/companies.json";
+        axios.get(url2).then(res => {
+            const output = res.data;
+            setCompanies(output);
+        })
+        const url3 = "./database/company_comments.json";
+        axios.get(url3).then(res => {
+            const output = res.data;
+            setCompanyComment(output);
+        })
+    }, []);
+    
+    
+
     const [showModal, setShowModal] = useState<boolean>(false);
     const renderTabMenuList = () => {
         return (
             <div className="companyContentsWindow__list">
                 <ul>
-                    <li className={props.thisPage === 'about' ? 'current' : ''}><Link to="/company-detail/:id/about">会社概要</Link></li>
-                    <li className={props.thisPage === 'step' ? 'current' : ''}><Link to="/company-detail/:id/step">選考ステップ</Link></li>
-                    <li className={props.thisPage === 'entry' ? 'current' : ''}><Link to="/company-detail/:id/entry">エントリーシート</Link></li>
-                    <li className={props.thisPage === 'interview' ? 'current' : ''}><Link to="/company-detail/:id/interview">面接情報</Link></li>
+                    <li className={props.thisPage === 'about' ? 'current' : ''}><Link to={`/company-detail/${props.companyId}/about`}>会社概要</Link></li>
+                    <li className={props.thisPage === 'step' ? 'current' : ''}><Link to={`/company-detail/${props.companyId}/step`}>選考ステップ</Link></li>
+                    <li className={props.thisPage === 'entry' ? 'current' : ''}><Link to={`/company-detail/${props.companyId}/entry`}>エントリーシート</Link></li>
+                    <li className={props.thisPage === 'interview' ? 'current' : ''}><Link to={`/company-detail/${props.companyId}/interview`}>面接情報</Link></li>
                 </ul>
             </div>
         );
@@ -45,21 +71,24 @@ const CompanyContentsWindow:React.FC<Props> = props => {
                     <motion.div className="companyDetail-contents about" initial="out" animate="in" exit="out" variants={pageTransition}>
                         <section className="companyDetail-contents__section">
                             <h2 className="heading6">事業内容</h2>
-                            <p className="company">UI/UXデザイン、ビジネスモデルデザイン、ブランド体験デザイン、組織デザイン、ソフトウェア開発</p>
+                            <p className="company">{companies[companyId] ? companies[companyId].business : ''}</p>
                         </section>
                         <section className="companyDetail-contents__section">
                             <h2 className="heading6">従業員数</h2>
-                            <p>100 ~ 200人</p>
+                            <p>{companies[companyId] ? companies[companyId].employee_number : ''}</p>
                         </section>
                         <section className="companyDetail-contents__section">
                             <div>
                                 <h2 className="heading6">会社についてのコメント</h2>
                                 <button onClick={()=> setShowModal(true)} className="btn btn--edit"><img src={WriteIcon} alt="" />コメントを書く</button>
                             </div>
-                            <UserComment isArrow={false} />
-                            <UserComment isArrow={false} />
-                            <UserComment isArrow={false} />
-                            <UserComment isArrow={false} />
+                            {(() => {
+                                if (activity) {
+                                return activity.map((data:any) => (
+                                    <UserComment year={data.year} txt={data.txt} updateTime={data.updateTime} isArrow={true}/>
+                                ))
+                                }
+                            })()}
                         </section>
                     </motion.div>
                     <Modal type="write-comment" showModal={showModal} setShowModal={setShowModal}/>

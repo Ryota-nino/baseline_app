@@ -34,14 +34,15 @@ const AccountSettingContent:React.FC<Props> = props => {
           <section className="contentBox contentBox--big student-number">
                 <h3 className="heading4">学籍番号を変更</h3>
                 <InputBig
-                    type="number" 
-                    labelTxt="学籍番号" 
-                    isRequired={true} 
-                    isRequiredTxt={false} 
-                    placeholderTxt=""
-                    isError={isError}
-                    isIcon={false}
-                    defaultValue="21800098"
+                  name="student_number"
+                  type="number" 
+                  labelTxt="学籍番号" 
+                  isRequired={true} 
+                  isRequiredTxt={false} 
+                  placeholderTxt=""
+                  isError={isError}
+                  isIcon={false}
+                  defaultValue="21800098"
                 />
                 <div className="accountSetting-content__bottom">
                     <p><Link to="/:user/account-setting">キャンセル</Link></p>
@@ -54,35 +55,59 @@ const AccountSettingContent:React.FC<Props> = props => {
           <section className="contentBox contentBox--big password">
                 <h3 className="heading4">パスワードを変更</h3>
                 <InputBig
-                    type="password" 
-                    labelTxt="現在のパスワード" 
-                    isRequired={true} 
-                    isRequiredTxt={false} 
-                    placeholderTxt=""
-                    isError={isError}
-                    isIcon={false}
-                    defaultValue="21800098"
-                    readonly={true}
+                  name="now_password"
+                  type="password" 
+                  labelTxt="現在のパスワード" 
+                  isRequired={true} 
+                  isRequiredTxt={false} 
+                  placeholderTxt=""
+                  isError={isError}
+                  isIcon={false}
+                  defaultValue="21800098"
+                  readonly={true}
                 />
                 <InputBig
-                    type="password" 
-                    labelTxt="新しいパスワード" 
-                    isRequired={true} 
-                    isRequiredTxt={false} 
-                    placeholderTxt=""
-                    isError={isError}
-                    isIcon={false}
-                    defaultValue=""
+                  name="new_password"
+                  type="password" 
+                  labelTxt="新しいパスワード" 
+                  isRequired={true} 
+                  isRequiredTxt={false} 
+                  placeholderTxt=""
+                  isError={isError}
+                  isIcon={false}
+                  defaultValue=""
                 />
                 <InputBig
-                    type="password" 
-                    labelTxt="パスワードを確認" 
-                    isRequired={true} 
-                    isRequiredTxt={false} 
-                    placeholderTxt=""
-                    isError={isError}
-                    isIcon={false}
-                    defaultValue=""
+                  name="new_password_confirm"
+                  type="password" 
+                  labelTxt="パスワードを確認" 
+                  isRequired={true} 
+                  isRequiredTxt={false} 
+                  placeholderTxt=""
+                  isError={isError}
+                  isIcon={false}
+                  defaultValue=""
+                />
+                <div className="accountSetting-content__bottom">
+                    <p><Link to="/:user/account-setting">キャンセル</Link></p>
+                    <RoundedBtn txt="保存" />
+                </div>
+            </section>
+        );
+      } else if (props.thisPage === 'mail') {
+        return (
+          <section className="contentBox contentBox--big mail">
+              <h3 className="heading4">メールアドレスを変更</h3>
+                <InputBig
+                  name="mail"
+                  type="email" 
+                  labelTxt="メールアドレス" 
+                  isRequired={true} 
+                  isRequiredTxt={false} 
+                  placeholderTxt=""
+                  isError={isError}
+                  isIcon={false}
+                  defaultValue="ogurahiroki@gmail.com"
                 />
                 <div className="accountSetting-content__bottom">
                     <p><Link to="/:user/account-setting">キャンセル</Link></p>

@@ -13,11 +13,12 @@ const Top:React.FC = props => {
   const [companies, setCompanies] = useState<any>([]);
 
   useEffect( ()=> {
-    const url = "./companies.json";
+    const url = "./database/companies.json";
     axios.get(url).then(res => {
-      setCompanies({
-        data: res.data,
-      });
+      const output = res.data;
+      setCompanies(
+        output,
+      );
       
     })
   }, [])
@@ -43,18 +44,18 @@ const Top:React.FC = props => {
 
         <div className="action-sheet">
           <SearchBar width={"316px"} isIcon={true} placeholder={"企業名で検索"}/>
-          <ActionBtn txt="企業を新規掲載" isPlus={true} linkUrl="company-insert"/>
+          <ActionBtn type="button" txt="企業を新規掲載" isPlus={true} linkUrl="company-insert/register"/>
         </div>
 
         <div className="company-list">
-          {console.log(companies.data)}
-          {/* {companies.data.map((data:any) => (
-            <CompanyCard class={"item"} name={data.name}　business={data.business} pref={data.pref} registerTime={data.registerTime} img={data.image} />
-          ))} */}
-          {/* <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard /> */}
+          {(() => {
+            if (companies) {
+              return companies.map((data:any) => (
+                <CompanyCard companyId={data.id} class={"item"} name={data.company_name}　business={data.business} pref={data.pref} registerTime={data.updateTime} img={data.logo} />
+              ))
+            }
+          })()}
+
         </div>
 
         <div className="activity-column">

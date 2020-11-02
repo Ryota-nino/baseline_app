@@ -30,8 +30,9 @@ const CompanyInfoEdit:React.FC<Props> = props => {
         {value: '10月'},
         {value: '11月'},
         {value: '12月'},
-      ];
-
+    ];
+    const jobInterviewTypes = ['本選考', 'サマーインターン' , 'ウィンターインターン', 'スプリングインターン'];
+    const jobTypes = ['デザイナー', 'エンジニア' , '企画職', 'イラストレーター', 'その他'];
     const addTabBtn = useRef<HTMLButtonElement>(null);
     const insertTab = useRef<HTMLOListElement>(null);
     useEffect(() => {
@@ -53,8 +54,8 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <article className="contentBox contentBox--big step">
                         <h1 className="heading4">選考ステップ1</h1>
                         <div className="contentBox__wrap">
-                            <InputBig type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
-                            <InputDropdown ttl="" selectObj={calendarObj}/>
+                            <InputBig name="title" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                            <InputDropdown name="date" ttl="" selectObj={calendarObj}/>
                         </div>
                         <div className="input-txtarea">
                             <p className="input-txtarea__heading">本文</p>
@@ -65,8 +66,8 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <article className="contentBox contentBox--big step">
                         <h1 className="heading4">選考ステップ2</h1>
                         <div className="contentBox__wrap">
-                            <InputBig type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
-                            <InputDropdown ttl="" selectObj={calendarObj} />
+                            <InputBig name="title" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                            <InputDropdown name="date" ttl="" selectObj={calendarObj} />
                         </div>
                         <InputTextArea ttl="本文" placeholder="本文を記入"/>
                         <div className="btn btn--delete"><img src={TrashIcon} alt=""/></div>
@@ -88,12 +89,12 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                 <>
                     <article className="contentBox contentBox--big entry">
                         <h1 className="heading4">エントリーシート</h1>
-                        <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                        <InputBig name="title" className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
                         <InputTextArea ttl="本文" placeholder="本文を記入"/>
                         <div className="btn btn--delete"><img src={TrashIcon} alt=""/></div>
                     </article>
                     <article className="contentBox contentBox--big entry">
-                        <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                        <InputBig name="title" className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
                         <InputTextArea ttl="本文" placeholder="本文を記入"/>
                         <div className="btn btn--delete"><img src={TrashIcon} alt=""/></div>
                     </article>
@@ -109,12 +110,12 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <h1 className="heading4">概要</h1>
                     <div className="label-input mb16">
                         <p className="label-input__txt">選考種類<span className="cAttention">*</span></p>
-                        <SelectBox />
+                        <SelectBox name="selection_type" options={jobInterviewTypes}/>
                     </div>
                     <div className="contentBox__flex">
                         <div className="label-input">
                             <p className="label-input__txt">応募職種<span className="cAttention">*</span></p>
-                            <SelectBox />
+                            <SelectBox name="job" options={jobTypes}/>
                         </div>
                         <div className="label-input">
                             <FreeWordInput isRequired={true} type="string" ttl="その他" placeholder="職種を入力" />
@@ -128,12 +129,12 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <h1 className="heading4">概要</h1>
                     <div className="label-input mb16">
                         <p className="label-input__txt">選考種類<span className="cAttention">*</span></p>
-                        <SelectBox />
+                        <SelectBox name="selection_type" options={jobInterviewTypes}/>
                     </div>
                     <div className="contentBox__flex">
                         <div className="label-input">
                             <p className="label-input__txt">応募職種<span className="cAttention">*</span></p>
-                            <SelectBox />
+                            <SelectBox name="job" options={jobTypes}/>
                         </div>
                         <div className="label-input">
                             <FreeWordInput isRequired={false} type="string" ttl="結果" placeholder="合格" />
@@ -147,12 +148,12 @@ const CompanyInfoEdit:React.FC<Props> = props => {
                     <h1 className="heading4">概要</h1>
                     <div className="label-input mb16">
                         <p className="label-input__txt">選考種類<span className="cAttention">*</span></p>
-                        <SelectBox />
+                        <SelectBox name="selection_type" options={jobInterviewTypes}/>
                     </div>
                     <div className="contentBox__flex">
                         <div className="label-input">
                             <p className="label-input__txt">応募職種<span className="cAttention">*</span></p>
-                            <SelectBox />
+                            <SelectBox name="job" options={jobTypes}/>
                         </div>
                         <div className="label-input">
                             <FreeWordInput isRequired={true} type="string" ttl="その他" placeholder="職種を入力" />

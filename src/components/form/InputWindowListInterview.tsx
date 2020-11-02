@@ -11,6 +11,12 @@ interface Props {
 }
 
 const InputWindowListInterview:React.FC<Props> = props => {
+
+    const jobInterviewTypes = ['本選考', 'サマーインターン' , 'ウィンターインターン', 'スプリングインターン'];
+    const jobTypes = ['デザイナー', 'エンジニア' , '企画職', 'イラストレーター', 'その他'];
+    const result = ['合格', '不合格'];
+    const interviewPeople = ['1人', '2人', '3人', '4人' , '5人以上'];
+
     const pageTransition = {
         in: {
           opacity: 1,
@@ -35,22 +41,22 @@ const InputWindowListInterview:React.FC<Props> = props => {
                 <h1 className="heading4">{props.pages === 0 ? '1' : props.pages.length + 1}次面接の概要をご記入ください</h1>
                 <div className="label-input mb16">
                     <p className="label-input__txt">選考種類<span className="cAttention">*</span></p>
-                    <SelectBox />
+                    <SelectBox name="selection_type" options={jobInterviewTypes}/>
                 </div>
                 <div className="contentBox__flex mb16">
                     <div className="label-input">
                         <p className="label-input__txt">応募職種<span className="cAttention">*</span></p>
-                        <SelectBox />
+                        <SelectBox name="job" options={jobTypes} />
                     </div>
                     <div className="label-input">
                         <p className="label-input__txt">結果</p>
-                        <SelectBox />
+                        <SelectBox name="result" options={result}/>
                     </div>
                 </div>
-                <div className="label-input">
+                {/* <div className="label-input">
                     <p className="label-input__txt">面接人数</p>
-                    <SelectBox />
-                </div>
+                    <SelectBox options={interviewPeople} />
+                </div> */}
             </article>
 
             {element}

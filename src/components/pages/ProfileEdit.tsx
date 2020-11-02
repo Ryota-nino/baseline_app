@@ -82,7 +82,7 @@ return (
                     </div>
 
                     <div className="userEdit-header__right-col">
-                        <InputBig type="text" labelTxt="名前" isRequired={false} isRequiredTxt={false} placeholderTxt="山本 仁" isError={isError} isIcon={false} />
+                        <InputBig name="name" type="text" labelTxt="名前" isRequired={false} isRequiredTxt={false} placeholderTxt="山本 仁" isError={isError} isIcon={false} />
                         <div className="gender-select">
                             <p className="gender-select__heading">性別</p>
                             <ul className="gender-select-list">
@@ -113,9 +113,8 @@ return (
             </div>
 
             <div className="contentBox contentBox--big">
-                <InputBig type="number" labelTxt="学籍番号" isRequired={false} isRequiredTxt={false} placeholderTxt="2180098" isError={isError} isIcon={false} />
-                <InputDropdown ttl="希望職種" selectObj={jobList}/>
-                <InputDropdown ttl="卒業年次" selectObj={yearList}/>
+                <InputDropdown ttl="希望職種" name="job" selectObj={jobList}/>
+                <InputDropdown ttl="卒業年次" name="graduation_year" selectObj={yearList}/>
                 <div className="contentBox__wrap">
                     <p className="contentBox__cansel btn"><Link to="/mypage">キャンセル</Link></p>
                     <div onClick={ () => handleLink('/mypage')}>

@@ -53,8 +53,8 @@ const InputWindowStep:React.FC<Props> = props => {
         <motion.article id={`inputWindow-${props.id}`} key={props.id} className="contentBox contentBox--big step" initial="out" animate="in" exit="out" variants={pageTransition}>
             <h1 className="heading4">選考ステップを記述しよう</h1>
             <div className="contentBox__wrap">
-                <InputBig type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
-                <InputDropdown ttl="" selectObj={calendarObj}/>
+                <InputBig name="title" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+                <InputDropdown name="date" ttl="" selectObj={calendarObj}/>
             </div>
             <div className="input-txtarea">
                 <p className="input-txtarea__heading">本文</p>

@@ -1,12 +1,25 @@
 import React from 'react';
 
-const SelectBox:React.FC = () => {
+interface Props {
+  name: string;
+  options: string[];
+  selectFunc?: any;
+}
+
+const SelectBox:React.FC<Props> = (props) => {
+  function changeHandler(e:any) {
+    e.stopPropagation();
+    if(props.selectFunc) {
+      props.selectFunc(e.target.value);
+    }
+  }
   return (
         <div className="selectBox input--normal">
             <div>
-                <select>
-                  <option value="0">新着順</option>
-                  <option value="1">古い順</option>
+                <select name={props.name} onChange={changeHandler}>
+                  {props.options.map(item => {
+                    return <option value={item}>{item}</option>
+                  })}
                 </select>
             </div>
         </div>

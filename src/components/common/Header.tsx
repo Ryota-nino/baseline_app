@@ -58,7 +58,7 @@ const Header:React.FC<Props> = props => {
               </ul>
             <PrimaryBtn setShowModal={props.setShowModal}/>
           </div>
-          <MyAvatar ml="" isArrow={true} clickFunc={toggleUserMenu}/>
+          <MyAvatar name="小倉 弘暉" student_number={"210099"} ml="" isArrow={true} clickFunc={toggleUserMenu}/>
 
           <div ref={myAvatarMenu} className={`myAvatar-menu ${viewMenu && 'view'}`}>
             <ul className="myAvatar-menu__wrap">

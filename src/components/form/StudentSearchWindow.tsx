@@ -1,18 +1,30 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { SearchBar, InputCheckRadio, SelectBox } from './index.js';
-import PrefecturesData from '../../assets/data/prefectures';
-import { render } from '@testing-library/react';
 
 interface Props {
   className?: string;
 }
 
 const StudentSearchWindow:React.FC<Props> = props => {
-  const jobList = ['デザイナー', 'エンジニア' , '企画職']
+  const [seachJob, setSeachJob] = useState<any>();
+  const seachJobHandler = (value:any) => {
+    setSeachJob(value);
+    console.log(value) ;
+  }
+
+  const [seachGraduationYear, setSeachGraduationYear] = useState<any>();
+
+  const seachGraduationYearHandler = (value:any) => {
+    setSeachGraduationYear(value);
+    console.log(value);
+  }
+
+  const jobList = ['デザイナー', 'エンジニア' , '企画職'];
+  const yearList = ['21卒', '22卒' , '23卒'];
   const renderJobList = () => {
     return jobList.map((item, index) => {
         return (
-          <InputCheckRadio keyName={`job-${index}`} className={"checkbox-item"} type={"checkbox"} txt={item} />
+          <InputCheckRadio keyName={`job-${index}`} className={"checkbox-item"} type={"checkbox"} txt={item} checkboxFunc={seachJobHandler}/>
         );  
     })
   }
@@ -28,7 +40,7 @@ const StudentSearchWindow:React.FC<Props> = props => {
 
       <div className="search-item">
         <p className="search-item__name">卒業年</p>
-        <SelectBox />
+        <SelectBox name="graduation_year" options={yearList} selectFunc={seachGraduationYearHandler}/>
       </div>
 
       <div className="search-item">

@@ -16,12 +16,17 @@ const SearchBar:React.FC<Props> = props => {
       return <img src={SearchIconGray} alt=""/>
     }
   }
+  const pressEnterHandler = (e:any) => {
+    if(e.key == 'Enter') {
+      console.log("axos");
+    }
+  }
   
   
   return (
     <div style={style} className="searchBar input--normal">
       { isIconRender()  }
-        <input type="text" placeholder={props.placeholder}/>
+        <input type="text" placeholder={props.placeholder} onKeyPress={pressEnterHandler}/>
       </div>
   );
 }

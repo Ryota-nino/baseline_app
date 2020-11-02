@@ -19,7 +19,7 @@ const CompanyInsertUsers:React.FC<Props> = props => {
     <>
         <section className="app-main company-detail">
             <div className="left-col">
-                <CompanyBar hasActionBtn={true} />
+                <CompanyBar thisPage="insertUsers" companyId={"1"} hasActionBtn={true} />
 
                 <section className="companyDetail-contents userCard">
                     <h2 className="heading4 withAccent">{pageTtl}</h2>

@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 
 interface Props {
+    name: string;
     type: string;
     labelTxt: string;
     isRequired: boolean;
@@ -36,6 +37,7 @@ const InsertBig:React.FC<Props> = props => {
                 <span className="input--big__label">{props.labelTxt}</span>{props.isRequiredTxt && <span className="cAttention">*</span>}
             </div>
             <input 
+                name={props.name}
                 type={props.type} 
                 required={props.isRequired} 
                 placeholder={props.placeholderTxt}

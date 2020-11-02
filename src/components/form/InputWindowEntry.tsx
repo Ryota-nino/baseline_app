@@ -53,7 +53,7 @@ const InputWindowStep:React.FC<Props> = props => {
         <>
         <motion.article id={`inputWindow-${props.id}`} key={props.id} className="contentBox contentBox--big entry" initial="out" animate="in" exit="out" variants={pageTransition}>
             {props.id === 1 && <h1 className="heading4">エントリーシート</h1>}
-            <InputBig className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
+            <InputBig name="title" className="mb42" type="string" labelTxt="タイトル" isRequired={true} isRequiredTxt={true} placeholderTxt="例) エントリーシート" isError={isError} isIcon={false} />
             <InputTextArea ttl="本文" placeholder="本文を記入"/>
             {
                 props.id !== 1 && <div className="btn btn--delete" onClick={deleteHandler}><img src={TrashIcon} alt=""/></div>

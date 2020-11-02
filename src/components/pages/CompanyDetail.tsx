@@ -1,4 +1,6 @@
 import React, {useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
+
 import {UserListWindow} from '../user';
 import {CompanyContentsWindow,CompanyBar} from '../company';
 import { AnimatePresence,motion } from 'framer-motion';
@@ -9,6 +11,9 @@ interface Props {
 }
 
 const CompanyDetail:React.FC<Props> = props => {
+  // const location = useLocation();
+  const companyId = props.match.params.id;
+
   const thisPage = props.match.params.category;
   const pageTransition = {
     in: {
@@ -27,9 +32,8 @@ const CompanyDetail:React.FC<Props> = props => {
   return (
     <motion.section className="app-main company-detail" initial="out" animate="in" exit="out" variants={pageTransition}>
         <div className="left-col">
-            <CompanyBar hasActionBtn={true} />
-            {/* <CompanyContentsWindow thisPage={props.thisPage}/> */}
-            <CompanyContentsWindow thisPage={thisPage}/>
+            <CompanyBar companyId={companyId} hasActionBtn={true} thisPage="detail"/>
+            <CompanyContentsWindow companyId={companyId} thisPage={thisPage}/>
         </div>
         <div className="right-col">
             <UserListWindow thisPage="insert-users"/>

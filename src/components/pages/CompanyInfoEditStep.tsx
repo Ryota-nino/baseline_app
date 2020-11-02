@@ -14,6 +14,8 @@ const CompanyInfoEditStep:React.FC = props => {
         {id: 1,},
     ]);
     let inputLength = inputWindow.length;
+    const jobInterviewTypes = ['本選考', 'サマーインターン' , 'ウィンターインターン', 'スプリングインターン'];
+    const jobTypes = ['デザイナー', 'エンジニア' , '企画職', 'イラストレーター', 'その他'];
 
     const createInputWindow = () => {
         if(inputLength < 10) {
@@ -36,16 +38,16 @@ const CompanyInfoEditStep:React.FC = props => {
                                 <h1 className="heading4">概要</h1>
                                 <div className="label-input mb16">
                                     <p className="label-input__txt">選考種類<span className="cAttention">*</span></p>
-                                    <SelectBox />
+                                    <SelectBox name="selection_type" options={jobInterviewTypes}/>
                                 </div>
                                 <div className="contentBox__flex">
                                     <div className="label-input">
                                         <p className="label-input__txt">応募職種<span className="cAttention">*</span></p>
-                                        <SelectBox />
+                                        <SelectBox name="job" options={jobTypes}/>
                                     </div>
-                                    <div className="label-input">
+                                    {/* <div className="label-input">
                                         <FreeWordInput isRequired={true} type="string" ttl="その他" placeholder="職種を入力" />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </article>
 

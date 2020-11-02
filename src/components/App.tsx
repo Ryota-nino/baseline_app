@@ -16,22 +16,15 @@ const App = () => {
           <Router>
             <Switch>
               <Route path="/register" component={Page.Register}></Route>
-              <Route path="/company-info/edit" component={HeaderSide}></Route>
+              <Route path="/company-info/:id/edit" component={HeaderSide}></Route>
               <Route path="/" render={ () =>  <Header setShowModal={setShowModal} /> }></Route>
             </Switch>
 
             <AnimatePresence exitBeforeEnter />
               <Switch>
-
-                {/* <Route path="/company-info/edit/step" render={ () => <Page.CompanyInfoEdit thisPage="step" /> }></Route> */}
-                {/* <Route path="/company-info/edit/step" render={ () => <Page.CompanyInfoEditStep /> }></Route> */}
-
-
-                <Route path="/company-info/edit/step" component={Page.CompanyInfoEditStep}></Route>
-                <Route path="/company-info/edit/interview" component={Page.CompanyInfoEditInterview}></Route>
-                <Route path="/company-info/edit/entry" component={Page.CompanyInfoEditEntry}></Route>
-                {/* <Route path="/company-info/edit/interview" render={ () => <Page.CompanyInfoEdit thisPage="interview" /> }></Route>
-                <Route path="/company-info/edit/entry" render={ () => <Page.CompanyInfoEdit thisPage="entry" /> }></Route> */}
+                <Route path="/company-info/:id/edit/step" component={Page.CompanyInfoEditStep}></Route>
+                <Route path="/company-info/:id/edit/interview" component={Page.CompanyInfoEditInterview}></Route>
+                <Route path="/company-info/:id/edit/entry" component={Page.CompanyInfoEditEntry}></Route>
 
                 <main className="main">
                   <div className="main__container">
@@ -43,19 +36,12 @@ const App = () => {
                     <Route path="/user/:id" render={ (props) => <Page.UserPage type="user" {...props} />}></Route>
                     <Route path="/mypage" render={ () => <Page.UserPage type="mypage" />}></Route>
 
-                    {/* <Route path="/company-detail/:id/about" render={ () => <Page.CompanyDetail thisPage="about" /> }></Route>
-                    <Route path="/company-detail/:id/step" render={ () => <Page.CompanyDetail thisPage="step" /> }></Route>
-                    <Route path="/company-detail/:id/entry" render={ () => <Page.CompanyDetail thisPage="entry" /> }></Route>
-                    <Route path="/company-detail/:id/interview" render={ () => <Page.CompanyDetail thisPage="interview" /> }></Route> */}
                     <Route exact path="/company-detail/:id/:category" render={ (props) => <Page.CompanyDetail {...props} /> }></Route>
 
                     <Route exact path="/company-detail/contents/:id/:category" render={ (props) => <Page.CompanyDetailContents {...props} /> }></Route>
-                    {/* <Route path="/company-detail/contents/:id/step" render={ () => <Page.CompanyDetailContents thisPage="step"/> }></Route>
-                    <Route path="/company-detail/contents/:id/entry" render={ () => <Page.CompanyDetailContents thisPage="entry"/> }></Route>
-                    <Route path="/company-detail/contents/:id/interview" render={ () => <Page.CompanyDetailContents thisPage="interview"/> }></Route> */}
 
-                    <Route path="/company-insert" component={Page.CompanyInsert}></Route>
-                    <Route exact path="/company-info" render={ () => <Page.CompanyInfo />} ></Route>
+                    <Route exact path="/company-insert/:id" component={Page.CompanyInsert}></Route>
+                    <Route exact path="/company-info/:id/" render={ () => <Page.CompanyInfo />} ></Route>
                     <Route path="/profile-edit" component={Page.ProfileEdit}></Route>
                     {/* <Route><h2>ページは存在しません</h2></Route> */}
 
@@ -65,6 +51,7 @@ const App = () => {
                     <Route exact path="/:user/account-setting" render={ ()=> <Page.AccountSetting /> }></Route>
                     <Route exact path="/:user/account-setting/student-number" render={ ()=> <Page.AccountSettingContent thisPage="student-number" /> }></Route>
                     <Route exact path="/:user/account-setting/password" render={ ()=> <Page.AccountSettingContent thisPage="password" /> }></Route>
+                    <Route exact path="/:user/account-setting/mail" render={ ()=> <Page.AccountSettingContent thisPage="mail" /> }></Route>
                     <Route exact path="/:user/account-setting/account-delete" render={ ()=> <Page.AccountSettingContent thisPage="account-delete" /> }></Route>
                   </div>
                 </main>

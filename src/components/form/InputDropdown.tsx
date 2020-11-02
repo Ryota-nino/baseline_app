@@ -3,6 +3,7 @@ import SelectBox from './SelectBox';
 
 interface Props {
   ttl: string;
+  name: string;
   selectObj: {value: string}[];
 }
 
@@ -20,7 +21,7 @@ const InputDropdown:React.FC<Props> = props => {
     <div className="input-dropdown">
         {props.ttl != '' && <p className="input-dropdown__heading">{props.ttl}</p>}
         <div className="input-dropdown__wrap">
-            <select>
+            <select name={props.name}>
               {renderSelectItem()}
             </select>
         </div>

@@ -44,6 +44,18 @@
             margin-right: 16px;
         }
     }
+    &__right {
+        display: flex;
+        align-items: center;
+        a {
+            color: $cLink;
+            margin-right: 16px;
+            transition: 0.3s ease;
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }
     &__inner {
         & > div {
             display: flex;

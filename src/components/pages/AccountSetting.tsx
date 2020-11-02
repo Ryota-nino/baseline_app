@@ -40,6 +40,13 @@ const AccountSetting:React.FC = props => {
                             <p className="setting-item__arrow"><img src={ArrowIcon} alt=""/></p>
                         </Link>
                     </li>
+                    <li className="setting-item">
+                        <Link to="/01/account-setting/mail" >
+                            <p className="setting-item__label">メールアドレス</p>
+                            <p className="setting-item__value">ogurahiroki@gmail.com</p>
+                            <p className="setting-item__arrow"><img src={ArrowIcon} alt=""/></p>
+                        </Link>
+                    </li>
                     <li className="setting-item delete" onClick={()=> setShowModal(true)}>
                         <p className="icon-txt icon-txt--attention"><img src={TrashIcon} alt="" />アカウントを削除する</p>
                         <p className="setting-item__arrow"><img src={ArrowIcon} alt=""/></p>

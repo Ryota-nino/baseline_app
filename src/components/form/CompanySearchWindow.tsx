@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { SearchBar, InputCheckRadio } from './index.js';
 import PrefecturesData from '../../assets/data/prefectures';
 
@@ -9,13 +9,25 @@ interface Props {
 const CompanySearchWindow:React.FC<Props> = props => {
   let isShow = false;
 
+  const [prefNumber, setPrefNumber] = useState<any>();
+  const [graduateStudent, setGraduateStudent] = useState<any>();
+  
+  const prefSearchHandler = (value:any) => {
+    setPrefNumber(value);
+    console.log(value) ;
+  }
+  const graduateStudentHandler = (value:any) => {
+    setGraduateStudent(value);
+    console.log(value) ;
+  }
+
   const renderPrefecturesList = (isAllShow: boolean) => {
     return Object.entries(PrefecturesData['prefectures']).map(([key,value]) => {
       return (
         <>
           <p className="checkbox-list__heading">{key}</p>
           {value.map(data => {
-            return <InputCheckRadio keyName={data.code.toString()} className={"checkbox-item"} type={"checkbox"} txt={data.name} />
+            return <InputCheckRadio keyName={data.code.toString()} className={"checkbox-item"} type={"checkbox"} txt={data.name} checkboxFunc={prefSearchHandler} />
           })}
         </>
       );
@@ -51,7 +63,6 @@ const CompanySearchWindow:React.FC<Props> = props => {
         <p className="search-item__name">地域で検索</p>
         <div className="checkbox-list prefectures-list">
           <div className="checkbox-list__wrap prefectures-list__wrap">
-            {/* <p className="checkbox-list__heading">北海道・東北</p> */}
             { renderPrefecturesList(false) }
           </div>
           <button className="btn" id="isShow-ListBtn" onClick={showList}>すべての項目を表示</button>
@@ -64,7 +75,7 @@ const CompanySearchWindow:React.FC<Props> = props => {
       </div>
 
       <div className="search-item">
-        <InputCheckRadio className={"search-item__checkbox"} type={"checkbox"} txt={"卒業生の在籍"} keyName={"alumni"} />
+        <InputCheckRadio className={"search-item__checkbox"} type={"checkbox"} txt={"卒業生の在籍"} keyName={"alumni"} checkboxFunc={graduateStudentHandler} />
       </div>
 
     </div>

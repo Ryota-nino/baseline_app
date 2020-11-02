@@ -32,7 +32,7 @@ class SearchCompany extends React.Component<{}, any>{
   page = 1;
 
   componentDidMount() {
-    const url = "./companies.json";
+    const url = "./database/companies.json";
     axios.get(url).then(res => {
       this.setState({
         data: res.data,
@@ -52,11 +52,11 @@ class SearchCompany extends React.Component<{}, any>{
           <div className="right-col">
               <div className="right-col__header">
                 <SortBar />
-                <ActionBtn txt="企業を新規掲載" isPlus={true} linkUrl="company-insert"/>
+                <ActionBtn type="button" txt="企業を新規掲載" isPlus={true} linkUrl="company-insert/register"/>
               </div>
               <div className="company-list">
                 {this.state.data.map((data:any) => (
-                  <CompanyCard class={"item"} name={data.name}　business={data.business} pref={data.pref} registerTime={data.registerTime} img={data.image} />
+                  <CompanyCard companyId={data.id} class={"item"} name={data.company_name}　business={data.business} pref={data.pref} registerTime={data.registerTime} img={data.logo} />
                 ))}
               </div>
             </div>

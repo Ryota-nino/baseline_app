@@ -5,6 +5,7 @@ interface Props {
     keyName?: string;
     className?: string;
     type: 'checkbox' | 'radio';
+    checkboxFunc?: any;
 }
 
 const Checkbox:React.FC<Props> = props => {
@@ -13,11 +14,20 @@ const Checkbox:React.FC<Props> = props => {
         typeClass = 'input-checkbox input-checkbox--normal';
     }
     const checkHandler = (e:any)=> {
-      console.log(e.target.value)
+      e.stopPropagation();
+      if(props.checkboxFunc) {
+        props.checkboxFunc(e.target.value);
+      }
     }
     return (
       <>
-          <input onChange={checkHandler} id={`input-${props.keyName}`} className="check-radio-input" type={props.type} value={props.keyName}/>
+          <input 
+            onChange={checkHandler} 
+            id={`input-${props.keyName}`} 
+            className="check-radio-input" 
+            type={props.type} 
+            value={props.keyName}
+          />
           <label htmlFor={`input-${props.keyName}`} className={`${typeClass}`}><img src={CheckIcon} alt="" /></label>
       </>
     );

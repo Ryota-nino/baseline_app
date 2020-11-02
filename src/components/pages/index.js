@@ -5,6 +5,7 @@ export {default as UserPage} from './UserPage';
 export {default as CompanyDetail} from './CompanyDetail';
 export {default as CompanyDetailContents} from './CompanyDetailContents';
 export {default as CompanyInsert} from './CompanyInsert';
+export {default as CompanyInsertConfirm} from './CompanyInsertConfirm';
 export {default as CompanyInfo} from './CompanyInfo';
 export {default as CompanyInfoEdit} from './CompanyInfoEdit';
 export {default as CompanyInfoEditStep} from './CompanyInfoEditStep';

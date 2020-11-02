@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Goodpatch } from '../../assets/images/index';
 
 interface Props {
+  companyId: number;
   class: string;
   name:string;
   business:string;
@@ -20,16 +21,17 @@ const CompanyCard:React.FC<Props> = (props) => {
       return props.business;
   }
   const checkPrefLength = ()=> {
+    let output = String(props.pref).replace(/,/g, ' ');
     const MAX_LENGTH = 4;
     if (props.pref.length > MAX_LENGTH) {
       const output = String(props.pref.slice(0, MAX_LENGTH) + '...');
       return output.replace(/,/g, ' ');
     }
-    return props.pref;
+    return output;
   }
   return (
         <article className={`company-card ${props.class}`}>
-            <Link to="/company-detail/01/about">
+            <Link to={`/company-detail/${props.companyId}/about`}>
               <figure className="company-card__img"><img src={props.img} alt=""/></figure>
               <h3 className="company-card__name">{props.name}</h3>
               <p className="company-card__desc">{checkTextLength()}</p>

@@ -23,14 +23,14 @@ const SearchStudent:React.FC = () => {
 
   const [students, setStudents] = useState<any>();
   useEffect( ()=> {
-
-    const url = "./students.json";
+    const url = "./database/account.json";
     axios.get(url).then(res => {
       const output = res.data;
       setStudents(
         output,
       );
     })
+    console.log(students)
   }, []);
   
   return (
@@ -49,13 +49,18 @@ const SearchStudent:React.FC = () => {
                 </ul>
               </div>
               <motion.div className="studentListTable__wrapper" initial="out" animate="in" exit="out" variants={pageTransition}>
-                {/* {students.map((data:any) => (
-                  <StudentListCard />
-                ))} */}
-                {console.log(students)}
+                
+                {(() => {
+                  if (students) {
+                    return students.map((data:any) => (
+                      <StudentListCard id={data.id} name={`${data.last_name} ${data.first_name}`} student_number={data.student_number} graduationYear={data.graduation_year} job={data.job} updateTime={data.updateTime}/>
+                    ))
+                  }
+                })()}
+                
                 
               </motion.div>
-              {/* <Pagenation pageNum={pageNum} setPageNum={setPageNum}/> */}
+              
               <Pagenation/>
             </div>  
           </div>

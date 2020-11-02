@@ -33,22 +33,24 @@ const CompanyInsert:React.FC = () => {
     <motion.section className="app-main company-insert single" initial="out" animate="in" exit="out" variants={pageTransition}>
         <h2 className="heading1">企業登録</h2>
         <div className="companyInsert-window">
-          <InputBig type="text" labelTxt="企業名" isRequired={true} isRequiredTxt={true}  placeholderTxt="ビジョナル株式会社" isError={isError} isIcon={false}/>
-          <InputBig type="text" labelTxt="フリガナ" isRequired={true} isRequiredTxt={true}  placeholderTxt="カブシキガイシャビジョナル" isError={isError} isIcon={false}/>
-          
-          <ThumbnailUploadInput />
+          <form action="#" method="POST">
+            <InputBig name="company_name" type="text" labelTxt="企業名" isRequired={true} isRequiredTxt={true}  placeholderTxt="ビジョナル株式会社" isError={isError} isIcon={false}/>
+            <InputBig name="furigana" type="text" labelTxt="フリガナ" isRequired={true} isRequiredTxt={true}  placeholderTxt="カブシキガイシャビジョナル" isError={isError} isIcon={false}/>
+            
+            <ThumbnailUploadInput name={"logo"}/>
 
-          <InputBig type="text" labelTxt="企業URL" isRequired={true} isRequiredTxt={true}  placeholderTxt="https://www.google.com" isError={isError} isIcon={true} iconUrl={LinkIcon}/>
-          <InputBig type="text" labelTxt="事業内容" isRequired={false} isRequiredTxt={false} placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発" isError={isError} isIcon={false}/>
+            <InputBig name="url" type="text" labelTxt="企業URL" isRequired={true} isRequiredTxt={true}  placeholderTxt="https://www.google.com" isError={isError} isIcon={true} iconUrl={LinkIcon}/>
+            <InputBig name="business" type="text" labelTxt="事業内容" isRequired={false} isRequiredTxt={false} placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発" isError={isError} isIcon={false}/>
 
-          <PrefectureAccordion />
+            <PrefectureAccordion />
 
-          <InputDropdown ttl="従業員数" selectObj={employeesObj}/>
+            <InputDropdown name="employee_number" ttl="従業員数" selectObj={employeesObj}/>
 
-          <div className="company-insert__enter">
-            <p className="company-insert__cancel">キャンセル</p>
-            <ActionBtn txt="確認画面へ" isPlus={false} linkUrl="#"/>
-          </div>
+            <div className="company-insert__enter">
+              <p className="company-insert__cancel">キャンセル</p>
+              <ActionBtn type="submit" txt="登録する" isPlus={false} linkUrl="#"/>
+            </div>
+          </form>
 
         </div>
     </motion.section>

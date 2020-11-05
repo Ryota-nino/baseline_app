@@ -29,6 +29,35 @@ const CompanyInsert:React.FC = () => {
       opacity: 0,
     },
   }
+  const formOnClickHandler = (e:any)=> {
+    const forms = document.forms[0];
+    const company_name = forms.company_name.value;
+    const furigana = forms.furigana.value;
+    const logo = forms.logo.files[0];
+    const url = forms.url.value;
+    const business = forms.business.value;
+    const employee_number = forms.employee_number.value;
+    const prefArray:string[] = [];
+    const fr = new FileReader();
+    forms.pref.forEach((item:any) => {
+      if(item.checked) {
+        prefArray.push(item.value);
+      }
+    });
+    const sendObj:any = {
+      company_name: company_name,
+      furigana: furigana,
+      url: url,
+      business: business,
+      employee_number: employee_number,
+    };
+    fr.onloadend = function() {
+      sendObj.logo = fr.result;
+    }
+    fr.readAsDataURL(logo);
+    const sendJSON = JSON.stringify(sendObj);
+  }
+  
   return (
     <motion.section className="app-main company-insert single" initial="out" animate="in" exit="out" variants={pageTransition}>
         <h2 className="heading1">企業登録</h2>
@@ -48,7 +77,7 @@ const CompanyInsert:React.FC = () => {
 
             <div className="company-insert__enter">
               <p className="company-insert__cancel">キャンセル</p>
-              <ActionBtn type="submit" txt="登録する" isPlus={false} linkUrl="#"/>
+              <ActionBtn type="submit" txt="登録する" isPlus={false} linkUrl="#" clickFunc={formOnClickHandler} />
             </div>
           </form>
 

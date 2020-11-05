@@ -6,6 +6,7 @@ interface Props {
   txt: string;
   isPlus: boolean;
   type: 'button' | 'submit';
+  clickFunc?: any;
   linkUrl?: string;
   showModal?: any;
   setShowModal?: any;
@@ -39,7 +40,16 @@ const Action:React.FC<Props> = props => {
   return (
     <button 
       type={props.type} 
-      onClick={()=> {if(props.type == 'button') {onClickHandelr()}}} 
+      onClick={(e)=> {
+        if(props.type == 'button') {
+          onClickHandelr();
+        } else {
+          e.preventDefault();
+          props.clickFunc(e);
+        }
+        
+      }
+      } 
       className="btn btn--action"
     >
         {isPlusRender()}{props.txt}

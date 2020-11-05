@@ -2,10 +2,13 @@ import React from 'react';
 import {CheckIcon} from '../../assets/images/index';
 
 interface Props {
-    keyName?: string;
-    className?: string;
+    
     type: 'checkbox' | 'radio';
     checkboxFunc?: any;
+    keyName?: string;
+    id?: string;
+    className?: string;
+    txt?: string;
 }
 
 const Checkbox:React.FC<Props> = props => {
@@ -19,16 +22,18 @@ const Checkbox:React.FC<Props> = props => {
         props.checkboxFunc(e.target.value);
       }
     }
+    
     return (
       <>
           <input 
             onChange={checkHandler} 
-            id={`input-${props.keyName}`} 
+            id={`input-pref${props.id}`}
             className="check-radio-input" 
             type={props.type} 
-            value={props.keyName}
+            value={props.txt}
+            name="pref"
           />
-          <label htmlFor={`input-${props.keyName}`} className={`${typeClass}`}><img src={CheckIcon} alt="" /></label>
+          <label htmlFor={`input-pref${props.id}`} className={`${typeClass}`}><img src={CheckIcon} alt="" /></label>
       </>
     );
 }

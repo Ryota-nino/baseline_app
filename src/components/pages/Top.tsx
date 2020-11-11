@@ -3,39 +3,26 @@ import {Link} from 'react-router-dom';
 import { SearchBar } from '../form/index';
 import { ActionBtn } from '../btn/index';
 import { Modal } from '../modal';
-import { AnimatePresence,motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { CompanyCard, NewsBars, ActivityCard } from '../card/index';
 import axios from "axios";
 
-const Top:React.FC = props => {
-
+const Top:React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [companies, setCompanies] = useState<any>([]);
-
-  useEffect( ()=> {
+  useEffect(() => {
     const url = "./database/companies.json";
     axios.get(url).then(res => {
       const output = res.data;
       setCompanies(
         output,
       );
-      
     })
   }, [])
-  
 
   const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2
-      }
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    }
+    in: { opacity: 1, x: 0, transition: { duration: 0.2 } },
+    out: { x: -20, opacity: 0, }
   }
   return (
     <>
@@ -51,7 +38,15 @@ const Top:React.FC = props => {
           {(() => {
             if (companies) {
               return companies.map((data:any) => (
-                <CompanyCard companyId={data.id} class={"item"} name={data.company_name}　business={data.business} pref={data.pref} registerTime={data.updateTime} img={data.logo} />
+                <CompanyCard 
+                  companyId={data.id} 
+                  class={"item"} 
+                  name={data.company_name}　
+                  business={data.business} 
+                  pref={data.pref} 
+                  registerTime={data.updateTime} 
+                  img={data.logo} 
+                />
               ))
             }
           })()}

@@ -3,14 +3,10 @@ import {Link} from 'react-router-dom';
 import { forEachChild } from 'typescript';
 import { AccountDefaultIcon } from '../../assets/images/index';
 
-
 interface Props {
   isSmall: boolean;
 }
-
 const ActivityCard:React.FC<Props> = props => {
-  
-
   const viewTime = () => {
     if(!props.isSmall) {
       return (
@@ -34,7 +30,6 @@ const ActivityCard:React.FC<Props> = props => {
   }
 
   let activityName = props.isSmall ? 'normal' : 'small';
-
   return (
         <article className={"activity-card " + activityName}>
             <Link to="">

@@ -1,13 +1,25 @@
-import React from 'react';
+import React from "react";
 
 interface Props {
-  setShowModal: any;
+  txt: string;
+  type: "button" | "submit";
+  setShowModal?: any;
 }
 
-const Primary:React.FC<Props> = props => {
+const Primary: React.FC<Props> = (props) => {
   return (
-    <button className="btn btn--primary" onClick={()=> props.setShowModal(true)}>活動を追加</button>
+    <button
+      type={props.type}
+      className="btn btn--primary"
+      onClick={() => {
+        if (props.setShowModal) {
+          props.setShowModal(true);
+        }
+      }}
+    >
+      {props.txt}
+    </button>
   );
-}
+};
 
 export default Primary;

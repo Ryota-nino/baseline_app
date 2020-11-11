@@ -17,6 +17,7 @@ const UserPage:React.FC<Props> = props => {
   const companyId = location.pathname.split("/")[2];
 
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal2, setShowModal2] = useState<boolean>(false);
   let isUsrPage = props.type === 'user';
   const pageTransition = {
     in: {
@@ -67,7 +68,15 @@ const UserPage:React.FC<Props> = props => {
           {(() => {
             if (activity) {
               return activity.map((data:any) => (
-                <UserComment year={data.year} txt={data.txt} updateTime={data.updateTime} isArrow={true} type={props.type}　clickFunc={setShowModal}/>
+                <UserComment 
+                  year={data.year} 
+                  txt={data.txt} 
+                  updateTime={data.updateTime} 
+                  isArrow={true} 
+                  type={props.type}　
+                  clickFunc={setShowModal}
+                  clickFunc2={setShowModal2}
+                />
               ))
             } else {
               console.log("bbb")
@@ -76,6 +85,7 @@ const UserPage:React.FC<Props> = props => {
         </div>
       </motion.section>
       <Modal type="activity-edit" showModal={showModal} setShowModal={setShowModal}/>
+      <Modal type="activity-delete" showModal={showModal2} setShowModal={setShowModal2}/>
     </>
   );
 }

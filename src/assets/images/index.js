@@ -1,6 +1,8 @@
 export {default as Logo} from './logo.svg';
 export {default as AccountDefaultIcon} from './account-deafultIcon.svg';
 export {default as SearchIconGray} from './icon-search_gray.svg';
+export {default as DocumentIcon} from './icon-document.svg';
+export {default as DocumentIcon_White} from './icon-document_white.svg';
 export {default as DocumentIcon2} from './icon-document2.svg';
 export {default as ArrowIcon} from './icon-arrow.svg';
 export {default as Goodpatch} from './goodpatch.png';
@@ -22,3 +24,4 @@ export {default as BagIcon} from './icon-bag_black.svg';
 export {default as MenuDownIcon} from './icon-menuDown.svg';
 export {default as GearIcon} from './icon-gear.svg';
 export {default as CloseIcon} from './icon-close.svg';
+export {default as DesktopIllust} from './illust-desktop.svg';

@@ -120,6 +120,17 @@ const Modal:React.FC<Props> = props => {
             return (
                 commentWindowRender('アクティビティを編集')
             );
+        }else if(props.type === 'activity-delete') {
+            return (
+                <motion.div className="modal modal--normal activity-delete" variants={modal} onClick={(event)=> event.stopPropagation()}>
+                    <p className="heading4">アカウントが削除されます</p>
+                    <p className="txt">今まで投稿した活動履歴が全て削除されます。投稿した企業情報については削除されません。</p>
+                    <div className="flex">
+                        <p onClick={() => props.setShowModal(false)}>キャンセル</p>
+                        <RoundedBtn txt="アカウントを削除" isDelete={'true'} />
+                    </div>
+                </motion.div>
+            );
         } else if (props.type === 'company-level') {
             return (
                 <motion.div className="modal modal--normal company-level" variants={modal} onClick={(event)=> event.stopPropagation()}>

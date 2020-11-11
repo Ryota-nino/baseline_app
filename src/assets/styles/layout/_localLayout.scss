@@ -1,350 +1,354 @@
 .app-main {
-    .pageBack-link {
-        margin-bottom: 40px;
-    }
+  .pageBack-link {
+    margin-bottom: 40px;
+  }
 }
 
 .toppage {
-    .action-sheet {
-        display: flex;
-        align-items: center;
-        margin-bottom: 14px;
-        justify-content: space-between;
-    }
-    .company-list {
-        margin-bottom: 32px;
-    }
-    .left-col {
-        width: 823px;
-    }
-    .newsBar {
-        margin-bottom: 24px;
-    }
-    .contentBox--small {
-        margin-left: 20px;
-        
-    }
-    .activity-column {
-        display: flex;
-        justify-content: space-between;
-    }
+  .action-sheet {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    justify-content: space-between;
+  }
+  .company-list {
+    margin-bottom: 32px;
+  }
+  .left-col {
+    width: 823px;
+  }
+  .newsBar {
+    margin-bottom: 24px;
+  }
+  .contentBox--small {
+    margin-left: 20px;
+  }
+  .activity-column {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .searchCompany {
-    &__wrapper {
-        display: flex;
-        margin-bottom: 48px;
-    }
-    .pagenation {
-        margin-top: 16px;
-    }
+  &__wrapper {
+    display: flex;
+    margin-bottom: 48px;
+  }
+  .pagenation {
+    margin-top: 16px;
+  }
 }
-
-
 
 .mypage {
-    .icon-txt {
-        margin: 0 0 32px;
-        justify-content: flex-end;
-        cursor: pointer;
-        transition: .3s ease;
-        &:hover {
-            opacity: .7;
-        }
+  .icon-txt {
+    margin: 0 0 32px;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.7;
     }
-    .userDetail-window {
-        margin-bottom: 8px;
-    }
+  }
+  .userDetail-window {
+    margin-bottom: 8px;
+  }
 }
 .userpage {
-    .userDetail-window {
-        margin-bottom: 16px;
-        
-    }
+  .userDetail-window {
+    margin-bottom: 16px;
+  }
 }
 .activity-list {
-    background-color: $cWhite;        
-    border-radius: 24px;
-    padding: 40px 38px;
-    margin-top: 16px;
-    .activity-item {
-        max-width: 95%;
-    }
+  background-color: $cWhite;
+  border-radius: 24px;
+  padding: 40px 38px;
+  margin-top: 16px;
+  .activity-item {
+    max-width: 95%;
+  }
 }
 
 .company-detail {
-    .company-bar {
-        margin-bottom: 24px;
-    }
-    .user-card {
-        margin-bottom: 24px;
-    }
-}
-
-
-.company-detail {
-    display: flex;
-    justify-content: space-between;
-    .left-col {
-        flex: 0 1 765px;
-    }
-    .right-col {
-        flex: 0 1 260px;
-    }
+  .company-bar {
+    margin-bottom: 24px;
+  }
+  .user-card {
+    margin-bottom: 24px;
+  }
 }
 
 .company-detail {
-    .userListWindow {
-        margin-bottom: 16px;
-        &:last-child {
-            .heading5::before {
-                background-color: $cAccent1;
-            }
-        }
+  display: flex;
+  justify-content: space-between;
+  .left-col {
+    flex: 0 1 765px;
+  }
+  .right-col {
+    flex: 0 1 260px;
+  }
+}
+
+.company-detail {
+  .userListWindow {
+    margin-bottom: 16px;
+    &:last-child {
+      .heading5::before {
+        background-color: $cAccent1;
+      }
     }
+  }
 }
 
 .company-insert {
-    .input--big {
-        margin-bottom: 40px;
-        &:first-child {
-            input {
-                font-size: 1.8rem;
-            }
-        }
+  .input--big {
+    margin-bottom: 40px;
+    &:first-child {
+      input {
+        font-size: 1.8rem;
+      }
     }
-    
-    .thumbnail-upload {
-        margin-bottom: 40px;
-    }
-    .prefecture-accordion {
-        margin-bottom: 24px;
-    }
+  }
 
-    .input-dropdown {
-        margin-bottom: 32px;
-        width: 230px;
-    }
-    &__enter {
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;   
-    }
-    &__cancel {
-        margin-right: 24px;
-        color: $cGray1;
-    }
-    .btn--action {
-        padding: 10px 36px;
-    }
+  .thumbnail-upload {
+    margin-bottom: 40px;
+  }
+  .prefecture-accordion {
+    margin-bottom: 24px;
+  }
+
+  .input-dropdown {
+    margin-bottom: 32px;
+    width: 230px;
+  }
+  &__enter {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__cancel {
+    margin-right: 24px;
+    color: $cGray1;
+  }
+  .btn--action {
+    padding: 10px 36px;
+  }
 }
 
 .company-info {
-    &__form {
-        padding: 0 0 0 24px;
-        form {
-            div {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
+  &__form {
+    padding: 0 0 0 24px;
+    form {
+      div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
+  }
 
-    .company-bar {
-        margin-bottom: 24px;
+  .company-bar {
+    margin-bottom: 24px;
+  }
+  .contentBox2 {
+    margin-bottom: 24px;
+  }
+  .contentBox2.added-info {
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      .heading4 {
+        margin-bottom: 0;
+      }
     }
-    .contentBox2 {
-        margin-bottom: 24px;
+    .company-detailItem {
+      margin-left: auto;
+      margin-bottom: 16px;
     }
-    .contentBox2.added-info {
-        & > div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 32px;
-            .heading4 {
-                margin-bottom: 0;
-            }
-        }
-        .company-detailItem {
-            margin-left: auto;
-            margin-bottom: 16px;
-        }
-    }
+  }
 }
 
 .companyDetail-contents {
-    border-radius: 10px;
-    &.about {max-width: 80%;}
-    &:not(.about) { max-width: 95%; }
-    &.userCard {
-        padding: 32px 28px 32px;
-        max-width: 100%;
-        background-color: $cWhite;
+  border-radius: 10px;
+  &.about {
+    max-width: 80%;
+  }
+  &:not(.about) {
+    max-width: 95%;
+  }
+  &.userCard {
+    padding: 32px 28px 32px;
+    max-width: 100%;
+    background-color: $cWhite;
+  }
+  .userCard-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .user-card > a {
+      width: 222px;
+      img {
+        width: 40px;
+        height: 40px;
+      }
     }
-    .userCard-list {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        .user-card > a  {
-            width: 222px;
-            img {
-                width: 40px;
-                height: 40px;
-            }
-        }
+  }
+  .aboutCompany-bar {
+    margin-bottom: 24px;
+  }
+  .companyContentsWindow {
+    &__list {
+      margin-bottom: 40px;
     }
-    .aboutCompany-bar {
-        margin-bottom: 24px;
+    &__update {
+      margin-bottom: 32px;
     }
-    .companyContentsWindow {
-        &__list {
-            margin-bottom: 40px;
-        }
-        &__update {
-            margin-bottom: 32px;
-        }
-    }
+  }
 }
 
-
 .company-info-edit {
-    &__container {
-        display: flex;
-        align-items: flex-start;
+  &__container {
+    display: flex;
+    align-items: flex-start;
+  }
+  &__left-col {
+    width: calc(100vw - 234px);
+    margin-right: 18px;
+  }
+
+  .pageBack-link {
+    margin-bottom: 42px;
+  }
+  .contentBox {
+    position: relative;
+    margin-bottom: 32px;
+    &.interview {
+      .input-dropdown {
+        margin-bottom: 24px;
+        margin-top: 32px;
+      }
     }
-    &__left-col {
-        width: calc(100vw - 234px);
-        margin-right: 18px;
+    &__flex {
+      display: flex;
+      align-items: flex-end;
+      & > div {
+        margin-right: 32px;
+      }
     }
-    
-    .pageBack-link {
-        margin-bottom: 42px;
+    .heading4 {
+      margin-bottom: 42px;
     }
-    .contentBox {
-        position: relative;
-        margin-bottom: 32px;
-        &__flex {
-            display: flex;
-            align-items: flex-end;
-            & > div {
-                margin-right: 32px;
-            }
-        }
-        .heading4 {
-            margin-bottom: 42px;
-        }
-        &__wrap {
-            margin-bottom: 42px;
-        }    
-        .input--big {
-            width: 75%;
-        }
-        .input-txtarea {
-            textarea {
-                min-height: 108px;
-            }
-        }
-        .input-dropdown {
-            width: 20%;
-        }
-        .label-input__txt, .free-word .heading6 {
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .label-input, .label-input input ,.selectBox {
-            width: 200px;
-        }
-        .input--normal {
-            height: 42px;
-        }
+    &__wrap {
+      margin-bottom: 42px;
     }
-    .insertBox-addBtn {
-        margin: 0 auto;
+    .input--big {
+      width: 75%;
     }
-    .btn--delete {
-        position: absolute;
-        top: 24px;
-        right: 24px;
+    .input-txtarea {
+      textarea {
+        min-height: 108px;
+      }
     }
+    .input-dropdown {
+      width: 20%;
+    }
+    .label-input__txt,
+    .free-word .heading6 {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .label-input,
+    .label-input input,
+    .selectBox {
+      width: 200px;
+    }
+    .input--normal {
+      height: 42px;
+    }
+  }
+  .insertBox-addBtn {
+    margin: 0 auto;
+  }
+  .btn--delete {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
 }
 
 .profile-edit {
-    .input--big {
-        margin-bottom: 18px;
-        width: 300px;
+  .input--big {
+    margin-bottom: 18px;
+    width: 300px;
+  }
+  .input-dropdown {
+    margin-bottom: 24px;
+    width: 300px;
+  }
+  .contentBox {
+    margin-bottom: 24px;
+    &:last-child {
+      padding-bottom: 24px;
     }
-    .input-dropdown {
-        margin-bottom: 24px;
-        width: 300px;
+    .userEdit-header {
+      margin-top: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &__left-col {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &__right-col {
+        width: 355px;
+      }
     }
-    .contentBox {
-        margin-bottom: 24px;
-        &:last-child {
-            padding-bottom: 24px;
-        }
-        .userEdit-header {
-            margin-top: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            &__left-col {
-                width: 40%;   
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            &__right-col {
-                width: 355px;
-            }
-        }
-        &__wrap {
-            justify-content: flex-end;
-            align-items: center;
-            
-        }
-        &__cansel > a{
-            cursor: pointer;
-            color: $cGray1;
-            margin-right: 24px;
-        }
+    &__wrap {
+      justify-content: flex-end;
+      align-items: center;
     }
+    &__cansel > a {
+      cursor: pointer;
+      color: $cGray1;
+      margin-right: 24px;
+    }
+  }
 }
-
 
 .account-setting {
-    .contentBox {
-        max-width: 694px;
-    }
+  .contentBox {
+    max-width: 694px;
+  }
 }
 .accountSetting-content {
-    .contentBox {
-        max-width: 694px;
-        padding-bottom: 24px;
-        &.password {
-            .heading4 {
-                margin-bottom: 32px;
-            }
-            .input--big {
-                margin-bottom: 24px;
-            }
-            
-        }
+  .contentBox {
+    max-width: 694px;
+    padding-bottom: 24px;
+    &.password {
+      .heading4 {
+        margin-bottom: 32px;
+      }
+      .input--big {
+        margin-bottom: 24px;
+      }
     }
-    &__bottom {
-        margin-top: 16px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        & > p > a {
-            margin-right: 18px;
-            transition: 0.3s ease;
-            &:hover {
-                opacity: .6;
-            }
-        }
+  }
+  &__bottom {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    & > p > a {
+      margin-right: 18px;
+      transition: 0.3s ease;
+      &:hover {
+        opacity: 0.6;
+      }
     }
+  }
 }

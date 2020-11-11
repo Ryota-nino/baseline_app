@@ -1,86 +1,91 @@
-
 .activity-item {
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  & > img {
+    width: 36px;
+    height: 36px;
+    margin-right: 20px;
+  }
+  &__head {
     display: flex;
-    position: relative;
-    margin: 0 auto;
-    & > img {
-        width: 36px;
-        height: 36px;
-        margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  &__name {
+    margin-right: 10px;
+  }
+  &__list {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: $cGray1;
+  }
+  &__arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.5;
     }
-    &__head {
-        display: flex;
-        margin-bottom: 16px;
+  }
+  &__txt {
+    color: $cGray1;
+    font-size: 1.4rem;
+    line-height: 1.75;
+    padding-bottom: 40px;
+    border-bottom: 1px solid $cBorder1;
+    margin-bottom: 32px;
+    a {
+      color: $cLink;
     }
-    &__name {
-        margin-right: 10px;
+  }
+  &:last-child .activity-item__txt {
+    border: none;
+    padding: 0;
+  }
+  .activity-item-menu {
+    background: $cWhite;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.06),
+      0px 0px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    display: inline-block;
+    position: absolute;
+    top: 32px;
+    right: 0;
+    opacity: 0;
+    transition: 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    transform: translateY(-10px);
+    &.view {
+      opacity: 1;
+      transform: translateY(0);
+      .activity-item-menu__item {
+        pointer-events: all;
+      }
     }
-    &__list {
-        display: flex;
-        align-items: center;
-        font-size: 1.2rem;
-        color: $cGray1;
-    }
-    &__arrow {
-        position: absolute;
-        top:0;
-        right:0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        &:hover {
-            opacity: 0.5;
-        }
-    }
-    &__txt {
-        color: $cGray1;
-        font-size: 1.4rem;
-        line-height: 1.75;
-        padding-bottom: 40px;
-        border-bottom: 1px solid $cBorder1;
-        margin-bottom: 32px;
-        a {
-            color: $cLink;
-        }
-    }
-    &:last-child .activity-item__txt {
-        border: none;
-        padding: 0;
-    }
-    .activity-item-menu {
-        background: $cWhite;
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.06), 0px 0px 4px rgba(0, 0, 0, 0.06);
+
+    &__item {
+      display: flex;
+      align-items: center;
+      padding: 10px 22px 10px 10px;
+      pointer-events: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+      &:hover {
         border-radius: 3px;
-        display: inline-block;
-        position: absolute;
-        top: 32px;
-        right:0;
-        opacity: 0;
-        transition: 0.4s cubic-bezier(.87,0,.13,1);
-        transform: translateY(-10px);
-        &.view {
-            opacity: 1;
-            transform: translateY(0)
-        }
-        &__item {
-            display: flex;
-            align-items: center;
-            padding: 10px 22px 10px 10px;
-            cursor: pointer;
-            transition: 0.3s ease;
-            &:hover {
-                border-radius: 3px;
-                background-color: rgba(26,26,26,.05);
-            }
-            img {
-                margin-right: 5px;
-                width: 14px;
-                height: 14px;
-            }
-        }
+        background-color: rgba(26, 26, 26, 0.05);
+      }
+      img {
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+      }
     }
+  }
 }

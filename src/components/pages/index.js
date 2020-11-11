@@ -18,3 +18,9 @@ export {default as AccountSetting} from './AccountSetting';
 export {default as AccountSettingContent} from './AccountSettingContent';
 
 export {default as Register} from './Register';
+export {default as RegisterSend} from './RegisterSend';
+export {default as RegisterInsert} from './RegisterInsert';
+export {default as Login} from './Login';
+export {default as PasswordForget} from './PasswordForget';
+export {default as PasswordForgetSend} from './PasswordForgetSend';
+export {default as PasswordSetting} from './PasswordSetting';

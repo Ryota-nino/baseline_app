@@ -1,7 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Goodpatch } from '../../assets/images/index';
-
 interface Props {
   companyId: number;
   class: string;

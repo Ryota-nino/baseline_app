@@ -1,23 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Logo } from "../../assets/images/index";
-import { FreeWordInput } from "../form/index";
-import { PrimaryBtn } from "../btn/index";
-import { HeaderRegister } from "../../components/common/index";
+import React from "react";
+import { Primary } from "../Atoms/TextInput";
+import { PrimaryBtn } from "../Atoms/Btn/index";
+import { Header } from "../Organisms/Header/index";
 
 const PasswordSetting: React.FC = (props) => {
   return (
     <div className="register">
-      <HeaderRegister />
+      <Header needBtn={true} />
       <form method="POST" action="#" className="contentBox contentBox--big">
         <h1 className="heading4">パスワードの再設定</h1>
-        <FreeWordInput
+        <Primary
           type="password"
           ttl="新しいパスワード"
           placeholder="新しいパスワードを入力してください"
           isRequired={true}
         />
-        <FreeWordInput
+        <Primary
           type="password"
           ttl="パスワード確認"
           placeholder="上記と同じパスワードを入力"

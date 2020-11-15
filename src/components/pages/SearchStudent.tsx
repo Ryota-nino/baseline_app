@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import StudentSearchWindow from "../form/StudentSearchWindow";
-import { StudentListCard } from "../card";
-import { Pagenation } from "../common";
+import StudentSearch from "../Organisms/Window/StudentSearch";
+import { StudentList } from "../Molecules/Card";
+import { Pagenation } from "../Organisms/Header";
 import { motion } from "framer-motion";
 import axios from "axios";
 
@@ -30,6 +30,19 @@ const SearchStudent: React.FC = () => {
     console.log(students);
   }, []);
 
+  // const getUser = () => {
+  //   apiClient.get("/sanctum/csrf-cookie").then((response) => {
+  //     apiClient
+  //       .get("/api/auth/user")
+  //       .then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   });
+  // };
+
   return (
     <motion.section
       className="app-main searchStudent"
@@ -40,7 +53,7 @@ const SearchStudent: React.FC = () => {
     >
       <h2 className="heading1">他者の就活を探す</h2>
       <div className="app-main__container">
-        <StudentSearchWindow className={"left-col"} />
+        <StudentSearch className={"left-col"} />
         <div className="right-col">
           <div className="studentListTable">
             <div className="studentListTable__head">
@@ -61,7 +74,7 @@ const SearchStudent: React.FC = () => {
               {(() => {
                 if (students) {
                   return students.map((data: any) => (
-                    <StudentListCard
+                    <StudentList
                       id={data.id}
                       name={`${data.last_name} ${data.first_name}`}
                       student_number={data.student_number}

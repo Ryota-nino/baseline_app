@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { InputWindowInterview } from "./index";
-import { SelectBox, FreeWordInput } from "../form";
-import { AnimatePresence, motion } from "framer-motion";
-import { InsertAddBtn } from "../btn";
+import { SelectPrimary } from "../Atoms/Input";
+import { motion } from "framer-motion";
+import { InsertAddBtn } from "../Atoms/Btn";
 
 interface Props {
   window: any;
@@ -53,14 +53,14 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
   const element = inputWindow.map((todo: any) => (
     <InputWindowInterview id={todo.id} />
   ));
-//   const element = props.window.map((todo: any) => (
-//     <InputWindowInterview id={todo.id} />
-//   ));
+  //   const element = props.window.map((todo: any) => (
+  //     <InputWindowInterview id={todo.id} />
+  //   ));
 
   return (
-    <motion.div
+    <motion.form
       id={`interview-${props.pages === 0 ? "0" : props.pages.length}`}
-      className="company-info-edit__left-col"
+      className="company-info-edit__left-col companyEdit-form"
       initial="out"
       animate="in"
       exit="out"
@@ -75,7 +75,7 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
           <p className="label-input__txt">
             選考種類<span className="cAttention">*</span>
           </p>
-          <SelectBox
+          <SelectPrimary
             name="selection_type"
             options={jobInterviewTypes}
             required={true}
@@ -86,11 +86,11 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
             <p className="label-input__txt">
               応募職種<span className="cAttention">*</span>
             </p>
-            <SelectBox name="job" options={jobTypes} required={true} />
+            <SelectPrimary name="job" options={jobTypes} required={true} />
           </div>
           <div className="label-input">
             <p className="label-input__txt">結果</p>
-            <SelectBox name="result" options={result} required={true} />
+            <SelectPrimary name="result" options={result} required={true} />
           </div>
         </div>
         {/* <div className="label-input">
@@ -102,7 +102,7 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
       {element}
       {/* <InsertAddBtn txt="項目を追加" click={props.func} /> */}
       <InsertAddBtn txt="項目を追加" click={createInputWindow} />
-    </motion.div>
+    </motion.form>
   );
 };
 

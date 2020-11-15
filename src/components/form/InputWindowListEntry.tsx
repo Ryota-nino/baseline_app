@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { InputWindowEntry } from './index';
-import { AnimatePresence,motion } from 'framer-motion';
+import React from "react";
+import { InputWindowEntry } from "./index";
 
 interface Props {
-    obj: any;
+  obj: any;
 }
 
-const InputWindowListStep:React.FC<Props> = props => {
-    
-    const todos = props.obj.map((todo:any) =>
-        <InputWindowEntry id={todo.id} />
-      )
+const InputWindowListStep: React.FC<Props> = (props) => {
+  const todos = props.obj.map((todo: any) => <InputWindowEntry id={todo.id} />);
 
-    return(
-        <>
-            {todos}
-        </>
-    );
+  return <>{todos}</>;
 };
 
 export default InputWindowListStep;

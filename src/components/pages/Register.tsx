@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { FreeWordInput } from "../../components/form/index";
-import { PrimaryBtn } from "../../components/btn/index";
-import { HeaderRegister } from "../../components/common/index";
+import { PrimaryBtn } from "../Atoms/Btn/index";
+import { Primary } from "../Atoms/TextInput/index";
+import { Header } from "../Organisms/Header/index";
 
 const Register: React.FC = (props) => {
+  const onSubmitHandler = () => {
+    const email = document.querySelector(
+      'input[type="email"]'
+    ) as HTMLButtonElement;
+    if (email.value === "") {
+      alert("メールアドレスを入力してください");
+    }
+  };
+
   return (
     <div className="register">
-      <HeaderRegister />
+      <Header needBtn={true} />
       <div className="formBox">
         <form method="POST" action="#" className="contentBox contentBox--big">
           <h1 className="heading4">会員登録</h1>
-          <FreeWordInput
-            type="text"
+          <Primary
+            type="email"
             ttl="メールアドレス"
             placeholder="example@gmail.com"
             isRequired={true}
           />
-          <PrimaryBtn type="submit" txt="仮登録メールを送信" />
+          <PrimaryBtn
+            type="button"
+            txt="仮登録メールを送信"
+            Func={onSubmitHandler}
+          />
           <p>
             すでにアカウントをお持ちの方は
             <Link to="/login">こちら</Link>

@@ -1,7 +1,8 @@
 import React from "react";
-import { TrashIcon, PenIcon } from "../../assets/images/index";
-import { InputBig, InputDropdown } from ".";
-import { AnimatePresence, motion } from "framer-motion";
+import { TrashIcon } from "../../assets/images/index";
+import { SelectSecondary } from "../Atoms/Input";
+import { Secondary } from "../Atoms/TextInput";
+import { motion } from "framer-motion";
 
 interface Props {
   id: number;
@@ -52,7 +53,7 @@ const InputWindowStep: React.FC<Props> = (props) => {
     <motion.article
       id={`inputWindow-${props.id}`}
       key={props.id}
-      className="contentBox contentBox--big step"
+      className="contentBox contentBox--big interview-formBox"
       initial="out"
       animate="in"
       exit="out"
@@ -60,7 +61,7 @@ const InputWindowStep: React.FC<Props> = (props) => {
     >
       <h1 className="heading4">選考ステップを記述しよう</h1>
       <div className="contentBox__wrap">
-        <InputBig
+        <Secondary
           name="title"
           type="string"
           labelTxt="タイトル"
@@ -70,7 +71,7 @@ const InputWindowStep: React.FC<Props> = (props) => {
           isError={isError}
           isIcon={false}
         />
-        <InputDropdown name="date" ttl="" selectObj={calendarObj} />
+        <SelectSecondary name="date" ttl="" selectObj={calendarObj} />
       </div>
       <div className="input-txtarea">
         <p className="input-txtarea__heading">本文</p>

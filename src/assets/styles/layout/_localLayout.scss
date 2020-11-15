@@ -1,3 +1,50 @@
+.page-login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  main {
+    width: 100%;
+  }
+}
+.login {
+  .contentBox {
+    width: 434px;
+    margin: auto;
+  }
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+  }
+  .heading6 {
+    font-weight: normal;
+  }
+  .free-word {
+    margin-bottom: 20px;
+    &.last {
+      margin-bottom: 0;
+    }
+  }
+  .password-forget {
+    font-size: 1.3rem;
+    text-align: right;
+    a {
+      color: $cLink;
+    }
+  }
+  .btn {
+    margin: 48px auto 8px;
+  }
+  .not-have-account {
+    text-align: center;
+    font-size: 1.3rem;
+    a {
+      color: $cLink;
+    }
+  }
+}
+
 .app-main {
   .pageBack-link {
     margin-bottom: 40px;

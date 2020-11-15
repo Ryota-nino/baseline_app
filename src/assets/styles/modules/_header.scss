@@ -1,172 +1,185 @@
-
+.headerRegister {
+  background-color: $cWhite;
+  padding: 20px 0 20px 64px;
+  &__logo {
+    width: 98px;
+  }
+}
 .header {
-    background-color: $cWhite;
-    width: 274px;
-    height: 100vh;
-    padding: 50px 0 40px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    top:0;
-    left:0;
-    .logo {
-        margin: 0 auto 48px;
-        text-align: center;
-        width: 98px;
-    }
-    .g-navi {
-        font-size: 1.4rem;
-        width: 228px;
-        
-        &__item {
-            position: relative;
-            & > a{
-                padding: 12px 0 12px 12px;
-                margin: 0 0 16px 18px;
-                display: flex;
-                align-items: center;
-                transition: 1s ease;
-                &:hover {
-                    opacity: 0.8;
-                }
-                &::before {
-                    content: "";
-                    margin-right: 18px;
-                    display: block;
-                    width: 24px;
-                    height: 24px;
-                    background-repeat: no-repeat;
-                }
-                &::after {
-                    content: "";
-                    transition: 0.3s ease-out;
-                    opacity: 0;
-                    transform: translateX(-5px);
-                    display: block;
-                    width: 5px;
-                    height: 48px;
-                    border-radius: 0 25px 25px 0;
-                    background-color: $cMain;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    bottom: 0;
-                }
-            }
-            &:last-child > a {
-                margin-bottom: 24px;
-            }
-            &:nth-child(1) > a::before {background-image: url($img + "icon-home.svg")}
-            &:nth-child(2) > a::before {background-image: url($img + "icon-search.svg")}
-            &:nth-child(3) > a::before {background-image: url($img + "icon-document.svg")}
-            &:nth-child(4) > a::before {background-image: url($img + "icon-user.svg")}
-            
-            &.current > a {
-                background-color: #F9F9F9;
-                border-radius: 8px;
-                &::after {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
+  background-color: $cWhite;
+  width: 274px;
+  height: 100vh;
+  padding: 50px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .logo {
+    margin: 0 auto 48px;
+    text-align: center;
+    width: 98px;
+  }
+  .g-navi {
+    font-size: 1.4rem;
+    width: 228px;
 
-        }
-    }    
-    
-    .btn--primary {
-        margin: 0 auto;
-    }
-
-    .myAvatar {
-        margin: 0 auto;
-        transition: 0.3s ease;
+    &__item {
+      position: relative;
+      & > a {
+        padding: 12px 0 12px 12px;
+        margin: 0 0 16px 18px;
+        display: flex;
+        align-items: center;
+        transition: 1s ease;
         &:hover {
-            opacity: 0.7;
+          opacity: 0.8;
         }
+        &::before {
+          content: "";
+          margin-right: 18px;
+          display: block;
+          width: 24px;
+          height: 24px;
+          background-repeat: no-repeat;
+        }
+        &::after {
+          content: "";
+          transition: 0.3s ease-out;
+          opacity: 0;
+          transform: translateX(-5px);
+          display: block;
+          width: 5px;
+          height: 48px;
+          border-radius: 0 25px 25px 0;
+          background-color: $cMain;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+        }
+      }
+      &:last-child > a {
+        margin-bottom: 24px;
+      }
+      &:nth-child(1) > a::before {
+        background-image: url($img + "icon-home.svg");
+      }
+      &:nth-child(2) > a::before {
+        background-image: url($img + "icon-search.svg");
+      }
+      &:nth-child(3) > a::before {
+        background-image: url($img + "icon-document.svg");
+      }
+      &:nth-child(4) > a::before {
+        background-image: url($img + "icon-user.svg");
+      }
+
+      &.current > a {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        &::after {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
     }
+  }
+
+  .btn--primary {
+    margin: 0 auto;
+  }
+
+  .myAvatar {
+    margin: 0 auto;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 .header-side {
-    width: 100vw;
-    background-color: $cWhite;
-    &__logo {
-        display: block;
-        width: 108px;
-        display: flex;
-        align-items: center;
-        a{
-            display: block;
-            width: 100%;
-        }
-        img {
-            width: 100%;
-        }
+  width: 100vw;
+  background-color: $cWhite;
+  &__logo {
+    display: block;
+    width: 108px;
+    display: flex;
+    align-items: center;
+    a {
+      display: block;
+      width: 100%;
     }
-    &__wrapper {
-        width: 90%;
-        margin: 0 auto;
-        padding: 16px 0;   
-        display: flex;
-        justify-content: space-between;
+    img {
+      width: 100%;
     }
-    &__right {
-        display: flex;
-        align-items: center;
-    }
-    &__cancel {
-        cursor: pointer;
-        margin-right: 16px;
-    }
+  }
+  &__wrapper {
+    width: 90%;
+    margin: 0 auto;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+  &__cancel {
+    cursor: pointer;
+    margin-right: 16px;
+  }
 }
 
 .myAvatar-menu {
-    background: $cWhite;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.06), 0px 0px 4px rgba(0, 0, 0, 0.06);
-    border-radius: 4px;
-    width: 253px;
+  background: $cWhite;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.06), 0px 0px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  width: 253px;
+  position: absolute;
+  bottom: 100px;
+  left: 40px;
+  padding: 16px 10px;
+  z-index: 0;
+  opacity: 0;
+  transition: 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  transform: translateY(10px);
+  &.view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &__item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid $cBorder1;
+    transition: 0.3s ease;
+    a {
+      display: block;
+    }
+    &:hover {
+      opacity: 0.6;
+    }
+    &:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 14px 16px 0 16px;
+    border-color: $cWhite transparent transparent transparent;
     position: absolute;
-    bottom : 100px;
-    left: 40px;
-    padding: 16px 10px;
-    z-index: 0;
-    opacity: 0;
-    transition: 0.4s cubic-bezier(.87,0,.13,1);
-    transform: translateY(10px);
-    &.view {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    &__item {
-        margin-bottom: 12px;
-        padding-bottom: 12px;
-        padding-left: 20px;
-        cursor: pointer;
-        border-bottom: 1px solid $cBorder1;
-        transition: 0.3s ease;
-        a {
-            display: block;
-        }
-        &:hover {
-            opacity: 0.6;
-        }
-        &:last-child {
-            border-bottom: 0;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-    }
-    &::before {
-        content: "";
-        display: block;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 14px 16px 0 16px;;
-        border-color: $cWhite transparent transparent transparent;
-        position: absolute;
-        bottom: -10px;
-        left: 25px;
-        z-index: 1;
-    }
+    bottom: -10px;
+    left: 25px;
+    z-index: 1;
+  }
 }

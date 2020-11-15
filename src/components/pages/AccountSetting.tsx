@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ArrowIcon, TrashIcon} from '../../assets/images/';
 import {Link} from 'react-router-dom';
 import { AnimatePresence,motion } from 'framer-motion';
-import {Modal} from '../modal';
+import {Modal} from '../Organisms/Modal';
 
 const AccountSetting:React.FC = props => {
     const [showModal, setShowModal] = useState<boolean>(false);

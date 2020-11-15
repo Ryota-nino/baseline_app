@@ -1,45 +1,42 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { Header, HeaderSide } from "./common/index";
-import { Modal, Popup } from "./modal";
+import { SideMenu, Header } from "./Organisms/Header/index";
+import { Modal } from "./Organisms/Modal";
 import * as Page from "./pages/index";
 import { AnimatePresence } from "framer-motion";
 import "../assets/styles/App.scss";
 
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
+  const [myData, setMyData] = useState<any>({});
 
   return (
     <div className="App">
       <div className="container">
         <Router>
           <Switch>
-            {/* 会員登録&ログイン */}
-            <Route path="/register" component={Page.Register}></Route>
-            <Route path="/register-send" component={Page.RegisterSend}></Route>
             <Route
-              path="/register-insert"
-              component={Page.RegisterInsert}
-            ></Route>
-
-            <Route path="/login" component={Page.Login}></Route>
-            <Route
-              path="/password-forget"
-              component={Page.PasswordForget}
+              path="/register"
+              render={() => <Header needBtn={false} />}
             ></Route>
             <Route
-              path="/password-forget-send"
-              component={Page.PasswordForgetSend}
+              path="/login"
+              render={() => <Header needBtn={false} />}
             ></Route>
             <Route
-              path="/password-setting"
-              component={Page.PasswordSetting}
+              path="/company-info/:id/edit"
+              render={() => <Header needBtn={true} />}
             ></Route>
-
-            <Route path="/company-info/:id/edit" component={HeaderSide}></Route>
             <Route
               path="/"
-              render={() => <Header setShowModal={setShowModal} />}
+              render={() => (
+                <SideMenu
+                  setShowModal={setShowModal}
+                  setMyData={setMyData}
+                  myData={myData}
+                />
+              )}
             ></Route>
           </Switch>
 
@@ -60,6 +57,30 @@ const App = () => {
 
             <main className="main">
               <div className="main__container">
+                {/* 会員登録&ログイン */}
+                <Route path="/register" component={Page.Register}></Route>
+                <Route
+                  path="/register-send"
+                  component={Page.RegisterSend}
+                ></Route>
+                <Route
+                  path="/register-insert"
+                  component={Page.RegisterInsert}
+                ></Route>
+
+                <Route path="/login" component={Page.Login}></Route>
+                <Route
+                  path="/password-forget"
+                  component={Page.PasswordForget}
+                ></Route>
+                <Route
+                  path="/password-forget-send"
+                  component={Page.PasswordForgetSend}
+                ></Route>
+                <Route
+                  path="/password-setting"
+                  component={Page.PasswordSetting}
+                ></Route>
                 <Route exact path="/" render={() => <Page.Top />}></Route>
 
                 <Route
@@ -76,7 +97,13 @@ const App = () => {
                 ></Route>
                 <Route
                   path="/mypage"
-                  render={() => <Page.UserPage type="mypage" />}
+                  render={() => (
+                    <Page.MyPage
+                      type="mypage"
+                      setMyData={setMyData}
+                      myData={myData}
+                    />
+                  )}
                 ></Route>
 
                 <Route
@@ -164,12 +191,12 @@ const App = () => {
           showModal={showModal}
           setShowModal={setShowModal}
         />
+        <footer className="footer">
+          <p className="copyright">
+            <small>©︎ 2020 Baseline Team</small>
+          </p>
+        </footer>
       </div>
-      <footer className="footer">
-        <p className="copyright">
-          <small>©︎ 2020 Hiroki Ogura</small>
-        </p>
-      </footer>
     </div>
   );
 };

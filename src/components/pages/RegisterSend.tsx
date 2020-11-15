@@ -1,7 +1,6 @@
 import React from "react";
-import { HeaderRegister } from "../../components/common/index";
+import { Header } from "../Organisms/Header/index";
 import {
-  Logo,
   DesktopIllust,
   MailIcon,
   DocumentIcon_White,
@@ -11,7 +10,7 @@ import {
 const RegisterSend: React.FC = (props) => {
   return (
     <div className="register">
-      <HeaderRegister />
+      <Header needBtn={true} />
       <ul className="register-step">
         <li className="current">
           <img src={MailIcon} alt="" />

@@ -1,10 +1,10 @@
 import React from "react";
 import { DesktopIllust } from "../../assets/images/index";
-import { HeaderRegister } from "../../components/common/index";
+import { Header } from "../Organisms/Header/index";
 const PasswordForgetSend: React.FC = (props) => {
   return (
     <div className="register">
-      <HeaderRegister />
+      <Header needBtn={true} />
       <div className="contentBox contentBox--big">
         <h1 className="heading5">パスワード再発行メールを送信しました</h1>
         <img src={DesktopIllust} alt="" />

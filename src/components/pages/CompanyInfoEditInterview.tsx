@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { InputWindowListInterview } from "../form";
-import { CompanyDetailCard } from "../company";
+import { CompanyInfo } from "../Molecules/Card/index";
 import { motion } from "framer-motion";
 
 const CompanyInfoEditInterview: React.FC = (props) => {
@@ -143,7 +143,7 @@ const CompanyInfoEditInterview: React.FC = (props) => {
           <Link to="/company-info" className="btn pageBack-link">
             <span className="heading4">情報一覧へ</span>
           </Link>
-          <div className="company-info-edit__container">
+          <div id="type-interview" className="company-info-edit__container">
             <InputWindowListInterview
               window={inputWindow}
               func={createInputWindow}
@@ -152,7 +152,7 @@ const CompanyInfoEditInterview: React.FC = (props) => {
             {inputPages.map((data) => {
               return data.page;
             })}
-            <CompanyDetailCard />
+            <CompanyInfo />
           </div>
         </div>
       </main>

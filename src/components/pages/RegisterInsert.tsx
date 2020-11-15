@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 import {
   Logo,
   MailIcon,
   DocumentIcon_White,
   CheckIcon,
 } from "../../assets/images/index";
-import { FreeWordInput, SelectBox, InputCheckRadio } from "../form/index";
-import { ActionBtn } from "../btn/index";
-import { HeaderRegister } from "../../components/common/index";
+
+import { SelectPrimary } from "../Atoms/Input";
+import { Primary } from "../Atoms/TextInput";
+import { CheckboxWithText } from "../Molecules/Input";
+import { ActionBtn } from "../Atoms/Btn/index";
+import { Header } from "../Organisms/Header/index";
 
 const RegisterInsert: React.FC = (props) => {
   useEffect(() => {
@@ -37,7 +39,7 @@ const RegisterInsert: React.FC = (props) => {
 
   return (
     <div className="register">
-      <HeaderRegister />
+      <Header needBtn={true} />
 
       <ul className="register-step">
         <li className="current">
@@ -62,19 +64,19 @@ const RegisterInsert: React.FC = (props) => {
             </h1>
             <p>メールアドレス</p>
             <p>example@gmail.com</p>
-            <FreeWordInput
+            <Primary
               type="number"
               ttl="学籍番号"
               placeholder="学校から配布された６桁の番号"
               isRequired={true}
             />
-            <FreeWordInput
+            <Primary
               type="password"
               ttl="パスワード"
               placeholder="英数字を含めた8文字以上"
               isRequired={true}
             />
-            <FreeWordInput
+            <Primary
               type="password"
               ttl="パスワード確認"
               placeholder="英数字を含めた8文字以上"
@@ -86,13 +88,13 @@ const RegisterInsert: React.FC = (props) => {
             <h1 className="heading4">基本情報</h1>
             <p>メールアドレス</p>
             <p>example@gmail.com</p>
-            <FreeWordInput
+            <Primary
               type="text"
               ttl="苗字"
               placeholder="山田"
               isRequired={true}
             />
-            <FreeWordInput
+            <Primary
               type="text"
               ttl="名前"
               placeholder="太郎"
@@ -129,14 +131,14 @@ const RegisterInsert: React.FC = (props) => {
               <p className="label-input__txt">
                 希望職種<span className="cAttention">*</span>
               </p>
-              <SelectBox name="job" options={jobTypes} required={true} />
+              <SelectPrimary name="job" options={jobTypes} required={true} />
             </div>
 
             <div className="label-input">
               <p className="label-input__txt">
                 卒業年次<span className="cAttention">*</span>
               </p>
-              <SelectBox
+              <SelectPrimary
                 name="graduation_year"
                 options={yearList}
                 required={true}
@@ -152,7 +154,7 @@ const RegisterInsert: React.FC = (props) => {
               </p>
             </div>
 
-            <InputCheckRadio
+            <CheckboxWithText
               type="checkbox"
               txt="利用規約、プライバシーポリシー及び個人情報の取扱いについて同意する"
             />

@@ -1,16 +1,14 @@
-import React, {useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
-
-import {UserListWindow} from '../user';
-import {CompanyContentsWindow,CompanyBar} from '../company';
-import { AnimatePresence,motion } from 'framer-motion';
+import React from "react";
+import { UserList } from "../Organisms/Window";
+import { CompanyContentsWindow, CompanyBar } from "../Organisms/CompanyDetail";
+import { motion } from "framer-motion";
 
 interface Props {
   // thisPage: string;
   match?: any;
 }
 
-const CompanyDetail:React.FC<Props> = props => {
+const CompanyDetail: React.FC<Props> = (props) => {
   // const location = useLocation();
   const companyId = props.match.params.id;
 
@@ -20,8 +18,8 @@ const CompanyDetail:React.FC<Props> = props => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.2
-      }
+        duration: 0.2,
+      },
     },
     out: {
       x: -20,
@@ -30,17 +28,27 @@ const CompanyDetail:React.FC<Props> = props => {
   };
 
   return (
-    <motion.section className="app-main company-detail" initial="out" animate="in" exit="out" variants={pageTransition}>
-        <div className="left-col">
-            <CompanyBar companyId={companyId} hasActionBtn={true} thisPage="detail"/>
-            <CompanyContentsWindow companyId={companyId} thisPage={thisPage}/>
-        </div>
-        <div className="right-col">
-            <UserListWindow thisPage="insert-users"/>
-            <UserListWindow thisPage="company-users"/>
-        </div>
+    <motion.section
+      className="app-main company-detail"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageTransition}
+    >
+      <div className="left-col">
+        <CompanyBar
+          companyId={companyId}
+          hasActionBtn={true}
+          thisPage="detail"
+        />
+        <CompanyContentsWindow companyId={companyId} thisPage={thisPage} />
+      </div>
+      <div className="right-col">
+        <UserList thisPage="insert-users" />
+        <UserList thisPage="company-users" />
+      </div>
     </motion.section>
   );
-}
+};
 
 export default CompanyDetail;

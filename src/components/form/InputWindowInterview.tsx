@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { TrashIcon, PenIcon } from "../../assets/images/index";
-import { InputTextArea } from "./index";
-import { AnimatePresence, motion } from "framer-motion";
-import { InputDropdown } from ".";
+import { TrashIcon } from "../../assets/images/index";
+import { TextareaPrimary } from "../Atoms/TextInput/index";
+import { SelectSecondary } from "../Atoms/Input/index";
+
+import { motion } from "framer-motion";
 
 interface Props {
   id: number;
@@ -52,7 +53,7 @@ const InputWindowInterview: React.FC<Props> = (props) => {
     <motion.article
       id={`inputWindow-${props.id}`}
       key={props.id}
-      className="contentBox contentBox--big interview"
+      className="contentBox contentBox--big interview-formBox"
       initial="out"
       animate="in"
       exit="out"
@@ -60,8 +61,8 @@ const InputWindowInterview: React.FC<Props> = (props) => {
       ref={el}
     >
       <h1 className="heading4">面接の内容</h1>
-      <InputDropdown name="date" ttl="" selectObj={calendarObj} />
-      <InputTextArea
+      <SelectSecondary name="date" ttl="" selectObj={calendarObj} />
+      <TextareaPrimary
         ttl="面接を受けた感想をお書きください"
         placeholder="アドバイスや指摘、気づいた点など"
       />

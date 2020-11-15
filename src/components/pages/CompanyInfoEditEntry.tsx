@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { SelectBox, FreeWordInput, InputWindowListEntry } from "../form";
-import { InsertAddBtn } from "../btn";
-import { CompanyDetailCard } from "../company";
-import { AnimatePresence, motion } from "framer-motion";
+import { InputWindowListEntry } from "../form";
+import { SelectPrimary } from "../Atoms/Input";
+import { InsertAddBtn } from "../Atoms/Btn";
+import { CompanyInfo } from "../Molecules/Card/index";
+import { motion } from "framer-motion";
 
 const CompanyInfoEditEntry: React.FC = (props) => {
   const pageTransition = {
@@ -54,15 +55,15 @@ const CompanyInfoEditEntry: React.FC = (props) => {
         <Link to="/company-info" className="btn pageBack-link">
           <span className="heading4">情報一覧へ</span>
         </Link>
-        <div className="company-info-edit__container">
-          <div className="company-info-edit__left-col">
+        <div id="type-entry" className="company-info-edit__container">
+          <form className="company-info-edit__left-col">
             <article className="contentBox contentBox--big">
               <h1 className="heading4">概要</h1>
               <div className="label-input mb16">
                 <p className="label-input__txt">
                   選考種類<span className="cAttention">*</span>
                 </p>
-                <SelectBox
+                <SelectPrimary
                   name="selection_type"
                   options={jobInterviewTypes}
                   required={false}
@@ -73,24 +74,28 @@ const CompanyInfoEditEntry: React.FC = (props) => {
                   <p className="label-input__txt">
                     応募職種<span className="cAttention">*</span>
                   </p>
-                  <SelectBox name="job" options={jobTypes} required={false} />
+                  <SelectPrimary
+                    name="job"
+                    options={jobTypes}
+                    required={false}
+                  />
                 </div>
-                <div className="label-input">
+                {/* <div className="label-input">
                   <FreeWordInput
                     isRequired={true}
                     type="string"
                     ttl="その他"
                     placeholder="職種を入力"
                   />
-                </div>
+                </div> */}
               </div>
             </article>
 
             <InputWindowListEntry obj={inputWindow} />
 
             <InsertAddBtn txt="項目を追加" click={createInputWindow} />
-          </div>
-          <CompanyDetailCard />
+          </form>
+          <CompanyInfo />
         </div>
       </div>
     </motion.main>

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import { TrashIcon } from "../../assets/images/index";
-import { TextareaPrimary } from "../Atoms/TextInput/index";
-import { SelectSecondary } from "../Atoms/Input/index";
+import { TrashIcon } from "../../../assets/images/index";
+import { TextareaPrimary } from "../../Atoms/TextInput/index";
+import { SelectSecondary } from "../../Atoms/Input/index";
 
 import { motion } from "framer-motion";
 

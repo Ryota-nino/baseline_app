@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { CompanyBar } from "../Organisms/CompanyDetail";
-import { PostStudent } from "../Molecules/Card/index";
-import { Primary } from "../Atoms/TextInput/index";
-import { CheckboxWithText } from "../Molecules/Input";
-import { ActionBtn, RoundedBtn } from "../Atoms/Btn";
-import { Modal } from "../Organisms/Modal";
+import { CompanyBar } from "../../Organisms/CompanyDetail";
+import { PostStudent } from "../../Molecules/Card/index";
+import { Primary } from "../../Atoms/TextInput/index";
+import { CheckboxWithText } from "../../Molecules/Input";
+import { ActionBtn, RoundedBtn } from "../../Atoms/Btn";
+import { Modal } from "../../Organisms/Modal";
 import { motion } from "framer-motion";
 interface Props {
   // showModal?: any;

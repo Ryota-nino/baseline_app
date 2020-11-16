@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { InputWindowListInterview } from "../form";
-import { CompanyInfo } from "../Molecules/Card/index";
+import { InterviewPage } from "../../Organisms/Window";
+import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
 
-const CompanyInfoEditInterview: React.FC = (props) => {
+const Interview: React.FC = (props) => {
   const pageTransition = {
     in: {
       opacity: 1,
@@ -75,7 +75,7 @@ const CompanyInfoEditInterview: React.FC = (props) => {
         {
           id: pagesLength + 1,
           page: (
-            <InputWindowListInterview
+            <InterviewPage
               window={inputWindow}
               func={createInputWindow}
               pages={inputPages}
@@ -144,7 +144,7 @@ const CompanyInfoEditInterview: React.FC = (props) => {
             <span className="heading4">情報一覧へ</span>
           </Link>
           <div id="type-interview" className="company-info-edit__container">
-            <InputWindowListInterview
+            <InterviewPage
               window={inputWindow}
               func={createInputWindow}
               pages={0}
@@ -160,4 +160,4 @@ const CompanyInfoEditInterview: React.FC = (props) => {
   );
 };
 
-export default CompanyInfoEditInterview;
+export default Interview;

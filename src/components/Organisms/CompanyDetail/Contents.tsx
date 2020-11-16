@@ -6,7 +6,7 @@ interface Props {
   thisPage: string;
 }
 
-const CompanyDetailContentsWindow: React.FC<Props> = (props) => {
+const Contents: React.FC<Props> = (props) => {
   const renderContents = () => {
     if (props.thisPage === "step") {
       return <Step thisPage={props.thisPage} />;
@@ -40,4 +40,4 @@ const CompanyDetailContentsWindow: React.FC<Props> = (props) => {
   );
 };
 
-export default CompanyDetailContentsWindow;
+export default Contents;

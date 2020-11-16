@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { InputWindowInterview } from "./index";
-import { SelectPrimary } from "../Atoms/Input";
+import { InterviewSheet } from ".";
+import { SelectPrimary } from "../../Atoms/Input";
 import { motion } from "framer-motion";
-import { InsertAddBtn } from "../Atoms/Btn";
+import { InsertAddBtn } from "../../Atoms/Btn";
 
 interface Props {
   window: any;
@@ -51,11 +51,8 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
   }
 
   const element = inputWindow.map((todo: any) => (
-    <InputWindowInterview id={todo.id} />
+    <InterviewSheet id={todo.id} />
   ));
-  //   const element = props.window.map((todo: any) => (
-  //     <InputWindowInterview id={todo.id} />
-  //   ));
 
   return (
     <motion.form
@@ -93,14 +90,9 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
             <SelectPrimary name="result" options={result} required={true} />
           </div>
         </div>
-        {/* <div className="label-input">
-                    <p className="label-input__txt">面接人数</p>
-                    <SelectBox options={interviewPeople} />
-                </div> */}
       </article>
 
       {element}
-      {/* <InsertAddBtn txt="項目を追加" click={props.func} /> */}
       <InsertAddBtn txt="項目を追加" click={createInputWindow} />
     </motion.form>
   );

@@ -1,12 +1,10 @@
 import React from "react";
-import { Primary } from "../Atoms/TextInput";
-import { PrimaryBtn } from "../Atoms/Btn/index";
-import { Header } from "../Organisms/Header/index";
+import { Primary } from "../../Atoms/TextInput";
+import { PrimaryBtn } from "../../Atoms/Btn/index";
 
-const PasswordSetting: React.FC = (props) => {
+const Setting: React.FC = (props) => {
   return (
     <div className="register">
-      <Header needBtn={true} />
       <form method="POST" action="#" className="contentBox contentBox--big">
         <h1 className="heading4">パスワードの再設定</h1>
         <Primary
@@ -27,4 +25,4 @@ const PasswordSetting: React.FC = (props) => {
   );
 };
 
-export default PasswordSetting;
+export default Setting;

@@ -1,16 +1,14 @@
 import React from "react";
-import { Header } from "../Organisms/Header/index";
 import {
   DesktopIllust,
   MailIcon,
   DocumentIcon_White,
   CheckIcon,
-} from "../../assets/images/index";
+} from "../../../assets/images/index";
 
 const RegisterSend: React.FC = (props) => {
   return (
     <div className="register">
-      <Header needBtn={true} />
       <ul className="register-step">
         <li className="current">
           <img src={MailIcon} alt="" />

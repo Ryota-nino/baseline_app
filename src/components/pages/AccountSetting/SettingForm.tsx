@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Secondary } from "../Atoms/TextInput";
-import { RoundedBtn } from "../Atoms/Btn";
+import { Secondary } from "../../Atoms/TextInput";
+import { RoundedBtn } from "../../Atoms/Btn";
 import { motion } from "framer-motion";
 
 interface Props {
   thisPage: string;
 }
 
-const AccountSettingContent: React.FC<Props> = (props) => {
+const SettingForm: React.FC<Props> = (props) => {
   const history = useHistory();
   const isError = [
     { isEmpty1: false },
@@ -141,4 +141,4 @@ const AccountSettingContent: React.FC<Props> = (props) => {
   );
 };
 
-export default AccountSettingContent;
+export default SettingForm;

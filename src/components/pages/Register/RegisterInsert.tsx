@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import {
-  Logo,
   MailIcon,
   DocumentIcon_White,
   CheckIcon,
-} from "../../assets/images/index";
+} from "../../../assets/images/index";
 
-import { SelectPrimary } from "../Atoms/Input";
-import { Primary } from "../Atoms/TextInput";
-import { CheckboxWithText } from "../Molecules/Input";
-import { ActionBtn } from "../Atoms/Btn/index";
-import { Header } from "../Organisms/Header/index";
+import { SelectPrimary } from "../../Atoms/Input";
+import { Primary } from "../../Atoms/TextInput";
+import { CheckboxWithText } from "../../Molecules/Input";
+import { ActionBtn } from "../../Atoms/Btn/index";
 
 const RegisterInsert: React.FC = (props) => {
   useEffect(() => {
@@ -39,8 +37,6 @@ const RegisterInsert: React.FC = (props) => {
 
   return (
     <div className="register">
-      <Header needBtn={true} />
-
       <ul className="register-step">
         <li className="current">
           <img src={MailIcon} alt="" />

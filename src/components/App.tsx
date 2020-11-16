@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { SideMenu, Header } from "./Organisms/Header/index";
 import { Modal } from "./Organisms/Modal";
-import * as Page from "./pages/index";
+import * as Page from "./Pages";
 import { AnimatePresence } from "framer-motion";
 import "../assets/styles/App.scss";
 
@@ -18,6 +18,10 @@ const App = () => {
           <Switch>
             <Route
               path="/register"
+              render={() => <Header needBtn={false} />}
+            ></Route>
+            <Route
+              path="/password"
               render={() => <Header needBtn={false} />}
             ></Route>
             <Route
@@ -44,42 +48,47 @@ const App = () => {
           <Switch>
             <Route
               path="/company-info/:id/edit/step"
-              component={Page.CompanyInfoEditStep}
+              component={Page.Step}
             ></Route>
             <Route
               path="/company-info/:id/edit/interview"
-              component={Page.CompanyInfoEditInterview}
+              component={Page.Interview}
             ></Route>
             <Route
               path="/company-info/:id/edit/entry"
-              component={Page.CompanyInfoEditEntry}
+              component={Page.Entry}
             ></Route>
 
             <main className="main">
               <div className="main__container">
                 {/* 会員登録&ログイン */}
-                <Route path="/register" component={Page.Register}></Route>
+                <Route exact path="/register" component={Page.Register}></Route>
                 <Route
-                  path="/register-send"
+                  path="/register/send"
+                  exact
                   component={Page.RegisterSend}
                 ></Route>
                 <Route
-                  path="/register-insert"
+                  exact
+                  path="/register/insert"
                   component={Page.RegisterInsert}
                 ></Route>
 
-                <Route path="/login" component={Page.Login}></Route>
+                <Route exact path="/login" component={Page.Login}></Route>
                 <Route
-                  path="/password-forget"
-                  component={Page.PasswordForget}
+                  exact
+                  path="/password/forget"
+                  component={Page.TypeMail}
                 ></Route>
                 <Route
-                  path="/password-forget-send"
-                  component={Page.PasswordForgetSend}
+                  exact
+                  path="/password/forget-send"
+                  component={Page.Send}
                 ></Route>
                 <Route
-                  path="/password-setting"
-                  component={Page.PasswordSetting}
+                  exact
+                  path="/password/setting"
+                  component={Page.Setting}
                 ></Route>
                 <Route exact path="/" render={() => <Page.Top />}></Route>
 
@@ -115,7 +124,7 @@ const App = () => {
                 <Route
                   exact
                   path="/company-detail/contents/:id/:category"
-                  render={(props) => <Page.CompanyDetailContents {...props} />}
+                  render={(props) => <Page.DetailContents {...props} />}
                 ></Route>
 
                 <Route
@@ -136,15 +145,11 @@ const App = () => {
 
                 <Route
                   path="/insert-users"
-                  render={() => (
-                    <Page.CompanyInsertUsers thisPage="insert-users" />
-                  )}
+                  render={() => <Page.InsertUsers thisPage="insert-users" />}
                 ></Route>
                 <Route
                   path="/company-users"
-                  render={() => (
-                    <Page.CompanyInsertUsers thisPage="company-users" />
-                  )}
+                  render={() => <Page.InsertUsers thisPage="company-users" />}
                 ></Route>
 
                 <Route
@@ -155,28 +160,22 @@ const App = () => {
                 <Route
                   exact
                   path="/:user/account-setting/student-number"
-                  render={() => (
-                    <Page.AccountSettingContent thisPage="student-number" />
-                  )}
+                  render={() => <Page.SettingForm thisPage="student-number" />}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/password"
-                  render={() => (
-                    <Page.AccountSettingContent thisPage="password" />
-                  )}
+                  render={() => <Page.SettingForm thisPage="password" />}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/mail"
-                  render={() => <Page.AccountSettingContent thisPage="mail" />}
+                  render={() => <Page.SettingForm thisPage="mail" />}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/account-delete"
-                  render={() => (
-                    <Page.AccountSettingContent thisPage="account-delete" />
-                  )}
+                  render={() => <Page.SettingForm thisPage="account-delete" />}
                 ></Route>
               </div>
             </main>

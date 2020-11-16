@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { InputWindowListEntry } from "../form";
-import { SelectPrimary } from "../Atoms/Input";
-import { InsertAddBtn } from "../Atoms/Btn";
-import { CompanyInfo } from "../Molecules/Card/index";
+import { SelectPrimary } from "../../Atoms/Input";
+import { InsertAddBtn } from "../../Atoms/Btn";
+import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
+import { EntrySheet } from "../../Organisms/Window";
 
-const CompanyInfoEditEntry: React.FC = (props) => {
+const Entry: React.FC = (props) => {
   const pageTransition = {
     in: {
       opacity: 1,
@@ -91,7 +91,10 @@ const CompanyInfoEditEntry: React.FC = (props) => {
               </div>
             </article>
 
-            <InputWindowListEntry obj={inputWindow} />
+            {/* <InputWindowListEntry obj={inputWindow} /> */}
+            {inputWindow.map((box) => {
+              return <EntrySheet id={box.id} />;
+            })}
 
             <InsertAddBtn txt="項目を追加" click={createInputWindow} />
           </form>
@@ -102,4 +105,4 @@ const CompanyInfoEditEntry: React.FC = (props) => {
   );
 };
 
-export default CompanyInfoEditEntry;
+export default Entry;

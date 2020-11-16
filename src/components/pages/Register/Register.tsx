@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PrimaryBtn } from "../Atoms/Btn/index";
-import { Primary } from "../Atoms/TextInput/index";
-import { Header } from "../Organisms/Header/index";
+import { PrimaryBtn } from "../../Atoms/Btn/index";
+import { Primary } from "../../Atoms/TextInput/index";
 
 const Register: React.FC = (props) => {
   const onSubmitHandler = () => {
@@ -16,7 +15,6 @@ const Register: React.FC = (props) => {
 
   return (
     <div className="register">
-      <Header needBtn={true} />
       <div className="formBox">
         <form method="POST" action="#" className="contentBox contentBox--big">
           <h1 className="heading4">会員登録</h1>

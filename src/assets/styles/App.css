@@ -483,6 +483,69 @@ input, select, textarea {
   }
 }
 
+.page-login {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.page-login main {
+  width: 100%;
+}
+
+.login .contentBox {
+  width: 434px;
+  margin: auto;
+}
+
+.login input[type="email"],
+.login input[type="text"],
+.login input[type="password"] {
+  width: 100%;
+}
+
+.login .heading6 {
+  font-weight: normal;
+}
+
+.login .free-word {
+  margin-bottom: 20px;
+}
+
+.login .free-word.last {
+  margin-bottom: 0;
+}
+
+.login .password-forget {
+  font-size: 1.3rem;
+  text-align: right;
+}
+
+.login .password-forget a {
+  color: #448AF3;
+}
+
+.login .btn {
+  margin: 48px auto 8px;
+}
+
+.login .not-have-account {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.login .not-have-account a {
+  color: #448AF3;
+}
+
 .app-main .pageBack-link {
   margin-bottom: 40px;
 }
@@ -542,12 +605,12 @@ input, select, textarea {
       -ms-flex-pack: end;
           justify-content: flex-end;
   cursor: pointer;
-  -webkit-transition: .3s ease;
-  transition: .3s ease;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .mypage .icon-txt:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .mypage .userDetail-window {
@@ -768,6 +831,11 @@ input, select, textarea {
   margin-bottom: 32px;
 }
 
+.company-info-edit .contentBox.interview .input-dropdown {
+  margin-bottom: 24px;
+  margin-top: 32px;
+}
+
 .company-info-edit .contentBox__flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -801,12 +869,15 @@ input, select, textarea {
   width: 20%;
 }
 
-.company-info-edit .contentBox .label-input__txt, .company-info-edit .contentBox .free-word .heading6 {
+.company-info-edit .contentBox .label-input__txt,
+.company-info-edit .contentBox .free-word .heading6 {
   margin-bottom: 8px;
   font-weight: bold;
 }
 
-.company-info-edit .contentBox .label-input, .company-info-edit .contentBox .label-input input, .company-info-edit .contentBox .selectBox {
+.company-info-edit .contentBox .label-input,
+.company-info-edit .contentBox .label-input input,
+.company-info-edit .contentBox .selectBox {
   width: 200px;
 }
 
@@ -925,7 +996,16 @@ input, select, textarea {
 }
 
 .accountSetting-content__bottom > p > a:hover {
-  opacity: .6;
+  opacity: 0.6;
+}
+
+.headerRegister {
+  background-color: #ffffff;
+  padding: 20px 0 20px 64px;
+}
+
+.headerRegister__logo {
+  width: 98px;
 }
 
 .header {
@@ -1028,7 +1108,7 @@ input, select, textarea {
 }
 
 .header .g-navi__item.current > a {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   border-radius: 8px;
 }
 
@@ -1810,7 +1890,8 @@ input, select, textarea {
   width: 100%;
 }
 
-.input--normal input, .input--normal select {
+.input--normal input,
+.input--normal select {
   height: 100%;
   width: 100%;
   padding: 10px 0 10px 4px;
@@ -1842,7 +1923,7 @@ input, select, textarea {
 
 .input--big input[type="password"] {
   font-weight: bold;
-  font-family: 'Montserrat' ,sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .input--big input {
@@ -1877,7 +1958,8 @@ input, select, textarea {
           align-items: center;
 }
 
-.selectBox::after, .sort-bar > div::after {
+.selectBox::after,
+.sort-bar > div::after {
   content: "";
   display: inline-block;
   width: 14px;
@@ -1963,7 +2045,7 @@ input, select, textarea {
 }
 
 .prefecture-accordion {
-  border: 1px solid #EEF0F1;
+  border: 1px solid #eef0f1;
 }
 
 .prefecture-accordion__heading {
@@ -2095,6 +2177,7 @@ input, select, textarea {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  overflow: hidden;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2186,7 +2269,7 @@ input, select, textarea {
   padding: 10px 40px;
   font-size: 1.3rem;
   color: #545454;
-  background-color: #EBF0F2;
+  background-color: #ebf0f2;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -2209,7 +2292,7 @@ input, select, textarea {
 }
 
 .select-image:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .select-image input[type="file"] {
@@ -2227,7 +2310,7 @@ input, select, textarea {
 
 .select-image__overlay {
   color: #ffffff;
-  opacity: .8;
+  opacity: 0.8;
   position: absolute;
   top: 0;
   left: 0;
@@ -2256,7 +2339,7 @@ input, select, textarea {
 .setting-item a, .setting-item.delete {
   font-size: 1.3rem;
   padding: 24px 16px;
-  border-bottom: 1px solid #CFD2D8;
+  border-bottom: 1px solid #cfd2d8;
   position: relative;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
@@ -2264,7 +2347,7 @@ input, select, textarea {
 }
 
 .setting-item a:hover, .setting-item.delete:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .setting-item a:hover .setting-item__arrow, .setting-item.delete:hover .setting-item__arrow {
@@ -2934,7 +3017,7 @@ input, select, textarea {
 
 .modal--accountDelete .accountDelete-user__stundet-number {
   color: #545454;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .modal--accountDelete .heading4 {
@@ -3091,6 +3174,45 @@ input, select, textarea {
           align-items: center;
 }
 
+.modal.activity-delete {
+  padding: 42px 18px 16px;
+  text-align: center;
+  width: 418px;
+}
+
+.modal.activity-delete .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 10px;
+  border-top: 1px solid #eeeeee;
+}
+
+.modal.activity-delete .flex .cansel {
+  cursor: pointer;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.modal.activity-delete .flex .cansel:hover {
+  opacity: 0.6;
+}
+
+.modal.activity-delete .txt {
+  margin-top: 24px;
+  padding-bottom: 24px;
+}
+
+.modal.activity-delete .btn {
+  margin-left: 24px;
+}
+
 .modal-background {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -3145,7 +3267,7 @@ input, select, textarea {
   border-radius: 8px;
   padding: 26px 32px 16px;
   font-size: 1.3rem;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .company-level__table {
@@ -3155,7 +3277,7 @@ input, select, textarea {
 }
 
 .company-level__table th {
-  color: #98A1A9;
+  color: #98a1a9;
   font-weight: bold;
 }
 
@@ -3167,11 +3289,13 @@ input, select, textarea {
   background-color: #ffffff;
 }
 
-.company-level__table tr:not(:first-child) th:first-child, .company-level__table tr:not(:first-child) td:first-child {
+.company-level__table tr:not(:first-child) th:first-child,
+.company-level__table tr:not(:first-child) td:first-child {
   border-radius: 6px 0 0 6px;
 }
 
-.company-level__table tr:not(:first-child) th:last-child, .company-level__table tr:not(:first-child) td:last-child {
+.company-level__table tr:not(:first-child) th:last-child,
+.company-level__table tr:not(:first-child) td:last-child {
   border-radius: 0 6px 6px 0;
 }
 
@@ -3280,11 +3404,13 @@ input, select, textarea {
   margin-bottom: 4px;
 }
 
-.update-bar, .error-bar {
+.update-bar,
+.error-bar {
   cursor: pointer;
 }
 
-.update-bar__wrap, .error-bar__wrap {
+.update-bar__wrap,
+.error-bar__wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3306,7 +3432,8 @@ input, select, textarea {
   opacity: 0.9;
 }
 
-.update-bar__icon, .error-bar__icon {
+.update-bar__icon,
+.error-bar__icon {
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -3536,6 +3663,10 @@ input, select, textarea {
           transform: translateY(0);
 }
 
+.activity-item .activity-item-menu.view .activity-item-menu__item {
+  pointer-events: all;
+}
+
 .activity-item .activity-item-menu__item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3544,6 +3675,7 @@ input, select, textarea {
       -ms-flex-align: center;
           align-items: center;
   padding: 10px 22px 10px 10px;
+  pointer-events: none;
   cursor: pointer;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
@@ -3891,7 +4023,7 @@ input, select, textarea {
 }
 
 .companyContentsWindow__list {
-  border-bottom: 2px solid #EBECED;
+  border-bottom: 2px solid #ebeced;
 }
 
 .companyContentsWindow__list ul {

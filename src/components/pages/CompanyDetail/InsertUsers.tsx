@@ -1,14 +1,14 @@
 import React from "react";
-import { UserList } from "../Organisms/Window";
+import { UserList } from "../../Organisms/Window";
 import { Link } from "react-router-dom";
-import { CompanyBar } from "../Organisms/CompanyDetail";
-import { Avatar } from "../../assets/images/index";
+import { CompanyBar } from "../../Organisms/CompanyDetail";
+import { Avatar } from "../../../assets/images/index";
 
 interface Props {
   thisPage: string;
 }
 
-const CompanyInsertUsers: React.FC<Props> = (props) => {
+const InsertUsers: React.FC<Props> = (props) => {
   let pageTtl;
   if (props.thisPage === "insert-users") {
     pageTtl = "情報提供に協力した方";
@@ -119,4 +119,4 @@ const CompanyInsertUsers: React.FC<Props> = (props) => {
   );
 };
 
-export default CompanyInsertUsers;
+export default InsertUsers;

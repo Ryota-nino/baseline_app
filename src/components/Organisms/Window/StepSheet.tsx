@@ -1,14 +1,14 @@
 import React from "react";
-import { TrashIcon } from "../../assets/images/index";
-import { SelectSecondary } from "../Atoms/Input";
-import { Secondary } from "../Atoms/TextInput";
+import { TrashIcon } from "../../../assets/images/index";
+import { SelectSecondary } from "../../Atoms/Input";
+import { Secondary } from "../../Atoms/TextInput";
 import { motion } from "framer-motion";
 
 interface Props {
   id: number;
 }
 
-const InputWindowStep: React.FC<Props> = (props) => {
+const StepSheet: React.FC<Props> = (props) => {
   const pageTransition = {
     in: {
       opacity: 1,
@@ -90,4 +90,4 @@ const InputWindowStep: React.FC<Props> = (props) => {
   );
 };
 
-export default InputWindowStep;
+export default StepSheet;

@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Primary } from "../Atoms/TextInput";
-import { PrimaryBtn } from "../Atoms/Btn/index";
-import { Header } from "../Organisms/Header/index";
+import { Primary } from "../../Atoms/TextInput";
+import { PrimaryBtn } from "../../Atoms/Btn/index";
 
-const PasswordForget: React.FC = (props) => {
+const TypeMail: React.FC = (props) => {
   return (
     <div className="register">
-      <Header needBtn={true} />
       <Link className="pageBack-link" to="/login">
         <span className="heading4">ログイン画面に戻る</span>
       </Link>
@@ -25,4 +23,4 @@ const PasswordForget: React.FC = (props) => {
   );
 };
 
-export default PasswordForget;
+export default TypeMail;

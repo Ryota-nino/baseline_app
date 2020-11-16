@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { InputWindowListStep } from "../form";
-import { SelectPrimary } from "../Atoms/Input";
-import { InsertAddBtn } from "../Atoms/Btn";
-import { CompanyInfo } from "../Molecules/Card/index";
 
-const CompanyInfoEditStep: React.FC = (props) => {
+import { SelectPrimary } from "../../Atoms/Input";
+import { InsertAddBtn } from "../../Atoms/Btn";
+import { CompanyInfo } from "../../Molecules/Card/index";
+import { StepSheet } from "../../Organisms/Window";
+
+const Step: React.FC = (props) => {
   let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
   let inputLength = inputWindow.length;
   const jobInterviewTypes = [
@@ -65,7 +66,10 @@ const CompanyInfoEditStep: React.FC = (props) => {
               </div>
             </article>
 
-            <InputWindowListStep obj={inputWindow} />
+            {/* <InputWindowListStep obj={inputWindow} /> */}
+            {inputWindow.map((box) => {
+              return <StepSheet id={box.id} />;
+            })}
 
             <InsertAddBtn txt="項目を追加" click={createInputWindow} />
           </form>
@@ -76,4 +80,4 @@ const CompanyInfoEditStep: React.FC = (props) => {
   );
 };
 
-export default CompanyInfoEditStep;
+export default Step;

@@ -1,6 +1,6 @@
 import React from "react";
-import { UserList } from "../Organisms/Window";
-import { CompanyContentsWindow, CompanyBar } from "../Organisms/CompanyDetail";
+import { UserList } from "../../Organisms/Window";
+import { Categories, CompanyBar } from "../../Organisms/CompanyDetail";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -41,7 +41,7 @@ const CompanyDetail: React.FC<Props> = (props) => {
           hasActionBtn={true}
           thisPage="detail"
         />
-        <CompanyContentsWindow companyId={companyId} thisPage={thisPage} />
+        <Categories companyId={companyId} thisPage={thisPage} />
       </div>
       <div className="right-col">
         <UserList thisPage="insert-users" />

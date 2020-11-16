@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CompanyDetailContentsWindow } from "../Organisms/CompanyDetail";
-import { UnofficialOffer } from "../Molecules/Bar/index";
+import { Contents } from "../../Organisms/CompanyDetail";
+import { UnofficialOffer } from "../../Molecules/Bar/index";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   match?: any;
 }
 
-const CompanyDetailContents: React.FC<Props> = (props) => {
+const DetailContents: React.FC<Props> = (props) => {
   const thisPage = props.match.params.category;
   const pageTransition = {
     in: {
@@ -37,9 +37,9 @@ const CompanyDetailContents: React.FC<Props> = (props) => {
       </Link>
       <UnofficialOffer />
 
-      <CompanyDetailContentsWindow thisPage={thisPage} />
+      <Contents thisPage={thisPage} />
     </motion.section>
   );
 };
 
-export default CompanyDetailContents;
+export default DetailContents;

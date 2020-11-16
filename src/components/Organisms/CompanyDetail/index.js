@@ -1,4 +1,4 @@
-export {default as CompanyContentsWindow} from './Categories';
+export {default as Categories} from './Categories';
 export {default as CompanyBar} from './AboutBar';
-export {default as CompanyDetailContentsWindow} from './Contents';
+export {default as Contents} from './Contents';
 

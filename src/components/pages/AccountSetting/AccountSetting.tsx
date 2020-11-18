@@ -3,22 +3,13 @@ import { ArrowIcon, TrashIcon } from "../../../assets/images";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Modal } from "../../Organisms/Modal";
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+interface Props {
+  myData: any;
+}
 
-const AccountSetting: React.FC = (props) => {
+const AccountSetting: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
   return (
     <>
       <motion.section
@@ -26,7 +17,7 @@ const AccountSetting: React.FC = (props) => {
         initial="out"
         animate="in"
         exit="out"
-        variants={pageTransition}
+        variants={pageTransitionNormal}
       >
         <h2 className="heading1">設定</h2>
         <section className="contentBox contentBox--big step">
@@ -35,7 +26,9 @@ const AccountSetting: React.FC = (props) => {
             <li className="setting-item">
               <Link to="/01/account-setting/student-number">
                 <p className="setting-item__label">学籍番号</p>
-                <p className="setting-item__value">2180075</p>
+                <p className="setting-item__value">
+                  {props.myData.student_number}
+                </p>
                 <p className="setting-item__arrow">
                   <img src={ArrowIcon} alt="" />
                 </p>
@@ -53,7 +46,7 @@ const AccountSetting: React.FC = (props) => {
             <li className="setting-item">
               <Link to="/01/account-setting/mail">
                 <p className="setting-item__label">メールアドレス</p>
-                <p className="setting-item__value">ogurahiroki@gmail.com</p>
+                <p className="setting-item__value">{props.myData.email}</p>
                 <p className="setting-item__arrow">
                   <img src={ArrowIcon} alt="" />
                 </p>

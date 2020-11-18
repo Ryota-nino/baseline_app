@@ -3,23 +3,10 @@ import StudentSearch from "../Organisms/Window/StudentSearch";
 import { StudentList } from "../Molecules/Card";
 import { Pagenation } from "../Organisms/Header";
 import { motion } from "framer-motion";
+import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
 
 const SearchStudent: React.FC = () => {
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
-
   const [students, setStudents] = useState<any>();
   useEffect(() => {
     const url = "./database/account.json";
@@ -49,7 +36,7 @@ const SearchStudent: React.FC = () => {
       initial="out"
       animate="in"
       exit="out"
-      variants={pageTransition}
+      variants={pageTransitionNormal}
     >
       <h2 className="heading1">他者の就活を探す</h2>
       <div className="app-main__container">
@@ -69,7 +56,7 @@ const SearchStudent: React.FC = () => {
               initial="out"
               animate="in"
               exit="out"
-              variants={pageTransition}
+              variants={pageTransitionNormal}
             >
               {(() => {
                 if (students) {

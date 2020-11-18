@@ -4,22 +4,40 @@ import { Search } from "../../Atoms/TextInput";
 import PrefecturesData from "../../../assets/data/prefectures";
 
 interface Props {
+  searchFunc: any;
   className?: string;
 }
 
 const CompanySearch: React.FC<Props> = (props) => {
   let isShow = false;
 
-  const [prefNumber, setPrefNumber] = useState<any>();
-  const [graduateStudent, setGraduateStudent] = useState<any>();
+  const [prefNumbers, setPrefNumbers] = useState<any>([]);
 
-  const prefSearchHandler = (value: any) => {
-    setPrefNumber(value);
-    console.log(value);
+  const prefSearchHandler = (value: any, isChecked: boolean) => {
+    // チェックボックスつけた
+    if (isChecked) {
+      setPrefNumbers([...prefNumbers, value]);
+      const prefArray = [...prefNumbers, value];
+      console.log(prefArray);
+      props.searchFunc({
+        prefecture_id: prefArray,
+      });
+    } else {
+      // チェックボックス外した
+      const idx = prefNumbers.indexOf(value);
+      if (idx >= 0) {
+        prefNumbers.splice(idx, 1);
+        console.log(prefNumbers);
+        props.searchFunc({
+          prefecture_id: prefNumbers,
+        });
+      }
+    }
   };
-  const graduateStudentHandler = (value: any) => {
-    setGraduateStudent(value);
-    console.log(value);
+  const graduateStudentHandler = (checked: any) => {
+    props.searchFunc({
+      enrollment_of_graduates: checked,
+    });
   };
 
   const renderPrefecturesList = (isAllShow: boolean) => {
@@ -32,6 +50,7 @@ const CompanySearch: React.FC<Props> = (props) => {
               return (
                 <CheckboxWithText
                   keyName={data.code.toString()}
+                  category={"prefectures"}
                   className={"checkbox-item"}
                   type={"checkbox"}
                   txt={data.name}
@@ -71,7 +90,13 @@ const CompanySearch: React.FC<Props> = (props) => {
     <div className={`sideSearchBar ${props.className}`}>
       <div className="search-item">
         <p className="search-item__name">フリーワード</p>
-        <Search width={"200px"} isIcon={true} placeholder={"企業名で検索"} />
+        <Search
+          width={"200px"}
+          isIcon={true}
+          placeholder={"企業名で検索"}
+          searchFunc={props.searchFunc}
+          isFreeWord={true}
+        />
       </div>
 
       <div className="search-item">
@@ -88,13 +113,20 @@ const CompanySearch: React.FC<Props> = (props) => {
 
       <div className="search-item">
         <p className="search-item__name">事業内容</p>
-        <Search width={"200px"} isIcon={false} placeholder={"事業内容で検索"} />
+        <Search
+          width={"200px"}
+          isIcon={false}
+          placeholder={"事業内容で検索"}
+          searchFunc={props.searchFunc}
+          isFreeWord={false}
+        />
       </div>
 
       <div className="search-item">
         <CheckboxWithText
           className={"search-item__checkbox"}
           type={"checkbox"}
+          category={"enrollment_of_graduates"}
           txt={"卒業生の在籍"}
           keyName={"alumni"}
           checkboxFunc={graduateStudentHandler}

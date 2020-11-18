@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { UserList } from "../../Organisms/Window";
 import { Categories, CompanyBar } from "../../Organisms/CompanyDetail";
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+import { showCompany } from ".././../../assets/script/";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -11,44 +13,49 @@ interface Props {
 const CompanyDetail: React.FC<Props> = (props) => {
   // const location = useLocation();
   const companyId = props.match.params.id;
-
   const thisPage = props.match.params.category;
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
+  const [companyData, setCompanyData] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    showCompany(companyId).then((getData: any) => {
+      if (getData.data) {
+        setCompanyData({
+          ...getData.data,
+        });
+        setLoading(true);
+      }
+    });
+  }, []);
+  const renderDOM = () => {
+    return (
+      <motion.section
+        className="app-main company-detail"
+        initial="out"
+        animate="in"
+        exit="out"
+        variants={pageTransitionNormal}
+      >
+        <div className="left-col">
+          <CompanyBar
+            companyId={companyId}
+            hasActionBtn={true}
+            thisPage="detail"
+            companyData={companyData}
+          />
+          <Categories
+            companyId={companyId}
+            thisPage={thisPage}
+            companyData={companyData}
+          />
+        </div>
+        <div className="right-col">
+          <UserList thisPage="insert-users" />
+          <UserList thisPage="company-users" />
+        </div>
+      </motion.section>
+    );
   };
-
-  return (
-    <motion.section
-      className="app-main company-detail"
-      initial="out"
-      animate="in"
-      exit="out"
-      variants={pageTransition}
-    >
-      <div className="left-col">
-        <CompanyBar
-          companyId={companyId}
-          hasActionBtn={true}
-          thisPage="detail"
-        />
-        <Categories companyId={companyId} thisPage={thisPage} />
-      </div>
-      <div className="right-col">
-        <UserList thisPage="insert-users" />
-        <UserList thisPage="company-users" />
-      </div>
-    </motion.section>
-  );
+  return <>{loading && renderDOM()}</>;
 };
 
 export default CompanyDetail;

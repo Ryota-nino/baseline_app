@@ -7,6 +7,7 @@ import { CheckboxWithText } from "../../Molecules/Input";
 import { ActionBtn, RoundedBtn } from "../../Atoms/Btn";
 import { Modal } from "../../Organisms/Modal";
 import { motion } from "framer-motion";
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
 interface Props {
   // showModal?: any;
   // setShowModal?: any;
@@ -18,20 +19,6 @@ const CompanyInfo: React.FC<Props> = (props) => {
 
   const location = useLocation();
   const companyId = location.pathname.split("/")[2];
-
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
   return (
     <>
       <motion.section
@@ -39,7 +26,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
         initial="out"
         animate="in"
         exit="out"
-        variants={pageTransition}
+        variants={pageTransitionNormal}
       >
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">企業詳細へ</span>

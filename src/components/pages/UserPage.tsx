@@ -6,6 +6,7 @@ import { Meter } from "../Atoms/Activity";
 import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
+import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
 interface Props {
   type: "user" | "mypage";
@@ -19,19 +20,6 @@ const UserPage: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
   let isUsrPage = props.type === "user";
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
 
   const [activity, setActivity] = useState<any>();
   const [account, setAccount] = useState<any>();
@@ -56,7 +44,7 @@ const UserPage: React.FC<Props> = (props) => {
         initial="out"
         animate="in"
         exit="out"
-        variants={pageTransition}
+        variants={pageTransitionNormal}
       >
         <h2 className="heading1">
           {isUsrPage

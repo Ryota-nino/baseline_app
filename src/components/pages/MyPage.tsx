@@ -6,6 +6,7 @@ import { ActivityMeter } from "../Organisms/Activity/index";
 import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
+import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
 interface Props {
   type: "user" | "mypage";
@@ -22,20 +23,6 @@ const MyPage: React.FC<Props> = (props) => {
   let isUsrPage = props.type === "user";
 
   // ここでmyDataが取れない
-
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
 
   const [activity, setActivity] = useState<any>();
   const [account, setAccount] = useState<any>();
@@ -61,7 +48,7 @@ const MyPage: React.FC<Props> = (props) => {
         initial="out"
         animate="in"
         exit="out"
-        variants={pageTransition}
+        variants={pageTransitionNormal}
       >
         <h2 className="heading1">マイページ</h2>
 

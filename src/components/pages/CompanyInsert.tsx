@@ -5,6 +5,7 @@ import { ImageUpload, SelectSecondary } from "../Atoms/Input/index";
 import { PrefectureSelector } from "../Organisms/Input";
 import { ActionBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
+import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import { insertCompany } from "../../assets/script/index";
 
 const CompanyInsert: React.FC = () => {
@@ -19,19 +20,7 @@ const CompanyInsert: React.FC = () => {
     { value: "300~400人" },
     { value: "400~500人" },
   ];
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
+
   const formOnClickHandler = (e: any) => {
     const forms = document.forms[0];
     const company_name = forms.company_name;
@@ -43,26 +32,31 @@ const CompanyInsert: React.FC = () => {
     const prefArray: number[] = [];
     const fr = new FileReader();
 
-    forms.pref.forEach((item: any) => {
+    // 都道府県
+    const prefecture = document
+      .querySelector(".prefecture-accordion")
+      ?.querySelectorAll('input[type="checkbox"]')!;
+    prefecture.forEach((item: any) => {
       if (item.checked) {
         const numberPref: number = Number(item.dataset.key);
         prefArray.push(numberPref);
       }
     });
+
     const sendObj: any = {
       frigana: furigana.value,
       company_name: company_name.value,
       business_description: business,
       prefecture_id: prefArray,
       number_of_employees: 1000,
-      logo_path: "aaaa",
+      logo_image: "",
       company_url: url.value,
     };
-    // 画像まだらしいので保留
-    // fr.onloadend = function () {
-    //   sendObj.logo_path = String(fr.result);
-    // };
-    // fr.readAsDataURL(logo);
+    fr.onloadend = function () {
+      sendObj.logo_image = String(fr.result);
+    };
+    fr.readAsDataURL(logo);
+    console.log(sendObj);
     insertCompany(sendObj);
   };
 
@@ -72,7 +66,7 @@ const CompanyInsert: React.FC = () => {
       initial="out"
       animate="in"
       exit="out"
-      variants={pageTransition}
+      variants={pageTransitionNormal}
     >
       <h2 className="heading1">企業登録</h2>
       <div className="companyInsert-window">

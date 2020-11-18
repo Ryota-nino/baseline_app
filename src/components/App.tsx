@@ -139,7 +139,7 @@ const App = () => {
                 ></Route>
                 <Route
                   path="/profile-edit"
-                  component={Page.ProfileEdit}
+                  render={() => <Page.ProfileEdit myData={myData} />}
                 ></Route>
                 {/* <Route><h2>ページは存在しません</h2></Route> */}
 
@@ -155,27 +155,41 @@ const App = () => {
                 <Route
                   exact
                   path="/:user/account-setting"
-                  render={() => <Page.AccountSetting />}
+                  render={() => <Page.AccountSetting myData={myData} />}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/student-number"
-                  render={() => <Page.SettingForm thisPage="student-number" />}
+                  render={() => (
+                    <Page.SettingForm
+                      myData={myData}
+                      thisPage="student-number"
+                    />
+                  )}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/password"
-                  render={() => <Page.SettingForm thisPage="password" />}
+                  render={() => (
+                    <Page.SettingForm myData={myData} thisPage="password" />
+                  )}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/mail"
-                  render={() => <Page.SettingForm thisPage="mail" />}
+                  render={() => (
+                    <Page.SettingForm myData={myData} thisPage="mail" />
+                  )}
                 ></Route>
                 <Route
                   exact
                   path="/:user/account-setting/account-delete"
-                  render={() => <Page.SettingForm thisPage="account-delete" />}
+                  render={() => (
+                    <Page.SettingForm
+                      myData={myData}
+                      thisPage="account-delete"
+                    />
+                  )}
                 ></Route>
               </div>
             </main>

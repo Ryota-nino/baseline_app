@@ -4,6 +4,9 @@ import { AccountDefaultIcon } from "../../../assets/images/index";
 
 interface Props {
   isSmall: boolean;
+  name?: string;
+  content?: string;
+  updated_at?: string;
 }
 const Activity: React.FC<Props> = (props) => {
   const viewTime = () => {
@@ -11,22 +14,18 @@ const Activity: React.FC<Props> = (props) => {
       return (
         <>
           <div className="activity-card__wrap">
-            <p className="activity-card__name">山本 仁</p>
-            <p className="activity-card__time">今日 13:30</p>
+            <p className="activity-card__name">{props.name}</p>
+            <p className="activity-card__time">{props.updated_at}</p>
           </div>
-          <p className="activity-card__txt">
-            マイナビ就職セミナーに行って来た話した企業で、DeNAとgoodpatchと9/12に面談...
-          </p>
+          <p className="activity-card__txt">{props.content}</p>
         </>
       );
     } else {
       return (
         <>
-          <p className="activity-card__name">山本 仁</p>
-          <p className="activity-card__txt mb8">
-            マイナビ就職セミナーに行って来た話した企業で、DeNAとgoodpatchと9/12に面談...
-          </p>
-          <p className="activity-card__time">今日 13:30</p>
+          <p className="activity-card__name">{props.name}</p>
+          <p className="activity-card__txt mb8">{props.content}</p>
+          <p className="activity-card__time">{props.updated_at}</p>
         </>
       );
     }

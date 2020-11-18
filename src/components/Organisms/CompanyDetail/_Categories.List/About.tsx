@@ -4,29 +4,17 @@ import { Modal } from "../../Modal";
 import { Pagenation } from "../../Header/index";
 import { WriteIcon } from "../../../../assets/images/index";
 import { motion } from "framer-motion";
-
+import { pageTransitionNormal } from "../../../../assets/script/pageTransition";
 interface Props {
   thisPage: string;
   companyId: any;
   activity: any;
   companies: any;
   companyComment: any;
+  companyData: any;
 }
 
 const About: React.FC<Props> = (props) => {
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
   const [showModal, setShowModal] = useState<boolean>(false);
   return (
     <>
@@ -35,23 +23,15 @@ const About: React.FC<Props> = (props) => {
         initial="out"
         animate="in"
         exit="out"
-        variants={pageTransition}
+        variants={pageTransitionNormal}
       >
         <section className="companyDetail-contents__section">
           <h2 className="heading6">事業内容</h2>
-          <p className="company">
-            {props.companies[props.companyId]
-              ? props.companies[props.companyId].business
-              : ""}
-          </p>
+          <p className="company">{props.companyData.business_description}</p>
         </section>
         <section className="companyDetail-contents__section">
           <h2 className="heading6">従業員数</h2>
-          <p>
-            {props.companies[props.companyId]
-              ? props.companies[props.companyId].employee_number
-              : ""}
-          </p>
+          <p>{props.companyData.number_of_employees}</p>
         </section>
         <section className="companyDetail-contents__section">
           <div>

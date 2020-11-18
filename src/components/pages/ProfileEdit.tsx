@@ -5,21 +5,12 @@ import { Secondary } from "../Atoms/TextInput";
 import { RoundedBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
 import { Avatar, CameraIcon } from "../../assets/images/index";
+import { pageTransitionNormal } from "../../assets/script/pageTransition";
 
-const ProfileEdit: React.FC = () => {
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
+interface Props {
+  myData: any;
+}
+const ProfileEdit: React.FC<Props> = (props) => {
   const history = useHistory();
   const handleLink = (path: string) => history.push(path);
   const isError = [
@@ -64,7 +55,7 @@ const ProfileEdit: React.FC = () => {
       initial="out"
       animate="in"
       exit="out"
-      variants={pageTransition}
+      variants={pageTransitionNormal}
     >
       <button className="btn pageBack-link" onClick={() => history.goBack()}>
         <span className="heading4">マイページへ</span>
@@ -98,6 +89,7 @@ const ProfileEdit: React.FC = () => {
                 labelTxt="名前"
                 isRequired={false}
                 isRequiredTxt={false}
+                defaultValue={""}
                 placeholderTxt="山本 仁"
                 isError={isError}
                 isIcon={false}

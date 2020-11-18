@@ -3,6 +3,7 @@ import { CheckIcon } from "../../../assets/images/index";
 
 interface Props {
   type: "checkbox" | "radio";
+  category?: string;
   checkboxFunc?: any;
   keyName?: string;
   id?: string;
@@ -17,8 +18,17 @@ const Checkbox: React.FC<Props> = (props) => {
   }
   const checkHandler = (e: any) => {
     e.stopPropagation();
-    if (props.checkboxFunc) {
-      props.checkboxFunc(e.target.value);
+    // 卒業生の在籍
+    if (props.category == "enrollment_of_graduates" && props.checkboxFunc) {
+      props.checkboxFunc(e.currentTarget.checked);
+    }
+    // 都道府県
+    if (props.category == "prefectures" && props.checkboxFunc) {
+      if (e.currentTarget.checked) {
+        props.checkboxFunc(e.currentTarget.name, true);
+      } else {
+        props.checkboxFunc(e.currentTarget.name, false);
+      }
     }
   };
 
@@ -31,7 +41,7 @@ const Checkbox: React.FC<Props> = (props) => {
         className="check-radio-input"
         type={props.type}
         value={props.txt}
-        name="pref"
+        name={props.keyName}
       />
       <label htmlFor={`input-${props.id}`} className={`${typeClass}`}>
         <img src={CheckIcon} alt="" />

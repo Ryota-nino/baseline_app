@@ -14,7 +14,7 @@ const PrefectureSelector: React.FC = (props) => {
                 return (
                   <li>
                     <CheckboxWithText
-                      keyName={data.id}
+                      keyName={data.code}
                       id={data.code}
                       type="checkbox"
                       txt={data.name}

@@ -3,9 +3,10 @@ import { Link, useHistory } from "react-router-dom";
 import { Secondary } from "../../Atoms/TextInput";
 import { RoundedBtn } from "../../Atoms/Btn";
 import { motion } from "framer-motion";
-
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
 interface Props {
   thisPage: string;
+  myData: any;
 }
 
 const SettingForm: React.FC<Props> = (props) => {
@@ -15,19 +16,6 @@ const SettingForm: React.FC<Props> = (props) => {
     { isEmpty2: false },
     { isEmpty3: false },
   ];
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
   const renderContent = () => {
     if (props.thisPage === "student-number") {
       return (
@@ -42,7 +30,7 @@ const SettingForm: React.FC<Props> = (props) => {
             placeholderTxt=""
             isError={isError}
             isIcon={false}
-            defaultValue="21800098"
+            defaultValue={props.myData.student_number}
           />
           <div className="accountSetting-content__bottom">
             <p>
@@ -111,7 +99,7 @@ const SettingForm: React.FC<Props> = (props) => {
             placeholderTxt=""
             isError={isError}
             isIcon={false}
-            defaultValue="ogurahiroki@gmail.com"
+            defaultValue={props.myData.email}
           />
           <div className="accountSetting-content__bottom">
             <p>
@@ -130,7 +118,7 @@ const SettingForm: React.FC<Props> = (props) => {
         initial="out"
         animate="in"
         exit="out"
-        variants={pageTransition}
+        variants={pageTransitionNormal}
       >
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">設定一覧へ</span>

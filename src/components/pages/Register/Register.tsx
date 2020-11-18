@@ -5,11 +5,26 @@ import { Primary } from "../../Atoms/TextInput/index";
 
 const Register: React.FC = (props) => {
   const onSubmitHandler = () => {
+    checkForms();
+  };
+  const checkForms = () => {
     const email = document.querySelector(
-      'input[type="email"]'
+      'input[name="email"]'
     ) as HTMLButtonElement;
+    const errors = [];
+    let isError: boolean = false;
     if (email.value === "") {
-      alert("メールアドレスを入力してください");
+      let emailError = email.parentNode?.querySelector(".error-message")!;
+      emailError.textContent = "メールアドレスを入力してください";
+      errors.push(true);
+    }
+    errors.forEach((error) => {
+      if (error) {
+        isError = true;
+      }
+    });
+    if (!isError) {
+      alert("OK!");
     }
   };
 
@@ -20,8 +35,10 @@ const Register: React.FC = (props) => {
           <h1 className="heading4">会員登録</h1>
           <Primary
             type="email"
+            name="email"
             ttl="メールアドレス"
             placeholder="example@gmail.com"
+            isError={true}
             isRequired={true}
           />
           <PrimaryBtn

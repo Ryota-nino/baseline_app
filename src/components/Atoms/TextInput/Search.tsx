@@ -2,9 +2,11 @@ import React from "react";
 import { SearchIconGray } from "../../../assets/images/index";
 
 interface Props {
-  width?: string;
   isIcon: boolean;
   placeholder: string;
+  searchFunc?: any;
+  width?: string;
+  isFreeWord?: boolean;
 }
 
 const SearchBar: React.FC<Props> = (props) => {
@@ -17,8 +19,14 @@ const SearchBar: React.FC<Props> = (props) => {
     }
   };
   const pressEnterHandler = (e: any) => {
-    if (e.key == "Enter") {
-      console.log("axos");
+    if (e.key == "Enter" && props.isFreeWord) {
+      props.searchFunc({
+        free_word: e.currentTarget.value,
+      });
+    } else if (e.key == "Enter" && !props.isFreeWord) {
+      props.searchFunc({
+        business_description: e.currentTarget.value,
+      });
     }
   };
 

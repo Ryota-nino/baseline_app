@@ -42,7 +42,9 @@ const Action: React.FC<Props> = (props) => {
           onClickHandelr();
         } else {
           e.preventDefault();
-          props.clickFunc(e);
+          if (props.clickFunc) {
+            props.clickFunc(e);
+          }
         }
       }}
       className="btn btn--action"

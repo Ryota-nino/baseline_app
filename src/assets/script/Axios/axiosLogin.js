@@ -1,4 +1,4 @@
-import { apiClient } from "./index";
+import { apiClient } from "../index";
 export const login = (email,password,active,jumpFunc) => {
   apiClient.get("/sanctum/csrf-cookie").then((response) => {
     apiClient

@@ -8,6 +8,7 @@ interface Props {
   thisPage: string;
   companyId: any;
   hasActionBtn: boolean;
+  companyData?: any;
 }
 
 const AboutBar: React.FC<Props> = (props) => {
@@ -18,6 +19,7 @@ const AboutBar: React.FC<Props> = (props) => {
       const output = res.data;
       setCompanies(output);
     });
+    console.log(props.companyData);
   }, []);
   const companyId = Number(props.companyId) - 1;
   const checkPrefLength = () => {
@@ -33,44 +35,44 @@ const AboutBar: React.FC<Props> = (props) => {
       return output;
     }
   };
-  return (
-    <article className="company-bar">
-      <div className="company-bar__wrap">
-        <img src={Goodpatch} alt="" />
-        <div className="company-bar__inner">
-          <h1 className="heading4">
-            {companies[companyId] ? companies[companyId].company_name : ""}
-          </h1>
-          <div>
-            <p className="company-bar__link">
-              <a
-                target="_blank"
-                href={companies[companyId] ? companies[companyId].url : ""}
-              >
-                {companies[companyId] ? companies[companyId].url : ""}
-              </a>
-            </p>
-            <p className="company-bar__address">{checkPrefLength()}</p>
+  const renderDOM = () => {
+    return (
+      <article className="company-bar">
+        <div className="company-bar__wrap">
+          <img src={Goodpatch} alt="" />
+          <div className="company-bar__inner">
+            <h1 className="heading4">{props.companyData.company_name}</h1>
+            <div>
+              <p className="company-bar__link">
+                <a target="_blank" href={props.companyData.company_url}>
+                  {props.companyData.company_url}
+                </a>
+              </p>
+              <p className="company-bar__address">{checkPrefLength()}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="company-bar__right">
-        {props.thisPage === "detail" ? (
-          <Link to={`/company-insert/${props.companyId}`}>企業情報の編集</Link>
-        ) : (
-          ""
-        )}
-        {props.hasActionBtn && (
-          <ActionBtn
-            type="button"
-            txt="情報を追加する"
-            isPlus={false}
-            linkUrl={`company-info/${props.companyId}/`}
-          />
-        )}
-      </div>
-    </article>
-  );
+        <div className="company-bar__right">
+          {props.thisPage === "detail" ? (
+            <Link to={`/company-insert/${props.companyData.id}`}>
+              企業情報の編集
+            </Link>
+          ) : (
+            ""
+          )}
+          {props.hasActionBtn && (
+            <ActionBtn
+              type="button"
+              txt="情報を追加する"
+              isPlus={false}
+              linkUrl={`company-info/${props.companyId}/`}
+            />
+          )}
+        </div>
+      </article>
+    );
+  };
+  return <>{renderDOM()}</>;
 };
 
 export default AboutBar;

@@ -2,27 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { About, Step, Entry, Interview } from "./_Categories.List/index";
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
 import axios from "axios";
 
 interface Props {
   thisPage: string;
   companyId: any;
+  companyData: any;
 }
 
 const Categories: React.FC<Props> = (props) => {
-  const pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
   const [activity, setActivity] = useState<any>();
   const [companies, setCompanies] = useState<any>([]);
   const [companyComment, setCompanyComment] = useState<any>([]);
@@ -54,6 +43,7 @@ const Categories: React.FC<Props> = (props) => {
           activity={activity}
           companies={companies}
           companyComment={companyComment}
+          companyData={props.companyData}
         />
       );
     }
@@ -74,7 +64,7 @@ const Categories: React.FC<Props> = (props) => {
       initial="out"
       animate="in"
       exit="out"
-      variants={pageTransition}
+      variants={pageTransitionNormal}
     >
       <div className="companyContentsWindow__list">
         <ul>

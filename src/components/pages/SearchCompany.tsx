@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { CompanySearch } from "../Organisms/Window";
 import { Sort } from "../Atoms/Input";
@@ -6,31 +6,44 @@ import { Pagenation } from "../Organisms/Header/index";
 import { ActionBtn } from "../Atoms/Btn/index";
 import { motion } from "framer-motion";
 import { Company } from "../Molecules/Card/index";
+import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
+import { searchCompany } from "../../assets/script/index";
 
 class SearchCompany extends React.Component<{}, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      data: [],
+      companies: [],
+      query: {},
     };
   }
-
-  pageTransition = {
-    in: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    out: {
-      x: -20,
-      opacity: 0,
-    },
-  };
   renderLength = 5; // １ページあたりのデータ件数
   page = 1;
+
+  componentWillMount() {
+    searchCompany().then((getData: any) => {
+      this.setState({
+        companies: getData.data.data,
+      });
+    });
+  }
+
+  searchCompanyWithParam = (param: any) => {
+    // クエリの保存
+    this.setState({
+      query: {
+        ...this.state.query,
+        ...param,
+      },
+    });
+    // クエリを使って検索
+    searchCompany({ ...this.state.query, ...param }).then((getData: any) => {
+      this.setState({
+        companies: getData.data.data,
+      });
+    });
+  };
 
   componentDidMount() {
     const url = "./database/companies.json";
@@ -50,15 +63,18 @@ class SearchCompany extends React.Component<{}, any> {
         initial="out"
         animate="in"
         exit="out"
-        variants={this.pageTransition}
+        variants={pageTransitionNormal}
       >
         <h2 className="heading1">企業を探す</h2>
 
         <div className="app-main__container">
-          <CompanySearch className={"left-col"} />
+          <CompanySearch
+            className={"left-col"}
+            searchFunc={this.searchCompanyWithParam}
+          />
           <div className="right-col">
             <div className="right-col__header">
-              <Sort />
+              <Sort searchFunc={this.searchCompanyWithParam} />
               <ActionBtn
                 type="button"
                 txt="企業を新規掲載"
@@ -67,15 +83,15 @@ class SearchCompany extends React.Component<{}, any> {
               />
             </div>
             <div className="company-list">
-              {this.state.data.map((data: any) => (
+              {this.state.companies.map((data: any) => (
                 <Company
                   companyId={data.id}
                   class={"item"}
                   name={data.company_name}
-                  business={data.business}
-                  pref={data.pref}
-                  registerTime={data.registerTime}
-                  img={data.logo}
+                  business={data.business_description}
+                  pref={data.prefectures}
+                  registerTime={data.created_at}
+                  img={"http://localhost:8000" + data.logo_path}
                 />
               ))}
             </div>

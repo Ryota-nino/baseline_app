@@ -1,4 +1,4 @@
-import { apiClient } from "./index";
+import { apiClient } from "../index";
 export const insertCompany = (postData) => {
   apiClient.get("/sanctum/csrf-cookie").then((response) => {
     apiClient

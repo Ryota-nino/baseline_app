@@ -1,13 +1,14 @@
-.page-login {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  main {
-    width: 100%;
-  }
-}
-.login {
+// .page-login {
+//   height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   main {
+//     width: 100%;
+//   }
+// }
+.login,
+.register {
   .contentBox {
     width: 434px;
     margin: auto;

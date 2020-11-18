@@ -5,6 +5,7 @@ interface Props {
   id?: string;
   keyName?: string;
   className?: string;
+  category?: string;
   type: "checkbox" | "radio";
   txt: string;
   checkboxFunc?: any;
@@ -16,6 +17,7 @@ const CheckboxWithText: React.FC<Props> = (props) => {
       <Checkbox
         keyName={props.keyName}
         className={props.keyName}
+        category={props.category}
         type={props.type}
         id={props.id}
         checkboxFunc={props.checkboxFunc ? props.checkboxFunc : ""}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Primary } from "../Atoms/TextInput";
 import { CheckboxWithText } from "../Molecules/Input";
@@ -16,7 +16,9 @@ const Login: React.FC = (props) => {
     history.push("/");
   };
 
-  const primayBtnClickHandler = () => {
+  const checkForms = () => {
+    const errors = [];
+    let isError: boolean = false;
     const email = document.querySelector(
       'input[name="email"]'
     ) as HTMLInputElement;
@@ -26,18 +28,35 @@ const Login: React.FC = (props) => {
     const isActive = document.getElementById(
       "input-isActive"
     ) as HTMLInputElement;
-    if (email.value === "" && password.value === "") {
-      alert("メールアドレスとパスワードを入力してください");
-      return;
-    } else if (email.value === "") {
-      alert("メールアドレスを入力してください");
-      return;
-    } else if (password.value === "") {
-      alert("パスワードを入力してください");
-      return;
+
+    if (email.value === "") {
+      let emailError = email.parentNode?.querySelector(".error-message")!;
+      emailError.textContent = "メールアドレスを入力してください";
+      errors.push(true);
+    }
+    if (password.value === "") {
+      let passwordError = password.parentNode?.querySelector(".error-message")!;
+      passwordError.textContent = "パスワードを入力してください";
+      errors.push(true);
     }
 
-    login(email.value, password.value, isActive.checked, goHomePage);
+    errors.forEach((error) => {
+      if (error) {
+        isError = true;
+      }
+    });
+    if (!isError) {
+      login(email.value, password.value, isActive.checked, goHomePage);
+    }
+  };
+
+  const primayBtnClickHandler = () => {
+    checkForms();
+  };
+  const inputEnterKeyHandler = (e: any) => {
+    if (e.key == "Enter") {
+      checkForms();
+    }
   };
 
   return (
@@ -50,6 +69,8 @@ const Login: React.FC = (props) => {
           ttl="メールアドレス"
           placeholder="example@gmail.com"
           isRequired={true}
+          isError={true}
+          onKeyPress={inputEnterKeyHandler}
         />
         <Primary
           name="password"
@@ -57,9 +78,11 @@ const Login: React.FC = (props) => {
           ttl="パスワード"
           placeholder="パスワードを入力してください"
           isRequired={true}
+          isError={true}
+          onKeyPress={inputEnterKeyHandler}
         />
         <p className="password-forget">
-          <Link to="/password-forget">パスワードを忘れた</Link>
+          <Link to="/password/forget">パスワードを忘れた</Link>
         </p>
         <CheckboxWithText
           id="isActive"

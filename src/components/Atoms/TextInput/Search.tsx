@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SearchIconGray } from "../../../assets/images/index";
-
 interface Props {
   isIcon: boolean;
   placeholder: string;
+  defaultValue?: string;
   searchFunc?: any;
   width?: string;
-  isFreeWord?: boolean;
+  types?: string;
 }
 
 const SearchBar: React.FC<Props> = (props) => {
@@ -18,15 +18,27 @@ const SearchBar: React.FC<Props> = (props) => {
       return <img src={SearchIconGray} alt="" />;
     }
   };
+
+  useEffect(() => {
+    // ホーム画面から入力した検索
+    if (props.defaultValue) {
+      props.searchFunc({
+        free_word: props.defaultValue,
+      });
+    }
+  }, []);
+
   const pressEnterHandler = (e: any) => {
-    if (e.key == "Enter" && props.isFreeWord) {
+    if (e.key == "Enter" && props.types === "company_name") {
       props.searchFunc({
         free_word: e.currentTarget.value,
       });
-    } else if (e.key == "Enter" && !props.isFreeWord) {
+    } else if (e.key == "Enter" && props.types === "business") {
       props.searchFunc({
         business_description: e.currentTarget.value,
       });
+    } else if (e.key == "Enter" && props.types === "top_company_search") {
+      props.searchFunc(e.currentTarget.value);
     }
   };
 
@@ -37,6 +49,7 @@ const SearchBar: React.FC<Props> = (props) => {
         type="text"
         placeholder={props.placeholder}
         onKeyPress={pressEnterHandler}
+        defaultValue={props.defaultValue}
       />
     </div>
   );

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PostStudent } from "../../../Molecules/Card/index";
-
+import { Pagenation } from "../../Header/index";
 interface Props {
   thisPage: string;
   companyId: any;
+  companyData: any;
 }
 
 const Step: React.FC<Props> = (props) => {
@@ -21,6 +22,25 @@ const Step: React.FC<Props> = (props) => {
       opacity: 0,
     },
   };
+  const [steps, setSteps] = useState<any>(null);
+  useEffect(() => {
+    const stepArray: any = [];
+    props.companyData.company_information.forEach((data: any) => {
+      data.selections.forEach((step: any) => {
+        if (step) {
+          const stepCard = {
+            id: step.id,
+            userName: data.user.last_name + " " + data.user.first_name,
+            iconImagePath: data.user.icon_image_path,
+            job: data.user.desired_occupations,
+            icon: data.user.icon_image_path,
+          };
+          stepArray.push(stepCard);
+        }
+      });
+    });
+    setSteps(stepArray);
+  }, []);
 
   return (
     <motion.div
@@ -30,24 +50,29 @@ const Step: React.FC<Props> = (props) => {
       exit="out"
       variants={pageTransition}
     >
-      <PostStudent
-        ttl="本選考(22卒)"
-        isPass={false}
-        job="デザイナー"
-        userName="山本 敦"
-      />
-      <PostStudent
-        ttl="本選考(22卒)"
-        isPass={false}
-        job="デザイナー"
-        userName="山本 敦"
-      />
-      <PostStudent
-        ttl="本選考(22卒)"
-        isPass={false}
-        job="デザイナー"
-        userName="山本 敦"
-      />
+      {(() => {
+        if (steps) {
+          return steps.map((data: any) => {
+            return (
+              <PostStudent
+                id={data.id}
+                ttl="本選考(22卒)"
+                isPass={false}
+                job={data.job}
+                icon={data.icon}
+                userName={data.userName}
+              />
+            );
+          });
+        }
+      })()}
+      {(() => {
+        if (steps) {
+          if (steps.length !== 0) {
+            return <Pagenation />;
+          }
+        }
+      })()}
     </motion.div>
   );
 };

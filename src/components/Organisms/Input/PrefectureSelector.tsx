@@ -2,7 +2,11 @@ import React from "react";
 import { CheckboxWithText } from "../../Molecules/Input/index";
 import PrefecturesData from "../../../assets/data/prefectures";
 
-const PrefectureSelector: React.FC = (props) => {
+interface Props {
+  companyPref: string[];
+}
+const PrefectureSelector: React.FC<Props> = (props) => {
+  console.log(props.companyPref);
   const renderPrefecturesList = () => {
     return Object.entries(PrefecturesData["prefectures"]).map(
       ([key, value]) => {
@@ -18,6 +22,7 @@ const PrefectureSelector: React.FC = (props) => {
                       id={data.code}
                       type="checkbox"
                       txt={data.name}
+                      checkedPref={props.companyPref}
                     />
                   </li>
                 );

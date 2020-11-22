@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PostStudent } from "../../../Molecules/Card/index";
-
+import { Pagenation } from "../../Header/index";
 interface Props {
   thisPage: string;
   companyId: any;
+  companyData: any;
 }
 
 const Entry: React.FC<Props> = (props) => {
@@ -21,6 +22,26 @@ const Entry: React.FC<Props> = (props) => {
       opacity: 0,
     },
   };
+  const [entries, setEntries] = useState<any>(null);
+
+  useEffect(() => {
+    const entriesArray: any = [];
+    props.companyData.company_information.forEach((data: any) => {
+      data.entries.forEach((entry: any) => {
+        if (entry) {
+          const entryCard = {
+            id: entry.id,
+            userName: data.user.last_name + " " + data.user.first_name,
+            iconImagePath: data.user.icon_image_path,
+            job: data.user.desired_occupations,
+            icon: data.user.icon_image_path,
+          };
+          entriesArray.push(entryCard);
+        }
+      });
+    });
+    setEntries(entriesArray);
+  }, []);
 
   return (
     <motion.div
@@ -30,24 +51,29 @@ const Entry: React.FC<Props> = (props) => {
       exit="out"
       variants={pageTransition}
     >
-      <PostStudent
-        ttl="本選考(22卒)"
-        isPass={false}
-        job="デザイナー"
-        userName="山本 敦"
-      />
-      <PostStudent
-        ttl="サマーインターンシップ(22卒)"
-        isPass={true}
-        job="デザイナー"
-        userName="山本 敦"
-      />
-      <PostStudent
-        ttl="本選考(22卒)"
-        isPass={false}
-        job="デザイナー"
-        userName="山本 敦"
-      />
+      {(() => {
+        if (entries) {
+          return entries.map((data: any) => {
+            return (
+              <PostStudent
+                id={data.id}
+                ttl="本選考(22卒)"
+                isPass={false}
+                job={data.job}
+                icon={data.icon}
+                userName={data.userName}
+              />
+            );
+          });
+        }
+      })()}
+      {(() => {
+        if (entries) {
+          if (entries.length !== 0) {
+            return <Pagenation />;
+          }
+        }
+      })()}
     </motion.div>
   );
 };

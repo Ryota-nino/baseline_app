@@ -48,13 +48,31 @@ const Categories: React.FC<Props> = (props) => {
       );
     }
     if (props.thisPage === "step") {
-      return <Step thisPage={props.thisPage} companyId={companyId} />;
+      return (
+        <Step
+          thisPage={props.thisPage}
+          companyId={companyId}
+          companyData={props.companyData}
+        />
+      );
     }
     if (props.thisPage === "entry") {
-      return <Entry thisPage={props.thisPage} companyId={companyId} />;
+      return (
+        <Entry
+          thisPage={props.thisPage}
+          companyId={companyId}
+          companyData={props.companyData}
+        />
+      );
     }
     if (props.thisPage === "interview") {
-      return <Interview thisPage={props.thisPage} companyId={companyId} />;
+      return (
+        <Interview
+          thisPage={props.thisPage}
+          companyId={companyId}
+          companyData={props.companyData}
+        />
+      );
     }
   };
 

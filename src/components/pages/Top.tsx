@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Search } from "../Atoms/TextInput";
 import { ActionBtn } from "../Atoms/Btn/index";
@@ -9,11 +10,17 @@ import { News } from "../Molecules/Bar/index";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import { getHomeData } from "../../assets/script/index";
 import axios from "axios";
-const Top: React.FC = () => {
+
+interface Props {
+  setFreeWord: any;
+}
+
+const Top: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [companies, setCompanies] = useState<any>([]);
   const [homeData, setHomeData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const history = useHistory();
   useEffect(() => {
     const url = "./database/companies.json";
     axios.get(url).then((res) => {
@@ -29,6 +36,11 @@ const Top: React.FC = () => {
       }
     });
   }, []);
+
+  const searchFunc = (word: string) => {
+    props.setFreeWord(word);
+    history.push(`/search-company`);
+  };
 
   const renderDOM = () => {
     return (
@@ -46,6 +58,8 @@ const Top: React.FC = () => {
               width={"316px"}
               isIcon={true}
               placeholder={"企業名で検索"}
+              searchFunc={searchFunc}
+              types={"top_company_search"}
             />
             <ActionBtn
               type="button"
@@ -65,7 +79,7 @@ const Top: React.FC = () => {
                   business={data.business_description}
                   pref={data.prefectures}
                   registerTime={data.updated_at}
-                  img={"http://localhost:8000" + data.logo_path}
+                  img={data.logo_image_url}
                 />
               ));
             })()}

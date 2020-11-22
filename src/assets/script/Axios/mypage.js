@@ -1,8 +1,8 @@
 import {apiClient} from '../index';
-export const showCompany = (id) => {
+export const mypage = () => {
     return apiClient.get("/sanctum/csrf-cookie").then((response) => {
       return apiClient
-        .get(`/api/company/show/${id}`)
+        .get(`/api/mypage`)
         .then((response) => {
           if (response.status !== 200) {
             return false;
@@ -12,8 +12,9 @@ export const showCompany = (id) => {
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert("データ取得失敗")
+            alert('検索失敗');
           }
         });
     });
   };
+  

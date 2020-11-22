@@ -7,6 +7,7 @@ import {
 } from "../../../assets/images/index";
 
 interface Props {
+  name: string;
   year: string;
   txt: string;
   updateTime: string;
@@ -30,7 +31,7 @@ const Comment: React.FC<Props> = (props) => {
   };
 
   useEffect((): void => {
-    setUrlText();
+    // setUrlText();
   }, []);
 
   let [toggleMenu, setToggleMenu] = useState(false);
@@ -53,7 +54,7 @@ const Comment: React.FC<Props> = (props) => {
       <img src={Avatar} alt="" />
       <div className="activity-item__content">
         <div className="activity-item__head">
-          <h1 className="activity-item__name">山本 仁</h1>
+          <h1 className="activity-item__name">{props.name}</h1>
           <ul className="activity-item__list">
             <li>{props.year}</li>
             <li>&nbsp;|&nbsp;</li>

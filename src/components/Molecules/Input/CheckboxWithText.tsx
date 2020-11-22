@@ -9,6 +9,7 @@ interface Props {
   type: "checkbox" | "radio";
   txt: string;
   checkboxFunc?: any;
+  checkedPref?: string[];
 }
 
 const CheckboxWithText: React.FC<Props> = (props) => {
@@ -22,6 +23,7 @@ const CheckboxWithText: React.FC<Props> = (props) => {
         id={props.id}
         checkboxFunc={props.checkboxFunc ? props.checkboxFunc : ""}
         txt={props.txt}
+        checkedPref={props.checkedPref}
       />
       <span>{props.txt}</span>
     </label>

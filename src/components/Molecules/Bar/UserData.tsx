@@ -3,8 +3,8 @@ import { MailIcon } from "../../../assets/images/index";
 import { ActionBtn } from "../../Atoms/Btn";
 
 interface Props {
-  account: any;
-  account_id: any;
+  userData: any;
+  userId: any;
   isPage: "mypage" | "userpage";
 }
 
@@ -12,20 +12,20 @@ const UserData: React.FC<Props> = (props) => {
   return (
     <div className="userDetail-window">
       <div className="userDetail-window__container">
-        <img src={props.account.icon_image_path} alt="" />
+        <img src={props.userData.icon_image_path} alt="" />
         <div>
           <div className="userDetail-window__wrap">
             <p className="userDetail-window__name">
               {(() => {
                 if (props.isPage === "mypage") {
                   return (
-                    props.account.first_name + " " + props.account.last_name
+                    props.userData.first_name + " " + props.userData.last_name
                   );
-                } else if (props.account) {
+                } else if (props.userData) {
                   return (
-                    props.account[props.account_id].last_name +
+                    props.userData[props.userId].last_name +
                     " " +
-                    props.account[props.account_id].first_name
+                    props.userData[props.userId].first_name
                   );
                 }
               })()}
@@ -34,9 +34,9 @@ const UserData: React.FC<Props> = (props) => {
               @
               {(() => {
                 if (props.isPage === "mypage") {
-                  return props.account.student_number;
-                } else if (props.account) {
-                  return props.account[props.account_id].student_number;
+                  return props.userData.student_number;
+                } else if (props.userData) {
+                  return props.userData[props.userId].student_number;
                 }
               })()}
             </p>
@@ -45,9 +45,9 @@ const UserData: React.FC<Props> = (props) => {
             <li className="userDetail-window__year">
               {(() => {
                 if (props.isPage === "mypage") {
-                  return props.account.year_of_graduation + "卒";
-                } else if (props.account) {
-                  return props.account[props.account_id].graduation_year;
+                  return props.userData.year_of_graduation + "卒";
+                } else if (props.userData) {
+                  return props.userData[props.userId].graduation_year;
                 }
               })()}
             </li>
@@ -55,9 +55,9 @@ const UserData: React.FC<Props> = (props) => {
               &nbsp;/&nbsp;{" "}
               {(() => {
                 if (props.isPage === "mypage") {
-                  return props.account.sex;
-                } else if (props.account) {
-                  return props.account[props.account_id].gender;
+                  return props.userData.sex;
+                } else if (props.userData) {
+                  return props.userData[props.userId].gender;
                 }
               })()}
               &nbsp;/&nbsp;
@@ -65,9 +65,9 @@ const UserData: React.FC<Props> = (props) => {
             <li className="userDetail-window__job">
               {(() => {
                 if (props.isPage === "mypage") {
-                  return props.account.desired_occupations;
-                } else if (props.account) {
-                  return props.account[props.account_id].job;
+                  return props.userData.desired_occupations;
+                } else if (props.userData) {
+                  return props.userData[props.userId].job;
                 }
               })()}
             </li>
@@ -78,9 +78,9 @@ const UserData: React.FC<Props> = (props) => {
         <a
           href={`mailto:${(() => {
             if (props.isPage === "mypage") {
-              return props.account.email;
-            } else if (props.account) {
-              return props.account[props.account_id].mail;
+              return props.userData.email;
+            } else if (props.userData) {
+              return props.userData[props.userId].mail;
             }
           })()}`}
           className="btn btn--mail"

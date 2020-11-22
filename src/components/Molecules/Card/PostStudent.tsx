@@ -7,12 +7,14 @@ interface Props {
   isPass: boolean;
   job: string;
   userName: string;
+  id: number;
+  icon: string;
 }
 
 const PostStudent: React.FC<Props> = (props) => {
   return (
     <article className="company-detailItem">
-      <Link to="/company-detail/contents/01/step">
+      <Link to={`/company-detail/contents/${props.id}/step`}>
         <div className="company-detailItem__wrap">
           <img
             className="company-detailItem__icon"
@@ -24,7 +26,7 @@ const PostStudent: React.FC<Props> = (props) => {
         </div>
         <p className="company-detailItem__job">{props.job}希望</p>
         <p className="company-detailItem__user">
-          <img src={Avatar} alt="" />
+          <img src={props.icon} alt="" />
           <span>{props.userName}</span>
         </p>
       </Link>

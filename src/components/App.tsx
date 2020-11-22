@@ -8,8 +8,8 @@ import "../assets/styles/App.scss";
 
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  // const [loading, setLoading] = useState<boolean>(false);
   const [myData, setMyData] = useState<any>({});
+  const [homeFreeWord, setHomeFreeWord] = useState<string>();
 
   return (
     <div className="App">
@@ -90,11 +90,17 @@ const App = () => {
                   path="/password/setting"
                   component={Page.Setting}
                 ></Route>
-                <Route exact path="/" render={() => <Page.Top />}></Route>
+                <Route
+                  exact
+                  path="/"
+                  render={() => <Page.Top setFreeWord={setHomeFreeWord} />}
+                ></Route>
 
                 <Route
                   path="/search-company"
-                  component={Page.SearchCompany}
+                  render={() => (
+                    <Page.SearchCompany homeFreeWord={homeFreeWord} />
+                  )}
                 ></Route>
                 <Route
                   path="/search-student"
@@ -102,18 +108,9 @@ const App = () => {
                 ></Route>
                 <Route
                   path="/user/:id"
-                  render={(props) => <Page.UserPage type="user" {...props} />}
+                  render={(props) => <Page.UserPage {...props} />}
                 ></Route>
-                <Route
-                  path="/mypage"
-                  render={() => (
-                    <Page.MyPage
-                      type="mypage"
-                      setMyData={setMyData}
-                      myData={myData}
-                    />
-                  )}
-                ></Route>
+                <Route path="/mypage" render={() => <Page.MyPage />}></Route>
 
                 <Route
                   exact
@@ -145,11 +142,15 @@ const App = () => {
 
                 <Route
                   path="/insert-users"
-                  render={() => <Page.InsertUsers thisPage="insert-users" />}
+                  render={(props) => (
+                    <Page.InsertUsers thisPage="insert-users" {...props} />
+                  )}
                 ></Route>
                 <Route
-                  path="/company-users"
-                  render={() => <Page.InsertUsers thisPage="company-users" />}
+                  path="/company-users/:companyId"
+                  render={(props) => (
+                    <Page.InsertUsers thisPage="company-users" {...props} />
+                  )}
                 ></Route>
 
                 <Route

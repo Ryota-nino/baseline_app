@@ -9,6 +9,7 @@ interface Props {
   id?: string;
   className?: string;
   txt?: string;
+  checkedPref?: string[];
 }
 
 const Checkbox: React.FC<Props> = (props) => {
@@ -32,6 +33,9 @@ const Checkbox: React.FC<Props> = (props) => {
     }
   };
 
+  const isCheckedPref = () => {
+    return props.checkedPref?.some((pref: any) => props.id == pref.id);
+  };
   return (
     <>
       <input
@@ -42,6 +46,7 @@ const Checkbox: React.FC<Props> = (props) => {
         type={props.type}
         value={props.txt}
         name={props.keyName}
+        checked={isCheckedPref()}
       />
       <label htmlFor={`input-${props.id}`} className={`${typeClass}`}>
         <img src={CheckIcon} alt="" />

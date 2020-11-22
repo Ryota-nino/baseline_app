@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { LinkIcon } from "../../assets/images/index";
 import { Secondary } from "../Atoms/TextInput";
 import { ImageUpload, SelectSecondary } from "../Atoms/Input/index";
@@ -6,9 +7,32 @@ import { PrefectureSelector } from "../Organisms/Input";
 import { ActionBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { insertCompany } from "../../assets/script/index";
+import { detailCompany, editCompany } from "../../assets/script/index";
+import axios from "axios";
 
-const CompanyInsert: React.FC = () => {
+interface Props {
+  match?: any;
+}
+
+const CompanyInsert: React.FC<Props> = (props) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [companyData, setCompanyData] = useState<any>([]);
+  const companyId = props.match.params.id;
+  const history = useHistory();
+  useEffect(() => {
+    if (companyId !== "register") {
+      detailCompany(companyId).then((getData: any) => {
+        if (getData) {
+          setCompanyData(getData.data);
+          setLoading(true);
+          console.log(getData.data);
+        }
+      });
+    } else {
+      setLoading(true);
+    }
+  }, []);
+
   const isError = [
     { isEmpty1: false },
     { isEmpty2: false },
@@ -57,87 +81,102 @@ const CompanyInsert: React.FC = () => {
     };
     fr.readAsDataURL(logo);
     console.log(sendObj);
-    insertCompany(sendObj);
+    if (companyId !== "register") {
+      // insertCompany(sendObj);
+      editCompany(companyId, sendObj);
+    } else {
+      editCompany(companyId, sendObj);
+    }
   };
 
-  return (
-    <motion.section
-      className="app-main company-insert single"
-      initial="out"
-      animate="in"
-      exit="out"
-      variants={pageTransitionNormal}
-    >
-      <h2 className="heading1">企業登録</h2>
-      <div className="companyInsert-window">
-        <form action="#" method="POST">
-          <Secondary
-            name="company_name"
-            type="text"
-            labelTxt="企業名"
-            isRequired={true}
-            isRequiredTxt={true}
-            placeholderTxt="ビジョナル株式会社"
-            isError={isError}
-            isIcon={false}
-          />
-          <Secondary
-            name="furigana"
-            type="text"
-            labelTxt="フリガナ"
-            isRequired={true}
-            isRequiredTxt={true}
-            placeholderTxt="カブシキガイシャビジョナル"
-            isError={isError}
-            isIcon={false}
-          />
-
-          <ImageUpload name={"logo"} />
-
-          <Secondary
-            name="url"
-            type="text"
-            labelTxt="企業URL"
-            isRequired={true}
-            isRequiredTxt={true}
-            placeholderTxt="https://www.google.com"
-            isError={isError}
-            isIcon={true}
-            iconUrl={LinkIcon}
-          />
-          <Secondary
-            name="business"
-            type="text"
-            labelTxt="事業内容"
-            isRequired={false}
-            isRequiredTxt={false}
-            placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発"
-            isError={isError}
-            isIcon={false}
-          />
-
-          <PrefectureSelector />
-
-          <SelectSecondary
-            name="employee_number"
-            ttl="従業員数"
-            selectObj={employeesObj}
-          />
-
-          <div className="company-insert__enter">
-            <p className="company-insert__cancel">キャンセル</p>
-            <ActionBtn
-              type="submit"
-              txt="登録する"
-              isPlus={false}
-              linkUrl="#"
-              clickFunc={formOnClickHandler}
+  const renderDOM = () => {
+    return (
+      <motion.section
+        className="app-main company-insert single"
+        initial="out"
+        animate="in"
+        exit="out"
+        variants={pageTransitionNormal}
+      >
+        <button className="btn pageBack-link" onClick={() => history.goBack()}>
+          <span className="heading4">戻る</span>
+        </button>
+        <h2 className="heading1">企業登録</h2>
+        <div className="companyInsert-window">
+          <form action="#" method="POST">
+            <Secondary
+              defaultValue={companyData.company_name}
+              name="company_name"
+              type="text"
+              labelTxt="企業名"
+              isRequired={true}
+              isRequiredTxt={true}
+              placeholderTxt="ビジョナル株式会社"
+              isError={isError}
+              isIcon={false}
             />
-          </div>
-        </form>
-      </div>
-    </motion.section>
-  );
+            <Secondary
+              defaultValue={companyData.frigana}
+              name="furigana"
+              type="text"
+              labelTxt="フリガナ"
+              isRequired={true}
+              isRequiredTxt={true}
+              placeholderTxt="カブシキガイシャビジョナル"
+              isError={isError}
+              isIcon={false}
+            />
+
+            <ImageUpload name={"logo"} imageData={companyData.logo_image_url} />
+
+            <Secondary
+              defaultValue={companyData.company_url}
+              name="url"
+              type="text"
+              labelTxt="企業URL"
+              isRequired={true}
+              isRequiredTxt={true}
+              placeholderTxt="https://www.google.com"
+              isError={isError}
+              isIcon={true}
+              iconUrl={LinkIcon}
+            />
+            <Secondary
+              defaultValue={companyData.business_description}
+              name="business"
+              type="text"
+              labelTxt="事業内容"
+              isRequired={false}
+              isRequiredTxt={false}
+              placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発"
+              isError={isError}
+              isIcon={false}
+            />
+
+            <PrefectureSelector companyPref={companyData.prefectures} />
+
+            <SelectSecondary
+              name="employee_number"
+              ttl="従業員数"
+              selectObj={employeesObj}
+            />
+
+            <div className="company-insert__enter">
+              <p className="company-insert__cancel">キャンセル</p>
+              <ActionBtn
+                type="submit"
+                txt="登録する"
+                isPlus={false}
+                linkUrl="#"
+                clickFunc={formOnClickHandler}
+              />
+            </div>
+          </form>
+        </div>
+      </motion.section>
+    );
+  };
+  return <>{loading && renderDOM()}</>;
 };
 
 export default CompanyInsert;

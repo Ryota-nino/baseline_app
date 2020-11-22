@@ -9,17 +9,12 @@ import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
 interface Props {
-  type: "user" | "mypage";
   match?: any;
 }
 
 const UserPage: React.FC<Props> = (props) => {
-  const location = useLocation();
-  const companyId = location.pathname.split("/")[2];
-
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
-  let isUsrPage = props.type === "user";
 
   const [activity, setActivity] = useState<any>();
   const [account, setAccount] = useState<any>();
@@ -40,14 +35,14 @@ const UserPage: React.FC<Props> = (props) => {
   return (
     <>
       <motion.section
-        className={`app-main ${isUsrPage ? "userpage" : "mypage"} single`}
+        className={`app-main user-page single`}
         initial="out"
         animate="in"
         exit="out"
         variants={pageTransitionNormal}
       >
         <h2 className="heading1">
-          {isUsrPage
+          {/* {isUsrPage
             ? `${
                 account
                   ? account[props.match.params.id - 1].last_name +
@@ -55,38 +50,26 @@ const UserPage: React.FC<Props> = (props) => {
                     account[props.match.params.id - 1].first_name
                   : ""
               }さんのページ`
-            : "マイページ"}
+            : "マイページ"} */}
         </h2>
 
-        <UserData
-          isPage="userpage"
-          account={isUsrPage ? account : account}
-          account_id={isUsrPage ? 0 : 0}
-        />
-
-        {!isUsrPage && (
-          <Link to="/01/account-setting" className="icon-txt icon-txt--normal">
-            <img src={GearIcon} alt="" />
-            アカウント設定へ
-          </Link>
-        )}
+        <UserData isPage="userpage" userData={account} userId={0} />
         <Meter />
         <div className="activity-list">
           {(() => {
             if (activity) {
               return activity.map((data: any) => (
                 <Comment
+                  name={data.name}
                   year={data.year}
                   txt={data.txt}
                   updateTime={data.updateTime}
                   isArrow={true}
-                  type={props.type}
+                  type={"user"}
                   clickFunc={setShowModal}
                   clickFunc2={setShowModal2}
                 />
               ));
-            } else {
-              console.log("bbb");
             }
           })()}
         </div>

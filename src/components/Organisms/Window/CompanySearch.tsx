@@ -5,6 +5,7 @@ import PrefecturesData from "../../../assets/data/prefectures";
 
 interface Props {
   searchFunc: any;
+  homeFreeWord: string;
   className?: string;
 }
 
@@ -93,9 +94,10 @@ const CompanySearch: React.FC<Props> = (props) => {
         <Search
           width={"200px"}
           isIcon={true}
+          defaultValue={props.homeFreeWord}
           placeholder={"企業名で検索"}
           searchFunc={props.searchFunc}
-          isFreeWord={true}
+          types={"company_name"}
         />
       </div>
 
@@ -118,7 +120,7 @@ const CompanySearch: React.FC<Props> = (props) => {
           isIcon={false}
           placeholder={"事業内容で検索"}
           searchFunc={props.searchFunc}
-          isFreeWord={false}
+          types={"business"}
         />
       </div>
 

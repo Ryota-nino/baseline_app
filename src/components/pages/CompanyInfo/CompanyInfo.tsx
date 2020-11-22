@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { CompanyBar } from "../../Organisms/CompanyDetail";
+import { AboutBar } from "../../Organisms/CompanyDetail";
 import { PostStudent } from "../../Molecules/Card/index";
 import { Primary } from "../../Atoms/TextInput/index";
 import { CheckboxWithText } from "../../Molecules/Input";
@@ -31,7 +31,8 @@ const CompanyInfo: React.FC<Props> = (props) => {
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">企業詳細へ</span>
         </button>
-        <CompanyBar
+        <AboutBar
+          companyData={"a"}
           thisPage="info"
           companyId={companyId}
           hasActionBtn={false}
@@ -74,25 +75,31 @@ const CompanyInfo: React.FC<Props> = (props) => {
           <ul className="company-info__added">
             <li>
               <PostStudent
+                id={1}
                 ttl="本選考 (22卒)"
                 isPass={false}
                 job="デザイナー"
+                icon="a"
                 userName="山本 仁"
               />
             </li>
             <li>
               <PostStudent
+                id={1}
                 ttl="サマーインターンシップ (22卒)"
                 isPass={true}
+                icon="a"
                 job="エンジニア"
                 userName="中村 智"
               />
             </li>
             <li>
               <PostStudent
+                id={1}
                 ttl="本選考 (22卒)"
                 isPass={false}
                 job="デザイナー"
+                icon="a"
                 userName="山本 仁"
               />
             </li>

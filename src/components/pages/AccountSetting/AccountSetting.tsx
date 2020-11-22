@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ArrowIcon, TrashIcon } from "../../../assets/images";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Modal } from "../../Organisms/Modal";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
@@ -9,6 +9,7 @@ interface Props {
 }
 
 const AccountSetting: React.FC<Props> = (props) => {
+  const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
   return (
     <>
@@ -19,6 +20,9 @@ const AccountSetting: React.FC<Props> = (props) => {
         exit="out"
         variants={pageTransitionNormal}
       >
+        <button className="btn pageBack-link" onClick={() => history.goBack()}>
+          <span className="heading4">マイページへ</span>
+        </button>
         <h2 className="heading1">設定</h2>
         <section className="contentBox contentBox--big step">
           <h3 className="heading4">アカウント設定</h3>

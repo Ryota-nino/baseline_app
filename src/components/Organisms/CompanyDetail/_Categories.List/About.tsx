@@ -16,6 +16,25 @@ interface Props {
 
 const About: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [companyComments, setCompanyComments] = useState<any>(null);
+  useEffect(() => {
+    // コメントを配列に保存
+    const companyCommentsArray: any = [];
+    props.companyData.company_information.forEach((data: any) => {
+      const user = {
+        name: data.user.last_name + " " + data.user.first_name,
+        annual: data.user.annual,
+        comments: [] as any,
+        updated_at: data.updated_at,
+      };
+      data.company_comments.forEach((comment: string) => {
+        user.comments.push(comment);
+      });
+      companyCommentsArray.push(user);
+    });
+    setCompanyComments(companyCommentsArray);
+  }, []);
+
   return (
     <>
       <motion.div
@@ -31,7 +50,7 @@ const About: React.FC<Props> = (props) => {
         </section>
         <section className="companyDetail-contents__section">
           <h2 className="heading6">従業員数</h2>
-          <p>{props.companyData.number_of_employees}</p>
+          <p>{props.companyData.number_of_employees + "人"}</p>
         </section>
         <section className="companyDetail-contents__section">
           <div>
@@ -45,15 +64,20 @@ const About: React.FC<Props> = (props) => {
             </button>
           </div>
           {(() => {
-            if (props.activity) {
-              return props.activity.map((data: any) => (
-                <Comment
-                  year={data.year}
-                  txt={data.txt}
-                  updateTime={data.updateTime}
-                  isArrow={true}
-                />
-              ));
+            if (companyComments) {
+              return companyComments.map((data: any) =>
+                data.comments.map((comment: any) => {
+                  return (
+                    <Comment
+                      name={data.name}
+                      year={data.annual + "年次"}
+                      txt={comment.comment_content}
+                      updateTime={data.updated_at}
+                      isArrow={true}
+                    />
+                  );
+                })
+              );
             }
           })()}
           <Pagenation />

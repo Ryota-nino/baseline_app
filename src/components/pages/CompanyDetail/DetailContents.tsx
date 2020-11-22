@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Contents } from "../../Organisms/CompanyDetail";
 import { UnofficialOffer } from "../../Molecules/Bar/index";
 import { motion } from "framer-motion";

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CameraIcon } from "../../../assets/images/index";
 
 interface Props {
   name: string;
+  imageData?: string;
 }
 
 const ImageUpload: React.FC<Props> = (props) => {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<any>("");
+  useEffect(() => {
+    setImage(props.imageData);
+  }, []);
   const handleImage = (event: any) => {
     const image = event.target.files[0];
     const imageUrl = URL.createObjectURL(image);

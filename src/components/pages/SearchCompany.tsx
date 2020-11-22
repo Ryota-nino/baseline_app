@@ -10,12 +10,17 @@ import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
 import { searchCompany } from "../../assets/script/index";
 
-class SearchCompany extends React.Component<{}, any> {
+interface Props {
+  homeFreeWord: string | undefined;
+}
+
+class SearchCompany extends React.Component<Props, any> {
   constructor(props: any) {
     super(props);
     this.state = {
       companies: [],
       query: {},
+      homeFreeWord: props.homeFreeWord,
     };
   }
   renderLength = 5; // １ページあたりのデータ件数
@@ -27,6 +32,7 @@ class SearchCompany extends React.Component<{}, any> {
         companies: getData.data.data,
       });
     });
+    // const thisPage = this.props.match.params.free_word
   }
 
   searchCompanyWithParam = (param: any) => {
@@ -71,6 +77,7 @@ class SearchCompany extends React.Component<{}, any> {
           <CompanySearch
             className={"left-col"}
             searchFunc={this.searchCompanyWithParam}
+            homeFreeWord={this.state.homeFreeWord}
           />
           <div className="right-col">
             <div className="right-col__header">
@@ -91,7 +98,7 @@ class SearchCompany extends React.Component<{}, any> {
                   business={data.business_description}
                   pref={data.prefectures}
                   registerTime={data.created_at}
-                  img={"http://localhost:8000" + data.logo_path}
+                  img={data.logo_image_url}
                 />
               ))}
             </div>

@@ -5,6 +5,7 @@ import { CheckboxWithText } from "../../Molecules/Input";
 import { SelectPrimary } from "../../Atoms/Input/index.js";
 
 interface Props {
+  searchFunc: any;
   className?: string;
 }
 
@@ -41,11 +42,13 @@ const StudentSearch: React.FC<Props> = (props) => {
   return (
     <div className={`sideSearchBar ${props.className}`}>
       <div className="search-item">
-        <p className="search-item__name">フリーワード</p>
+        <p className="search-item__name">ユーザー名で検索</p>
         <Search
           width={"200px"}
           isIcon={true}
           placeholder={"検索ワードを入力"}
+          searchFunc={props.searchFunc}
+          types={"student_name"}
         />
       </div>
 

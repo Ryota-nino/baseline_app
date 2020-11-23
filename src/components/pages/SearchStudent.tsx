@@ -5,9 +5,14 @@ import { Pagenation } from "../Organisms/Header";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
 import axios from "axios";
+import { searchUser } from "../../assets/script/index";
 
 const SearchStudent: React.FC = () => {
   const [students, setStudents] = useState<any>();
+  const [usersData, setUsersData] = useState<any>([]);
+  const [query, setQuery] = useState<object>();
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     const url = "./database/account.json";
     axios.get(url).then((res) => {
@@ -15,20 +20,61 @@ const SearchStudent: React.FC = () => {
       setStudents(output);
     });
     console.log(students);
+
+    searchUser({ ...query }).then((getData: any) => {
+      setUsersData({
+        data: getData.data,
+        users: getData.data.data,
+      });
+      console.log(getData.data);
+      setLoading(true);
+    });
   }, []);
 
-  // const getUser = () => {
-  //   apiClient.get("/sanctum/csrf-cookie").then((response) => {
-  //     apiClient
-  //       .get("/api/auth/user")
-  //       .then((response) => {
-  //         console.log(response);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   });
-  // };
+  const searchUserWithParam = (param: any) => {
+    setQuery({
+      ...query,
+      ...param,
+    });
+    searchUser({ ...query, ...param }).then((getData: any) => {
+      setUsersData({
+        data: getData.data,
+        users: getData.data.data,
+      });
+    });
+  };
+
+  const renderStudentList = () => {
+    return (
+      <motion.div
+        className="studentListTable__wrapper"
+        initial="out"
+        animate="in"
+        exit="out"
+        variants={pageTransitionNormal}
+      >
+        {usersData.users.map((data: any) => (
+          <StudentList
+            id={data.id}
+            name={`${data.last_name} ${data.first_name}`}
+            student_number={data.student_number}
+            graduationYear={data.year_of_graduation}
+            job={data.desired_occupation.name}
+            updateTime={data.updated_at}
+            iconPath={data.icon_image_path}
+          />
+        ))}
+      </motion.div>
+    );
+  };
+  const renderPagenation = () => {
+    return (
+      <Pagenation
+        searchFunc={searchUserWithParam}
+        lastPage={usersData.data.last_page}
+      />
+    );
+  };
 
   return (
     <motion.section
@@ -40,7 +86,10 @@ const SearchStudent: React.FC = () => {
     >
       <h2 className="heading1">他者の就活を探す</h2>
       <div className="app-main__container">
-        <StudentSearch className={"left-col"} />
+        <StudentSearch
+          className={"left-col"}
+          searchFunc={searchUserWithParam}
+        />
         <div className="right-col">
           <div className="studentListTable">
             <div className="studentListTable__head">
@@ -51,31 +100,9 @@ const SearchStudent: React.FC = () => {
                 <li className="studentListTable__heading">更新日時</li>
               </ul>
             </div>
-            <motion.div
-              className="studentListTable__wrapper"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransitionNormal}
-            >
-              {(() => {
-                if (students) {
-                  return students.map((data: any) => (
-                    <StudentList
-                      id={data.id}
-                      name={`${data.last_name} ${data.first_name}`}
-                      student_number={data.student_number}
-                      graduationYear={data.graduation_year}
-                      job={data.job}
-                      updateTime={data.updateTime}
-                    />
-                  ));
-                }
-              })()}
-            </motion.div>
-
-            <Pagenation />
+            {loading && renderStudentList()}
           </div>
+          {loading && renderPagenation()}
         </div>
       </div>
     </motion.section>

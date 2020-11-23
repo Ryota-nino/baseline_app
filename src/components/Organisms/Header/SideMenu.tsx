@@ -111,6 +111,7 @@ const Header: React.FC<Props> = (props) => {
         />
       </div>
       <MyAvatar
+        iconPath="aa"
         name={props.myData.first_name + " " + props.myData.last_name}
         student_number={props.myData.student_number}
         ml=""

@@ -5,17 +5,18 @@ interface Props {
   student_number: string;
   ml: string;
   isArrow: boolean;
+  iconPath: string;
   clickFunc?: any;
 }
 const MyAvatar: React.FC<Props> = (props) => {
   const isArrowRender = () => {
     if (props.isArrow) {
-      return <img src={ArrowIcon} alt="" />;
+      return <img src={props.iconPath} alt="" />;
     }
   };
   return (
     <div className="myAvatar" onClick={props.clickFunc}>
-      <img src={AccountDefaultIcon} alt="" />
+      <img src={props.iconPath} alt="" />
       <div className="myAvatar__wrap" style={{ marginLeft: props.ml }}>
         <p className="myAvatar__name">{props.name}</p>
         <p className="myAvatar__id">@{props.student_number}</p>

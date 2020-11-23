@@ -10,6 +10,7 @@ interface Props {
   graduationYear: string;
   job: string;
   updateTime: string;
+  iconPath: string;
 }
 
 const StudentList: React.FC<Props> = (props) => {
@@ -20,6 +21,7 @@ const StudentList: React.FC<Props> = (props) => {
           name={props.name}
           student_number={props.student_number}
           ml="8px"
+          iconPath={props.iconPath}
           isArrow={false}
         />
         <GraduationYear txt={props.graduationYear} />

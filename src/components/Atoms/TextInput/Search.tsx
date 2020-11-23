@@ -29,6 +29,7 @@ const SearchBar: React.FC<Props> = (props) => {
   }, []);
 
   const pressEnterHandler = (e: any) => {
+    // company
     if (e.key == "Enter" && props.types === "company_name") {
       props.searchFunc({
         free_word: e.currentTarget.value,
@@ -39,6 +40,13 @@ const SearchBar: React.FC<Props> = (props) => {
       });
     } else if (e.key == "Enter" && props.types === "top_company_search") {
       props.searchFunc(e.currentTarget.value);
+    }
+
+    // student
+    if (e.key == "Enter" && props.types === "student_name") {
+      props.searchFunc({
+        free_word: e.currentTarget.value,
+      });
     }
   };
 

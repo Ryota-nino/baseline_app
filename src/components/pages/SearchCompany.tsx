@@ -19,6 +19,7 @@ class SearchCompany extends React.Component<Props, any> {
     super(props);
     this.state = {
       companies: [],
+      data: [],
       query: {},
       homeFreeWord: props.homeFreeWord,
     };
@@ -29,13 +30,15 @@ class SearchCompany extends React.Component<Props, any> {
   componentWillMount() {
     searchCompany().then((getData: any) => {
       this.setState({
+        data: getData.data,
         companies: getData.data.data,
       });
+      console.log(getData.data);
     });
-    // const thisPage = this.props.match.params.free_word
   }
 
   searchCompanyWithParam = (param: any) => {
+    console.log(param);
     // クエリの保存
     this.setState({
       query: {
@@ -46,6 +49,7 @@ class SearchCompany extends React.Component<Props, any> {
     // クエリを使って検索
     searchCompany({ ...this.state.query, ...param }).then((getData: any) => {
       this.setState({
+        data: getData.data,
         companies: getData.data.data,
       });
     });
@@ -104,8 +108,14 @@ class SearchCompany extends React.Component<Props, any> {
             </div>
           </div>
         </div>
-        {/* <Pagenation pageNum={pageNum} setPageNum={setPageNum}/> */}
-        <Pagenation totalPage={this.state.totalPage} />
+        {this.state.companies.length > 0 ? (
+          <Pagenation
+            searchFunc={this.searchCompanyWithParam}
+            lastPage={this.state.data.last_page}
+          />
+        ) : (
+          ""
+        )}
       </motion.section>
     );
   }

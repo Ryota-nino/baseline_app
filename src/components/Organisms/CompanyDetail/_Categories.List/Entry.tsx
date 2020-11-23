@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PostStudent } from "../../../Molecules/Card/index";
 import { Pagenation } from "../../Header/index";
+import { showEntry } from "../../../../assets/script/index";
 interface Props {
   thisPage: string;
   companyId: any;
@@ -41,6 +42,10 @@ const Entry: React.FC<Props> = (props) => {
       });
     });
     setEntries(entriesArray);
+
+    showEntry(1).then((data: any) => {
+      console.log(data);
+    });
   }, []);
 
   return (

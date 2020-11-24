@@ -93,7 +93,9 @@ const App = () => {
                 <Route
                   exact
                   path="/"
-                  render={() => <Page.Top setFreeWord={setHomeFreeWord} />}
+                  render={() => (
+                    <Page.Top setFreeWord={setHomeFreeWord} myData={myData} />
+                  )}
                 ></Route>
 
                 <Route

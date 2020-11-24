@@ -7,4 +7,5 @@ export {searchUser} from './Axios/searchUser';
 export {showCompany,detailCompany,editCompany,insertCompany} from './Axios/company';
 export {mypage,getUserData} from './Axios/mypage';
 export {showEntry} from './Axios/categories';
+export {indexDraft,registDraft} from './Axios/draft';
 export {pageTransitionNormal} from './pageTransition';

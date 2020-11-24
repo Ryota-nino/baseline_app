@@ -13,6 +13,7 @@ import axios from "axios";
 
 interface Props {
   setFreeWord: any;
+  myData: any;
 }
 
 const Top: React.FC<Props> = (props) => {
@@ -90,7 +91,8 @@ const Top: React.FC<Props> = (props) => {
                 <div className="contentBox__wrap">
                   {homeData.other_activities.map((data: any) => (
                     <Activity
-                      name={data.users.first_name}
+                      id={data.users.id}
+                      name={data.users.first_name + " " + data.users.last_name}
                       textLengthCheckFunc={checkTextLength}
                       content={data.content}
                       updated_at={data.updated_at}
@@ -107,7 +109,8 @@ const Top: React.FC<Props> = (props) => {
               </h1>
               {homeData.my_activities.map((data: any) => (
                 <Activity
-                  name={data.users.first_name}
+                  id={props.myData.id}
+                  name={data.users.first_name + " " + data.users.last_name}
                   textLengthCheckFunc={checkTextLength}
                   content={data.content}
                   updated_at={data.updated_at}

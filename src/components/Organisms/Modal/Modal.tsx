@@ -25,14 +25,9 @@ interface Props {
 
 const Modal: React.FC<Props> = (props) => {
   const [saveTextModal, setSaveTextModal] = useState<boolean>(false);
-  const [draft, setDraft] = useState<any>();
-  useEffect(() => {
-    const url = "./draft.json";
-    axios.get(url).then((res) => {
-      const output = res.data;
-      setDraft(output);
-    });
-  }, []);
+
+  const [currentText, setCurrentText] = useState<string>();
+  const [useDraftText, setUseDraftText] = useState<string>();
 
   const rootingModalRender = () => {
     if (props.type === "activity-post") {
@@ -42,6 +37,8 @@ const Modal: React.FC<Props> = (props) => {
           showModal={props.showModal}
           setShowModal={props.setShowModal}
           setSaveTextModal={setSaveTextModal}
+          content={useDraftText}
+          setCurrentText={setCurrentText}
         />
       );
     } else if (props.type === "select-post-category") {
@@ -58,6 +55,7 @@ const Modal: React.FC<Props> = (props) => {
           showModal={props.showModal}
           setShowModal={props.setShowModal}
           setSaveTextModal={setSaveTextModal}
+          content={useDraftText}
         />
       );
     } else if (props.type === "activity-edit") {
@@ -79,8 +77,19 @@ const Modal: React.FC<Props> = (props) => {
     }
   };
 
+  const useDraft = (draftData: any) => {
+    console.log(draftData);
+    setUseDraftText(draftData.content);
+  };
+
   const saveTextModalRender = () => {
-    return <SaveText setSaveTextModal={setSaveTextModal} draft={draft} />;
+    return (
+      <SaveText
+        setSaveTextModal={setSaveTextModal}
+        useDraft={useDraft}
+        currentText={currentText}
+      />
+    );
   };
 
   const renderModal = () => {

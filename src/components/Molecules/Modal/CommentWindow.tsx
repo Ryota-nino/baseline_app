@@ -22,6 +22,7 @@ interface Props {
   setShowModal: any;
   setSaveTextModal: any;
   content?: string;
+  setCurrentText?: any;
 }
 
 const CommentWindow: React.FC<Props> = (props) => {
@@ -55,6 +56,14 @@ const CommentWindow: React.FC<Props> = (props) => {
       count: textLength,
       textValue: inputText.textValue,
     });
+  };
+
+  const draftClickHandler = () => {
+    props.setSaveTextModal(true);
+    const currentText = document.querySelector(
+      ".modal__textarea"
+    )! as HTMLTextAreaElement;
+    props.setCurrentText(currentText.value);
   };
   return (
     <>
@@ -95,7 +104,7 @@ const CommentWindow: React.FC<Props> = (props) => {
             &nbsp;/ 200
           </p>
           <div>
-            <p onClick={() => props.setSaveTextModal(true)}>下書き</p>
+            <p onClick={draftClickHandler}>下書き</p>
             <RoundedBtn
               txt="投稿"
               className={inputText.count > 200 ? "invalid" : ""}

@@ -4,6 +4,10 @@ interface Props {
   txt: string;
 }
 const GraduationYear: React.FC<Props> = (props) => {
-  return <p className="graduationYear-tag">{props.txt}</p>;
+  const graduationYearConversion = () => {
+    const text = props.txt;
+    return text.substr(2, 2);
+  };
+  return <p className="graduationYear-tag">{graduationYearConversion()}卒</p>;
 };
 export default GraduationYear;

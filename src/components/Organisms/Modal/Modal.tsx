@@ -20,6 +20,7 @@ interface Props {
   setShowModal: any;
   type: string;
   companyId?: any;
+  content?: string;
 }
 
 const Modal: React.FC<Props> = (props) => {
@@ -66,6 +67,7 @@ const Modal: React.FC<Props> = (props) => {
           showModal={props.showModal}
           setShowModal={props.setShowModal}
           setSaveTextModal={setSaveTextModal}
+          content={props.content}
         />
       );
     } else if (props.type === "activity-delete") {

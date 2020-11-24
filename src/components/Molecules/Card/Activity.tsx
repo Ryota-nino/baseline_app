@@ -4,6 +4,7 @@ import { AccountDefaultIcon } from "../../../assets/images/index";
 
 interface Props {
   isSmall: boolean;
+  textLengthCheckFunc: any;
   name?: string;
   content?: string;
   updated_at?: string;
@@ -17,14 +18,18 @@ const Activity: React.FC<Props> = (props) => {
             <p className="activity-card__name">{props.name}</p>
             <p className="activity-card__time">{props.updated_at}</p>
           </div>
-          <p className="activity-card__txt">{props.content}</p>
+          <p className="activity-card__txt">
+            {props.textLengthCheckFunc(props.content, 45)}
+          </p>
         </>
       );
     } else {
       return (
         <>
           <p className="activity-card__name">{props.name}</p>
-          <p className="activity-card__txt mb8">{props.content}</p>
+          <p className="activity-card__txt mb8">
+            {props.textLengthCheckFunc(props.content, 45)}
+          </p>
           <p className="activity-card__time">{props.updated_at}</p>
         </>
       );

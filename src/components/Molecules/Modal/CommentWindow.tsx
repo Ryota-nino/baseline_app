@@ -21,6 +21,7 @@ interface Props {
   showModal: any;
   setShowModal: any;
   setSaveTextModal: any;
+  content?: string;
 }
 
 const CommentWindow: React.FC<Props> = (props) => {
@@ -35,6 +36,12 @@ const CommentWindow: React.FC<Props> = (props) => {
       const output = res.data;
       setDraft(output);
     });
+    if (props.content) {
+      setInputText({
+        count: props.content.length,
+        textValue: props.content,
+      });
+    }
   }, []);
 
   const handleTextChange = (textValue: string) => {
@@ -71,6 +78,7 @@ const CommentWindow: React.FC<Props> = (props) => {
             name="content"
             className="modal__textarea"
             required
+            defaultValue={props.content}
             onChange={(e) => handleTextChange(e.target.value)}
             onKeyUp={(e) => handleCountChange(e.currentTarget.value.length)}
           ></textarea>

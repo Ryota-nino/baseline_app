@@ -17,17 +17,10 @@ interface Props {
 
 const Top: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [companies, setCompanies] = useState<any>([]);
   const [homeData, setHomeData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   useEffect(() => {
-    const url = "./database/companies.json";
-    axios.get(url).then((res) => {
-      const output = res.data;
-      setCompanies(output);
-    });
-
     getHomeData().then((getData: any) => {
       if (getData.data) {
         setHomeData(getData.data);
@@ -40,6 +33,12 @@ const Top: React.FC<Props> = (props) => {
   const searchFunc = (word: string) => {
     props.setFreeWord(word);
     history.push(`/search-company`);
+  };
+  const checkTextLength = (el: string, MAX_LENGTH: number) => {
+    if (el.length > MAX_LENGTH) {
+      return el.substr(0, MAX_LENGTH) + "...";
+    }
+    return el;
   };
 
   const renderDOM = () => {
@@ -70,19 +69,17 @@ const Top: React.FC<Props> = (props) => {
           </div>
 
           <div className="company-list">
-            {(() => {
-              return homeData.companies.map((data: any) => (
-                <Company
-                  companyId={data.id}
-                  class={"item"}
-                  name={data.company_name}
-                  business={data.business_description}
-                  pref={data.prefectures}
-                  registerTime={data.updated_at}
-                  img={data.logo_image_url}
-                />
-              ));
-            })()}
+            {homeData.companies.map((data: any) => (
+              <Company
+                companyId={data.id}
+                class={"item"}
+                name={data.company_name}
+                business={data.business_description}
+                pref={data.prefectures}
+                registerTime={data.updated_at}
+                img={data.logo_image_url}
+              />
+            ))}
           </div>
 
           <div className="activity-column">
@@ -91,16 +88,15 @@ const Top: React.FC<Props> = (props) => {
               <article className="contentBox contentBox--big">
                 <h1 className="heading4">新着の活動情報</h1>
                 <div className="contentBox__wrap">
-                  {(() => {
-                    return homeData.other_activities.map((data: any) => (
-                      <Activity
-                        name={data.users.first_name}
-                        content={data.content}
-                        updated_at={data.updated_at}
-                        isSmall={true}
-                      />
-                    ));
-                  })()}
+                  {homeData.other_activities.map((data: any) => (
+                    <Activity
+                      name={data.users.first_name}
+                      textLengthCheckFunc={checkTextLength}
+                      content={data.content}
+                      updated_at={data.updated_at}
+                      isSmall={true}
+                    />
+                  ))}
                 </div>
               </article>
             </div>
@@ -109,16 +105,15 @@ const Top: React.FC<Props> = (props) => {
               <h1 className="heading5" onClick={() => setShowModal(true)}>
                 あなたのアクティビティ
               </h1>
-              {(() => {
-                return homeData.my_activities.map((data: any) => (
-                  <Activity
-                    name={data.users.first_name}
-                    content={data.content}
-                    updated_at={data.updated_at}
-                    isSmall={false}
-                  />
-                ));
-              })()}
+              {homeData.my_activities.map((data: any) => (
+                <Activity
+                  name={data.users.first_name}
+                  textLengthCheckFunc={checkTextLength}
+                  content={data.content}
+                  updated_at={data.updated_at}
+                  isSmall={false}
+                />
+              ))}
               <Link className="page-link" to="/mypage">
                 マイページへ
               </Link>

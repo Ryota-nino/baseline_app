@@ -24,14 +24,29 @@ const Comment: React.FC<Props> = (props) => {
     const reg = /((https?|ftp)(:\/\/[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+))/;
     const txtEl: string = activityTxtEl.current!.innerText;
     const searchUrlTxt = txtEl.match(reg);
-    activityTxtEl.current!.innerHTML = txtEl.replace(
-      reg,
-      `<a href="${searchUrlTxt![0]}">${searchUrlTxt![0]}</a>`
-    );
+    if (searchUrlTxt) {
+      activityTxtEl.current!.innerHTML = txtEl.replace(
+        reg,
+        `<a href="${searchUrlTxt![0]}">${searchUrlTxt![0]}</a>`
+      );
+    }
+  };
+
+  const timeTextConversion = () => {
+    const dateTime: string = String(props.updateTime).slice(0, 10);
+    const timeText: string = dateTime.replace(/-/g, ".");
+    const texts: {
+      dateTime: string;
+      timeText: string;
+    } = {
+      dateTime,
+      timeText,
+    };
+    return texts;
   };
 
   useEffect((): void => {
-    // setUrlText();
+    setUrlText();
   }, []);
 
   let [toggleMenu, setToggleMenu] = useState(false);
@@ -59,7 +74,9 @@ const Comment: React.FC<Props> = (props) => {
             <li>{props.year}</li>
             <li>&nbsp;|&nbsp;</li>
             <li>
-              <time dateTime="2020-09-20T13:30">{props.updateTime}</time>
+              <time dateTime={timeTextConversion().dateTime}>
+                {timeTextConversion().timeText}
+              </time>
             </li>
           </ul>
           {props.type === "mypage" && isArrowRender()}
@@ -72,7 +89,7 @@ const Comment: React.FC<Props> = (props) => {
         <ul className={`activity-item-menu ${toggleMenu && "view"}`}>
           <li
             className="activity-item-menu__item"
-            onClick={() => props.clickFunc(true)}
+            onClick={() => props.clickFunc(true, props.txt)}
           >
             <img src={PencilIcon} alt="" />
             <span>編集</span>

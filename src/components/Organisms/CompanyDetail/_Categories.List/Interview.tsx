@@ -69,7 +69,9 @@ const Interview: React.FC<Props> = (props) => {
       {(() => {
         if (interviews) {
           if (interviews.length !== 0) {
-            return <Pagenation />;
+            return (
+              <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
+            );
           }
         }
       })()}

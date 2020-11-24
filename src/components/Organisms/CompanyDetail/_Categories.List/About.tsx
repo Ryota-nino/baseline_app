@@ -80,7 +80,7 @@ const About: React.FC<Props> = (props) => {
               );
             }
           })()}
-          <Pagenation />
+          <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
         </section>
       </motion.div>
       <Modal

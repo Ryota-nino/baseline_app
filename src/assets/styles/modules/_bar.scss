@@ -1,206 +1,210 @@
 .newsBar {
-    a {
-        background-color: $cBlack;
-        border-radius: 8px;
-        color: $cWhite;
-        padding: 11px 24px 11px 32px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        color: $cWhite;
-        justify-content: space-between;
-        transition: 0.3s ease;
-        &:hover {
-            opacity: .8;
-        }
+  a {
+    background-color: $cBlack;
+    border-radius: 8px;
+    color: $cWhite;
+    padding: 11px 24px 11px 32px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: $cWhite;
+    justify-content: space-between;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.8;
     }
-    &__wrap {
-        display: flex;
-        align-items: center;
-    }
-    &__ttl {
-        margin-right: 32px;
-        font-weight: bold;
-    }
-    &__txt, &__time {
-        font-size: 1.3rem;
-    }
+  }
+  &__wrap {
+    display: flex;
+    align-items: center;
+  }
+  &__ttl {
+    margin-right: 32px;
+    font-weight: bold;
+  }
+  &__txt,
+  &__time {
+    font-size: 1.3rem;
+  }
 }
 
 .company-bar {
-    border-radius: 24px;
-    background-color: $cWhite;
+  border-radius: 24px;
+  background-color: $cWhite;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 20px 32px;
+  &__wrap {
+    width: 60%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px 20px 32px;
-    &__wrap {
-        display: flex;
-        align-items: center;
-        & > img {
-            width: 95px;
-            height: 69px;
-            border-radius: 8px;
-            margin-right: 16px;
-        }
+    & > img {
+      width: 95px;
+      height: 69px;
+      border-radius: 8px;
+      margin-right: 16px;
     }
-    &__right {
-        display: flex;
-        align-items: center;
-        a {
-            color: $cLink;
-            margin-right: 16px;
-            transition: 0.3s ease;
-            &:hover {
-                opacity: 0.6;
-            }
-        }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    a {
+      color: $cLink;
+      margin-right: 16px;
+      transition: 0.3s ease;
+      &:hover {
+        opacity: 0.6;
+      }
     }
-    &__inner {
-        & > div {
-            display: flex;
-        }
+  }
+  &__inner {
+    & > div {
+      display: flex;
     }
-    .heading4 {
-        margin-bottom: 8px;
+  }
+  .heading4 {
+    margin-bottom: 8px;
+  }
+  &__link > a {
+    color: $cLink;
+    font-size: 1.2rem;
+    margin-right: 16px;
+  }
+  &__address {
+    color: $cGray1;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1px solid $cMain;
+      margin-right: 8px;
     }
-    &__link > a {
-        color: $cLink;
-        font-size: 1.2rem;
-        margin-right: 16px;
-    }
-    &__address {
-        color: $cGray1;
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        &::before {
-            content: "";
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            border: 1px solid $cMain;
-            margin-right: 8px;
-        }
-    }
+  }
 }
 
 .company-detailItem {
-    & > a {
-        display: flex;
-        align-items: center;
-        // width: 650px;
-        cursor: pointer;
-        justify-content: space-between;
-        transition: 0.3s ease;
-        padding: 14px 24px;
-        border-radius: 10px;
-        &:hover {
-            box-shadow: 0 0 15px rgba(0,0,0,.06) , 0 0 30px rgba(0,0,0,.04);
-        }
+  & > a {
+    display: flex;
+    align-items: center;
+    // width: 650px;
+    cursor: pointer;
+    justify-content: space-between;
+    transition: 0.3s ease;
+    padding: 14px 24px;
+    border-radius: 10px;
+    &:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06), 0 0 30px rgba(0, 0, 0, 0.04);
     }
+  }
 
-    
-    
-    &__wrap {
-        display: flex;
-        align-items: center;
-        width: 60%;
+  &__wrap {
+    display: flex;
+    align-items: center;
+    width: 60%;
+  }
+  &__icon {
+    background-color: #fae9c9;
+    padding: 6px;
+    border-radius: 6px;
+    margin-right: 16px;
+  }
+  &__ttl {
+    font-weight: normal;
+    margin-right: 12px;
+    font-size: 1.4rem;
+  }
+  &__job {
+    width: 15%;
+    font-size: 1.3rem;
+    color: $cGray1;
+  }
+  &__user {
+    width: 20%;
+    display: flex;
+    color: $cGray1;
+    align-items: center;
+    justify-content: flex-end;
+    img {
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
     }
-    &__icon {
-        background-color: #FAE9C9;
-        padding: 6px;
-        border-radius: 6px;
-        margin-right: 16px;
-    }
-    &__ttl {
-        font-weight: normal;
-        margin-right: 12px;
-        font-size: 1.4rem;
-    }
-    &__job {
-        width: 15%;
-        font-size: 1.3rem;
-        color: $cGray1;
-    }
-    &__user {
-        width: 20%;
-        display: flex;
-        color: $cGray1;
-        align-items: center;
-        justify-content: flex-end;
-        img {
-            width: 32px;
-            height: 32px;
-            margin-right: 8px;
-        }
-    }
+  }
 }
-@media screen and (min-width: $bigWindow) { 
-    .company-detailItem {
-        width: 97%;
-    }
+@media screen and (min-width: $bigWindow) {
+  .company-detailItem {
+    width: 97%;
+  }
 }
 
 .aboutCompany-bar {
-    background-color: $cWhite;
-    border-radius: 24px;
-    padding: 26px 32px;
+  background-color: $cWhite;
+  border-radius: 24px;
+  padding: 26px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    &__wrapper {
-        display: flex;
-        align-items: center;
+  }
+  &__wrap {
+    display: flex;
+    align-items: center;
+  }
+  &__avatar {
+    margin-right: 16px;
+    position: relative;
+    img {
+      width: 50px;
     }
-    &__wrap {
-        display: flex;
-        align-items: center;
+    .pass-tag {
+      position: absolute;
+      bottom: -7px;
+      left: 2px;
+      right: 0;
+      margin: auto;
+      line-height: 1.3;
+      text-align: center;
     }
-    &__avatar {
-        margin-right: 16px;
-        position: relative;
-        img { width: 50px; }
-        .pass-tag {
-            position: absolute;
-            bottom: -7px;
-            left: 2px;
-            right: 0;
-            margin: auto;
-            line-height: 1.3;
-            text-align: center;
-        }
-    }
-    &__inner {
-        margin-right: 24px;
-    }
-    &__name {
-        font-weight: bold;
-        margin-bottom: 3px;
-    }
-    &__profile {
-        font-size: 1.3rem;
-        color: $cGray1;
-        display: flex;
-    }
-    .btn--action {
-        height: 48px;
-    }
+  }
+  &__inner {
+    margin-right: 24px;
+  }
+  &__name {
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+  &__profile {
+    font-size: 1.3rem;
+    color: $cGray1;
+    display: flex;
+  }
+  .btn--action {
+    height: 48px;
+  }
 }
 .companyExcerpt-card {
-    display: flex;
-    align-items: center;
-    img {
-        width: 80px;
-        border-radius: 7px;
-        margin-right: 16px;
+  display: flex;
+  align-items: center;
+  img {
+    width: 80px;
+    border-radius: 7px;
+    margin-right: 16px;
+  }
+  .heading5 {
+    margin-bottom: 4px;
+  }
+  &__link {
+    font-size: 1.2rem;
+    a {
+      color: $cLink;
     }
-    .heading5 {
-        margin-bottom: 4px;
-    }
-    &__link {
-        font-size: 1.2rem;
-        a{color: $cLink}
-    }
+  }
 }

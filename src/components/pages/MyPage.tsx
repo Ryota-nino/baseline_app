@@ -24,6 +24,8 @@ const MyPage: React.FC<Props> = (props) => {
   const [account, setAccount] = useState<any>();
   const [myData, setMyData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [editContent, setEditContent] = useState<string>();
+
   useEffect(() => {
     const url = "./activity.json";
     axios.get(url).then((res) => {
@@ -38,11 +40,19 @@ const MyPage: React.FC<Props> = (props) => {
     });
 
     mypage().then((getData: any) => {
-      setMyData(getData.data);
+      setMyData({
+        data: getData.data,
+        company_information: getData.company_information,
+      });
       console.log(getData.data);
       setLoading(true);
     });
   }, []);
+
+  const commentEdit = (isOpen: boolean, content: string) => {
+    setShowModal(isOpen);
+    setEditContent(content);
+  };
 
   const renderDOM = () => {
     return (
@@ -56,7 +66,11 @@ const MyPage: React.FC<Props> = (props) => {
         >
           <h2 className="heading1">マイページ</h2>
 
-          <UserData isPage="mypage" userData={myData} userId={0} />
+          <UserData
+            isPage="mypage"
+            userData={myData.data}
+            userId={myData.data.id}
+          />
 
           <Link to="/01/account-setting" className="icon-txt icon-txt--normal">
             <img src={GearIcon} alt="" />
@@ -74,7 +88,7 @@ const MyPage: React.FC<Props> = (props) => {
                     updateTime={data.updateTime}
                     isArrow={true}
                     type={"mypage"}
-                    clickFunc={setShowModal}
+                    clickFunc={commentEdit}
                     clickFunc2={setShowModal2}
                   />
                 ));
@@ -86,6 +100,7 @@ const MyPage: React.FC<Props> = (props) => {
           type="activity-edit"
           showModal={showModal}
           setShowModal={setShowModal}
+          content={editContent}
         />
         <Modal
           type="activity-delete"

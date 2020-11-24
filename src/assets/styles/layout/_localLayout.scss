@@ -235,6 +235,11 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    &::after {
+      content: "";
+      width: 222px;
+      height: 0;
+    }
     .user-card > a {
       width: 222px;
       img {

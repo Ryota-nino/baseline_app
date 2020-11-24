@@ -75,7 +75,9 @@ const Entry: React.FC<Props> = (props) => {
       {(() => {
         if (entries) {
           if (entries.length !== 0) {
-            return <Pagenation />;
+            return (
+              <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
+            );
           }
         }
       })()}

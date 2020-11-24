@@ -33,6 +33,19 @@ const CompanyCard: React.FC<Props> = (props) => {
     return output;
   };
 
+  const timeTextConversion = () => {
+    const dateTime: string = String(props.registerTime).slice(0, 10);
+    const timeText: string = dateTime.replace(/-/g, ".");
+    const texts: {
+      dateTime: string;
+      timeText: string;
+    } = {
+      dateTime,
+      timeText,
+    };
+    return texts;
+  };
+
   return (
     <article className={`company-card ${props.class}`}>
       <Link to={`/company-detail/${props.companyId}/about`}>
@@ -46,7 +59,9 @@ const CompanyCard: React.FC<Props> = (props) => {
         ) : null}
         {/* <p className="company-card__address">{checkPrefLength()}</p> */}
         <p className="company-card__time">
-          <time dateTime="">{props.registerTime}</time>
+          <time dateTime={timeTextConversion().dateTime}>
+            {timeTextConversion().timeText}
+          </time>
         </p>
       </Link>
     </article>

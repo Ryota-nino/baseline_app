@@ -69,7 +69,9 @@ const Step: React.FC<Props> = (props) => {
       {(() => {
         if (steps) {
           if (steps.length !== 0) {
-            return <Pagenation />;
+            return (
+              <Pagenation searchFunc={() => console.log("a")} lastPage={1} />
+            );
           }
         }
       })()}

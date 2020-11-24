@@ -7,7 +7,11 @@ import { PrefectureSelector } from "../Organisms/Input";
 import { ActionBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { detailCompany, editCompany } from "../../assets/script/index";
+import {
+  insertCompany,
+  detailCompany,
+  editCompany,
+} from "../../assets/script/index";
 import axios from "axios";
 
 interface Props {
@@ -17,6 +21,7 @@ interface Props {
 const CompanyInsert: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [companyData, setCompanyData] = useState<any>([]);
+  const [postImage, setPostImage] = useState<any>();
   const companyId = props.match.params.id;
   const history = useHistory();
   useEffect(() => {
@@ -79,13 +84,14 @@ const CompanyInsert: React.FC<Props> = (props) => {
     fr.onloadend = function () {
       sendObj.logo_image = String(fr.result);
     };
-    fr.readAsDataURL(logo);
+    if (logo) {
+      fr.readAsDataURL(logo);
+    }
     console.log(sendObj);
     if (companyId !== "register") {
-      // insertCompany(sendObj);
       editCompany(companyId, sendObj);
     } else {
-      editCompany(companyId, sendObj);
+      insertCompany(sendObj);
     }
   };
 

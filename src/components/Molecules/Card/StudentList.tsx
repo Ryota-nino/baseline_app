@@ -14,6 +14,19 @@ interface Props {
 }
 
 const StudentList: React.FC<Props> = (props) => {
+  const timeTextConversion = () => {
+    const dateTime: string = String(props.updateTime).slice(0, 10);
+    const timeText: string = dateTime.replace(/-/g, ".");
+    const texts: {
+      dateTime: string;
+      timeText: string;
+    } = {
+      dateTime,
+      timeText,
+    };
+    return texts;
+  };
+
   return (
     <article className="studentCard-item">
       <Link to={`/user/${props.id}`}>
@@ -26,7 +39,11 @@ const StudentList: React.FC<Props> = (props) => {
         />
         <GraduationYear txt={props.graduationYear} />
         <p className="studentListTable__job">{props.job}</p>
-        <p className="studentListTable__time">{props.updateTime}</p>
+        <p className="studentListTable__time">
+          <time dateTime={timeTextConversion().dateTime}>
+            {timeTextConversion().timeText}
+          </time>
+        </p>
       </Link>
     </article>
   );

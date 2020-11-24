@@ -11,7 +11,7 @@ interface Props {
 const MyAvatar: React.FC<Props> = (props) => {
   const isArrowRender = () => {
     if (props.isArrow) {
-      return <img src={props.iconPath} alt="" />;
+      return <img src={ArrowIcon} alt="" />;
     }
   };
   return (

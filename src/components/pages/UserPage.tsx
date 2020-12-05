@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import { UserData } from "../Molecules/Bar/index";
 import { ActivityMeter } from "../Organisms/Activity/index";
 import { Comment } from "../Molecules/Card/index";
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const UserPage: React.FC<Props> = (props) => {
+  const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
 
@@ -50,6 +52,12 @@ const UserPage: React.FC<Props> = (props) => {
           exit="out"
           variants={pageTransitionNormal}
         >
+          <button
+            className="btn pageBack-link"
+            onClick={() => history.goBack()}
+          >
+            <span className="heading4">戻る</span>
+          </button>
           <h2 className="heading1">
             {/* {isUsrPage
             ? `${

@@ -1,4 +1,4 @@
-import React, { KeyboardEventHandler } from "react";
+import React, { ChangeEvent, ChangeEventHandler, KeyboardEventHandler } from "react";
 
 interface Props {
   type: string;
@@ -6,10 +6,13 @@ interface Props {
   placeholder: string;
   isRequired: boolean;
   isError?: boolean;
+  errorMessage?: string;
   unit?: string;
   maxLength?: number;
   name?: string;
   onKeyPress?: KeyboardEventHandler;
+  onChange?: ChangeEventHandler;
+  defaultValue?: string;
 }
 
 const Primary: React.FC<Props> = (props) => {
@@ -27,9 +30,13 @@ const Primary: React.FC<Props> = (props) => {
           required={props.isRequired}
           maxLength={props.maxLength}
           onKeyPress={props.onKeyPress}
+          onChange={props.onChange}
+          defaultValue={props.defaultValue}
         />
         {props.unit}
-        {props.isError && <span className="error-message"></span>}
+        {props.isError && (
+          <span className="error-message">{props.errorMessage}</span>
+        )}
       </label>
     </>
   );

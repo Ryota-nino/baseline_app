@@ -23,6 +23,7 @@ const Top: React.FC<Props> = (props) => {
   const history = useHistory();
   useEffect(() => {
     getHomeData().then((getData: any) => {
+      console.log(getData.data);
       if (getData.data) {
         setHomeData(getData.data);
         console.log(getData.data);
@@ -91,10 +92,10 @@ const Top: React.FC<Props> = (props) => {
                 <div className="contentBox__wrap">
                   {homeData.other_activities.map((data: any) => (
                     <Activity
-                      id={data.users.id}
-                      name={data.users.first_name + " " + data.users.last_name}
+                      id={data.user.id}
+                      name={data.user.first_name + " " + data.user.last_name}
                       textLengthCheckFunc={checkTextLength}
-                      content={data.content}
+                      content={data.my_activities[0].content}
                       updated_at={data.updated_at}
                       isSmall={true}
                     />
@@ -110,9 +111,9 @@ const Top: React.FC<Props> = (props) => {
               {homeData.my_activities.map((data: any) => (
                 <Activity
                   id={props.myData.id}
-                  name={data.users.first_name + " " + data.users.last_name}
+                  name={data.user.first_name + " " + data.user.last_name}
                   textLengthCheckFunc={checkTextLength}
-                  content={data.content}
+                  content={data.my_activities[0].content}
                   updated_at={data.updated_at}
                   isSmall={false}
                 />

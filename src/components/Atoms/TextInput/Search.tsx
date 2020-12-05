@@ -58,6 +58,7 @@ const SearchBar: React.FC<Props> = (props) => {
         placeholder={props.placeholder}
         onKeyPress={pressEnterHandler}
         defaultValue={props.defaultValue}
+        maxLength={100}
       />
     </div>
   );

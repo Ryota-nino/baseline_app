@@ -5,6 +5,7 @@ interface Props {
   type: "button" | "submit";
   setShowModal?: any;
   Func?: any;
+  disabledRule?: any;
 }
 const Primary: React.FC<Props> = (props) => {
   return (
@@ -19,6 +20,7 @@ const Primary: React.FC<Props> = (props) => {
           props.Func();
         }
       }}
+      disabled={props.disabledRule}
     >
       {props.txt}
     </button>

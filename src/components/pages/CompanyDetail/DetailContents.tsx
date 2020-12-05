@@ -12,6 +12,7 @@ interface Props {
 
 const DetailContents: React.FC<Props> = (props) => {
   const thisPage = props.match.params.category;
+  const history = useHistory();
   return (
     <motion.section
       className="app-main companyDetail-contents signle"
@@ -20,9 +21,9 @@ const DetailContents: React.FC<Props> = (props) => {
       exit="out"
       variants={pageTransitionNormal}
     >
-      <Link to="/company-detail/:id/about" className="btn pageBack-link">
-        <span className="heading4">企業詳細へ</span>
-      </Link>
+      <button className="btn pageBack-link" onClick={() => history.goBack()}>
+        <span className="heading4">企業情報へ</span>
+      </button>
       <UnofficialOffer />
 
       <Contents thisPage={thisPage} />

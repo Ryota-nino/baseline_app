@@ -17,6 +17,11 @@ const CompanyInfo: React.FC<Props> = (props) => {
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
 
+  const obj = {
+    company_name: "aa",
+    company_url: "https://",
+  };
+
   const location = useLocation();
   const companyId = location.pathname.split("/")[2];
   return (
@@ -32,7 +37,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
           <span className="heading4">企業詳細へ</span>
         </button>
         <AboutBar
-          companyData={"a"}
+          companyData={obj}
           thisPage="info"
           companyId={companyId}
           hasActionBtn={false}

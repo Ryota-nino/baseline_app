@@ -4,6 +4,7 @@ interface Props {
   isDelete?: string;
   className?: any;
   Func?: any;
+  isType?: "button";
 }
 
 const Rounded: React.FC<Props> = (props) => {
@@ -12,7 +13,7 @@ const Rounded: React.FC<Props> = (props) => {
       className={` btn--rounded ${props.isDelete && "delete"} ${
         props.className
       }`}
-      type="submit"
+      type={props.isType ? props.isType : "submit"}
       onClick={() => {
         if (props.Func) {
           props.Func();

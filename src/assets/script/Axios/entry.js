@@ -1,8 +1,8 @@
 import {apiClient} from '../index';
-export const mypage = () => {
+export const indexEntry = (id) => {
     return apiClient.get("/sanctum/csrf-cookie").then((response) => {
       return apiClient
-        .get(`/api/mypage`)
+        .get(`/api/entry/show/${id}`)
         .then((response) => {
           if (response.status !== 200) {
             return false;
@@ -12,27 +12,27 @@ export const mypage = () => {
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert('検索失敗');
+            alert("データ取得失敗")
           }
         });
     });
   };
-export const getUserData = (id) => {
-    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
-      return apiClient
-        .get(`/api/mypage/${id}`)
+  export const registEntry = (postData) => {
+    apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      apiClient
+        .post(`/api/entry`, postData)
         .then((response) => {
-          if (response.status !== 200) {
-            return false;
+          console.log(response);
+          if (response.status === 200) {
+            // alert("成功");
           }
-          return response;
         })
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert('検索失敗');
+            alert("失敗");
           }
         });
     });
   };
-
+  

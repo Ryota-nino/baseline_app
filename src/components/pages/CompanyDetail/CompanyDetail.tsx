@@ -19,6 +19,7 @@ const CompanyDetail: React.FC<Props> = (props) => {
   useEffect(() => {
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
+        console.log(getData.data);
         setCompanyData({
           ...getData.data,
         });

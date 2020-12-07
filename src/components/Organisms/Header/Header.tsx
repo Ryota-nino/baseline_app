@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "../../../assets/images/index";
 import { RoundedBtn } from "../../Atoms/Btn";
+import { registEntry, registSelection } from "../../../assets/script";
 
 interface Props {
   needBtn: boolean;
+  match?: any;
 }
 const HeaderRegister: React.FC<Props> = (props) => {
   const onSaveHandler = () => {
@@ -14,6 +16,8 @@ const HeaderRegister: React.FC<Props> = (props) => {
     let sendJSON: any;
     const formObj: any = {};
     const editForms = document.forms;
+    const companyId = props.match.params.id;
+    console.log(companyId);
 
     // ステップページ
     if (thisPageName == "type-step") {
@@ -21,9 +25,12 @@ const HeaderRegister: React.FC<Props> = (props) => {
         ".interview-formBox"
       );
       const contentForms: any = {};
-      formObj.selection_type = editForms[0].selection_type.value;
-      formObj.job = editForms[0].job.value;
-      formObj.contents = [];
+      formObj.company_id = Number(companyId);
+      // formObj.internship_id = editForms[0].selection_type.value;
+      formObj.internship_id = 1;
+      formObj.occupational_category_id = Number(editForms[0].job.value);
+      formObj.items = [];
+
       interviewForms.forEach((form) => {
         const titleInput = form.querySelector(
           'input[name="title"]'
@@ -33,34 +40,36 @@ const HeaderRegister: React.FC<Props> = (props) => {
         ) as HTMLInputElement;
         const textarea = document.querySelector("textarea")!;
         contentForms.title = titleInput.value;
-        contentForms.date = dateSelect.value;
-        contentForms.text = textarea.value;
-        formObj.contents.push(contentForms);
+        contentForms.interview_date = Number(dateSelect.value);
+        contentForms.content = textarea.value;
+        formObj.items.push(contentForms);
       });
       console.log(formObj);
+      registSelection(formObj);
       sendJSON = JSON.stringify(formObj);
       // インタビューページ
     } else if (thisPageName == "type-interview") {
       const sendData: any = [];
       for (let i = 0; i < editForms.length; i++) {
-        formObj.selection_type = editForms[i].selection_type.value;
-        formObj.job = editForms[i].job.value;
-        formObj.result = editForms[i].result.value;
+        formObj.company_id = Number(companyId);
+        // formObj.internship_id = editForms[i].selection_type.value;
+        formObj.internship_id = Number(1);
+        formObj.occupational_category_id = Number(editForms[0].job.value);
+        formObj.result = Number(editForms[i].result.value);
         const interviewForms = editForms[i].querySelectorAll(
           ".interview-formBox"
         );
-        formObj.contents = [];
-        const contents: any = [];
+        formObj.items = [];
+        const items: any = [];
         interviewForms.forEach((form) => {
           const contentForms: any = {};
           contentForms.date = form.querySelector("select")!.value;
-          contentForms.text = form.querySelector("textarea")!.value;
-          contents.push(contentForms);
+          contentForms.content = form.querySelector("textarea")!.value;
+          items.push(contentForms);
         });
-        sendData.push(contents);
-        // console.log(sendData);
+        sendData.push(items);
       }
-      console.log(sendData);
+      console.log(formObj);
       sendJSON = JSON.stringify(sendData);
       // エントリーページ
     } else if (thisPageName == "type-entry") {
@@ -68,9 +77,11 @@ const HeaderRegister: React.FC<Props> = (props) => {
         ".interview-formBox"
       );
 
-      formObj.selection_type = editForms[0].selection_type.value;
-      formObj.job = editForms[0].job.value;
-      formObj.contents = [];
+      formObj.company_id = Number(companyId);
+      // formObj.internship_id = Number(editForms[0].selection_type.value);
+      formObj.internship_id = Number(1);
+      formObj.occupational_category_id = Number(editForms[0].job.value);
+      formObj.items = [];
       const contentForms: any = {};
       interviewForms.forEach((form) => {
         const titleInput = form.querySelector(
@@ -78,10 +89,11 @@ const HeaderRegister: React.FC<Props> = (props) => {
         ) as HTMLInputElement;
         const textarea = document.querySelector("textarea")!;
         contentForms.title = titleInput.value;
-        contentForms.text = textarea.value;
-        formObj.contents.push(contentForms);
+        contentForms.content = textarea.value;
+        formObj.items.push(contentForms);
       });
       console.log(formObj);
+      registEntry(formObj);
       sendJSON = JSON.stringify(formObj);
     }
     // console.log(sendJSON);

@@ -6,7 +6,7 @@ import { RoundedBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
 import { Avatar, CameraIcon } from "../../assets/images/index";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { mypage } from "../../assets/script/";
+import { mypage, indexJob } from "../../assets/script/";
 import axios from "axios";
 
 interface Props {
@@ -14,13 +14,17 @@ interface Props {
 }
 const ProfileEdit: React.FC<Props> = (props) => {
   const [myData, setMyData] = useState<any>();
+  const [jobs, setJobs] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     mypage().then((getData: any) => {
       setMyData(getData.data);
       console.log(getData.data);
+    });
+
+    indexJob().then((getData: any) => {
+      setJobs(getData.data);
       setLoading(true);
-      // selectBtnChanges();
     });
   }, []);
   const history = useHistory();
@@ -31,17 +35,12 @@ const ProfileEdit: React.FC<Props> = (props) => {
     { isEmpty3: false },
   ];
   const yearList = [
-    { value: "21卒" },
-    { value: "22卒" },
-    { value: "23卒" },
-    { value: "24卒" },
-    { value: "25卒" },
-    { value: "26卒" },
-  ];
-  const jobList = [
-    { value: "企画職" },
-    { value: "デザイナー" },
-    { value: "エンジニア" },
+    { id: 1, name: "21卒" },
+    { id: 1, name: "22卒" },
+    { id: 1, name: "23卒" },
+    { id: 1, name: "24卒" },
+    { id: 1, name: "25卒" },
+    { id: 1, name: "26卒" },
   ];
   const gender = [
     { id: 1, name: "男性" },
@@ -61,6 +60,8 @@ const ProfileEdit: React.FC<Props> = (props) => {
     e.currentTarget.classList.add("current");
     e.currentTarget.querySelector('input[type="checkbox"]').checked = true;
   };
+
+  const changeBtnClickHandler = () => {};
 
   const renderDOM = () => {
     return (
@@ -104,10 +105,21 @@ const ProfileEdit: React.FC<Props> = (props) => {
                 <Secondary
                   name="name"
                   type="text"
+                  labelTxt="苗字"
+                  isRequired={false}
+                  isRequiredTxt={false}
+                  defaultValue={myData.first_name}
+                  placeholderTxt="山本 仁"
+                  isError={isError}
+                  isIcon={false}
+                />
+                <Secondary
+                  name="name"
+                  type="text"
                   labelTxt="名前"
                   isRequired={false}
                   isRequiredTxt={false}
-                  defaultValue={myData.first_name + " " + myData.last_name}
+                  defaultValue={myData.last_name}
                   placeholderTxt="山本 仁"
                   isError={isError}
                   isIcon={false}
@@ -141,7 +153,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
           </div>
 
           <div className="contentBox contentBox--big">
-            <SelectSecondary ttl="希望職種" name="job" selectObj={jobList} />
+            <SelectSecondary ttl="希望職種" name="job" selectObj={jobs} />
             <SelectSecondary
               ttl="卒業年次"
               name="graduation_year"

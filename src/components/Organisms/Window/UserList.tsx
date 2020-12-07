@@ -13,15 +13,20 @@ const UserList: React.FC<Props> = (props) => {
   useEffect(() => {
     if (props.thisPage === "insert-users") {
       const userArray: object[] = [];
+      let beforeId: number;
       props.companyData.company_information.forEach((data: any) => {
-        const user = {
-          id: data.user.id,
-          name: data.user.last_name + " " + data.user.first_name,
-          desiredOccupations: data.user.desired_occupations,
-          graduationYear: data.user.year_of_graduation,
-          icon: data.user.icon_image_path,
-        };
-        userArray.push(user);
+        if (beforeId == data.user.id) {
+        } else {
+          const user = {
+            id: data.user.id,
+            name: data.user.last_name + " " + data.user.first_name,
+            desiredOccupations: data.user.desired_occupations,
+            graduationYear: data.user.year_of_graduation,
+            icon: data.user.icon_image_path,
+          };
+          userArray.push(user);
+        }
+        beforeId = data.user.id;
       });
       setUserList(userArray);
     }

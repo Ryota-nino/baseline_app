@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { SelectPrimary } from "../../Atoms/Input";
 import { InsertAddBtn } from "../../Atoms/Btn";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { StepSheet } from "../../Organisms/Window";
+import { indexJob, showCompany } from "../../../assets/script";
+interface Props {
+  match?: any;
+}
 
-const Step: React.FC = (props) => {
+const Step: React.FC<Props> = (props) => {
+  const companyId = props.match.params.id;
   let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
   let inputLength = inputWindow.length;
   const jobInterviewTypes = [
@@ -15,13 +20,18 @@ const Step: React.FC = (props) => {
     "ウィンターインターン",
     "スプリングインターン",
   ];
-  const jobTypes = [
-    "デザイナー",
-    "エンジニア",
-    "企画職",
-    "イラストレーター",
-    "その他",
-  ];
+
+  let [jobs, setJobs] = useState();
+  let [company, setCompany] = useState<any>();
+  useEffect(() => {
+    indexJob().then((getData: any) => {
+      console.log(getData);
+      setJobs(getData.data);
+    });
+    showCompany(companyId).then((getData: any) => {
+      setCompany(getData.data);
+    });
+  }, []);
 
   const createInputWindow = () => {
     if (inputLength < 10) {
@@ -54,11 +64,7 @@ const Step: React.FC = (props) => {
                   <p className="label-input__txt">
                     応募職種<span className="cAttention">*</span>
                   </p>
-                  <SelectPrimary
-                    name="job"
-                    options={jobTypes}
-                    required={true}
-                  />
+                  <SelectPrimary name="job" options={jobs} required={true} />
                 </div>
                 {/* <div className="label-input">
                     <FreeWordInput isRequired={true} type="string" ttl="その他" placeholder="職種を入力" />
@@ -73,7 +79,7 @@ const Step: React.FC = (props) => {
 
             <InsertAddBtn txt="項目を追加" click={createInputWindow} />
           </form>
-          <CompanyInfo />
+          <CompanyInfo data={company} />
         </div>
       </div>
     </main>

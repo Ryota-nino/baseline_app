@@ -75,7 +75,7 @@ const UserPage: React.FC<Props> = (props) => {
             userData={userData}
             userId={userData.id}
           />
-          <ActivityMeter />
+          {/* <ActivityMeter /> */}
           <div className="activity-list">
             {(() => {
               if (activity) {

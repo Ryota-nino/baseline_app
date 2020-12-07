@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   name: string;
-  options: string[];
+  options: any;
   required: boolean;
   selectFunc?: any;
 }
@@ -14,17 +14,20 @@ const SelectBox: React.FC<Props> = (props) => {
       props.selectFunc(e.target.value);
     }
   }
+
   return (
     <div className="selectBox input--normal">
+      {console.log(props.options)}
       <div>
         <select
           name={props.name}
           onChange={changeHandler}
           required={props.required}
         >
-          {props.options.map((item) => {
-            return <option value={item}>{item}</option>;
-          })}
+          {props.options &&
+            props.options.map((item: any) => {
+              return <option value={item["id"]}>{item["name"]}</option>;
+            })}
         </select>
       </div>
     </div>

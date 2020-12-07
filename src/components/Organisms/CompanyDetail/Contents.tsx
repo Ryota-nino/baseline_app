@@ -4,6 +4,7 @@ import { Step, Entry, Interview } from "./_Contents.Categories";
 
 interface Props {
   thisPage: string;
+  params: any;
 }
 
 const Contents: React.FC<Props> = (props) => {
@@ -12,7 +13,7 @@ const Contents: React.FC<Props> = (props) => {
       return <Step thisPage={props.thisPage} />;
     }
     if (props.thisPage === "entry") {
-      return <Entry thisPage={props.thisPage} />;
+      return <Entry params={props.params} thisPage={props.thisPage} />;
     }
     if (props.thisPage === "interview") {
       return <Interview thisPage={props.thisPage} />;
@@ -23,15 +24,25 @@ const Contents: React.FC<Props> = (props) => {
       <div className="companyContentsWindow__list">
         <ul>
           <li className={props.thisPage === "step" ? "current" : ""}>
-            <Link to="/company-detail/contents/:id/step">選考ステップ</Link>
+            <Link
+              to={`/company-detail/contents/${props.params.cateogry_id}/step/${props.params.student_id}`}
+            >
+              選考ステップ
+            </Link>
           </li>
           <li className={props.thisPage === "entry" ? "current" : ""}>
-            <Link to="/company-detail/contents/:id/entry">
+            <Link
+              to={`/company-detail/contents/${props.params.cateogry_id}/entry/${props.params.student_id}`}
+            >
               エントリーシート
             </Link>
           </li>
           <li className={props.thisPage === "interview" ? "current" : ""}>
-            <Link to="/company-detail/contents/:id/interview">面接情報</Link>
+            <Link
+              to={`/company-detail/contents/${props.params.cateogry_id}/interview/${props.params.student_id}`}
+            >
+              面接情報
+            </Link>
           </li>
         </ul>
       </div>

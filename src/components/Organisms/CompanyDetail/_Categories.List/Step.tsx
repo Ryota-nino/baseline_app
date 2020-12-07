@@ -30,6 +30,7 @@ const Step: React.FC<Props> = (props) => {
         if (step) {
           const stepCard = {
             id: step.id,
+            user_id: data.user.id,
             userName: data.user.last_name + " " + data.user.first_name,
             iconImagePath: data.user.icon_image_path,
             job: data.user.desired_occupations,
@@ -55,12 +56,14 @@ const Step: React.FC<Props> = (props) => {
           return steps.map((data: any) => {
             return (
               <PostStudent
-                id={data.id}
+                category_id={data.id}
+                student_id={data.user_id}
                 ttl="本選考(22卒)"
                 isPass={false}
                 job={data.job}
                 icon={data.icon}
                 userName={data.userName}
+                type="step"
               />
             );
           });

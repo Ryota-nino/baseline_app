@@ -9,6 +9,21 @@ interface Props {
   id: number;
 }
 
+const calendarObj = [
+  { id: 1, name: "1月" },
+  { id: 1, name: "2月" },
+  { id: 1, name: "3月" },
+  { id: 1, name: "4月" },
+  { id: 1, name: "5月" },
+  { id: 1, name: "6月" },
+  { id: 1, name: "7月" },
+  { id: 1, name: "8月" },
+  { id: 1, name: "9月" },
+  { id: 1, name: "10月" },
+  { id: 1, name: "11月" },
+  { id: 1, name: "12月" },
+];
+
 const InputWindowInterview: React.FC<Props> = (props) => {
   const el = useRef(null);
 
@@ -25,20 +40,6 @@ const InputWindowInterview: React.FC<Props> = (props) => {
       opacity: 0,
     },
   };
-  const calendarObj = [
-    { value: "1月" },
-    { value: "2月" },
-    { value: "3月" },
-    { value: "4月" },
-    { value: "5月" },
-    { value: "6月" },
-    { value: "7月" },
-    { value: "8月" },
-    { value: "9月" },
-    { value: "10月" },
-    { value: "11月" },
-    { value: "12月" },
-  ];
 
   const deleteHandler = () => {
     // const article = document.getElementById(`inputWindow-${props.id}`)!;

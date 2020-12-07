@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PrimaryBtn } from "../../Atoms/Btn/index";
 import { Primary } from "../../Atoms/TextInput/index";
+import { temporaryRegistationUser } from "../../../assets/script";
 
 const Register: React.FC = (props) => {
   const onSubmitHandler = () => {
     checkForms();
   };
+
+  useEffect(() => {
+    temporaryRegistationUser("OguraHiroki1999@yahoo.co.jp");
+  }, []);
+
   const checkForms = () => {
     const email = document.querySelector(
       'input[name="email"]'

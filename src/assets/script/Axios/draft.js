@@ -17,6 +17,7 @@ export const indexDraft = () => {
         });
     });
   };
+  
   export const registDraft = (postData) => {
     apiClient.get("/sanctum/csrf-cookie").then((response) => {
       apiClient

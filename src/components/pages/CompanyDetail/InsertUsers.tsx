@@ -28,6 +28,7 @@ const InsertUsers: React.FC<Props> = (props) => {
   } else if (props.thisPage === "company-users") {
     pageTtl = "この会社に就職した方";
   }
+  let beforeId: number;
   const renderDOM = () => {
     return (
       <>
@@ -47,22 +48,26 @@ const InsertUsers: React.FC<Props> = (props) => {
               <h2 className="heading4 withAccent">{pageTtl}</h2>
               <div className="userCard-list">
                 {companyData.company_information.map((data: any) => {
-                  return (
-                    <article className="user-card">
-                      <Link to={`/user/${data.user.id}`}>
-                        <img src={data.user.icon_image_path} alt="" />
-                        <div className="user-card__wrapper">
-                          <h1 className="user-card__name">
-                            {data.user.first_name + " " + data.user.last_name}
-                          </h1>
-                          <div className="user-card__wrap">
-                            <p>{data.user.year_of_graduation}卒</p>
-                            <p>{data.user.desired_occupations}希望</p>
+                  if (beforeId == data.user.id) {
+                  } else {
+                    beforeId = data.user.id;
+                    return (
+                      <article className="user-card">
+                        <Link to={`/user/${data.user.id}`}>
+                          <img src={data.user.icon_image_path} alt="" />
+                          <div className="user-card__wrapper">
+                            <h1 className="user-card__name">
+                              {data.user.first_name + " " + data.user.last_name}
+                            </h1>
+                            <div className="user-card__wrap">
+                              <p>{data.user.year_of_graduation}卒</p>
+                              <p>{data.user.desired_occupations}希望</p>
+                            </div>
                           </div>
-                        </div>
-                      </Link>
-                    </article>
-                  );
+                        </Link>
+                      </article>
+                    );
+                  }
                 })}
               </div>
             </section>

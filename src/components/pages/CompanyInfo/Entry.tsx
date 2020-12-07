@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SelectPrimary } from "../../Atoms/Input";
 import { InsertAddBtn } from "../../Atoms/Btn";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
 import { EntrySheet } from "../../Organisms/Window";
+import { indexJob, showCompany } from "../../../assets/script";
 
-const Entry: React.FC = (props) => {
+interface Props {
+  match?: any;
+}
+const Entry: React.FC<Props> = (props) => {
+  const companyId = props.match.params.id;
   const pageTransition = {
     in: {
       opacity: 1,
@@ -20,23 +25,25 @@ const Entry: React.FC = (props) => {
       opacity: 0,
     },
   };
+  let [jobs, setJobs] = useState();
+  let [company, setCompany] = useState<any>();
+  useEffect(() => {
+    indexJob().then((getData: any) => {
+      setJobs(getData.data);
+    });
+    showCompany(companyId).then((getData: any) => {
+      setCompany(getData.data);
+    });
+  }, []);
+  let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
+  let inputLength = inputWindow.length;
+
   const jobInterviewTypes = [
     "本選考",
     "サマーインターン",
     "ウィンターインターン",
     "スプリングインターン",
   ];
-  const jobTypes = [
-    "デザイナー",
-    "エンジニア",
-    "企画職",
-    "イラストレーター",
-    "その他",
-  ];
-
-  let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
-  let inputLength = inputWindow.length;
-
   const createInputWindow = () => {
     if (inputLength < 10) {
       setInputWindow([...inputWindow, { id: inputLength + 1 }]);
@@ -74,11 +81,7 @@ const Entry: React.FC = (props) => {
                   <p className="label-input__txt">
                     応募職種<span className="cAttention">*</span>
                   </p>
-                  <SelectPrimary
-                    name="job"
-                    options={jobTypes}
-                    required={false}
-                  />
+                  <SelectPrimary name="job" options={jobs} required={false} />
                 </div>
                 {/* <div className="label-input">
                   <FreeWordInput
@@ -98,7 +101,7 @@ const Entry: React.FC = (props) => {
 
             <InsertAddBtn txt="項目を追加" click={createInputWindow} />
           </form>
-          <CompanyInfo />
+          <CompanyInfo data={company} />
         </div>
       </div>
     </motion.main>

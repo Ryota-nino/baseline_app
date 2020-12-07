@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 import { InterviewPage } from "../../Organisms/Window";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
+import { indexJob, showCompany } from "../../../assets/script";
 
-const Interview: React.FC = (props) => {
+interface Props {
+  match?: any;
+}
+const Interview: React.FC<Props> = (props) => {
+  let [loading, setLoading] = useState<boolean>(false);
+  const companyId = props.match.params.id;
   const pageTransition = {
     in: {
       opacity: 1,
@@ -26,11 +32,8 @@ const Interview: React.FC = (props) => {
       page: <></>,
     },
   ]);
-
   let pagesLength = inputPages.length;
-
   let windowLength = inputWindow.length;
-
   function createInputWindow() {
     if (windowLength < 10) {
       setInputWindow([...inputWindow, { id: windowLength + 1 }]);
@@ -41,8 +44,17 @@ const Interview: React.FC = (props) => {
   const insertTab = useRef<HTMLOListElement>(null);
 
   let isFirstClick: boolean;
+  let [jobs, setJobs] = useState();
+  let [company, setCompany] = useState<any>();
   useEffect(() => {
     isFirstClick = true;
+    indexJob().then((getData: any) => {
+      setJobs(getData.data);
+    });
+    showCompany(companyId).then((getData: any) => {
+      setCompany(getData.data);
+      setLoading(true);
+    });
   }, []);
 
   const createTabMenu = () => {
@@ -79,6 +91,7 @@ const Interview: React.FC = (props) => {
               window={inputWindow}
               func={createInputWindow}
               pages={inputPages}
+              jobs={jobs}
             />
           ),
         },
@@ -123,41 +136,55 @@ const Interview: React.FC = (props) => {
     }
   };
 
-  return (
-    <motion.div initial="out" animate="in" exit="out" variants={pageTransition}>
-      <div className="insert-tab">
-        <ol ref={insertTab} className="insert-tab__wrap">
-          <li data-id="0" id="insertTab-0" className="insert-tab__item current">
-            <span>1次面接</span>
-          </li>
-          {/* <li className="insert-tab__item">二次面接</li> */}
-        </ol>
-        <button
-          ref={addTabBtn}
-          onClick={createTabMenu}
-          className="btn btn--plus"
-        ></button>
-      </div>
-      <main className="main company-info-edit">
-        <div className="main__container">
-          <Link to="/company-info" className="btn pageBack-link">
-            <span className="heading4">情報一覧へ</span>
-          </Link>
-          <div id="type-interview" className="company-info-edit__container">
-            <InterviewPage
-              window={inputWindow}
-              func={createInputWindow}
-              pages={0}
-            />
-            {inputPages.map((data) => {
-              return data.page;
-            })}
-            <CompanyInfo />
-          </div>
+  const renderDOM = () => {
+    return (
+      <motion.div
+        initial="out"
+        animate="in"
+        exit="out"
+        variants={pageTransition}
+      >
+        <div className="insert-tab">
+          <ol ref={insertTab} className="insert-tab__wrap">
+            <li
+              data-id="0"
+              id="insertTab-0"
+              className="insert-tab__item current"
+            >
+              <span>1次面接</span>
+            </li>
+            {/* <li className="insert-tab__item">二次面接</li> */}
+          </ol>
+          <button
+            ref={addTabBtn}
+            onClick={createTabMenu}
+            className="btn btn--plus"
+          ></button>
         </div>
-      </main>
-    </motion.div>
-  );
+        <main className="main company-info-edit">
+          <div className="main__container">
+            <Link to="/company-info" className="btn pageBack-link">
+              <span className="heading4">情報一覧へ</span>
+            </Link>
+            <div id="type-interview" className="company-info-edit__container">
+              <InterviewPage
+                window={inputWindow}
+                func={createInputWindow}
+                pages={0}
+                jobs={jobs}
+              />
+              {inputPages.map((data) => {
+                return data.page;
+              })}
+              <CompanyInfo data={company} />
+            </div>
+          </div>
+        </main>
+      </motion.div>
+    );
+  };
+
+  return <>{loading && renderDOM()}</>;
 };
 
 export default Interview;

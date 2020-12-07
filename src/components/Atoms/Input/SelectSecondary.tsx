@@ -3,13 +3,14 @@ import React from "react";
 interface Props {
   ttl: string;
   name: string;
-  selectObj: { value: string }[];
+  selectObj: any;
 }
 
 const SelectSecondary: React.FC<Props> = (props) => {
+  console.log(props.selectObj);
   const renderSelectItem = () => {
-    return Object.values(props.selectObj).map((data, index) => {
-      return <option value={data.value}>{data.value}</option>;
+    return Object.values(props.selectObj).map((data: any, index) => {
+      return <option value={data.id}>{data.name}</option>;
     });
   };
 

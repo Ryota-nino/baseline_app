@@ -23,6 +23,7 @@ interface Props {
   setSaveTextModal: any;
   content?: string;
   setCurrentText?: any;
+  btnClickFunc?: any;
 }
 
 const CommentWindow: React.FC<Props> = (props) => {
@@ -64,6 +65,14 @@ const CommentWindow: React.FC<Props> = (props) => {
       ".modal__textarea"
     )! as HTMLTextAreaElement;
     props.setCurrentText(currentText.value);
+  };
+
+  const contentSendHandler = () => {
+    const currentText = document.querySelector(
+      ".modal__textarea"
+    )! as HTMLTextAreaElement;
+    props.setCurrentText(currentText.value);
+    props.btnClickFunc(currentText.value);
   };
   return (
     <>
@@ -108,6 +117,8 @@ const CommentWindow: React.FC<Props> = (props) => {
             <RoundedBtn
               txt="投稿"
               className={inputText.count > 200 ? "invalid" : ""}
+              isType="button"
+              Func={contentSendHandler}
             />
           </div>
         </div>

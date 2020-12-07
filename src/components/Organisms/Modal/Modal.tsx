@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { registMyActivity } from "../../../assets/script/";
 import {
   CommentWindow,
   LevelDesc,
@@ -29,6 +30,10 @@ const Modal: React.FC<Props> = (props) => {
   const [currentText, setCurrentText] = useState<string>();
   const [useDraftText, setUseDraftText] = useState<string>();
 
+  const registerActivity = (text: string) => {
+    registMyActivity({ content: text });
+  };
+
   const rootingModalRender = () => {
     if (props.type === "activity-post") {
       return (
@@ -39,6 +44,7 @@ const Modal: React.FC<Props> = (props) => {
           setSaveTextModal={setSaveTextModal}
           content={useDraftText}
           setCurrentText={setCurrentText}
+          btnClickFunc={registerActivity}
         />
       );
     } else if (props.type === "select-post-category") {

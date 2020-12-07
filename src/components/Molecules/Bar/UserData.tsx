@@ -37,8 +37,8 @@ const UserData: React.FC<Props> = (props) => {
               {graduationYearConversion() + "卒"}
             </li>
             <li className="userDetail-window__gender">
-              &nbsp;/&nbsp;性別:{renderGender(props.userData.sex)}
-              &nbsp;/&nbsp;
+              &nbsp;|&nbsp;性別:{renderGender(props.userData.sex)}
+              &nbsp;|&nbsp;
             </li>
             <li className="userDetail-window__job">
               {props.userData.desired_occupation.name}

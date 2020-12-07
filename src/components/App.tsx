@@ -30,7 +30,7 @@ const App = () => {
             ></Route>
             <Route
               path="/company-info/:id/edit"
-              render={() => <Header needBtn={true} />}
+              render={(props) => <Header needBtn={true} {...props} />}
             ></Route>
             <Route
               path="/"
@@ -122,7 +122,7 @@ const App = () => {
 
                 <Route
                   exact
-                  path="/company-detail/contents/:id/:category"
+                  path="/company-detail/contents/:cateogry_id/:category/:student_id"
                   render={(props) => <Page.DetailContents {...props} />}
                 ></Route>
 
@@ -134,7 +134,7 @@ const App = () => {
                 <Route
                   exact
                   path="/company-info/:id/"
-                  render={() => <Page.CompanyInfo />}
+                  render={(props) => <Page.CompanyInfo {...props} />}
                 ></Route>
                 <Route
                   path="/profile-edit"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { AboutBar } from "../../Organisms/CompanyDetail";
 import { PostStudent } from "../../Molecules/Card/index";
@@ -8,22 +8,21 @@ import { ActionBtn, RoundedBtn } from "../../Atoms/Btn";
 import { Modal } from "../../Organisms/Modal";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+import { indexEntry } from "../../../assets/script";
 interface Props {
-  // showModal?: any;
-  // setShowModal?: any;
+  match?: any;
 }
 
 const CompanyInfo: React.FC<Props> = (props) => {
   const history = useHistory();
+  const companyId = props.match.params.id;
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const obj = {
     company_name: "aa",
     company_url: "https://",
   };
-
   const location = useLocation();
-  const companyId = location.pathname.split("/")[2];
   return (
     <>
       <motion.section
@@ -36,12 +35,12 @@ const CompanyInfo: React.FC<Props> = (props) => {
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">企業詳細へ</span>
         </button>
-        <AboutBar
+        {/* <AboutBar
           companyData={obj}
           thisPage="info"
           companyId={companyId}
           hasActionBtn={false}
-        />
+        /> */}
         <div className="contentBox2">
           <h2 className="heading4">共通情報</h2>
           <div className="company-info__form">
@@ -80,7 +79,8 @@ const CompanyInfo: React.FC<Props> = (props) => {
           <ul className="company-info__added">
             <li>
               <PostStudent
-                id={1}
+                category_id={1}
+                student_id={1}
                 ttl="本選考 (22卒)"
                 isPass={false}
                 job="デザイナー"
@@ -90,7 +90,8 @@ const CompanyInfo: React.FC<Props> = (props) => {
             </li>
             <li>
               <PostStudent
-                id={1}
+                category_id={1}
+                student_id={1}
                 ttl="サマーインターンシップ (22卒)"
                 isPass={true}
                 icon="a"
@@ -100,7 +101,8 @@ const CompanyInfo: React.FC<Props> = (props) => {
             </li>
             <li>
               <PostStudent
-                id={1}
+                category_id={1}
+                student_id={1}
                 ttl="本選考 (22卒)"
                 isPass={false}
                 job="デザイナー"

@@ -7,7 +7,7 @@ import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { mypage } from "../../assets/script/";
+import { getMyActivity, mypage } from "../../assets/script/";
 import axios from "axios";
 interface Props {
   match?: any;
@@ -38,7 +38,9 @@ const MyPage: React.FC<Props> = (props) => {
       const output = res.data;
       setAccount(output);
     });
-
+    getMyActivity().then((getData: any) => {
+      console.log(getData);
+    });
     mypage().then((getData: any) => {
       setMyData({
         data: getData.data,

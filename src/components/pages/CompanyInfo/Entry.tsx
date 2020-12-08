@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { SelectPrimary } from "../../Atoms/Input";
 import { InsertAddBtn } from "../../Atoms/Btn";
 import { CompanyInfo } from "../../Molecules/Card/index";
@@ -12,6 +12,7 @@ interface Props {
 }
 const Entry: React.FC<Props> = (props) => {
   const companyId = props.match.params.id;
+  const history = useHistory();
   const pageTransition = {
     in: {
       opacity: 1,
@@ -27,14 +28,18 @@ const Entry: React.FC<Props> = (props) => {
   };
   let [jobs, setJobs] = useState();
   let [company, setCompany] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     indexJob().then((getData: any) => {
       setJobs(getData.data);
     });
     showCompany(companyId).then((getData: any) => {
       setCompany(getData.data);
+      setLoading(true);
     });
   }, []);
+
   let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
   let inputLength = inputWindow.length;
 
@@ -50,40 +55,44 @@ const Entry: React.FC<Props> = (props) => {
     }
   };
 
-  return (
-    <motion.main
-      className="main company-info-edit"
-      initial="out"
-      animate="in"
-      exit="out"
-      variants={pageTransition}
-    >
-      <div className="main__container">
-        <Link to="/company-info" className="btn pageBack-link">
-          <span className="heading4">情報一覧へ</span>
-        </Link>
-        <div id="type-entry" className="company-info-edit__container">
-          <form className="company-info-edit__left-col">
-            <article className="contentBox contentBox--big">
-              <h1 className="heading4">概要</h1>
-              <div className="label-input mb16">
-                <p className="label-input__txt">
-                  選考種類<span className="cAttention">*</span>
-                </p>
-                <SelectPrimary
-                  name="selection_type"
-                  options={jobInterviewTypes}
-                  required={false}
-                />
-              </div>
-              <div className="contentBox__flex">
-                <div className="label-input">
+  const renderDOM = () => {
+    return (
+      <motion.main
+        className="main company-info-edit"
+        initial="out"
+        animate="in"
+        exit="out"
+        variants={pageTransition}
+      >
+        <div className="main__container">
+          <button
+            className="btn pageBack-link"
+            onClick={() => history.goBack()}
+          >
+            <span className="heading4">情報一覧へ</span>
+          </button>
+          <div id="type-entry" className="company-info-edit__container">
+            <form className="company-info-edit__left-col">
+              <article className="contentBox contentBox--big">
+                <h1 className="heading4">概要</h1>
+                <div className="label-input mb16">
                   <p className="label-input__txt">
-                    応募職種<span className="cAttention">*</span>
+                    選考種類<span className="cAttention">*</span>
                   </p>
-                  <SelectPrimary name="job" options={jobs} required={false} />
+                  <SelectPrimary
+                    name="selection_type"
+                    options={jobInterviewTypes}
+                    required={false}
+                  />
                 </div>
-                {/* <div className="label-input">
+                <div className="contentBox__flex">
+                  <div className="label-input">
+                    <p className="label-input__txt">
+                      応募職種<span className="cAttention">*</span>
+                    </p>
+                    <SelectPrimary name="job" options={jobs} required={false} />
+                  </div>
+                  {/* <div className="label-input">
                   <FreeWordInput
                     isRequired={true}
                     type="string"
@@ -91,21 +100,24 @@ const Entry: React.FC<Props> = (props) => {
                     placeholder="職種を入力"
                   />
                 </div> */}
-              </div>
-            </article>
+                </div>
+              </article>
 
-            {/* <InputWindowListEntry obj={inputWindow} /> */}
-            {inputWindow.map((box) => {
-              return <EntrySheet id={box.id} />;
-            })}
+              {/* <InputWindowListEntry obj={inputWindow} /> */}
+              {inputWindow.map((box) => {
+                return <EntrySheet id={box.id} />;
+              })}
 
-            <InsertAddBtn txt="項目を追加" click={createInputWindow} />
-          </form>
-          <CompanyInfo data={company} />
+              <InsertAddBtn txt="項目を追加" click={createInputWindow} />
+            </form>
+            <CompanyInfo data={company} />
+          </div>
         </div>
-      </div>
-    </motion.main>
-  );
+      </motion.main>
+    );
+  };
+
+  return <>{loading && renderDOM()}</>;
 };
 
 export default Entry;

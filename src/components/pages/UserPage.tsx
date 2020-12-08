@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { UserData } from "../Molecules/Bar/index";
-import { ActivityMeter } from "../Organisms/Activity/index";
 import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
@@ -37,7 +36,6 @@ const UserPage: React.FC<Props> = (props) => {
 
     getUserData(userId).then((userData: any) => {
       setUserData(userData.data);
-      console.log(userData.data);
       setLoading(true);
     });
   }, []);

@@ -101,7 +101,7 @@ const CompanySearch: React.FC<Props> = (props) => {
         />
       </div>
 
-      <div className="search-item">
+      <div className="search-item ">
         <p className="search-item__name">地域で検索</p>
         <div className="checkbox-list prefectures-list">
           <div className="checkbox-list__wrap prefectures-list__wrap">

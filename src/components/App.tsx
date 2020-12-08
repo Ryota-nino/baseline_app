@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { SideMenu, Header } from "./Organisms/Header/index";
 import { Modal } from "./Organisms/Modal";
 import * as Page from "./Pages";
 import { AnimatePresence } from "framer-motion";
 import "../assets/styles/App.scss";
+import { getMyActivity, mypage } from "../assets/script/";
 
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [myData, setMyData] = useState<any>({});
-  const [homeFreeWord, setHomeFreeWord] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    getMyData();
+  }, []);
 
-  return (
-    <div className="App">
+  const [homeFreeWord, setHomeFreeWord] = useState<string>();
+  const [myData, setMyData] = useState<any>();
+  const getMyData = () => {
+    mypage().then((getData: any) => {
+      setMyData({
+        ...myData,
+        data: getData.data,
+        company_information: getData.data.company_information,
+      });
+      setLoading(true);
+    });
+  };
+
+  const renderDOM = () => {
+    return (
       <div className="container">
         <Router>
           <Switch>
@@ -112,7 +128,16 @@ const App = () => {
                   path="/user/:id"
                   render={(props) => <Page.UserPage {...props} />}
                 ></Route>
-                <Route path="/mypage" render={() => <Page.MyPage />}></Route>
+                <Route
+                  path="/mypage"
+                  render={() => (
+                    <Page.MyPage
+                      getMyData={getMyData}
+                      myData={myData}
+                      loading={loading}
+                    />
+                  )}
+                ></Route>
 
                 <Route
                   exact
@@ -206,6 +231,7 @@ const App = () => {
           type="activity-post"
           showModal={showModal}
           setShowModal={setShowModal}
+          getMyData={getMyData}
         />
         <footer className="footer">
           <p className="copyright">
@@ -213,8 +239,10 @@ const App = () => {
           </p>
         </footer>
       </div>
-    </div>
-  );
+    );
+  };
+
+  return <div className="App">{loading && renderDOM()}</div>;
 };
 
 export default App;

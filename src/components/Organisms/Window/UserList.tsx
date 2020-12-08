@@ -42,27 +42,31 @@ const UserList: React.FC<Props> = (props) => {
   }
 
   const renderUserList = () => {
+    let count = 0;
     if (props.thisPage === "insert-users") {
       if (userList) {
         return userList.map((data: any) => {
-          return (
-            <li className="user-excerpt">
-              <Link to={`/user/${data.id}`}>
-                <img src={"http://localhost:8000/" + data.icon} alt="" />
-                <div className="user-excerpt__wrap">
-                  <p className="user-excerpt__name">{data.name}</p>
-                  <div>
-                    <p className="user-excerpt__year">
-                      {data.graduationYear}卒
-                    </p>
-                    <p className="user-excerpt__job">
-                      {data.desiredOccupations}希望
-                    </p>
+          if (count < 5) {
+            count++;
+            return (
+              <li className="user-excerpt">
+                <Link to={`/user/${data.id}`}>
+                  <img src={"http://localhost:8000/" + data.icon} alt="" />
+                  <div className="user-excerpt__wrap">
+                    <p className="user-excerpt__name">{data.name}</p>
+                    <div>
+                      <p className="user-excerpt__year">
+                        {data.graduationYear}卒
+                      </p>
+                      <p className="user-excerpt__job">
+                        {data.desiredOccupations}希望
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </li>
-          );
+                </Link>
+              </li>
+            );
+          }
         });
       }
     }

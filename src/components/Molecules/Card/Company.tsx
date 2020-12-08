@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
 interface Props {
   companyId: number;
   class: string;

@@ -17,4 +17,21 @@ export const temporaryRegistationUser = (email) => {
       });
   });
 };
+export const registerUser = (postData) => {
+  apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    apiClient
+      .post("/api/user/register", postData)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+          alert("ログイン失敗");
+        }
+      });
+  });
+};
 

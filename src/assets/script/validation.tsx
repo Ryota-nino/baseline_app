@@ -33,6 +33,10 @@ export const contentValidation = (value: string) => {
   return "";
 };
 
+export const numberValidation = (value: number) => {
+  if (!value) return "内容を入力してください";
+};
+
 export const passwordValidation = (value: string) => {
   if (!value) return "※パスワードを入力してください";
   if (value.length > 12) return "※パスワードは12文字以下で入力してください";

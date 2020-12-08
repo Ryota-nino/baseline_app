@@ -7,53 +7,56 @@ import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { getMyActivity, mypage } from "../../assets/script/";
+// import { getMyActivity, mypage } from "../../assets/script/";
 import axios from "axios";
 interface Props {
+  getMyData: any;
+  myData: any;
+  loading: boolean;
   match?: any;
 }
 
 const MyPage: React.FC<Props> = (props) => {
-  const location = useLocation();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
 
-  // ここでmyDataが取れない
-
   const [activity, setActivity] = useState<any>();
   const [account, setAccount] = useState<any>();
-  const [myData, setMyData] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [editContent, setEditContent] = useState<string>();
+  const [editContent, setEditContent] = useState<any>();
+  const [editId, setEditId] = useState<number>();
 
-  useEffect(() => {
-    const url = "./activity.json";
-    axios.get(url).then((res) => {
-      const output = res.data;
-      setActivity(output);
-    });
-
-    const url2 = "./database/account.json";
-    axios.get(url2).then((res) => {
-      const output = res.data;
-      setAccount(output);
-    });
-    getMyActivity().then((getData: any) => {
-      console.log(getData);
-    });
-    mypage().then((getData: any) => {
-      setMyData({
-        data: getData.data,
-        company_information: getData.company_information,
-      });
-      console.log(getData.data);
-      setLoading(true);
-    });
-  }, []);
-
-  const commentEdit = (isOpen: boolean, content: string) => {
+  const commentEdit = (id: number, isOpen: boolean, content: string) => {
     setShowModal(isOpen);
     setEditContent(content);
+    setEditId(id);
+  };
+
+  const renderMyActivities = () => {
+    const activitiesArrray: any[] = [];
+    if (props.myData.company_information) {
+      props.myData.company_information.forEach((data: any) => {
+        if (data.my_activities[0])
+          activitiesArrray.push({
+            id: data.id,
+            activity: data.my_activities[0],
+          });
+      });
+      return activitiesArrray.map((data: any) => (
+        <Comment
+          id={data.id}
+          name={
+            props.myData.data.first_name + " " + props.myData.data.last_name
+          }
+          year={data.activity.posted_year}
+          txt={data.activity.content}
+          updateTime={data.activity.updated_at}
+          isArrow={true}
+          type={"mypage"}
+          clickFunc={commentEdit}
+          clickFunc2={setShowModal2}
+        />
+      ));
+    }
   };
 
   const renderDOM = () => {
@@ -70,8 +73,8 @@ const MyPage: React.FC<Props> = (props) => {
 
           <UserData
             isPage="mypage"
-            userData={myData.data}
-            userId={myData.data.id}
+            userData={props.myData.data}
+            userId={props.myData.data.id}
           />
 
           <Link to="/01/account-setting" className="icon-txt icon-txt--normal">
@@ -79,30 +82,15 @@ const MyPage: React.FC<Props> = (props) => {
             アカウント設定へ
           </Link>
           <ActivityMeter />
-          <div className="activity-list">
-            {(() => {
-              if (activity) {
-                return activity.map((data: any) => (
-                  <Comment
-                    name={data.name}
-                    year={data.year}
-                    txt={data.txt}
-                    updateTime={data.updateTime}
-                    isArrow={true}
-                    type={"mypage"}
-                    clickFunc={commentEdit}
-                    clickFunc2={setShowModal2}
-                  />
-                ));
-              }
-            })()}
-          </div>
+          <div className="activity-list">{renderMyActivities()}</div>
         </motion.section>
         <Modal
           type="activity-edit"
           showModal={showModal}
           setShowModal={setShowModal}
           content={editContent}
+          editId={editId}
+          getMyData={props.getMyData}
         />
         <Modal
           type="activity-delete"
@@ -112,7 +100,7 @@ const MyPage: React.FC<Props> = (props) => {
       </>
     );
   };
-  return <>{loading && renderDOM()}</>;
+  return <>{props.loading && renderDOM()}</>;
 };
 
 export default MyPage;

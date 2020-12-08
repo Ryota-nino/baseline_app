@@ -2,14 +2,14 @@ import React from "react";
 import { Checkbox } from "../../Atoms/Input/index";
 
 interface Props {
-  id?: string;
-  keyName?: string;
-  className?: string;
-  category?: string;
   type: "checkbox" | "radio";
   txt: string;
   checkboxFunc?: any;
   checkedPref?: string[];
+  id?: string;
+  keyName?: string;
+  className?: string;
+  category?: string;
 }
 
 const CheckboxWithText: React.FC<Props> = (props) => {

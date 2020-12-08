@@ -11,15 +11,14 @@ const SearchStudent: React.FC = () => {
   const [students, setStudents] = useState<any>();
   const [usersData, setUsersData] = useState<any>([]);
   const [query, setQuery] = useState<object>();
-  const [loading, setLoading] = useState<boolean>(false);
 
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     const url = "./database/account.json";
     axios.get(url).then((res) => {
       const output = res.data;
       setStudents(output);
     });
-    console.log(students);
 
     searchUser({ ...query }).then((getData: any) => {
       setUsersData({

@@ -23,10 +23,8 @@ const Top: React.FC<Props> = (props) => {
   const history = useHistory();
   useEffect(() => {
     getHomeData().then((getData: any) => {
-      console.log(getData.data);
       if (getData.data) {
         setHomeData(getData.data);
-        console.log(getData.data);
         setLoading(true);
       }
     });
@@ -110,7 +108,7 @@ const Top: React.FC<Props> = (props) => {
               </h1>
               {homeData.my_activities.map((data: any) => (
                 <Activity
-                  id={props.myData.id}
+                  id={data.user.id}
                   name={data.user.first_name + " " + data.user.last_name}
                   textLengthCheckFunc={checkTextLength}
                   content={data.my_activities[0].content}

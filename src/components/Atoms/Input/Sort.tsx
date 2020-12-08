@@ -6,16 +6,20 @@ interface Props {
 
 const SortBar: React.FC<Props> = (props) => {
   const selectChangeHandler = (e: any) => {
-    // let sortType: boolean = true;
-    // if (e.currentTarget.value == 0) {
-    //   sortType = true;
-    // }
-    // if (e.currentTarget.value == 1) {
-    //   sortType = false;
-    // }
+    let sortType: boolean = true;
+    if (e.currentTarget.value == 0) {
+      sortType = true;
+    }
+    if (e.currentTarget.value == 1) {
+      sortType = false;
+    }
+    console.log(sortType);
     props.searchFunc({
-      older: Number(e.currentTarget.value),
+      older: sortType,
     });
+    // props.searchFunc({
+    //   older: Number(e.currentTarget.value),
+    // });
   };
   return (
     <div className="sort-bar">

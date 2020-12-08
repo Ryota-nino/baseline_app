@@ -12,6 +12,7 @@ interface Props {
   txt: string;
   updateTime: string;
   isArrow: boolean;
+  id?: number;
   type?: "user" | "mypage";
   clickFunc?: any;
   clickFunc2?: any;
@@ -89,7 +90,7 @@ const Comment: React.FC<Props> = (props) => {
         <ul className={`activity-item-menu ${toggleMenu && "view"}`}>
           <li
             className="activity-item-menu__item"
-            onClick={() => props.clickFunc(true, props.txt)}
+            onClick={() => props.clickFunc(props.id, true, props.txt)}
           >
             <img src={PencilIcon} alt="" />
             <span>編集</span>

@@ -9,11 +9,26 @@ import { SelectPrimary } from "../../Atoms/Input";
 import { Primary } from "../../Atoms/TextInput";
 import { CheckboxWithText } from "../../Molecules/Input";
 import { ActionBtn } from "../../Atoms/Btn/index";
+import { handleChange } from "../../../assets/script/validation";
 
 const RegisterInsert: React.FC = (props) => {
+  const token = "8bf42341-ac89-365c-9274-304391f45b63";
   useEffect(() => {
     selectBtnChanges();
   }, []);
+  const [state, setState] = useState({
+    info: {
+      email: "",
+      password: "",
+    },
+    message: {
+      email: "",
+      password: "",
+    },
+  });
+  const inputChangeHandler = (e: any) => {
+    handleChange(state, setState, e);
+  };
 
   const selectBtnChanges = () => {
     const selectBtns = document.querySelectorAll(".select-btn");
@@ -39,52 +54,8 @@ const RegisterInsert: React.FC = (props) => {
   const yearList = ["21卒", "22卒", "23卒"];
 
   const onSubmitHandler = () => {
-    checkForms();
+    // checkForms();
   };
-
-  const isEmptyValidation = (
-    el: any,
-    errors: Array<boolean>,
-    message: string
-  ) => {
-    let elError = el.parentNode?.querySelector(".error-message")!;
-    if (el.value === "") {
-      elError.textContent = `${message}`;
-      errors.push(true);
-    } else {
-      elError.textContent = "";
-    }
-  };
-
-  const checkInputLength = (
-    el: HTMLInputElement,
-    maxLength: number,
-    errors: Array<boolean>,
-    message: string
-  ) => {
-    let elError = el.parentNode?.querySelector(".error-message")!;
-    if (el.value.length > maxLength) {
-      elError.textContent = `${message}`;
-      errors.push(true);
-    } else if (el.value !== "") {
-      elError.textContent = "";
-    }
-  };
-
-  const passwordAgainCheck = (
-    password: HTMLInputElement,
-    passwordAgain: HTMLInputElement,
-    errors: Array<boolean>,
-    message: string
-  ) => {
-    let elError = passwordAgain.parentNode?.querySelector(".error-message")!;
-    if (password.value !== passwordAgain.value) {
-      elError.textContent = `${message}`;
-      errors.push(true);
-      console.log("!");
-    }
-  };
-
   const [image, setImage] = useState("");
   const onImageHandler = (event: any) => {
     const sendObj = {
@@ -101,59 +72,6 @@ const RegisterInsert: React.FC = (props) => {
   };
 
   const createSendData = () => {};
-
-  const checkForms = () => {
-    const student_number = document.querySelector(
-      'input[name="student_number"]'
-    ) as HTMLInputElement;
-    const password = document.querySelector(
-      'input[name="password"]'
-    ) as HTMLInputElement;
-    const passwordAgain = document.querySelector(
-      'input[name="password_again"]'
-    ) as HTMLInputElement;
-    const lastName = document.querySelector(
-      'input[name="last_name"]'
-    ) as HTMLInputElement;
-    const firstName = document.querySelector(
-      'input[name="first_name"]'
-    ) as HTMLInputElement;
-    const errors: Array<boolean> = [];
-    let isError: boolean = false;
-    isEmptyValidation(student_number, errors, "学籍番号を入力してください");
-    isEmptyValidation(password, errors, "パスワードを入力してください");
-    isEmptyValidation(
-      passwordAgain,
-      errors,
-      "パスワードを再度入力してください"
-    );
-    isEmptyValidation(lastName, errors, "苗字を入力してください");
-    isEmptyValidation(firstName, errors, "名前を入力してください");
-    checkInputLength(
-      student_number,
-      10,
-      errors,
-      "10文字以内で入力してください"
-    );
-    checkInputLength(password, 30, errors, "30文字以内で入力してください");
-    checkInputLength(passwordAgain, 30, errors, "30文字以内で入力してください");
-    checkInputLength(lastName, 30, errors, "30文字以内で入力してください");
-    checkInputLength(firstName, 30, errors, "30文字以内で入力してください");
-    passwordAgainCheck(
-      password,
-      passwordAgain,
-      errors,
-      "パスワードが合致しません"
-    );
-    errors.forEach((error) => {
-      if (error) {
-        isError = true;
-      }
-    });
-    if (!isError) {
-      alert("OK!");
-    }
-  };
   return (
     <div className="register">
       <ul className="register-step">
@@ -186,6 +104,7 @@ const RegisterInsert: React.FC = (props) => {
               placeholder="学校から配布された６桁の番号"
               isRequired={true}
               isError={true}
+              onChange={inputChangeHandler}
             />
             <Primary
               name="password"
@@ -194,6 +113,7 @@ const RegisterInsert: React.FC = (props) => {
               placeholder="英数字を含めた8文字以上"
               isRequired={true}
               isError={true}
+              onChange={inputChangeHandler}
             />
             <Primary
               name="password_again"
@@ -202,6 +122,7 @@ const RegisterInsert: React.FC = (props) => {
               placeholder="英数字を含めた8文字以上"
               isRequired={true}
               isError={true}
+              onChange={inputChangeHandler}
             />
           </div>
 

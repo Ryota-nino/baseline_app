@@ -14,43 +14,46 @@ interface Props {
 
 const Header: React.FC<Props> = (props) => {
   const location = useLocation();
-  useEffect(() => {
-    isCurrentPage();
-  });
-
+  const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
+
   const logoutFunc = () => {
     history.push("/login");
   };
   const notLoginFunc = () => {
     history.push("/login");
   };
-
   useEffect(() => {
     getMyData(notLoginFunc).then((mydata: any) => {
       // 10文字まで表示
       if (mydata.data) {
         // mydata.data.first_name.substr(0, 5) +
         // mydata.data.last_name.substr(0, 5);
-        console.log(mydata.data);
+
         props.setMyData({
-          id: mydata.data.id,
-          first_name: mydata.data.first_name,
-          last_name: mydata.data.last_name,
-          student_number: mydata.data.student_number,
-          year_of_graduation: mydata.data.year_of_graduation,
-          icon_image_path: mydata.data.icon_image_path,
-          sex: mydata.data.sex,
-          email: mydata.data.email,
-          desired_occupations: mydata.data.desired_occupations,
+          ...props.myData,
+          profile: {
+            id: mydata.data.id,
+            first_name: mydata.data.first_name,
+            last_name: mydata.data.last_name,
+            student_number: mydata.data.student_number,
+            year_of_graduation: mydata.data.year_of_graduation,
+            icon_image_path: mydata.data.icon_image_path,
+            sex: mydata.data.sex,
+            email: mydata.data.email,
+            desired_occupations: mydata.data.desired_occupations,
+          },
         });
       }
+      setLoading(true);
     });
-
-    // loading react検索
-    // loadingをfalseからtrue
-    // returnをif文で分岐
   }, []);
+
+  useEffect(() => {
+    if (loading) {
+      isCurrentPage();
+    }
+  });
 
   const isCurrentPage = () => {
     const gNavs = document.querySelectorAll(".g-navi__item");
@@ -79,61 +82,72 @@ const Header: React.FC<Props> = (props) => {
     setViewMenu(!viewMenu);
   };
 
-  return (
-    <header className="header">
-      <div className="header__wrap">
-        <h1 className="logo">
-          <Link to="/">
-            <img src={Logo} alt="" />
-          </Link>
-        </h1>
-        <ul className="g-navi">
-          <li
-            className="g-navi__item current"
-            onClick={() => console.log(props.myData)}
-          >
-            <Link to="/">ホーム</Link>
-          </li>
-          <li className="g-navi__item">
-            <Link to="/search-company">企業を探す</Link>
-          </li>
-          <li className="g-navi__item">
-            <Link to="/search-student">学生の就活を見る</Link>
-          </li>
-          <li className="g-navi__item">
-            <Link to="/mypage">マイページ</Link>
-          </li>
-        </ul>
-        <PrimaryBtn
-          type="button"
-          txt="活動を追加"
-          setShowModal={props.setShowModal}
+  const renderDOM = () => {
+    return (
+      <header className="header">
+        <div className="header__wrap">
+          <h1 className="logo">
+            <Link to="/">
+              <img src={Logo} alt="" />
+            </Link>
+          </h1>
+          <ul className="g-navi">
+            <li
+              className="g-navi__item current"
+              onClick={() => console.log(props.myData.profile)}
+            >
+              <Link to="/">ホーム</Link>
+            </li>
+            <li className="g-navi__item">
+              <Link to="/search-company">企業を探す</Link>
+            </li>
+            <li className="g-navi__item">
+              <Link to="/search-student">学生の就活を見る</Link>
+            </li>
+            <li className="g-navi__item">
+              <Link to="/mypage">マイページ</Link>
+            </li>
+          </ul>
+          <PrimaryBtn
+            type="button"
+            txt="活動を追加"
+            setShowModal={props.setShowModal}
+          />
+        </div>
+        <MyAvatar
+          iconPath="aa"
+          name={
+            props.myData.profile.first_name +
+            " " +
+            props.myData.profile.last_name
+          }
+          student_number={props.myData.profile.student_number}
+          ml=""
+          isArrow={true}
+          clickFunc={toggleUserMenu}
         />
-      </div>
-      <MyAvatar
-        iconPath="aa"
-        name={props.myData.first_name + " " + props.myData.last_name}
-        student_number={props.myData.student_number}
-        ml=""
-        isArrow={true}
-        clickFunc={toggleUserMenu}
-      />
 
-      <div ref={myAvatarMenu} className={`myAvatar-menu ${viewMenu && "view"}`}>
-        <ul className="myAvatar-menu__wrap">
-          <li className="myAvatar-menu__item">
-            <Link to="/:user/account-setting">設定</Link>
-          </li>
-          <li
-            className="myAvatar-menu__item cAttention"
-            onClick={logout.bind(null, logoutFunc)}
-          >
-            ログアウト
-          </li>
-        </ul>
-      </div>
-    </header>
-  );
+        <div
+          ref={myAvatarMenu}
+          className={`myAvatar-menu ${viewMenu && "view"}`}
+        >
+          <ul className="myAvatar-menu__wrap">
+            <li className="myAvatar-menu__item">
+              <Link to="/:user/account-setting">設定</Link>
+            </li>
+            <li
+              className="myAvatar-menu__item cAttention"
+              onClick={logout.bind(null, logoutFunc)}
+            >
+              ログアウト
+            </li>
+          </ul>
+        </div>
+      </header>
+    );
+  };
+
+  return <>{loading && renderDOM()}</>;
 };
 
 export default Header;

@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { registMyActivity } from "../../../assets/script/";
+import { registMyActivity, editMyActivity } from "../../../assets/script/";
 import {
   CommentWindow,
   LevelDesc,
@@ -22,6 +22,8 @@ interface Props {
   type: string;
   companyId?: any;
   content?: string;
+  editId?: number;
+  getMyData?: any;
 }
 
 const Modal: React.FC<Props> = (props) => {
@@ -32,6 +34,11 @@ const Modal: React.FC<Props> = (props) => {
 
   const registerActivity = (text: string) => {
     registMyActivity({ content: text });
+    props.getMyData();
+  };
+  const editActivity = (id: number, text: string) => {
+    editMyActivity(id, text);
+    props.getMyData();
   };
 
   const rootingModalRender = () => {
@@ -45,6 +52,7 @@ const Modal: React.FC<Props> = (props) => {
           content={useDraftText}
           setCurrentText={setCurrentText}
           btnClickFunc={registerActivity}
+          type="regist"
         />
       );
     } else if (props.type === "select-post-category") {
@@ -71,7 +79,11 @@ const Modal: React.FC<Props> = (props) => {
           showModal={props.showModal}
           setShowModal={props.setShowModal}
           setSaveTextModal={setSaveTextModal}
+          setCurrentText={setCurrentText}
+          btnClickFunc={editActivity}
           content={props.content}
+          editId={props.editId}
+          type="edit"
         />
       );
     } else if (props.type === "activity-delete") {

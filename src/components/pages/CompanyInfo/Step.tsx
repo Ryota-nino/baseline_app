@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { SelectPrimary } from "../../Atoms/Input";
 import { InsertAddBtn } from "../../Atoms/Btn";
@@ -14,6 +14,8 @@ const Step: React.FC<Props> = (props) => {
   const companyId = props.match.params.id;
   let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
   let inputLength = inputWindow.length;
+  const [loading, setLoading] = useState<boolean>(false);
+  const history = useHistory();
   const jobInterviewTypes = [
     "本選考",
     "サマーインターン",
@@ -30,6 +32,7 @@ const Step: React.FC<Props> = (props) => {
     });
     showCompany(companyId).then((getData: any) => {
       setCompany(getData.data);
+      setLoading(true);
     });
   }, []);
 
@@ -38,52 +41,58 @@ const Step: React.FC<Props> = (props) => {
       setInputWindow([...inputWindow, { id: inputLength + 1 }]);
     }
   };
-
-  return (
-    <main className="main company-info-edit">
-      <div className="main__container">
-        <Link to="/company-info" className="btn pageBack-link">
-          <span className="heading4">情報一覧へ</span>
-        </Link>
-        <div id="type-step" className="company-info-edit__container">
-          <form className="company-info-edit__left-col">
-            <article className="contentBox contentBox--big">
-              <h1 className="heading4">概要</h1>
-              <div className="label-input mb16">
-                <p className="label-input__txt">
-                  選考種類<span className="cAttention">*</span>
-                </p>
-                <SelectPrimary
-                  name="selection_type"
-                  options={jobInterviewTypes}
-                  required={true}
-                />
-              </div>
-              <div className="contentBox__flex">
-                <div className="label-input">
+  const renderDOM = () => {
+    return (
+      <main className="main company-info-edit">
+        <div className="main__container">
+          <button
+            className="btn pageBack-link"
+            onClick={() => history.goBack()}
+          >
+            <span className="heading4">情報一覧へ</span>
+          </button>
+          <div id="type-step" className="company-info-edit__container">
+            <form className="company-info-edit__left-col">
+              <article className="contentBox contentBox--big">
+                <h1 className="heading4">概要</h1>
+                <div className="label-input mb16">
                   <p className="label-input__txt">
-                    応募職種<span className="cAttention">*</span>
+                    選考種類<span className="cAttention">*</span>
                   </p>
-                  <SelectPrimary name="job" options={jobs} required={true} />
+                  <SelectPrimary
+                    name="selection_type"
+                    options={jobInterviewTypes}
+                    required={true}
+                  />
                 </div>
-                {/* <div className="label-input">
+                <div className="contentBox__flex">
+                  <div className="label-input">
+                    <p className="label-input__txt">
+                      応募職種<span className="cAttention">*</span>
+                    </p>
+                    <SelectPrimary name="job" options={jobs} required={true} />
+                  </div>
+                  {/* <div className="label-input">
                     <FreeWordInput isRequired={true} type="string" ttl="その他" placeholder="職種を入力" />
                 </div> */}
-              </div>
-            </article>
+                </div>
+              </article>
 
-            {/* <InputWindowListStep obj={inputWindow} /> */}
-            {inputWindow.map((box) => {
-              return <StepSheet id={box.id} />;
-            })}
+              {/* <InputWindowListStep obj={inputWindow} /> */}
+              {inputWindow.map((box) => {
+                return <StepSheet id={box.id} />;
+              })}
 
-            <InsertAddBtn txt="項目を追加" click={createInputWindow} />
-          </form>
-          <CompanyInfo data={company} />
+              <InsertAddBtn txt="項目を追加" click={createInputWindow} />
+            </form>
+            <CompanyInfo data={company} />
+          </div>
         </div>
-      </div>
-    </main>
-  );
+      </main>
+    );
+  };
+
+  return <>{loading && renderDOM()}</>;
 };
 
 export default Step;

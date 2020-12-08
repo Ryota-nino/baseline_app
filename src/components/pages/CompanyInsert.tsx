@@ -12,7 +12,6 @@ import {
   detailCompany,
   editCompany,
 } from "../../assets/script/index";
-import axios from "axios";
 
 interface Props {
   match?: any;
@@ -168,7 +167,12 @@ const CompanyInsert: React.FC<Props> = (props) => {
             />
 
             <div className="company-insert__enter">
-              <p className="company-insert__cancel">キャンセル</p>
+              <p
+                className="company-insert__cancel"
+                onClick={() => history.goBack()}
+              >
+                キャンセル
+              </p>
               <ActionBtn
                 type="submit"
                 txt="登録する"

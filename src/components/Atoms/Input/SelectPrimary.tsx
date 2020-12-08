@@ -17,7 +17,6 @@ const SelectBox: React.FC<Props> = (props) => {
 
   return (
     <div className="selectBox input--normal">
-      {console.log(props.options)}
       <div>
         <select
           name={props.name}

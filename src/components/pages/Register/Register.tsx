@@ -1,43 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { PrimaryBtn } from "../../Atoms/Btn/index";
 import { Primary } from "../../Atoms/TextInput/index";
+import { handleChange } from "../../../assets/script/validation";
 import { temporaryRegistationUser } from "../../../assets/script";
 
 const Register: React.FC = (props) => {
+  const history = useHistory();
   const onSubmitHandler = () => {
-    checkForms();
-  };
-
-  useEffect(() => {
-    temporaryRegistationUser("OguraHiroki1999@yahoo.co.jp");
-  }, []);
-
-  const checkForms = () => {
     const email = document.querySelector(
-      'input[name="email"]'
-    ) as HTMLButtonElement;
-    const errors = [];
-    let isError: boolean = false;
-    if (email.value === "") {
-      let emailError = email.parentNode?.querySelector(".error-message")!;
-      emailError.textContent = "メールアドレスを入力してください";
-      errors.push(true);
-    }
-    errors.forEach((error) => {
-      if (error) {
-        isError = true;
-      }
-    });
-    if (!isError) {
-      alert("OK!");
-    }
+      'input[type="email"]'
+    ) as HTMLInputElement;
+    temporaryRegistationUser(email.value);
+    history.push(`/register/send`);
+  };
+  const [state, setState] = useState({
+    info: {
+      email: "",
+    },
+    message: {
+      email: "",
+    },
+  });
+
+  useEffect(() => {}, []);
+  const inputChangeHandler = (e: any) => {
+    handleChange(state, setState, e);
   };
 
+  const inputEnterKeyHandler = (e: any) => {
+    if (e.key == "Enter") {
+      handleChange(state, setState, e);
+      onSubmitHandler();
+    }
+  };
   return (
     <div className="register">
       <div className="formBox">
-        <form method="POST" action="#" className="contentBox contentBox--big">
+        <div className="contentBox contentBox--big">
           <h1 className="heading4">会員登録</h1>
           <Primary
             type="email"
@@ -46,17 +47,22 @@ const Register: React.FC = (props) => {
             placeholder="example@gmail.com"
             isError={true}
             isRequired={true}
+            errorMessage={state.message.email}
+            defaultValue={state.info.email}
+            onChange={inputChangeHandler}
+            onKeyPress={inputEnterKeyHandler}
           />
           <PrimaryBtn
             type="button"
             txt="仮登録メールを送信"
             Func={onSubmitHandler}
+            disabledRule={!state.info.email || state.message.email}
           />
           <p>
             すでにアカウントをお持ちの方は
             <Link to="/login">こちら</Link>
           </p>
-        </form>
+        </div>
       </div>
     </div>
   );

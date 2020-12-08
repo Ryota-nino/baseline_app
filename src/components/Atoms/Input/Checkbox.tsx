@@ -23,6 +23,14 @@ const Checkbox: React.FC<Props> = (props) => {
     if (props.category == "enrollment_of_graduates" && props.checkboxFunc) {
       props.checkboxFunc(e.currentTarget.checked);
     }
+    // 希望職種
+    if (props.category == "jobs" && props.checkboxFunc) {
+      if (e.currentTarget.checked) {
+        props.checkboxFunc(e.currentTarget.name, true);
+      } else {
+        props.checkboxFunc(e.currentTarget.name, false);
+      }
+    }
     // 都道府県
     if (props.category == "prefectures" && props.checkboxFunc) {
       if (e.currentTarget.checked) {

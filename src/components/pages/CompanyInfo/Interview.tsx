@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { InterviewPage } from "../../Organisms/Window";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
@@ -11,6 +11,7 @@ interface Props {
 const Interview: React.FC<Props> = (props) => {
   let [loading, setLoading] = useState<boolean>(false);
   const companyId = props.match.params.id;
+  const history = useHistory();
   const pageTransition = {
     in: {
       opacity: 1,
@@ -163,9 +164,12 @@ const Interview: React.FC<Props> = (props) => {
         </div>
         <main className="main company-info-edit">
           <div className="main__container">
-            <Link to="/company-info" className="btn pageBack-link">
+            <button
+              className="btn pageBack-link"
+              onClick={() => history.goBack()}
+            >
               <span className="heading4">情報一覧へ</span>
-            </Link>
+            </button>
             <div id="type-interview" className="company-info-edit__container">
               <InterviewPage
                 window={inputWindow}

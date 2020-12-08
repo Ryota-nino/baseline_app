@@ -1,14 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Logo } from "../../../assets/images/index";
 import { RoundedBtn } from "../../Atoms/Btn";
-import { registEntry, registSelection } from "../../../assets/script";
+import {
+  registEntry,
+  registSelection,
+  registInterview,
+} from "../../../assets/script";
 
 interface Props {
   needBtn: boolean;
   match?: any;
 }
 const HeaderRegister: React.FC<Props> = (props) => {
+  const history = useHistory();
   const onSaveHandler = () => {
     const thisPageName = document.querySelector(
       ".company-info-edit__container"
@@ -55,22 +60,31 @@ const HeaderRegister: React.FC<Props> = (props) => {
         // formObj.internship_id = editForms[i].selection_type.value;
         formObj.internship_id = Number(1);
         formObj.occupational_category_id = Number(editForms[0].job.value);
-        formObj.result = Number(editForms[i].result.value);
         const interviewForms = editForms[i].querySelectorAll(
           ".interview-formBox"
         );
-        formObj.items = [];
+        console.log(formObj);
+        console.log(interviewForms);
+        console.log(editForms[i].result.value);
+        // formObj.result = Number(editForms[i].result.value);
+
         const items: any = [];
+        const result = document.querySelectorAll(
+          'select[name="result"]'
+        )! as NodeListOf<HTMLSelectElement>;
         interviewForms.forEach((form) => {
           const contentForms: any = {};
-          contentForms.date = form.querySelector("select")!.value;
-          contentForms.content = form.querySelector("textarea")!.value;
+          contentForms.interview_date = form.querySelector("select")!.value;
+          contentForms.contents = form.querySelector("textarea")!.value;
+          contentForms.result = result[i].value;
           items.push(contentForms);
         });
         sendData.push(items);
+        formObj.items = sendData;
       }
       console.log(formObj);
-      sendJSON = JSON.stringify(sendData);
+      // sendJSON = JSON.stringify(sendData);
+      registInterview(formObj);
       // エントリーページ
     } else if (thisPageName == "type-entry") {
       const interviewForms = editForms[0].querySelectorAll(
@@ -107,9 +121,12 @@ const HeaderRegister: React.FC<Props> = (props) => {
       </h1>
       {props.needBtn && (
         <div className="header-side__right">
-          <Link to="/company-info" className="header-side__cancel btn">
+          <button
+            onClick={() => history.goBack()}
+            className="header-side__cancel btn"
+          >
             キャンセル
-          </Link>
+          </button>
           <RoundedBtn txt="保存" Func={onSaveHandler} />
         </div>
       )}

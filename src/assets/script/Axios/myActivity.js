@@ -35,3 +35,39 @@ export const registMyActivity = (content) => {
       });
   });
 };
+export const editMyActivity = (id,content) => {
+  apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    apiClient
+      .post(`/api/my_activity/edit/${id}`, { content : content })
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          // alert("成功");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+          alert("失敗");
+        }
+      });
+  });
+};
+// export const deleteMyActivity = (id,content) => {
+//   apiClient.get("/sanctum/csrf-cookie").then((response) => {
+//     apiClient
+//       .post(`/api/my_activity/edit/${id}`, { content : content })
+//       .then((response) => {
+//         console.log(response);
+//         if (response.status === 200) {
+//           // alert("成功");
+//         }
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//         if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+//           alert("失敗");
+//         }
+//       });
+//   });
+// };

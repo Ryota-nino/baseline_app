@@ -24,6 +24,8 @@ interface Props {
   content?: string;
   setCurrentText?: any;
   btnClickFunc?: any;
+  editId?: number;
+  type?: "regist" | "edit";
 }
 
 const CommentWindow: React.FC<Props> = (props) => {
@@ -67,13 +69,21 @@ const CommentWindow: React.FC<Props> = (props) => {
     props.setCurrentText(currentText.value);
   };
 
-  const contentSendHandler = () => {
+  const onClickHandler = () => {
     const currentText = document.querySelector(
       ".modal__textarea"
     )! as HTMLTextAreaElement;
     props.setCurrentText(currentText.value);
-    props.btnClickFunc(currentText.value);
+    if (props.type === "regist") {
+      props.btnClickFunc(currentText.value);
+    }
+    if (props.type === "edit") {
+      props.btnClickFunc(props.editId, currentText.value);
+    }
+
+    props.setShowModal(false);
   };
+
   return (
     <>
       <motion.form
@@ -118,7 +128,7 @@ const CommentWindow: React.FC<Props> = (props) => {
               txt="投稿"
               className={inputText.count > 200 ? "invalid" : ""}
               isType="button"
-              Func={contentSendHandler}
+              Func={onClickHandler}
             />
           </div>
         </div>

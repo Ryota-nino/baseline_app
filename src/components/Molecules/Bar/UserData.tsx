@@ -9,7 +9,6 @@ interface Props {
 }
 
 const UserData: React.FC<Props> = (props) => {
-  console.log(props.userData);
   const graduationYearConversion = () => {
     const text = props.userData.year_of_graduation;
     return text.substr(2, 2);

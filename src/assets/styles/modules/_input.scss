@@ -193,13 +193,25 @@
       right: 14px;
       margin: auto;
       transform: rotate(180deg);
+      transition: 0.3s ease;
+    }
+    &.rotate {
+      &::after {
+        transform: rotate(0);
+      }
     }
   }
   &__item {
     margin-bottom: 26px;
   }
   &__select-list {
+    transition: 0.3s ease;
     padding: 32px 46px;
+    &.hidden {
+      height: 0;
+      overflow: hidden;
+      padding: 0 32px;
+    }
   }
   &__category {
     margin-bottom: 4px;

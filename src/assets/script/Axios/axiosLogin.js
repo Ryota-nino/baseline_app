@@ -4,9 +4,9 @@ export const login = (email,password,active,jumpFunc) => {
     apiClient
       .post("/api/auth/login", {
         // laravel-a@example.com, "password",
-        email: email,
-        password: password,
-        active: active,
+        email,
+        password,
+        active,
       })
       .then((response) => {
         console.log(response);

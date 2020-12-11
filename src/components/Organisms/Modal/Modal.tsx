@@ -1,6 +1,10 @@
 import React, { useState, useReducer } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { registMyActivity, editMyActivity } from "../../../assets/script/";
+import {
+  registMyActivity,
+  editMyActivity,
+  deleteMyActivity,
+} from "../../../assets/script/";
 import {
   CommentWindow,
   LevelDesc,
@@ -23,6 +27,7 @@ interface Props {
   companyId?: any;
   content?: string;
   editId?: number;
+  deleteId?: number;
   getMyData?: any;
 }
 
@@ -38,6 +43,10 @@ const Modal: React.FC<Props> = (props) => {
   };
   const editActivity = (id: number, text: string) => {
     editMyActivity(id, text);
+    props.getMyData();
+  };
+  const deleteActivity = (id: number) => {
+    deleteMyActivity(id);
     props.getMyData();
   };
 
@@ -87,7 +96,13 @@ const Modal: React.FC<Props> = (props) => {
         />
       );
     } else if (props.type === "activity-delete") {
-      return <ActivityDelete setShowModal={props.setShowModal} />;
+      return (
+        <ActivityDelete
+          setShowModal={props.setShowModal}
+          deleteId={Number(props.deleteId)}
+          btnClickFunc={deleteActivity}
+        />
+      );
     } else if (props.type === "company-level") {
       return <LevelDesc setShowModal={props.setShowModal} />;
     } else if ("account-delete") {

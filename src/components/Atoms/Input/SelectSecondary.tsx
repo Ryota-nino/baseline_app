@@ -7,7 +7,6 @@ interface Props {
 }
 
 const SelectSecondary: React.FC<Props> = (props) => {
-  console.log(props.selectObj);
   const renderSelectItem = () => {
     return Object.values(props.selectObj).map((data: any, index) => {
       return <option value={data.id}>{data.name}</option>;

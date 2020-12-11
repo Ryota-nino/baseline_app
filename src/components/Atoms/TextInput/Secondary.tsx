@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
 
 interface Props {
   name: string;
@@ -13,6 +13,9 @@ interface Props {
   className?: string;
   defaultValue?: string;
   readonly?: boolean;
+  onChange?: ChangeEventHandler;
+  onKeyPress?: KeyboardEventHandler;
+  errorMessage?: string;
 }
 
 const Secondary: React.FC<Props> = (props) => {
@@ -44,7 +47,12 @@ const Secondary: React.FC<Props> = (props) => {
         placeholder={props.placeholderTxt}
         defaultValue={props.defaultValue}
         readOnly={props.readonly}
+        onChange={props.onChange}
+        onKeyPress={props.onKeyPress}
       />
+      {props.isError && (
+        <span className="error-message">{props.errorMessage}</span>
+      )}
       {hasErrorCheck()}
     </label>
   );

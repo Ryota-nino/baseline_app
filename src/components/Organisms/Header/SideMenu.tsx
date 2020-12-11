@@ -10,12 +10,14 @@ interface Props {
   setShowModal: any;
   setMyData: any;
   myData: any;
+  setIsLogin: any;
 }
 
 const Header: React.FC<Props> = (props) => {
   const location = useLocation();
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
+  const [myData, setMyData] = useState<any>();
 
   const logoutFunc = () => {
     history.push("/login");
@@ -24,14 +26,13 @@ const Header: React.FC<Props> = (props) => {
     history.push("/login");
   };
   useEffect(() => {
+    // props.setIsLogin(true);
     getMyData(notLoginFunc).then((mydata: any) => {
       // 10文字まで表示
-      if (mydata.data) {
+      if (mydata?.data) {
         // mydata.data.first_name.substr(0, 5) +
         // mydata.data.last_name.substr(0, 5);
-
-        props.setMyData({
-          ...props.myData,
+        setMyData({
           profile: {
             id: mydata.data.id,
             first_name: mydata.data.first_name,
@@ -44,6 +45,7 @@ const Header: React.FC<Props> = (props) => {
             desired_occupations: mydata.data.desired_occupations,
           },
         });
+      } else {
       }
       setLoading(true);
     });
@@ -94,7 +96,7 @@ const Header: React.FC<Props> = (props) => {
           <ul className="g-navi">
             <li
               className="g-navi__item current"
-              onClick={() => console.log(props.myData.profile)}
+              onClick={() => console.log(myData.profile)}
             >
               <Link to="/">ホーム</Link>
             </li>
@@ -116,12 +118,8 @@ const Header: React.FC<Props> = (props) => {
         </div>
         <MyAvatar
           iconPath="aa"
-          name={
-            props.myData.profile.first_name +
-            " " +
-            props.myData.profile.last_name
-          }
-          student_number={props.myData.profile.student_number}
+          name={myData.profile.first_name + " " + myData.profile.last_name}
+          student_number={myData.profile.student_number}
           ml=""
           isArrow={true}
           clickFunc={toggleUserMenu}

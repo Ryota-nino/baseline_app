@@ -46,9 +46,6 @@ const Login: React.FC = (props) => {
   const inputChangeHandler = (e: any) => {
     handleChange(state, setState, e);
   };
-  //   const primayBtnClickHandler = () => {
-  //   checkForms();
-  // };
   const inputEnterKeyHandler = (e: any) => {
     if (e.key == "Enter") {
       loginCheck();

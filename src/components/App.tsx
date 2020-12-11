@@ -7,16 +7,21 @@ import { AnimatePresence } from "framer-motion";
 import "../assets/styles/App.scss";
 import { getMyActivity, mypage } from "../assets/script/";
 
-const App = () => {
+const App: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  useEffect(() => {
-    getMyData();
-  }, []);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   const [homeFreeWord, setHomeFreeWord] = useState<string>();
   const [myData, setMyData] = useState<any>();
-  const getMyData = () => {
+  let urlParamStr = window.location.pathname;
+  useEffect(() => {
+    // if (urlParamStr.match(/login/) || urlParamStr.match(/register/)) {
+    setLoading(true);
+  }, []);
+
+  const getMyData = (notLoginFunc: any) => {
+    console.log("A");
     mypage().then((getData: any) => {
       setMyData({
         ...myData,
@@ -55,6 +60,7 @@ const App = () => {
                   setShowModal={setShowModal}
                   setMyData={setMyData}
                   myData={myData}
+                  setIsLogin={setIsLogin}
                 />
               )}
             ></Route>
@@ -110,7 +116,11 @@ const App = () => {
                   exact
                   path="/"
                   render={() => (
-                    <Page.Top setFreeWord={setHomeFreeWord} myData={myData} />
+                    <Page.Top
+                      setFreeWord={setHomeFreeWord}
+                      myData={myData}
+                      setIsLogin={setIsLogin}
+                    />
                   )}
                 ></Route>
 
@@ -135,6 +145,7 @@ const App = () => {
                       getMyData={getMyData}
                       myData={myData}
                       loading={loading}
+                      setMyData={setMyData}
                     />
                   )}
                 ></Route>
@@ -159,7 +170,9 @@ const App = () => {
                 <Route
                   exact
                   path="/company-info/:id/"
-                  render={(props) => <Page.CompanyInfo {...props} />}
+                  render={(props) => (
+                    <Page.CompanyInfo myData={myData} {...props} />
+                  )}
                 ></Route>
                 <Route
                   path="/profile-edit"

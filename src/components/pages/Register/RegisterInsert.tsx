@@ -12,18 +12,25 @@ import { ActionBtn } from "../../Atoms/Btn/index";
 import { handleChange } from "../../../assets/script/validation";
 
 const RegisterInsert: React.FC = (props) => {
-  const token = "8bf42341-ac89-365c-9274-304391f45b63";
+  const token = "82a0bd77-a48a-3e47-9b03-d807412daabc";
   useEffect(() => {
     selectBtnChanges();
+    const main = document.querySelector(".main") as HTMLElement;
+    main.classList.add("register");
   }, []);
   const [state, setState] = useState({
     info: {
+      student_number: "",
       email: "",
       password: "",
+      first_name: "",
+      last_name: "",
     },
     message: {
+      student_number: "",
       email: "",
       password: "",
+      last_name: "",
     },
   });
   const inputChangeHandler = (e: any) => {

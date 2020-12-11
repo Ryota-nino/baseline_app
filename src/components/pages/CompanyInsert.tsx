@@ -7,6 +7,7 @@ import { PrefectureSelector } from "../Organisms/Input";
 import { ActionBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
+import * as Validation from "../../assets/script/validation";
 import {
   insertCompany,
   detailCompany,
@@ -20,7 +21,6 @@ interface Props {
 const CompanyInsert: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [companyData, setCompanyData] = useState<any>([]);
-  const [postImage, setPostImage] = useState<any>();
   const companyId = props.match.params.id;
   const history = useHistory();
   useEffect(() => {
@@ -29,7 +29,6 @@ const CompanyInsert: React.FC<Props> = (props) => {
         if (getData) {
           setCompanyData(getData.data);
           setLoading(true);
-          console.log(getData.data);
         }
       });
     } else {
@@ -48,6 +47,25 @@ const CompanyInsert: React.FC<Props> = (props) => {
     { value: "300~400人" },
     { value: "400~500人" },
   ];
+
+  const [state, setState] = useState({
+    info: {
+      company_name: "",
+      furigana: "",
+      url: "",
+      business: "",
+    },
+    message: {
+      company_name: "",
+      furigana: "",
+      url: "",
+      business: "",
+    },
+  });
+
+  const inputChangeHandler = (e: any) => {
+    Validation.handleChange(state, setState, e);
+  };
 
   const formOnClickHandler = (e: any) => {
     const forms = document.forms[0];
@@ -89,8 +107,10 @@ const CompanyInsert: React.FC<Props> = (props) => {
     console.log(sendObj);
     if (companyId !== "register") {
       editCompany(companyId, sendObj);
+      // history.push(`/${companyId}`);
     } else {
-      insertCompany(sendObj);
+      console.log(insertCompany(sendObj));
+      // if (insertCompany(sendObj)) history.push(`/`);
     }
   };
 
@@ -117,8 +137,10 @@ const CompanyInsert: React.FC<Props> = (props) => {
               isRequired={true}
               isRequiredTxt={true}
               placeholderTxt="ビジョナル株式会社"
-              isError={isError}
+              isError={true}
               isIcon={false}
+              onChange={inputChangeHandler}
+              errorMessage={state.message.company_name}
             />
             <Secondary
               defaultValue={companyData.frigana}
@@ -128,8 +150,10 @@ const CompanyInsert: React.FC<Props> = (props) => {
               isRequired={true}
               isRequiredTxt={true}
               placeholderTxt="カブシキガイシャビジョナル"
-              isError={isError}
+              isError={true}
               isIcon={false}
+              onChange={inputChangeHandler}
+              errorMessage={state.message.furigana}
             />
 
             <ImageUpload name={"logo"} imageData={companyData.logo_image_url} />
@@ -145,6 +169,8 @@ const CompanyInsert: React.FC<Props> = (props) => {
               isError={isError}
               isIcon={true}
               iconUrl={LinkIcon}
+              onChange={inputChangeHandler}
+              errorMessage={state.message.url}
             />
             <Secondary
               defaultValue={companyData.business_description}
@@ -156,9 +182,14 @@ const CompanyInsert: React.FC<Props> = (props) => {
               placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発"
               isError={isError}
               isIcon={false}
+              onChange={inputChangeHandler}
+              errorMessage={state.message.business}
             />
 
-            <PrefectureSelector companyPref={companyData.prefectures} />
+            <PrefectureSelector
+              companyPref={companyData.prefectures}
+              category="prefSelect"
+            />
 
             <SelectSecondary
               name="employee_number"
@@ -179,6 +210,14 @@ const CompanyInsert: React.FC<Props> = (props) => {
                 isPlus={false}
                 linkUrl="#"
                 clickFunc={formOnClickHandler}
+                disabledRule={
+                  !state.info.company_name ||
+                  !state.info.furigana ||
+                  !state.info.url ||
+                  state.message.company_name ||
+                  state.message.furigana ||
+                  state.message.url
+                }
               />
             </div>
           </form>

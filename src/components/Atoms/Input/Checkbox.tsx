@@ -39,6 +39,12 @@ const Checkbox: React.FC<Props> = (props) => {
         props.checkboxFunc(e.currentTarget.name, false);
       }
     }
+    // 地域選択(企業登録)
+    if (props.category == "prefSelect" && props.checkboxFunc) {
+      if (e.currentTarget.checked) {
+        props.checkboxFunc();
+      }
+    }
   };
 
   const isCheckedPref = () => {

@@ -1,16 +1,36 @@
-// .page-login {
-//   height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   main {
-//     width: 100%;
-//   }
-// }
+.page-login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  main {
+    width: 100%;
+  }
+}
+.main.register {
+  width: 640px;
+  margin: 0 auto;
+  .free-word,
+  input[name="student_number"],
+  .selectBox {
+    width: 300px;
+  }
+}
+
+.login {
+  .contentBox {
+    width: 434px;
+  }
+}
+.register {
+  .contentBox {
+    width: 100%;
+  }
+}
+
 .login,
 .register {
   .contentBox {
-    width: 434px;
     margin: auto;
   }
   input[type="email"],

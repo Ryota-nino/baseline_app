@@ -37,7 +37,7 @@ const Activity: React.FC<Props> = (props) => {
             </p>
           </div>
           <p className="activity-card__txt">
-            {props.textLengthCheckFunc(props.content, 60)}
+            {props.textLengthCheckFunc(props.content && props.content, 60)}
           </p>
         </>
       );
@@ -46,7 +46,7 @@ const Activity: React.FC<Props> = (props) => {
         <>
           <p className="activity-card__name">{props.name}</p>
           <p className="activity-card__txt mb8">
-            {props.textLengthCheckFunc(props.content, 60)}
+            {props.textLengthCheckFunc(props.content && props.content, 60)}
           </p>
           <p className="activity-card__time">
             <time dateTime={timeTextConversion().dateTime}>

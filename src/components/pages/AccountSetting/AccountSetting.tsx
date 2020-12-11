@@ -9,6 +9,7 @@ interface Props {
 }
 
 const AccountSetting: React.FC<Props> = (props) => {
+  console.log(props.myData);
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
   return (
@@ -31,7 +32,7 @@ const AccountSetting: React.FC<Props> = (props) => {
               <Link to="/01/account-setting/student-number">
                 <p className="setting-item__label">学籍番号</p>
                 <p className="setting-item__value">
-                  {props.myData.student_number}
+                  {props.myData.data.student_number}
                 </p>
                 <p className="setting-item__arrow">
                   <img src={ArrowIcon} alt="" />
@@ -50,7 +51,7 @@ const AccountSetting: React.FC<Props> = (props) => {
             <li className="setting-item">
               <Link to="/01/account-setting/mail">
                 <p className="setting-item__label">メールアドレス</p>
-                <p className="setting-item__value">{props.myData.email}</p>
+                <p className="setting-item__value">{props.myData.data.email}</p>
                 <p className="setting-item__arrow">
                   <img src={ArrowIcon} alt="" />
                 </p>

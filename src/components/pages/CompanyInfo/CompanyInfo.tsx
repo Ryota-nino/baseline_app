@@ -8,31 +8,59 @@ import { ActionBtn, RoundedBtn } from "../../Atoms/Btn";
 import { Modal } from "../../Organisms/Modal";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { detailCompany } from ".././../../assets/script/";
+import {
+  detailCompany,
+  companyDetailUser,
+  getMyData,
+} from ".././../../assets/script/";
 interface Props {
+  myData: any;
   match?: any;
 }
 
 const CompanyInfo: React.FC<Props> = (props) => {
   const history = useHistory();
-  const companyId = props.match.params.id;
-
+  const companyId = Number(props.match.params.id);
   const [companyData, setCompanyData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [myData, setMyData] = useState<any>();
+  const [myCompanyInfo, setMyCompanyInfo] = useState({});
   useEffect(() => {
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
-        console.log(getData.data);
         setCompanyData({
           ...getData.data,
         });
-        setLoading(true);
       }
     });
-  }, []);
-  const location = useLocation();
 
+    getMyData()
+      .then((mydata: any) => {
+        if (mydata.data) {
+          setMyData({
+            profile: {
+              id: mydata.data.id,
+              first_name: mydata.data.first_name,
+              last_name: mydata.data.last_name,
+              student_number: mydata.data.student_number,
+              year_of_graduation: mydata.data.year_of_graduation,
+              icon_image_path: mydata.data.icon_image_path,
+              sex: mydata.data.sex,
+              email: mydata.data.email,
+              desired_occupations: mydata.data.desired_occupations,
+            },
+          });
+          setLoading(true);
+          return mydata.data;
+        }
+      })
+      .then((userData) => {
+        companyDetailUser(companyId, userData.id).then((getData) => {
+          console.log(getData);
+        });
+      });
+  }, []);
   const renderDOM = () => {
     return (
       <>

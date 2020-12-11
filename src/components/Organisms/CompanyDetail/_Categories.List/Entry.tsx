@@ -27,6 +27,7 @@ const Entry: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const entriesArray: any = [];
+    console.log(props.companyData);
     props.companyData.company_information.forEach((data: any) => {
       data.entries.forEach((entry: any) => {
         if (entry) {

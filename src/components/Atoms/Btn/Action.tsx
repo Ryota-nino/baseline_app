@@ -9,6 +9,7 @@ interface Props {
   linkUrl?: string;
   showModal?: any;
   setShowModal?: any;
+  disabledRule?: any;
 }
 
 const Action: React.FC<Props> = (props) => {
@@ -48,6 +49,7 @@ const Action: React.FC<Props> = (props) => {
         }
       }}
       className="btn btn--action"
+      disabled={props.disabledRule}
     >
       {isPlusRender()}
       {props.txt}

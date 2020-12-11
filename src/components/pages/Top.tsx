@@ -8,26 +8,53 @@ import { motion } from "framer-motion";
 import { Company, Activity } from "../Molecules/Card/index";
 import { News } from "../Molecules/Bar/index";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { getHomeData } from "../../assets/script/index";
+import { getHomeData, getMyData } from "../../assets/script/index";
 import axios from "axios";
 
 interface Props {
   setFreeWord: any;
   myData: any;
+  setIsLogin: any;
 }
 
 const Top: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [homeData, setHomeData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [myData, setMyData] = useState<any>();
   const history = useHistory();
+  const notLoginFunc = () => {
+    history.push("/login");
+  };
   useEffect(() => {
+    const container = document.querySelector(".container");
+    container?.classList.remove("page-login");
+    props.setIsLogin(true);
     getHomeData().then((getData: any) => {
-      if (getData.data) {
+      if (getData?.data) {
         setHomeData(getData.data);
         setLoading(true);
+        console.log(getData.data);
       }
     });
+    // getMyData(notLoginFunc).then((mydata: any) => {
+    //   if (mydata.data) {
+    //     setMyData({
+    //       profile: {
+    //         id: mydata.data.id,
+    //         first_name: mydata.data.first_name,
+    //         last_name: mydata.data.last_name,
+    //         student_number: mydata.data.student_number,
+    //         year_of_graduation: mydata.data.year_of_graduation,
+    //         icon_image_path: mydata.data.icon_image_path,
+    //         sex: mydata.data.sex,
+    //         email: mydata.data.email,
+    //         desired_occupations: mydata.data.desired_occupations,
+    //       },
+    //     });
+    //   }
+    //   setLoading(true);
+    // });
   }, []);
 
   const searchFunc = (word: string) => {
@@ -35,7 +62,7 @@ const Top: React.FC<Props> = (props) => {
     history.push(`/search-company`);
   };
   const checkTextLength = (el: string, MAX_LENGTH: number) => {
-    if (el.length > MAX_LENGTH) {
+    if (el && el.length > MAX_LENGTH) {
       return el.substr(0, MAX_LENGTH) + "...";
     }
     return el;
@@ -111,7 +138,9 @@ const Top: React.FC<Props> = (props) => {
                   id={data.user.id}
                   name={data.user.first_name + " " + data.user.last_name}
                   textLengthCheckFunc={checkTextLength}
-                  content={data.my_activities[0].content}
+                  content={
+                    data.my_activities[0] && data.my_activities[0].content
+                  }
                   updated_at={data.updated_at}
                   isSmall={false}
                 />

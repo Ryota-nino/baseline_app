@@ -12,7 +12,6 @@ export const mypage = () => {
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert('検索失敗');
           }
         });
     });
@@ -30,7 +29,6 @@ export const getUserData = (id) => {
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert('検索失敗');
           }
         });
     });

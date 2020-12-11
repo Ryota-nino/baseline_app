@@ -16,28 +16,39 @@ const modal = {
 
 interface Props {
   setShowModal: any;
+  deleteId: number;
+  btnClickFunc: any;
 }
 
 const ActivityDelete: React.FC<Props> = (props) => {
+  const btnClickHandler = () => {
+    props.btnClickFunc(props.deleteId);
+    props.setShowModal(false);
+  };
+
   return (
     <motion.div
-          className="modal modal--normal activity-delete"
-          variants={modal}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <p className="heading4">この活動履歴を削除しますか？</p>
-          <p className="txt">
-            今まで投稿した活動履歴が全て削除されます。
-            <br />
-            投稿した企業情報については削除されません。
-          </p>
-          <div className="flex">
-            <p className="cansel" onClick={() => props.setShowModal(false)}>
-              キャンセル
-            </p>
-            <RoundedBtn txt="アカウントを削除" isDelete={"true"} />
-          </div>
-        </motion.div>
+      className="modal modal--normal activity-delete"
+      variants={modal}
+      onClick={(event) => event.stopPropagation()}
+    >
+      <p className="heading4">この活動履歴を削除しますか？</p>
+      <p className="txt">
+        今まで投稿した活動履歴が全て削除されます。
+        <br />
+        投稿した企業情報については削除されません。
+      </p>
+      <div className="flex">
+        <p className="cansel" onClick={() => props.setShowModal(false)}>
+          キャンセル
+        </p>
+        <RoundedBtn
+          txt="アカウントを削除"
+          isDelete={"true"}
+          Func={btnClickHandler}
+        />
+      </div>
+    </motion.div>
   );
 };
 

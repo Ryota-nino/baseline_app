@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { TrashIcon } from "../../../assets/images/index";
 import { TextareaPrimary } from "../../Atoms/TextInput/index";
 import { Secondary } from "../../Atoms/TextInput";
 import { motion } from "framer-motion";
+import {
+  numberValidation,
+  handleChange,
+} from "../../../assets/script/validation";
 
 interface Props {
   id: number;
@@ -22,25 +26,26 @@ const EntrySheet: React.FC<Props> = (props) => {
       opacity: 0,
     },
   };
+
+  const [state, setState] = useState({
+    info: {
+      title: "",
+    },
+    message: {
+      title: "",
+    },
+  });
+
   const isError = [
     { isEmpty1: false },
     { isEmpty2: false },
     { isEmpty3: false },
   ];
-  const calendarObj = [
-    { value: "1月" },
-    { value: "2月" },
-    { value: "3月" },
-    { value: "4月" },
-    { value: "5月" },
-    { value: "6月" },
-    { value: "7月" },
-    { value: "8月" },
-    { value: "9月" },
-    { value: "10月" },
-    { value: "11月" },
-    { value: "12月" },
-  ];
+
+  const inputChangeHandler = (e: any) => {
+    handleChange(state, setState, e);
+    console.log(state);
+  };
 
   const deleteHandler = () => {
     const article = document.getElementById(`inputWindow-${props.id}`)!;
@@ -71,6 +76,7 @@ const EntrySheet: React.FC<Props> = (props) => {
           placeholderTxt="例) エントリーシート"
           isError={isError}
           isIcon={false}
+          onChange={inputChangeHandler}
         />
         <TextareaPrimary ttl="本文" placeholder="本文を記入" />
         {props.id !== 1 && (

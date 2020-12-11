@@ -6,29 +6,45 @@ import { ActivityMeter } from "../Organisms/Activity/index";
 import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
+import { mypage } from "../../assets/script/";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-// import { getMyActivity, mypage } from "../../assets/script/";
-import axios from "axios";
 interface Props {
   getMyData: any;
   myData: any;
   loading: boolean;
   match?: any;
+  setMyData: any;
 }
 
 const MyPage: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
-
-  const [activity, setActivity] = useState<any>();
-  const [account, setAccount] = useState<any>();
   const [editContent, setEditContent] = useState<any>();
   const [editId, setEditId] = useState<number>();
-
+  const [deleteId, setDeleteId] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    mypage().then((getData: any) => {
+      if (getData) {
+        props.setMyData({
+          ...props.myData,
+          data: getData.data,
+          company_information: getData.data.company_information,
+        });
+      }
+      setLoading(true);
+    });
+  }, []);
+  console.log(props.myData);
   const commentEdit = (id: number, isOpen: boolean, content: string) => {
     setShowModal(isOpen);
     setEditContent(content);
     setEditId(id);
+  };
+
+  const commentDelete = (id: number, isOpen: boolean) => {
+    setShowModal2(isOpen);
+    setDeleteId(id);
   };
 
   const renderMyActivities = () => {
@@ -39,6 +55,7 @@ const MyPage: React.FC<Props> = (props) => {
           activitiesArrray.push({
             id: data.id,
             activity: data.my_activities[0],
+            updated_at: data.updated_at,
           });
       });
       return activitiesArrray.map((data: any) => (
@@ -49,11 +66,11 @@ const MyPage: React.FC<Props> = (props) => {
           }
           year={data.activity.posted_year}
           txt={data.activity.content}
-          updateTime={data.activity.updated_at}
+          updateTime={data.updated_at}
           isArrow={true}
           type={"mypage"}
           clickFunc={commentEdit}
-          clickFunc2={setShowModal2}
+          clickFunc2={commentDelete}
         />
       ));
     }
@@ -96,11 +113,13 @@ const MyPage: React.FC<Props> = (props) => {
           type="activity-delete"
           showModal={showModal2}
           setShowModal={setShowModal2}
+          deleteId={deleteId}
+          getMyData={props.getMyData}
         />
       </>
     );
   };
-  return <>{props.loading && renderDOM()}</>;
+  return <>{loading && renderDOM()}</>;
 };
 
 export default MyPage;

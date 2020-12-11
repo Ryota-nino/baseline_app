@@ -45,7 +45,7 @@ const HeaderRegister: React.FC<Props> = (props) => {
         ) as HTMLInputElement;
         const textarea = document.querySelector("textarea")!;
         contentForms.title = titleInput.value;
-        contentForms.interview_date = Number(dateSelect.value);
+        contentForms.interview_date = String(dateSelect.value);
         contentForms.content = textarea.value;
         formObj.items.push(contentForms);
       });
@@ -69,14 +69,14 @@ const HeaderRegister: React.FC<Props> = (props) => {
         // formObj.result = Number(editForms[i].result.value);
 
         const items: any = [];
-        const result = document.querySelectorAll(
+        const results = document.querySelectorAll(
           'select[name="result"]'
         )! as NodeListOf<HTMLSelectElement>;
         interviewForms.forEach((form) => {
           const contentForms: any = {};
           contentForms.interview_date = form.querySelector("select")!.value;
-          contentForms.contents = form.querySelector("textarea")!.value;
-          contentForms.result = result[i].value;
+          contentForms.contents = [form.querySelector("textarea")!.value];
+          contentForms.results = Number(results[i].value);
           items.push(contentForms);
         });
         sendData.push(items);

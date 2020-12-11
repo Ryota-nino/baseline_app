@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
+import { pageTransitionNormal } from "../../../assets/script/pageTransition";
 import {
   Avatar,
   ArrowIcon,
   PencilIcon,
   TrashIcon,
 } from "../../../assets/images/index";
-
+import { motion } from "framer-motion";
 interface Props {
   name: string;
   year: string;
@@ -66,13 +67,19 @@ const Comment: React.FC<Props> = (props) => {
   };
 
   return (
-    <article className="activity-item">
+    <motion.article
+      className="activity-item"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageTransitionNormal}
+    >
       <img src={Avatar} alt="" />
       <div className="activity-item__content">
         <div className="activity-item__head">
           <h1 className="activity-item__name">{props.name}</h1>
           <ul className="activity-item__list">
-            <li>{props.year}</li>
+            <li>{props.year}年次</li>
             <li>&nbsp;|&nbsp;</li>
             <li>
               <time dateTime={timeTextConversion().dateTime}>
@@ -93,18 +100,18 @@ const Comment: React.FC<Props> = (props) => {
             onClick={() => props.clickFunc(props.id, true, props.txt)}
           >
             <img src={PencilIcon} alt="" />
-            <span>編集</span>
+            <span onClick={() => setToggleMenu(false)}>編集</span>
           </li>
           <li
             className="activity-item-menu__item cAttention"
-            onClick={() => props.clickFunc2(true)}
+            onClick={() => props.clickFunc2(props.id, true)}
           >
             <img src={TrashIcon} alt="" />
-            <span>削除</span>
+            <span onClick={() => setToggleMenu(false)}>削除</span>
           </li>
         </ul>
       )}
-    </article>
+    </motion.article>
   );
 };
 

@@ -1,4 +1,8 @@
-import React, { ChangeEvent, ChangeEventHandler, KeyboardEventHandler } from "react";
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  KeyboardEventHandler,
+} from "react";
 
 interface Props {
   type: string;

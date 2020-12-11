@@ -2,6 +2,8 @@
   display: flex;
   position: relative;
   margin: 0 auto;
+  border-bottom: 1px solid $cBorder1;
+  margin-bottom: 32px;
   & > img {
     width: 36px;
     height: 36px;
@@ -40,15 +42,17 @@
     font-size: 1.4rem;
     line-height: 1.75;
     padding-bottom: 40px;
-    border-bottom: 1px solid $cBorder1;
-    margin-bottom: 32px;
+
     a {
       color: $cLink;
     }
   }
-  &:last-child .activity-item__txt {
-    border: none;
-    padding: 0;
+
+  &:last-child {
+    margin-bottom: 0;
+    & .activity-item__txt {
+      border: none;
+    }
   }
   .activity-item-menu {
     background: $cWhite;

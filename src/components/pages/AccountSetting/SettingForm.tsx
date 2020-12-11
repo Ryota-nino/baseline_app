@@ -30,7 +30,7 @@ const SettingForm: React.FC<Props> = (props) => {
             placeholderTxt=""
             isError={isError}
             isIcon={false}
-            defaultValue={props.myData.student_number}
+            defaultValue={props.myData.data.student_number}
           />
           <div className="accountSetting-content__bottom">
             <p>
@@ -99,7 +99,7 @@ const SettingForm: React.FC<Props> = (props) => {
             placeholderTxt=""
             isError={isError}
             isIcon={false}
-            defaultValue={props.myData.email}
+            defaultValue={props.myData.data.email}
           />
           <div className="accountSetting-content__bottom">
             <p>

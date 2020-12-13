@@ -21,6 +21,7 @@ const UserPage: React.FC<Props> = (props) => {
   const [userData, setUserData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const userId = props.match.params.id;
+
   useEffect(() => {
     const url = "./activity.json";
     axios.get(url).then((res) => {
@@ -36,9 +37,34 @@ const UserPage: React.FC<Props> = (props) => {
 
     getUserData(userId).then((userData: any) => {
       setUserData(userData.data);
+      console.log(userData.data);
       setLoading(true);
     });
   }, []);
+  const renderActivities = () => {
+    const activitiesArrray: any[] = [];
+    if (userData.company_information) {
+      userData.company_information.forEach((data: any) => {
+        if (data.my_activities[0])
+          activitiesArrray.push({
+            id: data.id,
+            activity: data.my_activities[0],
+            updated_at: data.updated_at,
+          });
+      });
+      return activitiesArrray.map((data: any) => (
+        <Comment
+          id={data.id}
+          name={userData.first_name + " " + userData.last_name}
+          year={data.activity.posted_year}
+          txt={data.activity.content}
+          updateTime={data.updated_at}
+          isArrow={true}
+          type={"user"}
+        />
+      ));
+    }
+  };
 
   const renderDOM = () => {
     return (
@@ -74,7 +100,7 @@ const UserPage: React.FC<Props> = (props) => {
             userId={userData.id}
           />
           {/* <ActivityMeter /> */}
-          <div className="activity-list">
+          {/* <div className="activity-list">
             {(() => {
               if (activity) {
                 return activity.map((data: any) => (
@@ -91,7 +117,8 @@ const UserPage: React.FC<Props> = (props) => {
                 ));
               }
             })()}
-          </div>
+          </div> */}
+          <div className="activity-list">{renderActivities()}</div>
         </motion.section>
         <Modal
           type="activity-edit"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { indexEntry, indexJob } from "../../../../assets/script";
+import { companyDetailUser, indexJob } from "../../../../assets/script";
 
 interface Props {
   thisPage: string;
@@ -25,42 +25,79 @@ const Entry: React.FC<Props> = (props) => {
   const [content, setContent] = useState<any>();
   const [jobs, setJobs] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [postData, setPostData] = useState<any>();
   useEffect(() => {
-    indexEntry(props.params.cateogry_id).then((getData: any) => {
-      setContent(getData.data);
-      console.log(getData.data);
-    });
-    indexJob().then((getData: any) => {
-      console.log(getData.data);
-      setJobs(getData.data);
-      setLoading(true);
-    });
+    // indexJob().then((getData: any) => {
+    //   console.log(getData?.data);
+    //   setJobs(getData?.data);
+    //   setLoading(true);
+    // });
+    companyDetailUser(props.params.company_id, props.params.student_id).then(
+      (getData: any) => {
+        console.log(getData.data);
+        const postContent = getData.data.user.company_information.filter(
+          (data: any) => {
+            return data.company_id == props.params.company_id;
+          }
+        );
+        console.log(postContent);
+        setPostData(postContent);
+        setLoading(true);
+      }
+    );
   }, []);
 
-  const renderContentDOM = () => {
-    console.log(content);
-    if (content.entries) {
-      return content.entries.map((data: any) => {
-        return (
-          <section className="aboutCompany-Content">
-            <h3 className="heading5">{data.title}</h3>
-            <p className="aboutCompany-Content__txt">{data.content}</p>
-          </section>
-        );
-      });
-    }
+  const timeTextConversion = (time: string) => {
+    const dateTime: string = String(time).slice(0, 10);
+    const timeText: string = dateTime.replace(/-/g, ".");
+    const texts: {
+      dateTime: string;
+      timeText: string;
+    } = {
+      dateTime,
+      timeText,
+    };
+    return texts;
   };
 
-  const renderTitleDOM = () => {
+  const renderContentDOM = () => {
     return (
-      <div className="aboutCompany-item__left-col">
-        <h2 className="heading5">本選考 (22卒)</h2>
-        <p className="aboutCompany-item__job">
-          {jobs[content.occupational_category_id].name}応募
-        </p>
-      </div>
+      <>
+        {postData.map((content: any) => {
+          return (
+            <>
+              {content.entries.length != 0 && (
+                <div className="aboutCompany-item">
+                  <div className="aboutCompany-item__left-col">
+                    <h2 className="heading5">本選考 (22卒)</h2>
+                    <p className="aboutCompany-item__job">
+                      {content.occupational_category.name}応募
+                    </p>
+                  </div>
+
+                  <div className="aboutCompany-item__right-col">
+                    {content.entries.map((entry: any) => {
+                      return (
+                        <>
+                          <section className="aboutCompany-Content">
+                            <h3 className="heading5">{entry.title}</h3>
+                            <p className="aboutCompany-Content__txt">
+                              {entry.content}
+                            </p>
+                          </section>
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </>
+          );
+        })}
+      </>
     );
   };
+
   const renderDOM = () => {
     return (
       <motion.div
@@ -69,13 +106,16 @@ const Entry: React.FC<Props> = (props) => {
         exit="out"
         variants={pageTransition}
       >
-        <p className="companyContentsWindow__update">2020.09.18更新</p>
-        <div className="aboutCompany-item">
-          {loading && renderTitleDOM()}
-          <div className="aboutCompany-item__right-col">
-            {loading && renderContentDOM()}
-          </div>
-        </div>
+        <p className="companyContentsWindow__update">
+          {
+            timeTextConversion(postData[postData.length - 1].updated_at)
+              .timeText
+          }
+          &nbsp;更新
+        </p>
+
+        {loading && renderContentDOM()}
+
         {/* <div className="aboutCompany-item">
       <div className="aboutCompany-item__left-col">
         <h2 className="heading5">サマーインターンシップ(22卒)</h2>

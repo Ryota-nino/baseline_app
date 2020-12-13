@@ -45,16 +45,15 @@ export const detailCompany = (id) => {
 };
 
 export const editCompany = (id, postData) => {
-  let flg = false;
-  apiClient.get("/sanctum/csrf-cookie").then((response) => {
-    apiClient
+  return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    return apiClient
       .post(`/api/company/edit/${id}`, postData)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          alert("成功");
+          // alert("成功");
+          return true;
         }
-        flg = true;
       })
       .catch((error) => {
         console.error(error);
@@ -64,17 +63,16 @@ export const editCompany = (id, postData) => {
           error.response.status === 500
         ) {
           alert("失敗");
+          return false;
         }
-        flg = false;
+        return false;
       });
-      return flg;
   });
-  return flg;
 };
 
 export const insertCompany = (postData) => {
-  apiClient.get("/sanctum/csrf-cookie").then((response) => {
-    apiClient
+  return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    return apiClient
       .post("/api/company", postData)
       .then((response) => {
         console.log(response);
@@ -88,10 +86,8 @@ export const insertCompany = (postData) => {
           // alert("登録失敗");
           return false;
         }
-      }).then((result)=> {
-        console.log(result)
-        return result;
-      });
+        return false;
+      })
   });
   // return flg;
   

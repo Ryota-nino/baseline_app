@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { InterviewPage } from "../../Organisms/Window";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
-import { indexJob, showCompany } from "../../../assets/script";
+import { indexJob, indexInternship, showCompany } from "../../../assets/script";
 
 interface Props {
   match?: any;
@@ -46,11 +46,16 @@ const Interview: React.FC<Props> = (props) => {
 
   let isFirstClick: boolean;
   let [jobs, setJobs] = useState();
+  let [internship, setInternship] = useState();
   let [company, setCompany] = useState<any>();
   useEffect(() => {
     isFirstClick = true;
     indexJob().then((getData: any) => {
       setJobs(getData.data);
+    });
+    indexInternship().then((getData: any) => {
+      setInternship(getData.data);
+      console.log(getData.data);
     });
     showCompany(companyId).then((getData: any) => {
       setCompany(getData.data);
@@ -93,6 +98,7 @@ const Interview: React.FC<Props> = (props) => {
               func={createInputWindow}
               pages={inputPages}
               jobs={jobs}
+              internship={internship}
             />
           ),
         },
@@ -176,6 +182,7 @@ const Interview: React.FC<Props> = (props) => {
                 func={createInputWindow}
                 pages={0}
                 jobs={jobs}
+                internship={internship}
               />
               {inputPages.map((data) => {
                 return data.page;

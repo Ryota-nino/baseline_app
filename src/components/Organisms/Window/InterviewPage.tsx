@@ -9,6 +9,7 @@ interface Props {
   func: any;
   pages: any;
   jobs: any;
+  internship: any;
 }
 
 const InputWindowListInterview: React.FC<Props> = (props) => {
@@ -71,7 +72,7 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
             </p>
             <SelectPrimary
               name="selection_type"
-              options={[{ id: 1, name: "aa" }]}
+              options={props.internship}
               required={true}
             />
           </div>

@@ -51,7 +51,7 @@ const Categories: React.FC<Props> = (props) => {
       return (
         <Step
           thisPage={props.thisPage}
-          companyId={companyId}
+          companyId={props.companyId}
           companyData={props.companyData}
         />
       );
@@ -60,7 +60,7 @@ const Categories: React.FC<Props> = (props) => {
       return (
         <Entry
           thisPage={props.thisPage}
-          companyId={companyId}
+          companyId={props.companyId}
           companyData={props.companyData}
         />
       );
@@ -69,7 +69,7 @@ const Categories: React.FC<Props> = (props) => {
       return (
         <Interview
           thisPage={props.thisPage}
-          companyId={companyId}
+          companyId={props.companyId}
           companyData={props.companyData}
         />
       );

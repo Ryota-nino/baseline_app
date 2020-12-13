@@ -1,8 +1,8 @@
 import {apiClient} from '../index';
-export const indexEntry = (id) => {
+export const indexJob = () => {
     return apiClient.get("/sanctum/csrf-cookie").then((response) => {
       return apiClient
-        .get(`/api/entry/show/${id}`)
+        .get(`/api/occupational_category`)
         .then((response) => {
           if (response.status !== 200) {
             return false;
@@ -17,26 +17,39 @@ export const indexEntry = (id) => {
         });
     });
   };
-
-  export const registEntry = (postData) => {
+export const indexInternship = () => {
     return apiClient.get("/sanctum/csrf-cookie").then((response) => {
       return apiClient
-        .post(`/api/entry`, postData)
+        .get(`/api/internship`)
         .then((response) => {
-          console.log(response);
-          if (response.status === 200) {
-            // alert("成功");
-            return true;
+          if (response.status !== 200) {
+            return false;
           }
+          return response;
         })
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert("失敗");
-            return true;
+            alert("データ取得失敗")
           }
-          return true;
         });
     });
   };
-  
+export const indexYearGraduation = () => {
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
+        .get(`/api/year_of_graduation`)
+        .then((response) => {
+          if (response.status !== 200) {
+            return false;
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+            alert("データ取得失敗")
+          }
+        });
+    });
+  };

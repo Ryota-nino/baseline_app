@@ -57,6 +57,7 @@ const Interview: React.FC<Props> = (props) => {
             return (
               <PostStudent
                 category_id={data.id}
+                company_id={props.companyId}
                 student_id={data.user_id}
                 ttl="本選考(22卒)"
                 isPass={false}

@@ -23,31 +23,6 @@ const CompanyInsert: React.FC<Props> = (props) => {
   const [companyData, setCompanyData] = useState<any>([]);
   const companyId = props.match.params.id;
   const history = useHistory();
-  useEffect(() => {
-    if (companyId !== "register") {
-      detailCompany(companyId).then((getData: any) => {
-        if (getData) {
-          setCompanyData(getData.data);
-          setLoading(true);
-        }
-      });
-    } else {
-      setLoading(true);
-    }
-  }, []);
-
-  const isError = [
-    { isEmpty1: false },
-    { isEmpty2: false },
-    { isEmpty3: false },
-  ];
-  const employeesObj = [
-    { value: "100~200人" },
-    { value: "200~300人" },
-    { value: "300~400人" },
-    { value: "400~500人" },
-  ];
-
   const [state, setState] = useState({
     info: {
       company_name: "",
@@ -62,6 +37,37 @@ const CompanyInsert: React.FC<Props> = (props) => {
       business: "",
     },
   });
+
+  useEffect(() => {
+    if (companyId !== "register") {
+      detailCompany(companyId).then((getData: any) => {
+        if (getData) {
+          setCompanyData(getData.data);
+          setLoading(true);
+        }
+      });
+    } else {
+      setLoading(true);
+    }
+
+    // setState({
+    //   info: {
+    //     company_name:
+    //   }
+    // })
+  }, []);
+
+  const isError = [
+    { isEmpty1: false },
+    { isEmpty2: false },
+    { isEmpty3: false },
+  ];
+  const employeesObj = [
+    { value: "100~200人" },
+    { value: "200~300人" },
+    { value: "300~400人" },
+    { value: "400~500人" },
+  ];
 
   const inputChangeHandler = (e: any) => {
     Validation.handleChange(state, setState, e);
@@ -106,10 +112,17 @@ const CompanyInsert: React.FC<Props> = (props) => {
     }
     console.log(sendObj);
     if (companyId !== "register") {
-      editCompany(companyId, sendObj);
-      // history.push(`/${companyId}`);
+      editCompany(companyId, sendObj).then((boolean) => {
+        if (boolean) {
+          history.push(`/company-detail/${companyId}/about`);
+        }
+      });
     } else {
-      console.log(insertCompany(sendObj));
+      insertCompany(sendObj).then((boolean) => {
+        if (boolean) {
+          history.push(`/`);
+        }
+      });
       // if (insertCompany(sendObj)) history.push(`/`);
     }
   };
@@ -210,14 +223,14 @@ const CompanyInsert: React.FC<Props> = (props) => {
                 isPlus={false}
                 linkUrl="#"
                 clickFunc={formOnClickHandler}
-                disabledRule={
-                  !state.info.company_name ||
-                  !state.info.furigana ||
-                  !state.info.url ||
-                  state.message.company_name ||
-                  state.message.furigana ||
-                  state.message.url
-                }
+                // disabledRule={
+                //   !state.info.company_name ||
+                //   !state.info.furigana ||
+                //   !state.info.url ||
+                //   state.message.company_name ||
+                //   state.message.furigana ||
+                //   state.message.url
+                // }
               />
             </div>
           </form>

@@ -9,10 +9,10 @@ export {mypage,getUserData} from './Axios/mypage';
 export {getMyActivity,registMyActivity,editMyActivity,deleteMyActivity} from './Axios/myActivity';
 export {showEntry} from './Axios/categories';
 export {indexEntry,registEntry} from './Axios/entry';
-export {registInterview} from './Axios/interview';
-export {registSelection} from './Axios/selection';
+export {registInterview,editInterview,showInterview} from './Axios/interview';
+export {registSelection,editSelection,showSelection} from './Axios/selection';
 export {indexDraft,registDraft,deleteDraft} from './Axios/draft';
-export {indexJob} from './Axios/occupationalCategory';
+export {indexJob,indexYearGraduation,indexInternship} from './Axios/selectItems';
 export {temporaryRegistationUser} from './Axios/registerUser';
 export {pageTransitionNormal} from './pageTransition';
 

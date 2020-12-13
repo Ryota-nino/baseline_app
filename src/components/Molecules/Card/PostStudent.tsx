@@ -10,6 +10,7 @@ interface Props {
   category_id: number;
   student_id: number;
   icon: string;
+  company_id?: number;
   type?: "step" | "interview" | "entry";
 }
 
@@ -17,7 +18,7 @@ const PostStudent: React.FC<Props> = (props) => {
   return (
     <article className="company-detailItem">
       <Link
-        to={`/company-detail/contents/${props.category_id}/${props.type}/${props.student_id}`}
+        to={`/company-detail/contents/${props.category_id}/${props.type}/${props.student_id}/${props.company_id}`}
       >
         <div className="company-detailItem__wrap">
           <img

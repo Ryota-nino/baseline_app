@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Contents } from "../../Organisms/CompanyDetail";
 import { UnofficialOffer } from "../../Molecules/Bar/index";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { indexEntry } from "../../../assets/script";
+import { getUserData } from "../../../assets/script";
 import axios from "axios";
 
 interface Props {
@@ -15,10 +15,17 @@ const DetailContents: React.FC<Props> = (props) => {
   const thisPage = props.match.params.category;
   const params = props.match.params;
   const history = useHistory();
+  const [userData, setUserData] = useState();
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     // indexEntry(1).then((getData) => {
     //   console.log(getData);
     // });
+    getUserData(params.student_id).then((getData: any) => {
+      console.log(getData.data);
+      setUserData(getData.data);
+      setLoading(true);
+    });
   }, []);
 
   return (
@@ -32,7 +39,12 @@ const DetailContents: React.FC<Props> = (props) => {
       <button className="btn pageBack-link" onClick={() => history.goBack()}>
         <span className="heading4">企業情報へ</span>
       </button>
-      <UnofficialOffer />
+      <UnofficialOffer
+        student_id={params.student_id}
+        company_id={params.company_id}
+        isLoading={loading}
+        userData={userData}
+      />
 
       <Contents params={params} thisPage={thisPage} />
     </motion.section>

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-
+import { showSelection } from "../../../../assets/script";
 interface Props {
   thisPage: string;
+  params: any;
 }
 
 const Step: React.FC<Props> = (props) => {
@@ -19,6 +20,12 @@ const Step: React.FC<Props> = (props) => {
       opacity: 0,
     },
   };
+  useEffect(() => {
+    console.log(props.params.cateogry_id);
+    showSelection(props.params.cateogry_id).then((getData: any) => {
+      console.log(getData);
+    });
+  }, []);
 
   return (
     <motion.div initial="out" animate="in" exit="out" variants={pageTransition}>

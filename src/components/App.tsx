@@ -158,7 +158,7 @@ const App: React.FC = () => {
 
                 <Route
                   exact
-                  path="/company-detail/contents/:cateogry_id/:category/:student_id"
+                  path="/company-detail/contents/:cateogry_id/:category/:student_id/:company_id"
                   render={(props) => <Page.DetailContents {...props} />}
                 ></Route>
 

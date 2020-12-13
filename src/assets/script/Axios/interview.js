@@ -1,8 +1,29 @@
 import {apiClient} from '../index';
   export const registInterview = (postData) => {
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
+        .post(`/api/interview`, postData)
+        .then((response) => {
+          console.log(response);
+          if (response.status !== 200) {
+            return false;
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+            alert("失敗");
+            return false;
+          }
+          return false;
+        });
+    });
+  };
+  export const editInterview = (id,postData) => {
     apiClient.get("/sanctum/csrf-cookie").then((response) => {
       apiClient
-        .post(`/api/interview`, postData)
+        .post(`/api/interview/edit/${id}`, postData)
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
@@ -13,6 +34,25 @@ import {apiClient} from '../index';
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
             alert("失敗");
+          }
+        });
+    });
+  };
+
+  export const showInterview = (id) => {
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
+      .get(`/api/interview/show/${id}`)
+        .then((response) => {
+          if (response.status !== 200) {
+            return false;
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+            alert("データ取得失敗")
           }
         });
     });

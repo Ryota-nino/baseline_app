@@ -1,6 +1,9 @@
 .headerRegister {
   background-color: $cWhite;
-  padding: 20px 0 20px 64px;
+  padding: 20px 64px 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   &__logo {
     width: 98px;
   }

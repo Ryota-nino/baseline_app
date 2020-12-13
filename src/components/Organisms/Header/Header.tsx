@@ -54,7 +54,7 @@ const HeaderRegister: React.FC<Props> = (props) => {
       sendJSON = JSON.stringify(formObj);
       // インタビューページ
     } else if (thisPageName == "type-interview") {
-      const sendData: any = [];
+      let sendData: any = "";
       for (let i = 0; i < editForms.length; i++) {
         formObj.company_id = Number(companyId);
         // formObj.internship_id = editForms[i].selection_type.value;
@@ -79,12 +79,16 @@ const HeaderRegister: React.FC<Props> = (props) => {
           contentForms.results = Number(results[i].value);
           items.push(contentForms);
         });
-        sendData.push(items);
+        sendData = items;
         formObj.items = sendData;
       }
       console.log(formObj);
       // sendJSON = JSON.stringify(sendData);
-      registInterview(formObj);
+      registInterview(formObj).then((boolean) => {
+        if (boolean) {
+          history.push(`/company-detail/${companyId}/interview`);
+        }
+      });
       // エントリーページ
     } else if (thisPageName == "type-entry") {
       const interviewForms = editForms[0].querySelectorAll(
@@ -107,7 +111,11 @@ const HeaderRegister: React.FC<Props> = (props) => {
         formObj.items.push(contentForms);
       });
       console.log(formObj);
-      registEntry(formObj);
+      registEntry(formObj).then((boolean) => {
+        if (boolean) {
+          history.push(`/company-detail/${companyId}/entry`);
+        }
+      });
       sendJSON = JSON.stringify(formObj);
     }
     // console.log(sendJSON);

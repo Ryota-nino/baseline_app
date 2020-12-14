@@ -4,7 +4,7 @@ import { PassTag } from "../../Atoms/Tag";
 import { Avatar } from "../../../assets/images";
 import { CompanyExcerpt } from "../Info/index";
 import { showCompany } from "../../../assets/script";
-
+import { rikuma } from "../../../assets/images";
 interface Props {
   isLoading: boolean;
   userData: any;
@@ -34,7 +34,7 @@ const StudentAboutCompanyBar: React.FC<Props> = (props) => {
         <div className="aboutCompany-bar__wrapper">
           <div className="aboutCompany-bar__wrap">
             <div className="aboutCompany-bar__avatar">
-              <img src={Avatar} alt="" />
+              <img className="userIcon" src={rikuma} alt="" />
               {/* <PassTag txt="内定" /> */}
             </div>
 

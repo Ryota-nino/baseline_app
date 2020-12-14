@@ -1,7 +1,7 @@
 import React from "react";
 import { MailIcon } from "../../../assets/images/index";
 import { ActionBtn } from "../../Atoms/Btn";
-
+import { rikuma } from "../../../assets/images";
 interface Props {
   userData: any;
   userId: any;
@@ -21,7 +21,14 @@ const UserData: React.FC<Props> = (props) => {
   return (
     <div className="userDetail-window">
       <div className="userDetail-window__container">
-        <img src={props.userData.icon_image_path} alt="" />
+        <img
+          src={
+            props.userData.icon_image_path
+              ? props.userData.icon_image_path
+              : rikuma
+          }
+          alt=""
+        />
         <div>
           <div className="userDetail-window__wrap">
             <p className="userDetail-window__name">

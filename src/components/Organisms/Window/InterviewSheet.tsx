@@ -1,28 +1,12 @@
 import React, { useRef } from "react";
 import { TrashIcon } from "../../../assets/images/index";
 import { TextareaPrimary } from "../../Atoms/TextInput/index";
-import { SelectSecondary } from "../../Atoms/Input/index";
 
 import { motion } from "framer-motion";
 
 interface Props {
   id: number;
 }
-
-const calendarObj = [
-  { id: 1, name: "1月" },
-  { id: 1, name: "2月" },
-  { id: 1, name: "3月" },
-  { id: 1, name: "4月" },
-  { id: 1, name: "5月" },
-  { id: 1, name: "6月" },
-  { id: 1, name: "7月" },
-  { id: 1, name: "8月" },
-  { id: 1, name: "9月" },
-  { id: 1, name: "10月" },
-  { id: 1, name: "11月" },
-  { id: 1, name: "12月" },
-];
 
 const InputWindowInterview: React.FC<Props> = (props) => {
   const el = useRef(null);
@@ -62,7 +46,7 @@ const InputWindowInterview: React.FC<Props> = (props) => {
       ref={el}
     >
       <h1 className="heading4">面接の内容</h1>
-      <SelectSecondary name="date" ttl="" selectObj={calendarObj} />
+      {/* <SelectSecondary name="date" ttl="" selectObj={calendarObj} /> */}
       <TextareaPrimary
         ttl="面接を受けた感想をお書きください"
         placeholder="アドバイスや指摘、気づいた点など"

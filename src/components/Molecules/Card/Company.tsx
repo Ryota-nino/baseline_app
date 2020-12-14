@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+import { toue } from "../../../assets/images";
 interface Props {
   companyId: number;
   class: string;
@@ -52,7 +52,7 @@ const CompanyCard: React.FC<Props> = (props) => {
     <article className={`company-card ${props.class}`}>
       <Link to={`/company-detail/${props.companyId}/about`}>
         <figure className="company-card__img">
-          <img src={props.img} alt="" />
+          <img src={props.img ? props.img : toue} alt="" />
         </figure>
         <h3 className="company-card__name">{props.name}</h3>
         <p className="company-card__desc">{checkTextLength()}</p>

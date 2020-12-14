@@ -72,7 +72,7 @@ const Entry: React.FC<Props> = (props) => {
                       return (
                         <>
                           <section>
-                            <h3 className="heading5">
+                            <h3 className="heading5 mb8">
                               {interview.step}次面接&nbsp; - &nbsp;
                               {interview.interview_date + "月"}
                             </h3>
@@ -84,7 +84,7 @@ const Entry: React.FC<Props> = (props) => {
                             </table>
                           </section>
                           {interview.interview_contents.map((text: any) => {
-                            return <p className="mb16">{text.content}</p>;
+                            return <p className="mt16 mb42">{text.content}</p>;
                           })}
                         </>
                       );

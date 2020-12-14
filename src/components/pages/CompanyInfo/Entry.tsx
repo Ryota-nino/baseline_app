@@ -5,7 +5,7 @@ import { InsertAddBtn } from "../../Atoms/Btn";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
 import { EntrySheet } from "../../Organisms/Window";
-import { indexJob, showCompany } from "../../../assets/script";
+import { indexJob, showCompany, indexInternship } from "../../../assets/script";
 
 interface Props {
   match?: any;
@@ -29,10 +29,14 @@ const Entry: React.FC<Props> = (props) => {
   let [jobs, setJobs] = useState();
   let [company, setCompany] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  let [internship, setInternship] = useState();
 
   useEffect(() => {
     indexJob().then((getData: any) => {
       setJobs(getData.data);
+    });
+    indexInternship().then((getData: any) => {
+      setInternship(getData.data);
     });
     showCompany(companyId).then((getData: any) => {
       setCompany(getData.data);
@@ -81,7 +85,7 @@ const Entry: React.FC<Props> = (props) => {
                   </p>
                   <SelectPrimary
                     name="selection_type"
-                    options={jobInterviewTypes}
+                    options={internship}
                     required={false}
                   />
                 </div>

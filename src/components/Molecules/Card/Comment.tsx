@@ -5,6 +5,7 @@ import {
   ArrowIcon,
   PencilIcon,
   TrashIcon,
+  rikuma,
 } from "../../../assets/images/index";
 import { motion } from "framer-motion";
 interface Props {
@@ -74,7 +75,7 @@ const Comment: React.FC<Props> = (props) => {
       exit="out"
       variants={pageTransitionNormal}
     >
-      <img src={Avatar} alt="" />
+      <img className="userIcon" src={rikuma} alt="" />
       <div className="activity-item__content">
         <div className="activity-item__head">
           <h1 className="activity-item__name">{props.name}</h1>

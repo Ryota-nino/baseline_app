@@ -74,8 +74,12 @@ const HeaderRegister: React.FC<Props> = (props) => {
         )! as NodeListOf<HTMLSelectElement>;
         interviewForms.forEach((form) => {
           const contentForms: any = {};
-          contentForms.interview_date = form.querySelector("select")!.value;
-          contentForms.contents = [form.querySelector("textarea")!.value];
+          const selectDate = document.querySelector(
+            'select[name="date"]'
+          )! as HTMLInputElement;
+          contentForms.interview_date = selectDate.value;
+          contentForms.contents = [];
+          contentForms.contents.push(form.querySelector("textarea")!.value);
           contentForms.results = Number(results[i].value);
           items.push(contentForms);
         });

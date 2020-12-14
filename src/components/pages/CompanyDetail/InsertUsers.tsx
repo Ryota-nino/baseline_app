@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { AboutBar } from "../../Organisms/CompanyDetail";
 import { detailCompany } from ".././../../assets/script/";
-import { Avatar } from "../../../assets/images/index";
+import { rikuma } from "../../../assets/images/index";
 interface Props {
   thisPage: string;
   match?: any;
@@ -54,7 +54,14 @@ const InsertUsers: React.FC<Props> = (props) => {
                     return (
                       <article className="user-card">
                         <Link to={`/user/${data.user.id}`}>
-                          <img src={data.user.icon_image_path} alt="" />
+                          <img
+                            src={
+                              data.user.icon_image_path
+                                ? data.user.icon_image_path
+                                : rikuma
+                            }
+                            alt=""
+                          />
                           <div className="user-card__wrapper">
                             <h1 className="user-card__name">
                               {data.user.first_name + " " + data.user.last_name}

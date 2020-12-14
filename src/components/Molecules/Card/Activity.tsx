@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AccountDefaultIcon } from "../../../assets/images/index";
+import { AccountDefaultIcon, rikuma } from "../../../assets/images/index";
 
 interface Props {
   isSmall: boolean;
@@ -62,7 +62,7 @@ const Activity: React.FC<Props> = (props) => {
   return (
     <article className={"activity-card " + activityName}>
       <Link to={`/user/${String(props.id)}`}>
-        <img className="activity-card__img" src={AccountDefaultIcon} alt="" />
+        <img className="activity-card__img" src={rikuma} alt="" />
         {viewTime()}
       </Link>
     </article>

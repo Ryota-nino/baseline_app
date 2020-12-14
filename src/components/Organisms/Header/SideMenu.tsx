@@ -5,6 +5,7 @@ import { Logo } from "../../../assets/images/index";
 import { PrimaryBtn } from "../../Atoms/Btn/index";
 import { MyAvatar } from "../../Molecules/Info/index";
 import { getMyData, logout } from "../../../assets/script/index";
+import { rikuma } from "../../../assets/images/index";
 
 interface Props {
   setShowModal: any;
@@ -117,7 +118,7 @@ const Header: React.FC<Props> = (props) => {
           />
         </div>
         <MyAvatar
-          iconPath="aa"
+          iconPath={rikuma}
           name={myData.profile.first_name + " " + myData.profile.last_name}
           student_number={myData.profile.student_number}
           ml=""

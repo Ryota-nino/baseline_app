@@ -21,7 +21,6 @@ const App: React.FC = () => {
   }, []);
 
   const getMyData = (notLoginFunc: any) => {
-    console.log("A");
     mypage().then((getData: any) => {
       setMyData({
         ...myData,
@@ -196,7 +195,9 @@ const App: React.FC = () => {
                 <Route
                   exact
                   path="/:user/account-setting"
-                  render={() => <Page.AccountSetting myData={myData} />}
+                  render={() => (
+                    <Page.AccountSetting myData={myData} loading={loading} />
+                  )}
                 ></Route>
                 <Route
                   exact

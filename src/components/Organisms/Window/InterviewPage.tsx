@@ -3,7 +3,7 @@ import { InterviewSheet } from ".";
 import { SelectPrimary } from "../../Atoms/Input";
 import { motion } from "framer-motion";
 import { InsertAddBtn } from "../../Atoms/Btn";
-
+import { SelectSecondary } from "../../Atoms/Input/index";
 interface Props {
   window: any;
   func: any;
@@ -17,6 +17,21 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
   useEffect(() => {
     setLoading(true);
   }, []);
+
+  const calendarObj = [
+    { id: 1, name: "1月" },
+    { id: 1, name: "2月" },
+    { id: 1, name: "3月" },
+    { id: 1, name: "4月" },
+    { id: 1, name: "5月" },
+    { id: 1, name: "6月" },
+    { id: 1, name: "7月" },
+    { id: 1, name: "8月" },
+    { id: 1, name: "9月" },
+    { id: 1, name: "10月" },
+    { id: 1, name: "11月" },
+    { id: 1, name: "12月" },
+  ];
 
   const result = [
     { id: 0, name: "不合格" },
@@ -87,6 +102,12 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
               <p className="label-input__txt">結果</p>
               <SelectPrimary name="result" options={result} required={true} />
             </div>
+          </div>
+          <div className="label-input mb16">
+            <p className="label-input__txt">
+              選考種類<span className="cAttention">*</span>
+            </p>
+            <SelectSecondary name="date" ttl="" selectObj={calendarObj} />
           </div>
         </article>
 

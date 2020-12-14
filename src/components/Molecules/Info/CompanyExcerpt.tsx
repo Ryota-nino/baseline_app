@@ -1,6 +1,5 @@
 import React from "react";
-import { Goodpatch } from "../../../assets/images";
-
+import { toue } from "../../../assets/images";
 interface Props {
   companyData: any;
 }
@@ -8,7 +7,14 @@ interface Props {
 const CompanyExcerpt: React.FC<Props> = (props) => {
   return (
     <article className="companyExcerpt-card">
-      <img src={props.companyData.logo_image_url} alt="" />
+      <img
+        src={
+          props.companyData.logo_image_url
+            ? props.companyData.logo_image_url
+            : toue
+        }
+        alt=""
+      />
       <div className="companyExcerpt-card__wrap">
         <h1 className="heading5">{props.companyData.company_name}</h1>
         <p className="companyExcerpt-card__link">

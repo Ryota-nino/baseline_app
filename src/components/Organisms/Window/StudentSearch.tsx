@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Search } from "../../Atoms/TextInput";
 import { CheckboxWithText } from "../../Molecules/Input";
 import { SelectPrimary } from "../../Atoms/Input/index.js";
-import { indexJob } from "../../../assets/script/index";
+import { indexJob, indexYearGraduation } from "../../../assets/script/index";
 interface Props {
   searchFunc: any;
   className?: string;
@@ -12,6 +12,7 @@ interface Props {
 const StudentSearch: React.FC<Props> = (props) => {
   // const [seachJob, setSeachJob] = useState<any>();
   const [jobs, setJobs] = useState<any>();
+  const [yearGraduation, setYearGraduation] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   // const seachJobHandler = (value: any) => {
   //   setSeachJob(value);
@@ -20,6 +21,9 @@ const StudentSearch: React.FC<Props> = (props) => {
   useEffect(() => {
     indexJob().then((getData: any) => {
       setJobs(getData.data);
+    });
+    indexYearGraduation().then((getData: any) => {
+      setYearGraduation(getData.data);
       setLoading(true);
     });
   }, []);
@@ -76,6 +80,9 @@ const StudentSearch: React.FC<Props> = (props) => {
 
   const seachGraduationYearHandler = (value: any) => {
     setSeachGraduationYear(value);
+    props.searchFunc({
+      year_of_graduation: Number(value),
+    });
   };
 
   const yearList = ["21卒", "22卒", "23卒"];
@@ -113,7 +120,7 @@ const StudentSearch: React.FC<Props> = (props) => {
           <p className="search-item__name">卒業年</p>
           <SelectPrimary
             name="graduation_year"
-            options={yearList}
+            options={yearGraduation}
             selectFunc={seachGraduationYearHandler}
             required={false}
           />

@@ -35,6 +35,7 @@ export const indexInternship = () => {
         });
     });
   };
+
 export const indexYearGraduation = () => {
     return apiClient.get("/sanctum/csrf-cookie").then((response) => {
       return apiClient

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ActionBtn } from "../../Atoms/Btn";
+import { toue } from "../../../assets/images";
 interface Props {
   thisPage: string;
   companyId: any;
@@ -38,7 +39,14 @@ const AboutBar: React.FC<Props> = (props) => {
     return (
       <article className="company-bar">
         <div className="company-bar__wrap">
-          <img src={props.companyData.logo_image_url} alt="" />
+          <img
+            src={
+              props.companyData.logo_image_url
+                ? props.companyData.logo_image_url
+                : toue
+            }
+            alt=""
+          />
           <div className="company-bar__inner">
             <h1 className="heading4">
               {checkTextLength(30, props.companyData.company_name)}

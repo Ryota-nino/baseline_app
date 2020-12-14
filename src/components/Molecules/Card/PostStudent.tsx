@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Avatar, DocumentIcon2 } from "../../../assets/images/index";
+import { rikuma, DocumentIcon2 } from "../../../assets/images/index";
 import { PassTag } from "../../Atoms/Tag";
 interface Props {
   ttl: string;
@@ -31,7 +31,7 @@ const PostStudent: React.FC<Props> = (props) => {
         </div>
         <p className="company-detailItem__job">{props.job}希望</p>
         <p className="company-detailItem__user">
-          <img src={props.icon} alt="" />
+          <img src={props.icon ? props.icon : rikuma} alt="" />
           <span>{props.userName}</span>
         </p>
       </Link>

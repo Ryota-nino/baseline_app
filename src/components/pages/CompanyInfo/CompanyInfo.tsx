@@ -8,6 +8,7 @@ import { ActionBtn, RoundedBtn } from "../../Atoms/Btn";
 import { Modal } from "../../Organisms/Modal";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+import { rikuma } from "../../../assets/images";
 import {
   detailCompany,
   companyDetailUser,
@@ -25,7 +26,8 @@ const CompanyInfo: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [myData, setMyData] = useState<any>();
-  const [myCompanyInfo, setMyCompanyInfo] = useState({});
+  const [myCompanyInfo, setMyCompanyInfo] = useState([]);
+
   useEffect(() => {
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
@@ -34,7 +36,6 @@ const CompanyInfo: React.FC<Props> = (props) => {
         });
       }
     });
-
     getMyData()
       .then((mydata: any) => {
         if (mydata.data) {
@@ -51,13 +52,28 @@ const CompanyInfo: React.FC<Props> = (props) => {
               desired_occupations: mydata.data.desired_occupations,
             },
           });
-          setLoading(true);
+          console.log(mydata.data);
           return mydata.data;
         }
       })
       .then((userData) => {
-        companyDetailUser(companyId, userData.id).then((getData) => {
-          console.log(getData);
+        companyDetailUser(companyId, userData.id).then((getData: any) => {
+          console.log(getData.data.user);
+          const myCompanyData = getData.data.user.company_information.filter(
+            (item: any) => {
+              return item.company_id == companyId;
+            }
+          );
+          console.log(myCompanyData);
+          setMyCompanyInfo(myCompanyData);
+          setLoading(true);
+
+          // console.log(myCompanyData);
+          // myCompanyData.forEach((item: any) => {
+          //   setMyCompanyInfo({
+          //     internship: item.internship.name,
+          //   });
+          // });
         });
       });
   }, []);
@@ -119,7 +135,34 @@ const CompanyInfo: React.FC<Props> = (props) => {
               />
             </div>
             <ul className="company-info__added">
-              <li>
+              {myCompanyInfo.map((item: any) => {
+                let data = [];
+                // if (item.interviews) data.push(item.interviews);
+                console.log(item.interviews);
+
+                return (
+                  <li>
+                    <PostStudent
+                      category_id={1}
+                      student_id={myData.profile.id}
+                      ttl={item.internship.name}
+                      isPass={false}
+                      job={myData.profile.desired_occupations}
+                      icon={
+                        myData.profile.icon_image_url
+                          ? myData.profile.icon_image_url
+                          : rikuma
+                      }
+                      userName={
+                        myData.profile.first_name +
+                        " " +
+                        myData.profile.last_name
+                      }
+                    />
+                  </li>
+                );
+              })}
+              {/* <li>
                 <PostStudent
                   category_id={1}
                   student_id={1}
@@ -129,29 +172,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
                   icon="a"
                   userName="山本 仁"
                 />
-              </li>
-              <li>
-                <PostStudent
-                  category_id={1}
-                  student_id={1}
-                  ttl="サマーインターンシップ (22卒)"
-                  isPass={true}
-                  icon="a"
-                  job="エンジニア"
-                  userName="中村 智"
-                />
-              </li>
-              <li>
-                <PostStudent
-                  category_id={1}
-                  student_id={1}
-                  ttl="本選考 (22卒)"
-                  isPass={false}
-                  job="デザイナー"
-                  icon="a"
-                  userName="山本 仁"
-                />
-              </li>
+              </li> */}
             </ul>
           </div>
         </motion.section>

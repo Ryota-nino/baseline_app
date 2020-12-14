@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Avatar } from "../../../assets/images/index";
+import { rikuma } from "../../../assets/images/index";
 
 interface Props {
   thisPage: string;
@@ -51,7 +51,12 @@ const UserList: React.FC<Props> = (props) => {
             return (
               <li className="user-excerpt">
                 <Link to={`/user/${data.id}`}>
-                  <img src={"http://localhost:8000/" + data.icon} alt="" />
+                  <img
+                    src={
+                      data.icon ? "http://localhost:8000/" + data.icon : rikuma
+                    }
+                    alt=""
+                  />
                   <div className="user-excerpt__wrap">
                     <p className="user-excerpt__name">{data.name}</p>
                     <div>

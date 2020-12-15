@@ -8,8 +8,7 @@ import { motion } from "framer-motion";
 import { Company, Activity } from "../Molecules/Card/index";
 import { News } from "../Molecules/Bar/index";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { getHomeData, getMyData } from "../../assets/script/index";
-import axios from "axios";
+import { getHomeData } from "../../assets/script/index";
 
 interface Props {
   setFreeWord: any;
@@ -19,6 +18,7 @@ interface Props {
 
 const Top: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+
   const [homeData, setHomeData] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [myData, setMyData] = useState<any>();
@@ -26,10 +26,12 @@ const Top: React.FC<Props> = (props) => {
   const notLoginFunc = () => {
     history.push("/login");
   };
+
   useEffect(() => {
     const container = document.querySelector(".container");
     container?.classList.remove("page-login");
     props.setIsLogin(true);
+
     getHomeData().then((getData: any) => {
       if (getData?.data) {
         setHomeData(getData.data);

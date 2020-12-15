@@ -6,7 +6,7 @@ import { RoundedBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
 import { Avatar, CameraIcon } from "../../assets/images/index";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { mypage, indexJob } from "../../assets/script/";
+import { mypage, indexJob } from "../../assets/script";
 import axios from "axios";
 
 interface Props {

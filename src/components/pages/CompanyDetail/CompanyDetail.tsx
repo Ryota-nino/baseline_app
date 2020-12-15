@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { UserList } from "../../Organisms/Window";
 import { Categories, AboutBar } from "../../Organisms/CompanyDetail";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { showCompany, detailCompany } from ".././../../assets/script/";
+import { showCompany, detailCompany } from "../../../assets/script";
 import { motion } from "framer-motion";
 
 interface Props {

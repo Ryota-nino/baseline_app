@@ -20,7 +20,7 @@
     "jsx": "react"
   },
   "include": [
-    "src", "src/components/Pages/PasswordForget/TypeMail.tsx"
+    "src", "src/components/pages/PasswordForget/TypeMail.tsx"
   ],
   "noImplicitAny": false,
 }

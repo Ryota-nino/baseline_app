@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { AboutBar } from "../../Organisms/CompanyDetail";
-import { detailCompany } from ".././../../assets/script/";
+import { detailCompany } from "../../../assets/script";
 import { rikuma } from "../../../assets/images/index";
 interface Props {
   thisPage: string;

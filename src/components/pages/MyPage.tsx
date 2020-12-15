@@ -6,7 +6,7 @@ import { ActivityMeter } from "../Organisms/Activity/index";
 import { Comment } from "../Molecules/Card/index";
 import { Modal } from "../Organisms/Modal";
 import { motion } from "framer-motion";
-import { mypage } from "../../assets/script/";
+import { mypage } from "../../assets/script";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
 interface Props {
   getMyData: any;

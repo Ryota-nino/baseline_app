@@ -13,7 +13,7 @@ import {
   detailCompany,
   companyDetailUser,
   getMyData,
-} from ".././../../assets/script/";
+} from "../../../assets/script";
 interface Props {
   myData: any;
   match?: any;

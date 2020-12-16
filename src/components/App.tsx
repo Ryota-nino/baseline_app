@@ -5,7 +5,7 @@ import { Modal } from "./Organisms/Modal";
 import * as Page from "./Pages";
 import { AnimatePresence } from "framer-motion";
 import "../assets/styles/App.scss";
-import { getMyActivity, mypage } from "../assets/script/";
+import { mypage } from "../assets/script/";
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);

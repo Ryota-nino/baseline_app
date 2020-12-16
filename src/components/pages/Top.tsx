@@ -32,7 +32,7 @@ const Top: React.FC<Props> = (props) => {
     container?.classList.remove("page-login");
     props.setIsLogin(true);
 
-    getHomeData().then((getData: any) => {
+    getHomeData(notLoginFunc).then((getData: any) => {
       if (getData?.data) {
         setHomeData(getData.data);
         setLoading(true);

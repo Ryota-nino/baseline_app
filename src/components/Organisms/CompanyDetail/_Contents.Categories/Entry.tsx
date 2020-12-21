@@ -5,6 +5,8 @@ import { companyDetailUser, indexJob } from "../../../../assets/script";
 interface Props {
   thisPage: string;
   params: any;
+  userData: any;
+  isLoading: boolean;
   match?: any;
 }
 
@@ -27,11 +29,6 @@ const Entry: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [postData, setPostData] = useState<any>();
   useEffect(() => {
-    // indexJob().then((getData: any) => {
-    //   console.log(getData?.data);
-    //   setJobs(getData?.data);
-    //   setLoading(true);
-    // });
     companyDetailUser(props.params.company_id, props.params.student_id).then(
       (getData: any) => {
         console.log(getData.data);
@@ -60,6 +57,11 @@ const Entry: React.FC<Props> = (props) => {
     return texts;
   };
 
+  const graduationYearConversion = (year: string) => {
+    const text = year;
+    return text.substr(2, 2);
+  };
+
   const renderContentDOM = () => {
     return (
       <>
@@ -69,7 +71,13 @@ const Entry: React.FC<Props> = (props) => {
               {content.entries.length != 0 && (
                 <div className="aboutCompany-item">
                   <div className="aboutCompany-item__left-col">
-                    <h2 className="heading5">本選考 (22卒)</h2>
+                    <h2 className="heading5">
+                      {content.internship.name} (
+                      {graduationYearConversion(
+                        props.userData.year_of_graduation
+                      )}
+                      卒)
+                    </h2>
                     <p className="aboutCompany-item__job">
                       {content.occupational_category.name}応募
                     </p>
@@ -152,7 +160,7 @@ const Entry: React.FC<Props> = (props) => {
     );
   };
 
-  return <>{loading && renderDOM()}</>;
+  return <>{props.isLoading && loading && renderDOM()}</>;
 };
 
 export default Entry;

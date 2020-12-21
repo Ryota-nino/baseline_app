@@ -5,7 +5,11 @@ import { InsertAddBtn } from "../../Atoms/Btn";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
 import { EntrySheet } from "../../Organisms/Window";
-import { indexJob, showCompany, indexInternship } from "../../../assets/script";
+import {
+  indexJob,
+  detailCompany,
+  indexInternship,
+} from "../../../assets/script";
 
 interface Props {
   match?: any;
@@ -38,7 +42,7 @@ const Entry: React.FC<Props> = (props) => {
     indexInternship().then((getData: any) => {
       setInternship(getData.data);
     });
-    showCompany(companyId).then((getData: any) => {
+    detailCompany(companyId).then((getData: any) => {
       setCompany(getData.data);
       setLoading(true);
     });
@@ -47,12 +51,6 @@ const Entry: React.FC<Props> = (props) => {
   let [inputWindow, setInputWindow] = useState([{ id: 1 }]);
   let inputLength = inputWindow.length;
 
-  const jobInterviewTypes = [
-    "本選考",
-    "サマーインターン",
-    "ウィンターインターン",
-    "スプリングインターン",
-  ];
   const createInputWindow = () => {
     if (inputLength < 10) {
       setInputWindow([...inputWindow, { id: inputLength + 1 }]);

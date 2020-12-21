@@ -5,7 +5,11 @@ import { SelectPrimary } from "../../Atoms/Input";
 import { InsertAddBtn } from "../../Atoms/Btn";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { StepSheet } from "../../Organisms/Window";
-import { indexJob, showCompany } from "../../../assets/script";
+import {
+  indexJob,
+  detailCompany,
+  indexInternship,
+} from "../../../assets/script";
 interface Props {
   match?: any;
 }
@@ -16,21 +20,18 @@ const Step: React.FC<Props> = (props) => {
   let inputLength = inputWindow.length;
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
-  const jobInterviewTypes = [
-    "本選考",
-    "サマーインターン",
-    "ウィンターインターン",
-    "スプリングインターン",
-  ];
 
   let [jobs, setJobs] = useState();
   let [company, setCompany] = useState<any>();
+  let [internship, setInternship] = useState();
   useEffect(() => {
     indexJob().then((getData: any) => {
-      console.log(getData);
       setJobs(getData.data);
     });
-    showCompany(companyId).then((getData: any) => {
+    indexInternship().then((getData: any) => {
+      setInternship(getData.data);
+    });
+    detailCompany(companyId).then((getData: any) => {
       setCompany(getData.data);
       setLoading(true);
     });
@@ -61,7 +62,7 @@ const Step: React.FC<Props> = (props) => {
                   </p>
                   <SelectPrimary
                     name="selection_type"
-                    options={jobInterviewTypes}
+                    options={internship}
                     required={true}
                   />
                 </div>

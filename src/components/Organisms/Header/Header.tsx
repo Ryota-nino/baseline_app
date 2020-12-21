@@ -7,6 +7,7 @@ import {
   registSelection,
   registInterview,
 } from "../../../assets/script";
+import { Contents } from "../CompanyDetail";
 
 interface Props {
   needBtn: boolean;
@@ -22,77 +23,91 @@ const HeaderRegister: React.FC<Props> = (props) => {
     const formObj: any = {};
     const editForms = document.forms;
     const companyId = props.match.params.id;
-    console.log(companyId);
-
+    interface sendData {
+      company_id: number;
+      internship_id: number;
+      occupational_category_id: number;
+      items: object[];
+    }
+    const setGlobalSelect = () => {
+      const selectionType = (document.querySelector(
+        'select[name="selection_type"]'
+      ) as HTMLSelectElement).value;
+      const selectJob = (document.querySelector(
+        'select[name="job"]'
+      ) as HTMLSelectElement).value;
+      let sendData: sendData = {
+        company_id: Number(companyId),
+        internship_id: Number(selectionType),
+        occupational_category_id: Number(selectJob),
+        items: [],
+      };
+      return sendData;
+    };
     // ステップページ
     if (thisPageName == "type-step") {
-      const interviewForms = editForms[0].querySelectorAll(
-        ".interview-formBox"
-      );
-      const contentForms: any = {};
-      formObj.company_id = Number(companyId);
-      // formObj.internship_id = editForms[0].selection_type.value;
-      formObj.internship_id = 1;
-      formObj.occupational_category_id = Number(editForms[0].job.value);
-      formObj.items = [];
+      let sendData = setGlobalSelect();
 
-      interviewForms.forEach((form) => {
-        const titleInput = form.querySelector(
-          'input[name="title"]'
-        ) as HTMLInputElement;
-        const dateSelect = form.querySelector(
-          'select[name="date"]'
-        ) as HTMLInputElement;
-        const textarea = document.querySelector("textarea")!;
-        contentForms.title = titleInput.value;
-        contentForms.interview_date = String(dateSelect.value);
-        contentForms.content = textarea.value;
-        formObj.items.push(contentForms);
+      const contents = document.querySelectorAll(
+        ".interview-formBox"
+      ) as NodeListOf<HTMLElement>;
+      console.log(sendData);
+      contents.forEach((content) => {
+        console.log(content);
+        let itemsData = {
+          title: (content.querySelector(
+            'input[name="title"]'
+          ) as HTMLInputElement).value,
+          interview_date: Number(
+            (content.querySelector('select[name="date"]') as HTMLSelectElement)
+              .value
+          ),
+          content: (content.querySelector("textarea") as HTMLTextAreaElement)
+            .value,
+        };
+        sendData.items.push(itemsData);
       });
-      console.log(formObj);
-      registSelection(formObj);
-      sendJSON = JSON.stringify(formObj);
+      console.log(sendData);
+      registSelection(sendData).then((boolean) => {
+        if (boolean) {
+          history.push(`/company-detail/${companyId}/step`);
+        }
+      });
+
       // インタビューページ
     } else if (thisPageName == "type-interview") {
-      let sendData: any = "";
-      for (let i = 0; i < editForms.length; i++) {
-        formObj.company_id = Number(companyId);
-        // formObj.internship_id = editForms[i].selection_type.value;
-        formObj.internship_id = Number(1);
-        formObj.occupational_category_id = Number(editForms[0].job.value);
-        const interviewForms = editForms[i].querySelectorAll(
-          ".interview-formBox"
-        );
-        console.log(formObj);
-        console.log(interviewForms);
-        console.log(editForms[i].result.value);
-        // formObj.result = Number(editForms[i].result.value);
+      // 共通項目
+      let sendData = setGlobalSelect();
 
-        const items: any = [];
-        const results = document.querySelectorAll(
+      for (let i = 0; i < editForms.length; i++) {
+        const contentArray: string[] = [];
+        const contents = editForms[i].querySelectorAll(
+          ".interview-formBox textarea"
+        ) as NodeListOf<HTMLTextAreaElement>;
+        const result = (editForms[i].querySelector(
           'select[name="result"]'
-        )! as NodeListOf<HTMLSelectElement>;
-        interviewForms.forEach((form) => {
-          const contentForms: any = {};
-          const selectDate = document.querySelector(
-            'select[name="date"]'
-          )! as HTMLInputElement;
-          contentForms.interview_date = selectDate.value;
-          contentForms.contents = [];
-          contentForms.contents.push(form.querySelector("textarea")!.value);
-          contentForms.results = Number(results[i].value);
-          items.push(contentForms);
+        ) as HTMLSelectElement).value;
+        const date = (editForms[i].querySelector(
+          'select[name="date"]'
+        ) as HTMLSelectElement).value;
+        contents.forEach((content) => {
+          contentArray.push(String(content.value));
         });
-        sendData = items;
-        formObj.items = sendData;
+        let itemsData = {
+          results: result,
+          interview_date: date,
+          contents: contentArray,
+        };
+        sendData.items.push(itemsData);
       }
-      console.log(formObj);
-      // sendJSON = JSON.stringify(sendData);
-      registInterview(formObj).then((boolean) => {
+      console.log(sendData);
+
+      registInterview(sendData).then((boolean) => {
         if (boolean) {
           history.push(`/company-detail/${companyId}/interview`);
         }
       });
+
       // エントリーページ
     } else if (thisPageName == "type-entry") {
       const interviewForms = editForms[0].querySelectorAll(
@@ -122,7 +137,6 @@ const HeaderRegister: React.FC<Props> = (props) => {
       });
       sendJSON = JSON.stringify(formObj);
     }
-    // console.log(sendJSON);
   };
   return (
     <header className="headerRegister">

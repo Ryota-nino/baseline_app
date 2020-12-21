@@ -19,6 +19,7 @@ const PostStudent: React.FC<Props> = (props) => {
     <article className="company-detailItem">
       <Link
         to={`/company-detail/contents/${props.category_id}/${props.type}/${props.student_id}/${props.company_id}`}
+        // to={`/company-info/${props.company_id}/edit/interview`}
       >
         <div className="company-detailItem__wrap">
           <img

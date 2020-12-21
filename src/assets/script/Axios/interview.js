@@ -12,8 +12,12 @@ import {apiClient} from '../index';
         })
         .catch((error) => {
           console.error(error);
-          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500 || error.response.status === 402) {
             alert("失敗");
+            return false;
+          }
+          if (error.response.status === 400) {
+            alert('"面接の内容"は入力必須項目です。');
             return false;
           }
           return false;

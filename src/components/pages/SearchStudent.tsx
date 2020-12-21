@@ -31,6 +31,7 @@ const SearchStudent: React.FC = () => {
   }, []);
 
   const searchUserWithParam = (param: any) => {
+    console.log(param);
     setQuery({
       ...query,
       ...param,

@@ -46,7 +46,12 @@ const DetailContents: React.FC<Props> = (props) => {
         userData={userData}
       />
 
-      <Contents params={params} thisPage={thisPage} />
+      <Contents
+        params={params}
+        thisPage={thisPage}
+        userData={userData}
+        isLoading={loading}
+      />
     </motion.section>
   );
 };

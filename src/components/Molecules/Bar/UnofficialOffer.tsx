@@ -3,7 +3,7 @@ import { ActionBtn } from "../../Atoms/Btn";
 import { PassTag } from "../../Atoms/Tag";
 import { Avatar } from "../../../assets/images";
 import { CompanyExcerpt } from "../Info/index";
-import { showCompany } from "../../../assets/script";
+import { detailCompany, showCompany } from "../../../assets/script";
 import { rikuma } from "../../../assets/images";
 interface Props {
   isLoading: boolean;
@@ -15,7 +15,7 @@ interface Props {
 const StudentAboutCompanyBar: React.FC<Props> = (props) => {
   const [companyData, setCompanyData] = useState();
   useEffect(() => {
-    showCompany(props.company_id).then((getData: any) => {
+    detailCompany(props.company_id).then((getData: any) => {
       console.log(getData.data);
       setCompanyData(getData.data);
     });

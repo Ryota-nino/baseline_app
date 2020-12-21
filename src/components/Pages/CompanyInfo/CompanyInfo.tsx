@@ -136,16 +136,13 @@ const CompanyInfo: React.FC<Props> = (props) => {
             </div>
             <ul className="company-info__added">
               {myCompanyInfo.map((item: any) => {
-                let data = [];
-                // if (item.interviews) data.push(item.interviews);
-                console.log(item.interviews);
-
                 return (
                   <li>
                     <PostStudent
                       category_id={1}
+                      company_id={companyId}
                       student_id={myData.profile.id}
-                      ttl={item.internship.name}
+                      ttl={item.internship ? item.internship.name : "未入力"}
                       isPass={false}
                       job={myData.profile.desired_occupations}
                       icon={
@@ -162,17 +159,6 @@ const CompanyInfo: React.FC<Props> = (props) => {
                   </li>
                 );
               })}
-              {/* <li>
-                <PostStudent
-                  category_id={1}
-                  student_id={1}
-                  ttl="本選考 (22卒)"
-                  isPass={false}
-                  job="デザイナー"
-                  icon="a"
-                  userName="山本 仁"
-                />
-              </li> */}
             </ul>
           </div>
         </motion.section>

@@ -26,19 +26,23 @@ const Interview: React.FC<Props> = (props) => {
   useEffect(() => {
     const interviewArray: any = [];
     props.companyData.company_information.forEach((data: any) => {
-      data.interviews.forEach((interview: any) => {
-        if (interview) {
-          const interviewCard = {
-            id: interview.id,
-            user_id: data.user.id,
-            userName: data.user.last_name + " " + data.user.first_name,
-            iconImagePath: data.user.icon_image_path,
-            job: data.user.desired_occupations,
-            icon: data.user.icon_image_path,
-          };
-          interviewArray.push(interviewCard);
-        }
-      });
+      if (data.interviews.length != 0) {
+        console.log(data);
+        let interviewCard;
+        data.interviews.forEach((interview: any) => {
+          if (interview) {
+            interviewCard = {
+              id: interview.id,
+              user_id: data.user.id,
+              userName: data.user.last_name + " " + data.user.first_name,
+              iconImagePath: data.user.icon_image_path,
+              job: data.user.desired_occupations,
+              icon: data.user.icon_image_path,
+            };
+          }
+        });
+        interviewArray.push(interviewCard);
+      }
     });
     setInterviews(interviewArray);
   }, []);

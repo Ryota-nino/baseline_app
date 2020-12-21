@@ -25,7 +25,7 @@ interface Props {
   setCurrentText?: any;
   btnClickFunc?: any;
   editId?: number;
-  type?: "regist" | "edit";
+  type?: "regist" | "edit" | "company-comment";
 }
 
 const CommentWindow: React.FC<Props> = (props) => {
@@ -79,6 +79,9 @@ const CommentWindow: React.FC<Props> = (props) => {
     }
     if (props.type === "edit") {
       props.btnClickFunc(props.editId, currentText.value);
+    }
+    if (props.type === "company-comment") {
+      props.btnClickFunc(currentText.value);
     }
 
     props.setShowModal(false);

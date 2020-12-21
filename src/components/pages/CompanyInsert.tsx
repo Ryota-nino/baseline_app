@@ -49,12 +49,6 @@ const CompanyInsert: React.FC<Props> = (props) => {
     } else {
       setLoading(true);
     }
-
-    // setState({
-    //   info: {
-    //     company_name:
-    //   }
-    // })
   }, []);
 
   const isError = [
@@ -63,10 +57,11 @@ const CompanyInsert: React.FC<Props> = (props) => {
     { isEmpty3: false },
   ];
   const employeesObj = [
-    { value: "100~200人" },
-    { value: "200~300人" },
-    { value: "300~400人" },
-    { value: "400~500人" },
+    { id: 100, name: "100人" },
+    { id: 300, name: "300人" },
+    { id: 500, name: "500人" },
+    { id: 800, name: "800人" },
+    { id: 1000, name: "1000人" },
   ];
 
   const inputChangeHandler = (e: any) => {
@@ -190,8 +185,8 @@ const CompanyInsert: React.FC<Props> = (props) => {
               name="business"
               type="text"
               labelTxt="事業内容"
-              isRequired={false}
-              isRequiredTxt={false}
+              isRequired={true}
+              isRequiredTxt={true}
               placeholderTxt="UI/UXデザイン、ビジネスモデルデザイン、ソフトウェア開発"
               isError={isError}
               isIcon={false}

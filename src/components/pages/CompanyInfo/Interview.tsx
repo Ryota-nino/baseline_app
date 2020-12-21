@@ -3,7 +3,12 @@ import { useHistory } from "react-router-dom";
 import { InterviewPage } from "../../Organisms/Window";
 import { CompanyInfo } from "../../Molecules/Card/index";
 import { motion } from "framer-motion";
-import { indexJob, indexInternship, showCompany } from "../../../assets/script";
+import {
+  indexJob,
+  indexInternship,
+  detailCompany,
+  showCompany,
+} from "../../../assets/script";
 
 interface Props {
   match?: any;
@@ -57,7 +62,9 @@ const Interview: React.FC<Props> = (props) => {
       setInternship(getData.data);
       console.log(getData.data);
     });
-    showCompany(companyId).then((getData: any) => {
+
+    detailCompany(companyId).then((getData: any) => {
+      console.log(getData.data);
       setCompany(getData.data);
       setLoading(true);
     });

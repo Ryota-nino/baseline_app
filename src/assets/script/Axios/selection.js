@@ -1,20 +1,23 @@
 import {apiClient} from '../index';
 
   export const registSelection = (postData) => {
-    apiClient.get("/sanctum/csrf-cookie").then((response) => {
-      apiClient
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
         .post(`/api/selection`, postData)
         .then((response) => {
           console.log(response);
-          if (response.status === 200) {
-            // alert("成功");
+          if (response.status !== 200) {
+            return false;
           }
+          return response;
         })
         .catch((error) => {
           console.error(error);
           if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-            alert("失敗");
+            alert("記入されていない項目があります");
+            return false;
           }
+          return false;
         });
     });
   };

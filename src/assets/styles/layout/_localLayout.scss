@@ -327,9 +327,6 @@
         min-height: 108px;
       }
     }
-    .input-dropdown {
-      width: 20%;
-    }
     .label-input__txt,
     .free-word .heading6 {
       margin-bottom: 8px;
@@ -352,6 +349,9 @@
     top: 24px;
     right: 24px;
   }
+}
+#type-step select[name="date"] {
+  width: 100px;
 }
 
 .profile-edit {

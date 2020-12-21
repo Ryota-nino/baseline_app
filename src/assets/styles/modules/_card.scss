@@ -145,6 +145,7 @@
   padding: 24px 24px 32px;
   * {
     transition: 0.3s ease;
+    border-radius: 10px;
   }
   & > a {
     display: block;
@@ -154,6 +155,7 @@
   }
   &__img {
     width: 184px;
+
     margin: 0 auto 8px;
   }
   &__name {

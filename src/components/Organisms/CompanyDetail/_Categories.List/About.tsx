@@ -12,12 +12,17 @@ interface Props {
   companies: any;
   companyComment: any;
   companyData: any;
+  getCompanyData: any;
 }
 
 const About: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [companyComments, setCompanyComments] = useState<any>(null);
   useEffect(() => {
+    getComment();
+  }, []);
+
+  const getComment = () => {
     // コメントを配列に保存
     const companyCommentsArray: any = [];
     props.companyData.company_information.forEach((data: any) => {
@@ -33,7 +38,7 @@ const About: React.FC<Props> = (props) => {
       companyCommentsArray.push(user);
     });
     setCompanyComments(companyCommentsArray);
-  }, []);
+  };
 
   return (
     <>
@@ -50,7 +55,7 @@ const About: React.FC<Props> = (props) => {
         </section>
         <section className="companyDetail-contents__section">
           <h2 className="heading6">従業員数</h2>
-          <p>{props.companyData.number_of_employees + "人"}</p>
+          <p>{props.companyData.number_of_employees + "人以上"}</p>
         </section>
         <section className="companyDetail-contents__section">
           <div>
@@ -84,9 +89,11 @@ const About: React.FC<Props> = (props) => {
         </section>
       </motion.div>
       <Modal
-        type="write-comment"
+        type="company-comment"
         showModal={showModal}
         setShowModal={setShowModal}
+        companyId={props.companyId}
+        getCompanyData={props.getCompanyData}
       />
     </>
   );

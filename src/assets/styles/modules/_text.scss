@@ -114,4 +114,8 @@
 .error-message {
   color: $cAttention;
   font-size: 1.3rem;
+  &.secondary {
+    display: block;
+    transform: translateY(-40px);
+  }
 }

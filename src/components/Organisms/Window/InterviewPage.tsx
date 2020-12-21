@@ -3,7 +3,6 @@ import { InterviewSheet } from ".";
 import { SelectPrimary } from "../../Atoms/Input";
 import { motion } from "framer-motion";
 import { InsertAddBtn } from "../../Atoms/Btn";
-import { SelectSecondary } from "../../Atoms/Input/index";
 interface Props {
   window: any;
   func: any;
@@ -20,17 +19,17 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
 
   const calendarObj = [
     { id: 1, name: "1月" },
-    { id: 1, name: "2月" },
-    { id: 1, name: "3月" },
-    { id: 1, name: "4月" },
-    { id: 1, name: "5月" },
-    { id: 1, name: "6月" },
-    { id: 1, name: "7月" },
-    { id: 1, name: "8月" },
-    { id: 1, name: "9月" },
-    { id: 1, name: "10月" },
-    { id: 1, name: "11月" },
-    { id: 1, name: "12月" },
+    { id: 2, name: "2月" },
+    { id: 3, name: "3月" },
+    { id: 4, name: "4月" },
+    { id: 5, name: "5月" },
+    { id: 6, name: "6月" },
+    { id: 7, name: "7月" },
+    { id: 8, name: "8月" },
+    { id: 9, name: "9月" },
+    { id: 10, name: "10月" },
+    { id: 11, name: "11月" },
+    { id: 12, name: "12月" },
   ];
 
   const result = [
@@ -81,23 +80,33 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
             {props.pages === 0 ? "1" : props.pages.length + 1}
             次面接の概要をご記入ください
           </h1>
-          <div className="label-input mb16">
-            <p className="label-input__txt">
-              選考種類<span className="cAttention">*</span>
-            </p>
-            <SelectPrimary
-              name="selection_type"
-              options={props.internship}
-              required={true}
-            />
-          </div>
-          <div className="contentBox__flex mb16">
-            <div className="label-input">
+          {props.pages === 0 && (
+            <div className="label-input mb16">
               <p className="label-input__txt">
-                応募職種<span className="cAttention">*</span>
+                選考種類<span className="cAttention">*</span>
               </p>
-              <SelectPrimary name="job" options={props.jobs} required={true} />
+              <SelectPrimary
+                name="selection_type"
+                options={props.internship}
+                required={true}
+              />
             </div>
+          )}
+
+          <div className="contentBox__flex mb16">
+            {props.pages === 0 && (
+              <div className="label-input">
+                <p className="label-input__txt">
+                  応募職種<span className="cAttention">*</span>
+                </p>
+                <SelectPrimary
+                  name="job"
+                  options={props.jobs}
+                  required={true}
+                />
+              </div>
+            )}
+
             <div className="label-input">
               <p className="label-input__txt">結果</p>
               <SelectPrimary name="result" options={result} required={true} />
@@ -105,9 +114,9 @@ const InputWindowListInterview: React.FC<Props> = (props) => {
           </div>
           <div className="label-input mb16">
             <p className="label-input__txt">
-              選考種類<span className="cAttention">*</span>
+              選考時期<span className="cAttention">*</span>
             </p>
-            <SelectSecondary name="date" ttl="" selectObj={calendarObj} />
+            <SelectPrimary name="date" options={calendarObj} required={true} />
           </div>
         </article>
 

@@ -4,6 +4,7 @@ import {
   registMyActivity,
   editMyActivity,
   deleteMyActivity,
+  insertComment,
 } from "../../../assets/script/";
 import {
   CommentWindow,
@@ -29,6 +30,7 @@ interface Props {
   editId?: number;
   deleteId?: number;
   getMyData?: any;
+  getCompanyData?: any;
 }
 
 const Modal: React.FC<Props> = (props) => {
@@ -48,6 +50,10 @@ const Modal: React.FC<Props> = (props) => {
   const deleteActivity = (id: number) => {
     deleteMyActivity(id);
     props.getMyData();
+  };
+  const registComment = (text: string) => {
+    insertComment(Number(props.companyId) + 1, text);
+    props.getCompanyData();
   };
 
   const rootingModalRender = () => {
@@ -71,14 +77,17 @@ const Modal: React.FC<Props> = (props) => {
           companyId={props.companyId}
         />
       );
-    } else if (props.type === "write-comment") {
+    } else if (props.type === "company-comment") {
       return (
         <CommentWindow
           ttl="会社に対するコメントを書く"
           showModal={props.showModal}
           setShowModal={props.setShowModal}
           setSaveTextModal={setSaveTextModal}
+          setCurrentText={setCurrentText}
+          btnClickFunc={registComment}
           content={useDraftText}
+          type="company-comment"
         />
       );
     } else if (props.type === "activity-edit") {

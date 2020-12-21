@@ -17,6 +17,9 @@ const CompanyDetail: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   useEffect(() => {
+    getCompanyData();
+  }, []);
+  const getCompanyData = () => {
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
         console.log(getData.data);
@@ -26,7 +29,7 @@ const CompanyDetail: React.FC<Props> = (props) => {
         setLoading(true);
       }
     });
-  }, []);
+  };
   const renderDOM = () => {
     return (
       <motion.section
@@ -51,6 +54,7 @@ const CompanyDetail: React.FC<Props> = (props) => {
               companyId={companyId}
               thisPage={thisPage}
               companyData={companyData}
+              getCompanyData={getCompanyData}
             />
           </div>
           <div className="right-col">

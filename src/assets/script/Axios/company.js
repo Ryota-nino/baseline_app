@@ -82,8 +82,8 @@ export const insertCompany = (postData) => {
       })
       .catch((error) => {
         console.error(error);
-        if (error.response.status === 401 || error.response.status === 422) {
-          // alert("登録失敗");
+        if (error.response.status === 401 || error.response.status === 422 || error.response.status === 402) {
+          alert("未入力の項目が存在します");
           return false;
         }
         return false;
@@ -114,4 +114,31 @@ export const companyDetailUser = (company_id, user_id) => {
         }
       });
   });
+};
+
+export const insertComment = (company_id, comment_content) => {
+  return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    return apiClient
+      .post("/api/company_comment", {
+        company_id,
+        comment_content
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+
+          return true;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response.status === 401 || error.response.status === 422 || error.response.status === 402) {
+          alert("コメントを入力してください");
+          return false;
+        }
+        return false;
+      })
+  });
+  // return flg;
+  
 };

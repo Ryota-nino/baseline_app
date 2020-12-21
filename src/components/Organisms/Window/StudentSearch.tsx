@@ -85,12 +85,11 @@ const StudentSearch: React.FC<Props> = (props) => {
     });
   };
 
-  const yearList = ["21卒", "22卒", "23卒"];
-
   const renderJobList = () => {
     return jobs.map((data: any) => {
       return (
         <CheckboxWithText
+          id={data.id}
           keyName={`${data.id}`}
           className={"checkbox-item"}
           type={"checkbox"}

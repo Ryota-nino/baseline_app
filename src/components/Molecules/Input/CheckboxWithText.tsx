@@ -6,7 +6,7 @@ interface Props {
   txt: string;
   checkboxFunc?: any;
   checkedPref?: string[];
-  id?: string;
+  id?: string | undefined;
   keyName?: string;
   className?: string;
   category?: string;

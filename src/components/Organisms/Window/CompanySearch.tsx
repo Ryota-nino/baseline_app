@@ -50,6 +50,7 @@ const CompanySearch: React.FC<Props> = (props) => {
             {value.map((data) => {
               return (
                 <CheckboxWithText
+                  id={String(data.code)}
                   keyName={data.code.toString()}
                   category={"prefectures"}
                   className={"checkbox-item"}

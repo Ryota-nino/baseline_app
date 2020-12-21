@@ -9,6 +9,7 @@ interface Props {
   thisPage: string;
   companyId: any;
   companyData: any;
+  getCompanyData: any;
 }
 
 const Categories: React.FC<Props> = (props) => {
@@ -44,6 +45,7 @@ const Categories: React.FC<Props> = (props) => {
           companies={companies}
           companyComment={companyComment}
           companyData={props.companyData}
+          getCompanyData={props.getCompanyData}
         />
       );
     }

@@ -5,18 +5,41 @@ import { Step, Entry, Interview } from "./_Contents.Categories";
 interface Props {
   thisPage: string;
   params: any;
+  userData: any;
+  isLoading: boolean;
 }
 
 const Contents: React.FC<Props> = (props) => {
   const renderContents = () => {
     if (props.thisPage === "step") {
-      return <Step params={props.params} thisPage={props.thisPage} />;
+      return (
+        <Step
+          params={props.params}
+          thisPage={props.thisPage}
+          userData={props.userData}
+          isLoading={props.isLoading}
+        />
+      );
     }
     if (props.thisPage === "entry") {
-      return <Entry params={props.params} thisPage={props.thisPage} />;
+      return (
+        <Entry
+          params={props.params}
+          thisPage={props.thisPage}
+          userData={props.userData}
+          isLoading={props.isLoading}
+        />
+      );
     }
     if (props.thisPage === "interview") {
-      return <Interview params={props.params} thisPage={props.thisPage} />;
+      return (
+        <Interview
+          params={props.params}
+          thisPage={props.thisPage}
+          userData={props.userData}
+          isLoading={props.isLoading}
+        />
+      );
     }
   };
   return (

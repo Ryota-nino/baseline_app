@@ -6,12 +6,13 @@ interface Props {
   setShowModal?: any;
   Func?: any;
   disabledRule?: any;
+  isSolid?: boolean;
 }
 const Primary: React.FC<Props> = (props) => {
   return (
     <button
       type={props.type}
-      className="btn btn--primary"
+      className={`btn btn--primary ${props.isSolid && "solid"}`}
       onClick={() => {
         if (props.setShowModal) {
           props.setShowModal(true);

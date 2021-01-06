@@ -4,13 +4,15 @@ import { Link, useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Modal } from "../../Organisms/Modal";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+
 interface Props {
   myData: any;
   loading: boolean;
 }
 
 const AccountSetting: React.FC<Props> = (props) => {
-  console.log(props.myData);
+
+  
 
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);

@@ -25,5 +25,6 @@ export {default as MenuDownIcon} from './icon-menuDown.svg';
 export {default as GearIcon} from './icon-gear.svg';
 export {default as CloseIcon} from './icon-close.svg';
 export {default as DesktopIllust} from './illust-desktop.svg';
+export {default as DesktopIllust2} from './illust-desktop2.svg';
 export {default as toue} from './toue.png';
 export {default as rikuma} from './rikuma.png';

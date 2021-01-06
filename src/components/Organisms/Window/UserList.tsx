@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { indexJob } from "../../../assets/script";
 import { rikuma } from "../../../assets/images/index";
 
 interface Props {
@@ -9,7 +10,8 @@ interface Props {
 
 const UserList: React.FC<Props> = (props) => {
   const [userList, setUserList] = useState<any>();
-
+  const [jobs, setJobs] = useState<any>();
+  const [loading, setLoading] = useState<boolean>();
   useEffect(() => {
     if (props.thisPage === "insert-users") {
       const userArray: object[] = [];
@@ -30,9 +32,13 @@ const UserList: React.FC<Props> = (props) => {
       });
       setUserList(userArray);
     }
+    indexJob().then((getData: any) => {
+      setJobs(getData.data);
+      setLoading(true);
+    });
   }, []);
 
-  let pageTtl, linkTo;
+  let pageTtl: string, linkTo: string;
   if (props.thisPage === "insert-users") {
     pageTtl = "情報提供に協力した方";
     linkTo = "company-users";
@@ -61,10 +67,8 @@ const UserList: React.FC<Props> = (props) => {
                     <p className="user-excerpt__name">{data.name}</p>
                     <div>
                       <p className="user-excerpt__year">
-                        {data.graduationYear}卒
-                      </p>
-                      <p className="user-excerpt__job">
-                        {data.desiredOccupations}希望
+                        {data.graduationYear}卒 |&nbsp;
+                        <span>{jobs[data.desiredOccupations].name}希望</span>
                       </p>
                     </div>
                   </div>
@@ -77,18 +81,22 @@ const UserList: React.FC<Props> = (props) => {
     }
   };
 
-  return (
-    <article className="contentBox userListWindow">
-      <h1 className="heading5">{pageTtl}</h1>
-      <ul className="userListWindow__list">{renderUserList()}</ul>
-      <Link
-        className="userListWindow__link"
-        to={`/${linkTo}/${props.companyData.id}`}
-      >
-        さらに表示する
-      </Link>
-    </article>
-  );
+  const renderDOM = () => {
+    return (
+      <article className="contentBox userListWindow">
+        <h1 className="heading5">{pageTtl}</h1>
+        <ul className="userListWindow__list">{renderUserList()}</ul>
+        <Link
+          className="userListWindow__link"
+          to={`/${linkTo}/${props.companyData.id}`}
+        >
+          さらに表示する
+        </Link>
+      </article>
+    );
+  };
+
+  return <>{loading && renderDOM()}</>;
 };
 
 export default UserList;

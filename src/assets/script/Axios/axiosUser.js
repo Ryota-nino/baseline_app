@@ -18,3 +18,22 @@ export const getMyData = (notLoginFunc) => {
     });
   };
   
+export const editProfile = (user_id,postData) => {
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
+        .post(`/api/user/edit/${user_id}`,postData)
+        .then((response) => {
+          if (response.status !== 200) {
+            return false;
+          }
+          console.log(response)
+          return response;
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+          }
+        });
+    });
+  };
+  

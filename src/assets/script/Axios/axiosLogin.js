@@ -17,7 +17,7 @@ export const login = (email,password,active,jumpFunc) => {
       .catch((error) => {
         console.error(error);
         if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
-          alert("ログイン失敗");
+          alert("入力されたメールアドレスかパスワードが間違っています");
         }
       });
   });

@@ -15,6 +15,11 @@
       opacity: 0.5;
       cursor: default;
     }
+    &.solid {
+      background-color: $cWhite;
+      border: 1px solid $cMain;
+      color: $cMain;
+    }
   }
   &--action {
     background-color: $cBlack;

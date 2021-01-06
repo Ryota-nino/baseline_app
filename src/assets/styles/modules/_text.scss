@@ -7,6 +7,18 @@
   font-weight: bold;
   font-size: 2rem;
   line-height: 2rem;
+  span {
+    font-size: 1.3rem;
+    color: #545454;
+    font-weight: normal;
+    display: inline-block;
+    margin-left: 8px;
+    em {
+      font-weight: bold;
+      color: #f26f6f;
+      margin-right: 2px;
+    }
+  }
 }
 .heading5 {
   font-weight: bold;

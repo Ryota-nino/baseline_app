@@ -9,15 +9,11 @@ interface Props {
 }
 
 const UserData: React.FC<Props> = (props) => {
-  const graduationYearConversion = () => {
-    const text = props.userData.year_of_graduation;
-    return text.substr(2, 2);
-  };
-
   const renderGender = (num: number) => {
     const gender = ["男性", "女性", "その他"];
     return gender[num];
   };
+  
   return (
     <div className="userDetail-window">
       <div className="userDetail-window__container">
@@ -40,7 +36,7 @@ const UserData: React.FC<Props> = (props) => {
           </div>
           <ul className="userDetail-window__list">
             <li className="userDetail-window__year">
-              {graduationYearConversion() + "卒"}
+              {props.userData.year_of_graduation + "卒"}
             </li>
             <li className="userDetail-window__gender">
               &nbsp;|&nbsp;性別:{renderGender(props.userData.sex)}

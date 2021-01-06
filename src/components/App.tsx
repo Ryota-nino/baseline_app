@@ -94,6 +94,11 @@ const App: React.FC = () => {
                   path="/register/insert"
                   component={Page.RegisterInsert}
                 ></Route>
+                <Route
+                  exact
+                  path="/register/complete"
+                  component={Page.RegisterComplete}
+                ></Route>
 
                 <Route exact path="/login" component={Page.Login}></Route>
                 <Route

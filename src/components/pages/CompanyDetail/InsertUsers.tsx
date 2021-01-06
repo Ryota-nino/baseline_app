@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { AboutBar } from "../../Organisms/CompanyDetail";
-import { detailCompany } from "../../../assets/script";
+import { detailCompany, indexJob } from "../../../assets/script";
 import { rikuma } from "../../../assets/images/index";
 interface Props {
   thisPage: string;
@@ -12,8 +12,12 @@ const InsertUsers: React.FC<Props> = (props) => {
   const companyId = props.match.params.companyId;
   const [companyData, setCompanyData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [jobs, setJobs] = useState<any>();
   const history = useHistory();
   useEffect(() => {
+    indexJob().then((getData: any) => {
+      setJobs(getData.data);
+    });
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
         setCompanyData(getData.data);
@@ -22,6 +26,10 @@ const InsertUsers: React.FC<Props> = (props) => {
       }
     });
   }, []);
+  const graduationYearConversion = (txt: string) => {
+    const text = txt;
+    return text.substr(2, 2);
+  };
   let pageTtl: string;
   if (props.thisPage === "insert-users") {
     pageTtl = "情報提供に協力した方";
@@ -35,7 +43,7 @@ const InsertUsers: React.FC<Props> = (props) => {
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">戻る</span>
         </button>
-        <section className="app-main company-detail">
+        <section className="app-main insert-users company-detail">
           <div className="left-col">
             <AboutBar
               companyData={companyData}
@@ -67,8 +75,16 @@ const InsertUsers: React.FC<Props> = (props) => {
                               {data.user.first_name + " " + data.user.last_name}
                             </h1>
                             <div className="user-card__wrap">
-                              <p>{data.user.year_of_graduation}卒</p>
-                              <p>{data.user.desired_occupations}希望</p>
+                              <p>
+                                {graduationYearConversion(
+                                  data.user.year_of_graduation
+                                )}
+                                卒 |&nbsp;
+                                <span>
+                                  {jobs![data.user.desired_occupations].name}
+                                  希望
+                                </span>
+                              </p>
                             </div>
                           </div>
                         </Link>

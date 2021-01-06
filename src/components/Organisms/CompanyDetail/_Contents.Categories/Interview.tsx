@@ -51,10 +51,6 @@ const Entry: React.FC<Props> = (props) => {
     };
     return texts;
   };
-  const graduationYearConversion = (year: string) => {
-    const text = year;
-    return text.substr(2, 2);
-  };
 
   const renderContentDOM = () => {
     return (
@@ -67,9 +63,7 @@ const Entry: React.FC<Props> = (props) => {
                   <div className="aboutCompany-item__left-col">
                     <h2 className="heading5">
                       {content.internship.name} (
-                      {graduationYearConversion(
-                        props.userData.year_of_graduation
-                      )}
+                      {props.userData.year_of_graduation}
                       卒)
                     </h2>
                     <p className="aboutCompany-item__job">

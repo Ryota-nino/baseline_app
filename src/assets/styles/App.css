@@ -431,7 +431,8 @@ input, select, textarea {
 }
 
 .single {
-  max-width: 746px;
+  max-width: 900px;
+  margin: auto;
 }
 
 .main {
@@ -501,52 +502,82 @@ input, select, textarea {
   width: 100%;
 }
 
+.main.register {
+  width: 640px;
+  margin: 0 auto;
+}
+
+.main.register .free-word,
+.main.register input[name="student_number"],
+.main.register .selectBox {
+  width: 300px;
+}
+
 .login .contentBox {
   width: 434px;
+}
+
+.register .contentBox {
+  width: 100%;
+}
+
+.login .contentBox,
+.register .contentBox {
   margin: auto;
 }
 
 .login input[type="email"],
 .login input[type="text"],
-.login input[type="password"] {
+.login input[type="password"],
+.register input[type="email"],
+.register input[type="text"],
+.register input[type="password"] {
   width: 100%;
 }
 
-.login .heading6 {
+.login .heading6,
+.register .heading6 {
   font-weight: normal;
 }
 
-.login .free-word {
+.login .free-word,
+.register .free-word {
   margin-bottom: 20px;
 }
 
-.login .free-word.last {
+.login .free-word.last,
+.register .free-word.last {
   margin-bottom: 0;
 }
 
-.login .password-forget {
+.login .password-forget,
+.register .password-forget {
   font-size: 1.3rem;
   text-align: right;
 }
 
-.login .password-forget a {
+.login .password-forget a,
+.register .password-forget a {
   color: #448AF3;
 }
 
-.login .btn {
+.login .btn,
+.register .btn {
   margin: 48px auto 8px;
 }
 
-.login .not-have-account {
+.login .not-have-account,
+.register .not-have-account {
   text-align: center;
   font-size: 1.3rem;
 }
 
-.login .not-have-account a {
+.login .not-have-account a,
+.register .not-have-account a {
   color: #448AF3;
 }
 
-.app-main .pageBack-link {
+.pageBack-link {
   margin-bottom: 40px;
 }
 
@@ -637,7 +668,11 @@ input, select, textarea {
 }
 
 .company-detail .user-card {
-  margin-bottom: 24px;
+  margin-bottom: 8px;
+}
+
+.company-detail .user-card img {
+  border-radius: 100px;
 }
 
 .company-detail {
@@ -716,6 +751,10 @@ input, select, textarea {
   padding: 0 0 0 24px;
 }
 
+.company-info__form .input-component {
+  width: 50%;
+}
+
 .company-info__form form div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -771,7 +810,7 @@ input, select, textarea {
 }
 
 .companyDetail-contents.userCard {
-  padding: 32px 28px 32px;
+  padding: 52px 68px 52px;
   max-width: 100%;
   background-color: #ffffff;
 }
@@ -787,8 +826,15 @@ input, select, textarea {
       flex-wrap: wrap;
 }
 
+.companyDetail-contents .userCard-list::after {
+  content: "";
+  width: 240px;
+  height: 0;
+}
+
 .companyDetail-contents .userCard-list .user-card > a {
-  width: 222px;
+  width: 240px;
+  padding: 28px 16px;
 }
 
 .companyDetail-contents .userCard-list .user-card > a img {
@@ -865,10 +911,6 @@ input, select, textarea {
   min-height: 108px;
 }
 
-.company-info-edit .contentBox .input-dropdown {
-  width: 20%;
-}
-
 .company-info-edit .contentBox .label-input__txt,
 .company-info-edit .contentBox .free-word .heading6 {
   margin-bottom: 8px;
@@ -893,6 +935,10 @@ input, select, textarea {
   position: absolute;
   top: 24px;
   right: 24px;
+}
+
+#type-step select[name="date"] {
+  width: 100px;
 }
 
 .profile-edit .input--big {
@@ -999,9 +1045,26 @@ input, select, textarea {
   opacity: 0.6;
 }
 
+@media screen and (min-width: 1600px) {
+  .insert-users .left-col {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 100%;
+            flex: 0 1 100%;
+  }
+}
+
 .headerRegister {
   background-color: #ffffff;
-  padding: 20px 0 20px 64px;
+  padding: 20px 64px 20px 64px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .headerRegister__logo {
@@ -1261,6 +1324,12 @@ input, select, textarea {
   color: #ffffff;
   border-radius: 100px;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.btn--primary:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .btn--action {
@@ -1275,6 +1344,11 @@ input, select, textarea {
       -ms-flex-align: center;
           align-items: center;
   font-weight: bold;
+}
+
+.btn--action:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .btn--action .plus {
@@ -1317,8 +1391,8 @@ input, select, textarea {
 }
 
 .btn--edit {
-  background: #F5F5F5;
-  border: 1px solid #DCDCDC;
+  background: #f5f5f5;
+  border: 1px solid #dcdcdc;
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1400,8 +1474,8 @@ input, select, textarea {
 }
 
 #isShow-ListBtn {
-  background: #FAFAFA;
-  border: 1px solid #DEDEDE;
+  background: #fafafa;
+  border: 1px solid #dedede;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: 4px;
@@ -1426,7 +1500,8 @@ input, select, textarea {
   background: url("../../images/icon-arrow.svg") no-repeat center center/contain;
 }
 
-.page-prevBtn, .page-nextBtn {
+.page-prevBtn,
+.page-nextBtn {
   width: 32px;
   height: 32px;
   border-radius: 4px;
@@ -1522,8 +1597,8 @@ input, select, textarea {
   border-radius: 50%;
   position: relative;
   background-color: #21B79C;
-  -webkit-box-shadow: 0 4px 20px #DEE8F1;
-          box-shadow: 0 4px 20px #DEE8F1;
+  -webkit-box-shadow: 0 4px 20px #dee8f1;
+          box-shadow: 0 4px 20px #dee8f1;
 }
 
 .addBtn::before, .addBtn::after {
@@ -1587,11 +1662,18 @@ input, select, textarea {
 .myAvatar__id {
   font-size: 1.1rem;
   margin-top: 2px;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .myAvatar__arrow {
   margin-left: 24px;
+}
+
+.myAvatar__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  margin-right: 8px;
 }
 
 .heading1 {
@@ -1721,14 +1803,14 @@ input, select, textarea {
 }
 
 .about-overview {
-  border-top: 1px solid #F3F4F5;
-  border-bottom: 1px solid #F3F4F5;
+  border-top: 1px solid #f3f4f5;
+  border-bottom: 1px solid #f3f4f5;
   border-collapse: collapse;
   width: 100%;
 }
 
 .about-overview th {
-  background-color: #F8F8F9;
+  background-color: #f8f8f9;
   padding: 13px 0 13px 12px;
   width: 122px;
   text-align: left;
@@ -1736,6 +1818,17 @@ input, select, textarea {
 
 .about-overview td {
   padding-left: 24px;
+}
+
+.error-message {
+  color: #F26F6F;
+  font-size: 1.3rem;
+}
+
+.error-message.secondary {
+  display: block;
+  -webkit-transform: translateY(-40px);
+          transform: translateY(-40px);
 }
 
 .pagenation {
@@ -1748,8 +1841,8 @@ input, select, textarea {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  max-width: 272px;
-  margin: 0 auto;
+  max-width: 800px;
+  margin: 0 0 0 auto;
 }
 
 .pagination-number {
@@ -1801,7 +1894,7 @@ input, select, textarea {
 }
 
 .pagination-number li a:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 #abc {
@@ -1827,6 +1920,8 @@ input, select, textarea {
 .input-component span {
   cursor: pointer;
   color: #545454;
+  line-height: 1.2;
+  width: 80%;
 }
 
 .input-checkbox {
@@ -2070,6 +2165,13 @@ input, select, textarea {
   margin: auto;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.prefecture-accordion__heading.rotate::after {
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
 }
 
 .prefecture-accordion__item {
@@ -2077,7 +2179,15 @@ input, select, textarea {
 }
 
 .prefecture-accordion__select-list {
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
   padding: 32px 46px;
+}
+
+.prefecture-accordion__select-list.hidden {
+  height: 0;
+  overflow: hidden;
+  padding: 0 32px;
 }
 
 .prefecture-accordion__category {
@@ -2237,6 +2347,11 @@ input, select, textarea {
   margin-right: 4px;
 }
 
+.free-word input[name="graduation_year"] {
+  background-color: #fafafa;
+  color: #222;
+}
+
 .free-word .heading6 {
   margin-bottom: 12px;
 }
@@ -2304,8 +2419,11 @@ input, select, textarea {
 }
 
 .select-image__avatar {
-  width: 106px;
-  height: 106px;
+  width: 200px;
+  border-radius: 50%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .select-image__overlay {
@@ -2385,20 +2503,25 @@ input, select, textarea {
   display: flex;
 }
 
+.user-excerpt img {
+  border-radius: 100px;
+}
+
 .company-card a {
   display: block;
   max-width: 254px;
+  height: 330px;
   padding: 10px;
   background-color: #ffffff;
   border-radius: 8px;
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .company-card a:hover {
   -webkit-box-shadow: 6px 8px 22px rgba(0, 0, 0, 0.06);
           box-shadow: 6px 8px 22px rgba(0, 0, 0, 0.06);
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .company-card__img {
@@ -2450,7 +2573,7 @@ input, select, textarea {
 
 .company-card__time {
   font-size: 1.1rem;
-  opacity: .5;
+  opacity: 0.5;
   color: #545454;
   text-align: right;
 }
@@ -2508,7 +2631,7 @@ input, select, textarea {
 
 .activity-card__time {
   font-size: 1.2rem;
-  opacity: .5;
+  opacity: 0.5;
   color: #545454;
 }
 
@@ -2538,7 +2661,8 @@ input, select, textarea {
           box-shadow: 0 0 16px rgba(0, 0, 0, 0.06), 0 0 30px rgba(0, 0, 0, 0.04);
 }
 
-.studentCard-item > a > div, .studentCard-item > a > p {
+.studentCard-item > a > div,
+.studentCard-item > a > p {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 25%;
           flex: 0 0 25%;
@@ -2568,6 +2692,7 @@ input, select, textarea {
 .comapay-detailCard * {
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+  border-radius: 10px;
 }
 
 .comapay-detailCard > a {
@@ -2575,7 +2700,7 @@ input, select, textarea {
 }
 
 .comapay-detailCard > a:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .comapay-detailCard__img {
@@ -2595,7 +2720,7 @@ input, select, textarea {
 }
 
 .comapay-detailCard__link > a:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .user-card > a {
@@ -2676,7 +2801,7 @@ input, select, textarea {
 }
 
 .newsBar a:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .newsBar__wrap {
@@ -2713,6 +2838,7 @@ input, select, textarea {
 }
 
 .company-bar__wrap {
+  width: 60%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2818,7 +2944,7 @@ input, select, textarea {
 }
 
 .company-detailItem__icon {
-  background-color: #FAE9C9;
+  background-color: #fae9c9;
   padding: 6px;
   border-radius: 6px;
   margin-right: 16px;
@@ -2831,7 +2957,8 @@ input, select, textarea {
 }
 
 .company-detailItem__job {
-  width: 15%;
+  width: 30%;
+  margin-right: 16px;
   font-size: 1.3rem;
   color: #545454;
 }
@@ -2851,6 +2978,7 @@ input, select, textarea {
 }
 
 .company-detailItem__user img {
+  border-radius: 100px;
   width: 32px;
   height: 32px;
   margin-right: 8px;
@@ -2972,6 +3100,10 @@ input, select, textarea {
 
 .mb42 {
   margin-bottom: 42px;
+}
+
+.mt16 {
+  margin-top: 16px;
 }
 
 .modal--normal {
@@ -3209,8 +3341,9 @@ input, select, textarea {
   padding-bottom: 24px;
 }
 
-.modal.activity-delete .btn {
-  margin-left: 24px;
+.modal.activity-delete .btn--rounded {
+  margin-left: 32px;
+  margin-right: -24px;
 }
 
 .modal-background {
@@ -3563,12 +3696,18 @@ input, select, textarea {
   top: -5px;
 }
 
+.userIcon {
+  border-radius: 100px;
+}
+
 .activity-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   position: relative;
   margin: 0 auto;
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 32px;
 }
 
 .activity-item > img {
@@ -3628,17 +3767,18 @@ input, select, textarea {
   font-size: 1.4rem;
   line-height: 1.75;
   padding-bottom: 40px;
-  border-bottom: 1px solid #eeeeee;
-  margin-bottom: 32px;
 }
 
 .activity-item__txt a {
   color: #448AF3;
 }
 
+.activity-item:last-child {
+  margin-bottom: 0;
+}
+
 .activity-item:last-child .activity-item__txt {
   border: none;
-  padding: 0;
 }
 
 .activity-item .activity-item-menu {
@@ -3791,7 +3931,8 @@ input, select, textarea {
 }
 
 .sideSearchBar .checkbox-list__heading {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
+  margin-top: 10px;
 }
 
 .sideSearchBar .checkbox-list__wrap {
@@ -3800,6 +3941,10 @@ input, select, textarea {
   overflow-y: hidden;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+}
+
+.sideSearchBar .checkbox-list__wrap .input-component {
+  margin-bottom: 4px;
 }
 
 .sideSearchBar .checkbox-list .checkbox-item {
@@ -3918,6 +4063,10 @@ input, select, textarea {
           align-items: center;
 }
 
+.userDetail-window img {
+  border-radius: 100px;
+}
+
 .userDetail-window .btn--action {
   height: 42px;
   margin-left: 8px;
@@ -3971,7 +4120,7 @@ input, select, textarea {
 }
 
 .user-excerpt a:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .user-excerpt img {
@@ -3981,9 +4130,6 @@ input, select, textarea {
 }
 
 .user-excerpt__wrap > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   font-size: 1.3rem;
   color: #545454;
 }
@@ -4158,6 +4304,7 @@ input, select, textarea {
 
 .aboutCompany-item__job {
   margin-top: 6px;
+  line-height: 1.5;
 }
 
 .aboutCompany-Content {

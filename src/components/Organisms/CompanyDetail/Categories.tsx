@@ -13,27 +13,8 @@ interface Props {
 }
 
 const Categories: React.FC<Props> = (props) => {
-  const [activity, setActivity] = useState<any>();
-  const [companies, setCompanies] = useState<any>([]);
-  const [companyComment, setCompanyComment] = useState<any>([]);
   let companyId = Number(props.companyId) - 1;
-  useEffect(() => {
-    const url1 = "./activity.json";
-    axios.get(url1).then((res) => {
-      const output = res.data;
-      setActivity(output);
-    });
-    const url2 = "./database/companies.json";
-    axios.get(url2).then((res) => {
-      const output = res.data;
-      setCompanies(output);
-    });
-    const url3 = "./database/company_comments.json";
-    axios.get(url3).then((res) => {
-      const output = res.data;
-      setCompanyComment(output);
-    });
-  }, []);
+  useEffect(() => {}, []);
 
   const renderContents = () => {
     if (props.thisPage === "about") {
@@ -41,9 +22,6 @@ const Categories: React.FC<Props> = (props) => {
         <About
           thisPage={props.thisPage}
           companyId={companyId}
-          activity={activity}
-          companies={companies}
-          companyComment={companyComment}
           companyData={props.companyData}
           getCompanyData={props.getCompanyData}
         />

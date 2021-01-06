@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   DesktopIllust,
   MailIcon,
@@ -7,19 +7,29 @@ import {
 } from "../../../assets/images/index";
 
 const RegisterSend: React.FC = (props) => {
+  useEffect(() => {
+    const container = document.querySelector(".container");
+    container?.classList.add("page-login");
+  }, []);
   return (
-    <div className="register">
+    <div className="register-send">
       <ul className="register-step">
         <li className="current">
-          <img src={MailIcon} alt="" />
+          <p>
+            <img src={MailIcon} alt="" />
+          </p>
           <span>メール認証</span>
         </li>
         <li>
-          <img src={DocumentIcon_White} alt="" />
+          <p>
+            <img src={DocumentIcon_White} alt="" />
+          </p>
           <span>基本情報入力</span>
         </li>
         <li>
-          <img src={CheckIcon} alt="" />
+          <p>
+            <img src={CheckIcon} alt="" />
+          </p>
           <span>会員登録完了</span>
         </li>
       </ul>
@@ -28,7 +38,9 @@ const RegisterSend: React.FC = (props) => {
           <h1 className="heading4">まだ会員登録は完了していません</h1>
           <img src={DesktopIllust} alt="" />
           <p>
-            メールが届いていることを確認し、本文中に記載されているURLから 登録を完了してください。
+            メールが届いていることを確認し、本文中に記載されている
+            <br />
+            URLから登録を完了してください。
           </p>
         </form>
       </div>

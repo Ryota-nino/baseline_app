@@ -20,13 +20,14 @@ const CompanyDetail: React.FC<Props> = (props) => {
     getCompanyData();
   }, []);
   const getCompanyData = () => {
-    detailCompany(companyId).then((getData: any) => {
+    return detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
-        console.log(getData.data);
         setCompanyData({
           ...getData.data,
         });
         setLoading(true);
+
+        return getData.data;
       }
     });
   };

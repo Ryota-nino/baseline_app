@@ -1,15 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Secondary } from "../../Atoms/TextInput";
 import { RoundedBtn } from "../../Atoms/Btn";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
+import { editProfile, mypage } from "../../../assets/script";
 interface Props {
   thisPage: string;
   myData: any;
 }
 
 const SettingForm: React.FC<Props> = (props) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [myData, setMyData] = useState<any>();
+  const [sendObj, setSendObj] = useState<any>();
+
+  useEffect(() => {
+    mypage().then((getData: any) => {
+      setMyData({
+        data: getData.data,
+        company_information: getData.data.company_information,
+      });
+      setSendObj({
+        student_number: getData.data.student_number,
+        first_name: getData.data.first_name,
+        last_name: getData.data.last_name,
+        sex: getData.data.sex,
+        annual: getData.data.annual,
+        year_of_graduation: getData.data.year_of_graduation,
+        desired_occupations: getData.data.desired_occupations,
+        icon: getData.data.icon_image_url,
+      });
+      console.log(getData);
+      console.log(sendObj);
+      setIsLoading(true);
+    });
+  }, []);
+  const changeStudentNum = () => {
+    console.log(sendObj);
+    const studentNum = (document.querySelector(
+      'input[name="student_number"]'
+    ) as HTMLInputElement).value;
+    setSendObj({ ...sendObj, student_number: Number(studentNum) });
+    console.log({ ...sendObj, student_number: Number(studentNum) });
+    // editProfile(myData.data.id, { ...sendObj, student_number: studentNum });
+  };
+  const changePassword = () => {
+    const password = (document.querySelector(
+      'input[name="password"]'
+    ) as HTMLInputElement).value;
+    setSendObj({ ...sendObj, password: password });
+    console.log({ ...sendObj, password: password });
+    // editProfile(myData.data.id, { ...sendObj, student_number: studentNum });
+  };
+  const changeMail = () => {
+    const mail = (document.querySelector(
+      'input[name="mail"]'
+    ) as HTMLInputElement).value;
+    setSendObj({ ...sendObj, student_number: mail });
+    console.log({ ...sendObj, student_number: mail });
+    // editProfile(myData.data.id, { ...sendObj, student_number: studentNum });
+  };
+
   const history = useHistory();
   const isError = [
     { isEmpty1: false },
@@ -30,13 +82,13 @@ const SettingForm: React.FC<Props> = (props) => {
             placeholderTxt=""
             isError={isError}
             isIcon={false}
-            defaultValue={props.myData.data.student_number}
+            defaultValue={myData.data.student_number}
           />
           <div className="accountSetting-content__bottom">
             <p>
               <Link to="/:user/account-setting">キャンセル</Link>
             </p>
-            <RoundedBtn txt="保存" />
+            <RoundedBtn txt="保存" Func={changeStudentNum} />
           </div>
         </section>
       );
@@ -123,7 +175,7 @@ const SettingForm: React.FC<Props> = (props) => {
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">設定一覧へ</span>
         </button>
-        {renderContent()}
+        {isLoading && renderContent()}
       </motion.section>
     </>
   );

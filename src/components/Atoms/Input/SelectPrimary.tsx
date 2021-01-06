@@ -5,6 +5,7 @@ interface Props {
   options: any;
   required: boolean;
   selectFunc?: any;
+  ref?: any;
 }
 
 const SelectBox: React.FC<Props> = (props) => {
@@ -22,10 +23,17 @@ const SelectBox: React.FC<Props> = (props) => {
           name={props.name}
           onChange={changeHandler}
           required={props.required}
+          ref={props.ref}
         >
           {props.options &&
             props.options.map((item: any) => {
-              return <option value={item["id"]}>{item["name"]}</option>;
+              return (
+                <option value={item["id"]}>
+                  {props.name === "graduation_year"
+                    ? item["name"] + "卒"
+                    : item["name"]}
+                </option>
+              );
             })}
         </select>
       </div>

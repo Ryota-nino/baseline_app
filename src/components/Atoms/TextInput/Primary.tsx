@@ -17,6 +17,8 @@ interface Props {
   onKeyPress?: KeyboardEventHandler;
   onChange?: ChangeEventHandler;
   defaultValue?: string;
+  disabled?: boolean;
+  ref?: any;
 }
 
 const Primary: React.FC<Props> = (props) => {
@@ -35,7 +37,9 @@ const Primary: React.FC<Props> = (props) => {
           maxLength={props.maxLength}
           onKeyPress={props.onKeyPress}
           onChange={props.onChange}
-          defaultValue={props.defaultValue}
+          defaultValue={props.defaultValue && props.defaultValue}
+          disabled={props.disabled}
+          ref={props.ref}
         />
         {props.unit}
         {props.isError && (

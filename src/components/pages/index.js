@@ -11,6 +11,6 @@ export {default as ProfileEdit} from './ProfileEdit';
 export {AccountSetting, SettingForm} from './AccountSetting/index';
 export {default as AccountSettingContent} from './AccountSetting/SettingForm';
 export {DetailContents, CompanyDetail, InsertUsers} from './CompanyDetail/index';
-export {Register,RegisterInsert,RegisterSend} from './Register/index';
+export {Register,RegisterInsert,RegisterSend,RegisterComplete} from './Register/index';
 
 export {default as Login} from './Login';

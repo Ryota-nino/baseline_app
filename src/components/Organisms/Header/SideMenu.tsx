@@ -131,9 +131,9 @@ const Header: React.FC<Props> = (props) => {
           className={`myAvatar-menu ${viewMenu && "view"}`}
         >
           <ul className="myAvatar-menu__wrap">
-            <li className="myAvatar-menu__item">
-              <Link to="/:user/account-setting">設定</Link>
-            </li>
+            {/* <li className="myAvatar-menu__item">
+              <Link to={`/id/account-setting`}>設定</Link>
+            </li> */}
             <li
               className="myAvatar-menu__item cAttention"
               onClick={logout.bind(null, logoutFunc)}

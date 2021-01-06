@@ -4,10 +4,14 @@ import { SelectSecondary } from "../Atoms/Input/index";
 import { Secondary } from "../Atoms/TextInput";
 import { RoundedBtn } from "../Atoms/Btn";
 import { motion } from "framer-motion";
-import { Avatar, CameraIcon } from "../../assets/images/index";
+import { rikuma, CameraIcon } from "../../assets/images/index";
 import { pageTransitionNormal } from "../../assets/script/pageTransition";
-import { mypage, indexJob } from "../../assets/script";
-import axios from "axios";
+import {
+  mypage,
+  indexJob,
+  indexYearGraduation,
+  editProfile,
+} from "../../assets/script";
 
 interface Props {
   myData: any;
@@ -16,14 +20,20 @@ const ProfileEdit: React.FC<Props> = (props) => {
   const [myData, setMyData] = useState<any>();
   const [jobs, setJobs] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [yearGraduation, setYearGraduation] = useState<any>();
   useEffect(() => {
     mypage().then((getData: any) => {
       setMyData(getData.data);
       console.log(getData.data);
+      console.log(getData.data.year_of_graduation);
     });
 
     indexJob().then((getData: any) => {
       setJobs(getData.data);
+    });
+    indexYearGraduation().then((getData: any) => {
+      setYearGraduation(getData.data);
+
       setLoading(true);
     });
   }, []);
@@ -34,34 +44,106 @@ const ProfileEdit: React.FC<Props> = (props) => {
     { isEmpty2: false },
     { isEmpty3: false },
   ];
-  const yearList = [
-    { id: 1, name: "21卒" },
-    { id: 1, name: "22卒" },
-    { id: 1, name: "23卒" },
-    { id: 1, name: "24卒" },
-    { id: 1, name: "25卒" },
-    { id: 1, name: "26卒" },
-  ];
   const gender = [
-    { id: 1, name: "男性" },
-    { id: 2, name: "女性" },
-    { id: 3, name: "その他" },
+    { id: 0, name: "男性" },
+    { id: 1, name: "女性" },
+    { id: 2, name: "その他" },
   ];
 
-  const selectBtnChanges = (e: any) => {
+  const selectBtnChanges = () => {
     const selectBtns = document.querySelectorAll(".select-btn");
-    selectBtns.forEach((btn) => {
-      btn.classList.remove("current");
-      const checkbox = btn.querySelector(
-        'input[type="checkbox"]'
-      ) as HTMLInputElement;
-      checkbox.checked = false;
+
+    selectBtns.forEach((btn: any) => {
+      btn.addEventListener("click", () => {
+        selectBtns.forEach((item) => {
+          item.classList.remove("current");
+        });
+        btn.classList.add("current");
+        btn.querySelector("input").checked = true;
+      });
     });
-    e.currentTarget.classList.add("current");
-    e.currentTarget.querySelector('input[type="checkbox"]').checked = true;
   };
 
-  const changeBtnClickHandler = () => {};
+  interface sendObj {
+    student_number: string;
+    annual: number | null;
+    first_name: string;
+    last_name: string;
+    sex: any;
+    desired_occupations: number | null;
+    year_of_graduation: string;
+    icon?: string | undefined | ArrayBuffer | null;
+  }
+  let sendObj: sendObj = {
+    student_number: "",
+    annual: null,
+    first_name: "",
+    last_name: "",
+    sex: null,
+    desired_occupations: null,
+    year_of_graduation: "",
+  };
+
+  const changeBtnClickHandler = () => {
+    const firstname = (document.querySelector(
+      'input[name="first_name"]'
+    ) as HTMLInputElement).value;
+    const lastname = (document.querySelector(
+      'input[name="last_name"]'
+    ) as HTMLInputElement).value;
+    const gender = document.querySelectorAll(
+      'input[name="gender"]'
+    ) as NodeListOf<HTMLInputElement>;
+    const job = (document.querySelector(
+      'select[name="job"]'
+    ) as HTMLSelectElement).value;
+    const graduationYear = (document.querySelector(
+      'select[name="graduation_year"]'
+    ) as HTMLSelectElement).value;
+
+    let genderValue;
+    gender.forEach((item) => {
+      if (item.checked) {
+        genderValue = item.value;
+      }
+    });
+
+    sendObj = {
+      ...sendObj,
+      student_number: myData.student_number,
+      annual: myData.annual,
+      first_name: firstname,
+      last_name: lastname,
+      sex: genderValue,
+      desired_occupations: Number(job),
+      year_of_graduation: String(graduationYear),
+    };
+    console.log(sendObj);
+    editProfile(myData.id, sendObj);
+    handleLink("/mypage");
+  };
+
+  const handleImage = (event: any) => {
+    const image = event.target.files[0];
+    const imageUrl = URL.createObjectURL(image);
+    const avatarArea = document.querySelector(
+      ".select-image__avatar"
+    )! as HTMLImageElement;
+    avatarArea.src = imageUrl;
+
+    const file = image;
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      function () {
+        sendObj.icon = reader.result;
+      },
+      false
+    );
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   const renderDOM = () => {
     return (
@@ -75,7 +157,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
         <button className="btn pageBack-link" onClick={() => history.goBack()}>
           <span className="heading4">マイページへ</span>
         </button>
-        <form>
+        <div>
           <div className="contentBox contentBox--big">
             <h2 className="heading4">プロフィール編集</h2>
 
@@ -85,7 +167,9 @@ const ProfileEdit: React.FC<Props> = (props) => {
                   <div className="select-image__wrap">
                     <img
                       className="select-image__avatar"
-                      src={myData.icon_image_path}
+                      src={
+                        myData.icon_image_path ? myData.icon_image_path : rikuma
+                      }
                       alt=""
                     />
                     <div className="select-image__overlay">
@@ -97,13 +181,13 @@ const ProfileEdit: React.FC<Props> = (props) => {
                       <span className="select-image__txt">画像を選択</span>
                     </div>
                   </div>
-                  <input type="file" />
+                  <input type="file" onChange={handleImage} />
                 </label>
               </div>
 
               <div className="userEdit-header__right-col">
                 <Secondary
-                  name="name"
+                  name="first_name"
                   type="text"
                   labelTxt="苗字"
                   isRequired={false}
@@ -114,7 +198,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                   isIcon={false}
                 />
                 <Secondary
-                  name="name"
+                  name="last_name"
                   type="text"
                   labelTxt="名前"
                   isRequired={false}
@@ -131,7 +215,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                       return (
                         <li>
                           <label
-                            onClick={(e) => selectBtnChanges(e)}
+                            onClick={() => selectBtnChanges()}
                             className={`btn select-btn ${
                               data.id === myData.sex ? "current" : ""
                             }`}
@@ -139,8 +223,10 @@ const ProfileEdit: React.FC<Props> = (props) => {
                             <span>{data.name}</span>
                             <input
                               onClick={(event) => event.stopPropagation()}
-                              type="checkbox"
+                              type="radio"
                               name="gender"
+                              value={data.id}
+                              checked={data.id === myData.sex && true}
                             />
                           </label>
                         </li>
@@ -153,22 +239,28 @@ const ProfileEdit: React.FC<Props> = (props) => {
           </div>
 
           <div className="contentBox contentBox--big">
-            <SelectSecondary ttl="希望職種" name="job" selectObj={jobs} />
+            <SelectSecondary
+              ttl="希望職種"
+              name="job"
+              selectObj={jobs}
+              defaultValue={myData.desired_occupation.id}
+            />
             <SelectSecondary
               ttl="卒業年次"
               name="graduation_year"
-              selectObj={yearList}
+              selectObj={yearGraduation}
+              defaultValue={myData.year_of_graduation}
             />
             <div className="contentBox__wrap">
               <p className="contentBox__cansel btn">
                 <Link to="/mypage">キャンセル</Link>
               </p>
-              <div onClick={() => handleLink("/mypage")}>
-                <RoundedBtn txt="変更する" />
+              <div>
+                <RoundedBtn txt="変更する" Func={changeBtnClickHandler} />
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </motion.section>
     );
   };

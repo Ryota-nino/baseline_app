@@ -4,12 +4,20 @@ interface Props {
   ttl: string;
   name: string;
   selectObj: any;
+  defaultValue?: any;
 }
 
 const SelectSecondary: React.FC<Props> = (props) => {
   const renderSelectItem = () => {
     return Object.values(props.selectObj).map((data: any, index) => {
-      return <option value={data.id}>{data.name}</option>;
+      return (
+        <option
+          value={data.id}
+          selected={props.defaultValue == data.id && true}
+        >
+          {data.name}
+        </option>
+      );
     });
   };
 

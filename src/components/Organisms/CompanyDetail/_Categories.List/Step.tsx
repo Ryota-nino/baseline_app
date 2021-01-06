@@ -33,8 +33,10 @@ const Step: React.FC<Props> = (props) => {
             user_id: data.user.id,
             userName: data.user.last_name + " " + data.user.first_name,
             iconImagePath: data.user.icon_image_path,
-            job: data.user.desired_occupations,
+            job: data.occupational_category.name,
             icon: data.user.icon_image_path,
+            internship: data.internship.name,
+            graduationYear: data.user.year_of_graduation,
           };
           stepArray.push(stepCard);
         }
@@ -59,7 +61,7 @@ const Step: React.FC<Props> = (props) => {
                 category_id={data.id}
                 company_id={props.companyId}
                 student_id={data.user_id}
-                ttl="本選考(22卒)"
+                ttl={`${data.internship} (${data.graduationYear}卒)`}
                 isPass={false}
                 job={data.job}
                 icon={data.icon}

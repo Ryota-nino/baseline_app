@@ -88,30 +88,31 @@ const Comment: React.FC<Props> = (props) => {
               </time>
             </li>
           </ul>
-          {props.type === "mypage" && isArrowRender()}
+          {isArrowRender()}
+          {/* {props.type === "mypage" && isArrowRender()} */}
         </div>
         <p ref={activityTxtEl} className="activity-item__txt">
           {props.txt}
         </p>
       </div>
-      {props.type === "mypage" && (
-        <ul className={`activity-item-menu ${toggleMenu && "view"}`}>
-          <li
-            className="activity-item-menu__item"
-            onClick={() => props.clickFunc(props.id, true, props.txt)}
-          >
-            <img src={PencilIcon} alt="" />
-            <span onClick={() => setToggleMenu(false)}>編集</span>
-          </li>
-          <li
-            className="activity-item-menu__item cAttention"
-            onClick={() => props.clickFunc2(props.id, true)}
-          >
-            <img src={TrashIcon} alt="" />
-            <span onClick={() => setToggleMenu(false)}>削除</span>
-          </li>
-        </ul>
-      )}
+      {/* {props.type === "mypage" && ( */}
+      <ul className={`activity-item-menu ${toggleMenu && "view"}`}>
+        <li
+          className="activity-item-menu__item"
+          onClick={() => props.clickFunc(props.id, true, props.txt)}
+        >
+          <img src={PencilIcon} alt="" />
+          <span onClick={() => setToggleMenu(false)}>編集</span>
+        </li>
+        <li
+          className="activity-item-menu__item cAttention"
+          onClick={() => props.clickFunc2(props.id, true)}
+        >
+          <img src={TrashIcon} alt="" />
+          <span onClick={() => setToggleMenu(false)}>削除</span>
+        </li>
+      </ul>
+      {/* )} */}
     </motion.article>
   );
 };

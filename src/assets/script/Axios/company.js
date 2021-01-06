@@ -139,6 +139,27 @@ export const insertComment = (company_id, comment_content) => {
         return false;
       })
   });
-  // return flg;
-  
+};
+export const editComment = (comment_id, comment_content) => {
+  return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    return apiClient
+      .post(`/api/company_comment/edit/${comment_id}`, {
+        comment_content
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+
+          return true;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response.status === 401 || error.response.status === 422 || error.response.status === 402) {
+          alert("コメントを入力してください");
+          return false;
+        }
+        return false;
+      })
+  });
 };

@@ -1,10 +1,11 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   registMyActivity,
   editMyActivity,
   deleteMyActivity,
   insertComment,
+  editComment,
 } from "../../../assets/script/";
 import {
   CommentWindow,
@@ -14,8 +15,6 @@ import {
   ActivityDelete,
   SaveText,
 } from "../../Molecules/Modal";
-
-import axios from "axios";
 
 const backdrop = {
   visible: { opacity: 1 },
@@ -31,6 +30,7 @@ interface Props {
   deleteId?: number;
   getMyData?: any;
   getCompanyData?: any;
+  getComment?: any;
 }
 
 const Modal: React.FC<Props> = (props) => {
@@ -53,7 +53,17 @@ const Modal: React.FC<Props> = (props) => {
   };
   const registComment = (text: string) => {
     insertComment(Number(props.companyId) + 1, text);
-    props.getCompanyData();
+    props.getCompanyData().then((getData: any) => {
+      props.getComment(getData);
+    });
+  };
+
+  const editComment = (id: number, text: string) => {
+    console.log(id);
+    // editComment(id, text);
+    // props.getCompanyData().then((getData: any) => {
+    //   props.getComment(getData);
+    // });
   };
 
   const rootingModalRender = () => {
@@ -88,6 +98,20 @@ const Modal: React.FC<Props> = (props) => {
           btnClickFunc={registComment}
           content={useDraftText}
           type="company-comment"
+        />
+      );
+    } else if (props.type === "company-comment-edit") {
+      return (
+        <CommentWindow
+          ttl="会社に対するコメントを書く"
+          showModal={props.showModal}
+          setShowModal={props.setShowModal}
+          setSaveTextModal={setSaveTextModal}
+          setCurrentText={setCurrentText}
+          btnClickFunc={editActivity}
+          content={props.content}
+          editId={props.editId}
+          type="edit"
         />
       );
     } else if (props.type === "activity-edit") {

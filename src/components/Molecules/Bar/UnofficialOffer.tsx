@@ -20,10 +20,8 @@ const StudentAboutCompanyBar: React.FC<Props> = (props) => {
       setCompanyData(getData.data);
     });
   }, []);
-  const graduationYearConversion = () => {
-    const text = props.userData.year_of_graduation;
-    return text.substr(2, 2);
-  };
+  console.log();
+
   const renderGender = (num: number) => {
     const gender = ["男性", "女性", "その他"];
     return gender[num];
@@ -44,7 +42,8 @@ const StudentAboutCompanyBar: React.FC<Props> = (props) => {
               </p>
               <ul className="aboutCompany-bar__profile">
                 <li className="aboutCompany-bar__year">
-                  {graduationYearConversion() + "卒"}
+                  {props.userData.year_of_graduation &&
+                    props.userData.year_of_graduation + "卒"}
                 </li>
                 <li className="aboutCompany-bar__gender">
                   &nbsp;|&nbsp;性別:{renderGender(props.userData.sex)}

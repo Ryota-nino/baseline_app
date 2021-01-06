@@ -12,8 +12,8 @@ interface Props {
   getMyData: any;
   myData: any;
   loading: boolean;
-  match?: any;
   setMyData: any;
+  match?: any;
 }
 
 const MyPage: React.FC<Props> = (props) => {
@@ -23,6 +23,7 @@ const MyPage: React.FC<Props> = (props) => {
   const [editId, setEditId] = useState<number>();
   const [deleteId, setDeleteId] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     mypage().then((getData: any) => {
       if (getData) {
@@ -35,7 +36,7 @@ const MyPage: React.FC<Props> = (props) => {
       setLoading(true);
     });
   }, []);
-  console.log(props.myData);
+
   const commentEdit = (id: number, isOpen: boolean, content: string) => {
     setShowModal(isOpen);
     setEditContent(content);

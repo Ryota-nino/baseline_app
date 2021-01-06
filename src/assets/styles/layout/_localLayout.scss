@@ -3,10 +3,76 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  .register-step {
+    margin: 0 auto 32px;
+  }
+  .register {
+    width: 700px;
+    margin: 0 auto 0;
+    &.insert {
+      margin: 40px auto 0;
+      .heading4 {
+        border-bottom: 1px solid #eef0f1;
+        padding-bottom: 20px;
+        padding-left: 8px;
+      }
+      .gender-select,
+      .label-input {
+        &__heading {
+          font-weight: normal;
+        }
+        .label-input__txt {
+          margin-bottom: 8px;
+        }
+        margin-bottom: 20px;
+      }
+
+      .contentBox {
+        margin-bottom: 40px;
+        .select-btn {
+          margin: 0;
+        }
+      }
+    }
+    &.complete {
+      .btn {
+        width: 270px;
+        padding: 14px 0;
+        margin-top: 10px;
+        &:first-of-type {
+          margin-top: 40px;
+        }
+      }
+    }
+  }
   main {
     width: 100%;
+    margin: -2vw 0 0 0;
+  }
+  .contentBox {
+    &.forget-password-typeMail {
+      margin-top: 32px;
+    }
+  }
+  .formBox {
+    &.register-complete,
+    &.password-forget-send {
+      width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      img {
+        margin: 0 auto 32px;
+      }
+      .heading4 {
+        justify-content: center;
+        &::before {
+          display: none;
+        }
+      }
+    }
   }
 }
+
 .main.register {
   width: 640px;
   margin: 0 auto;
@@ -14,6 +80,38 @@
   input[name="student_number"],
   .selectBox {
     width: 300px;
+  }
+}
+
+.register-send {
+  .contentBox {
+    max-width: 560px;
+    margin: 24px auto 0;
+    img {
+      margin: 0 auto 40px;
+    }
+  }
+  .heading4 {
+    justify-content: center;
+    &::before {
+      display: none !important;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+}
+.register-mail {
+  .contentBox {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  p {
+    text-align: center;
+  }
+  .btn {
+    margin: 32px auto 10px;
   }
 }
 
@@ -65,11 +163,8 @@
     }
   }
 }
-
-.app-main {
-  .pageBack-link {
-    margin-bottom: 40px;
-  }
+.pageBack-link {
+  margin-bottom: 40px;
 }
 
 .toppage {
@@ -141,7 +236,7 @@
     margin-bottom: 24px;
   }
   .user-card {
-    margin-bottom: 24px;
+    margin-bottom: 8px;
     img {
       border-radius: 100px;
     }
@@ -209,6 +304,9 @@
 .company-info {
   &__form {
     padding: 0 0 0 24px;
+    .input-component {
+      width: 50%;
+    }
     form {
       div {
         display: flex;
@@ -250,7 +348,7 @@
     max-width: 95%;
   }
   &.userCard {
-    padding: 32px 28px 32px;
+    padding: 52px 68px 52px;
     max-width: 100%;
     background-color: $cWhite;
   }
@@ -260,11 +358,12 @@
     flex-wrap: wrap;
     &::after {
       content: "";
-      width: 222px;
+      width: 240px;
       height: 0;
     }
     .user-card > a {
-      width: 222px;
+      width: 240px;
+      padding: 28px 16px;
       img {
         width: 40px;
         height: 40px;
@@ -426,5 +525,11 @@
         opacity: 0.6;
       }
     }
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .insert-users .left-col {
+    flex: 0 1 100%;
   }
 }

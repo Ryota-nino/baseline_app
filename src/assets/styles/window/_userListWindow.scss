@@ -1,46 +1,46 @@
 .userListWindow {
-    padding: 32px 26px 24px;
-    .user-excerpt > a {
-        margin-bottom: 24px;
+  padding: 32px 26px 24px;
+  .user-excerpt > a {
+    margin-bottom: 24px;
+  }
+  &__link {
+    color: $cLink;
+    font-size: 1.3rem;
+    text-align: center;
+    display: block;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.6;
     }
-    &__link {
-        color: $cLink;
-        font-size: 1.3rem;
-        text-align: center;
-        display: block;
-        transition: 0.3s ease;
-        &:hover {
-            opacity: 0.6;
-        }
-    }
+  }
 }
 .user-excerpt {
-    a {
-        display: flex;
-        align-items: center;
-        transition: 0.3s ease;
-        &:hover {
-            opacity: .6;
-        }
-     }
-    img {
-        width: 40px;
-        height: 40px;
-        margin-right: 16px;
+  a {
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease;
+    &:hover {
+      opacity: 0.6;
     }
-    &__wrap {
-        & > div {
-            display: flex;
-            font-size: 1.3rem;
-            color: $cGray1;
-        }
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+  }
+  &__wrap {
+    & > div {
+      font-size: 1.3rem;
+      color: $cGray1;
     }
-    &__name {
-        font-weight: bold;
-        margin-bottom: 3px;
-    }
-    &__year {
-        margin-right: 8px;
-    }
-    
+  }
+  &__name {
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+  &__year {
+    margin-right: 8px;
+  }
+  &__job {
+  }
 }

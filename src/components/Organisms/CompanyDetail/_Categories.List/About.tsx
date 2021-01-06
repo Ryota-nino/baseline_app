@@ -8,24 +8,25 @@ import { pageTransitionNormal } from "../../../../assets/script/pageTransition";
 interface Props {
   thisPage: string;
   companyId: any;
-  activity: any;
-  companies: any;
-  companyComment: any;
   companyData: any;
   getCompanyData: any;
 }
 
 const About: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal2, setShowModal2] = useState<boolean>(false);
   const [companyComments, setCompanyComments] = useState<any>(null);
+  const [editContent, setEditContent] = useState<any>();
+  const [editId, setEditId] = useState<number>();
   useEffect(() => {
-    getComment();
+    console.log(props.companyData);
+    getComment(props.companyData);
   }, []);
 
-  const getComment = () => {
+  const getComment = (companyData: any) => {
     // コメントを配列に保存
     const companyCommentsArray: any = [];
-    props.companyData.company_information.forEach((data: any) => {
+    companyData.company_information.forEach((data: any) => {
       const user = {
         name: data.user.last_name + " " + data.user.first_name,
         annual: data.user.annual,
@@ -37,7 +38,14 @@ const About: React.FC<Props> = (props) => {
       });
       companyCommentsArray.push(user);
     });
+
     setCompanyComments(companyCommentsArray);
+  };
+
+  const commentEdit = (edit_id: number, isOpen: boolean, content: string) => {
+    setShowModal2(isOpen);
+    setEditContent(content);
+    setEditId(edit_id);
   };
 
   return (
@@ -74,11 +82,13 @@ const About: React.FC<Props> = (props) => {
                 data.comments.map((comment: any) => {
                   return (
                     <Comment
+                      id={comment.id}
                       name={data.name}
                       year={data.annual + "年次"}
                       txt={comment.comment_content}
                       updateTime={data.updated_at}
                       isArrow={true}
+                      clickFunc={commentEdit}
                     />
                   );
                 })
@@ -94,6 +104,17 @@ const About: React.FC<Props> = (props) => {
         setShowModal={setShowModal}
         companyId={props.companyId}
         getCompanyData={props.getCompanyData}
+        getComment={getComment}
+      />
+      <Modal
+        type="company-comment-edit"
+        showModal={showModal2}
+        setShowModal={setShowModal2}
+        companyId={props.companyId}
+        getCompanyData={props.getCompanyData}
+        getComment={getComment}
+        content={editContent}
+        editId={editId}
       />
     </>
   );

@@ -58,25 +58,31 @@ const CompanyInfo: React.FC<Props> = (props) => {
       })
       .then((userData) => {
         companyDetailUser(companyId, userData.id).then((getData: any) => {
-          console.log(getData.data.user);
           const myCompanyData = getData.data.user.company_information.filter(
             (item: any) => {
               return item.company_id == companyId;
             }
           );
-          console.log(myCompanyData);
           setMyCompanyInfo(myCompanyData);
           setLoading(true);
-
-          // console.log(myCompanyData);
-          // myCompanyData.forEach((item: any) => {
-          //   setMyCompanyInfo({
-          //     internship: item.internship.name,
-          //   });
-          // });
         });
       });
   }, []);
+
+  const graduationYearConversion = (txt: string) => {
+    const text = txt;
+    return text.substr(2, 2);
+  };
+
+  const isType = (item: any) => {
+    if (item.interviews.length != 0) {
+      return "interview";
+    } else if (item.selections.length != 0) {
+      return "step";
+    } else {
+      return "entry";
+    }
+  };
   const renderDOM = () => {
     return (
       <>
@@ -107,17 +113,21 @@ const CompanyInfo: React.FC<Props> = (props) => {
                   name="graduation_year"
                   type="number"
                   ttl="卒業年次"
-                  placeholder="22"
+                  placeholder={""}
+                  defaultValue={graduationYearConversion(
+                    myData.profile.year_of_graduation
+                  )}
                   unit="卒"
                   isRequired={false}
                   maxLength={3}
+                  disabled={true}
                 />
                 <div>
                   <CheckboxWithText
                     type="checkbox"
                     txt="あなたはこの企業に入社予定ですか？"
                   />
-                  <RoundedBtn txt="保存" />
+                  <RoundedBtn txt="保存" isType="button" />
                 </div>
               </form>
             </div>
@@ -136,28 +146,31 @@ const CompanyInfo: React.FC<Props> = (props) => {
             </div>
             <ul className="company-info__added">
               {myCompanyInfo.map((item: any) => {
-                return (
-                  <li>
-                    <PostStudent
-                      category_id={1}
-                      company_id={companyId}
-                      student_id={myData.profile.id}
-                      ttl={item.internship ? item.internship.name : "未入力"}
-                      isPass={false}
-                      job={myData.profile.desired_occupations}
-                      icon={
-                        myData.profile.icon_image_url
-                          ? myData.profile.icon_image_url
-                          : rikuma
-                      }
-                      userName={
-                        myData.profile.first_name +
-                        " " +
-                        myData.profile.last_name
-                      }
-                    />
-                  </li>
-                );
+                if (item.company_comments.length === 0) {
+                  return (
+                    <li>
+                      <PostStudent
+                        type={isType(item)}
+                        category_id={1}
+                        company_id={companyId}
+                        student_id={myData.profile.id}
+                        ttl={item.internship ? item.internship.name : "未入力"}
+                        isPass={false}
+                        job={myData.profile.desired_occupations}
+                        icon={
+                          myData.profile.icon_image_url
+                            ? myData.profile.icon_image_url
+                            : rikuma
+                        }
+                        userName={
+                          myData.profile.first_name +
+                          " " +
+                          myData.profile.last_name
+                        }
+                      />
+                    </li>
+                  );
+                }
               })}
             </ul>
           </div>

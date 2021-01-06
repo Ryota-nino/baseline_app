@@ -10,17 +10,13 @@ interface Props {
 }
 
 const StudentSearch: React.FC<Props> = (props) => {
-  // const [seachJob, setSeachJob] = useState<any>();
   const [jobs, setJobs] = useState<any>();
   const [yearGraduation, setYearGraduation] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
-  // const seachJobHandler = (value: any) => {
-  //   setSeachJob(value);
-  //   console.log(value);
-  // };
   useEffect(() => {
     indexJob().then((getData: any) => {
       setJobs(getData.data);
+      console.log(getData.data);
     });
     indexYearGraduation().then((getData: any) => {
       setYearGraduation(getData.data);
@@ -86,20 +82,23 @@ const StudentSearch: React.FC<Props> = (props) => {
   };
 
   const renderJobList = () => {
-    return jobs.map((data: any) => {
-      return (
-        <CheckboxWithText
-          id={data.id}
-          keyName={`${data.id}`}
-          className={"checkbox-item"}
-          type={"checkbox"}
-          txt={data.name}
-          category={"jobs"}
-          checkboxFunc={jobSearchHandler}
-        />
-      );
-    });
+    if (jobs) {
+      return jobs.map((data: any) => {
+        return (
+          <CheckboxWithText
+            id={data.id}
+            keyName={`${data.id}`}
+            className={"checkbox-item"}
+            type={"checkbox"}
+            txt={data.name}
+            category={"jobs"}
+            checkboxFunc={jobSearchHandler}
+          />
+        );
+      });
+    }
   };
+  renderJobList();
 
   const renderDOM = () => {
     return (

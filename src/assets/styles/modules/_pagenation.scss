@@ -1,3 +1,33 @@
+.register-step {
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+  margin: 0 auto;
+  li {
+    &.current {
+      color: $cMain;
+      p {
+        opacity: 1;
+      }
+    }
+  }
+  p {
+    margin: 0 auto 4px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $cMain;
+    opacity: 0.3;
+    img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
 .pagenation {
   display: flex;
   justify-content: space-between;

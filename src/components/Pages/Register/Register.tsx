@@ -12,8 +12,9 @@ const Register: React.FC = (props) => {
     const email = document.querySelector(
       'input[type="email"]'
     ) as HTMLInputElement;
-    temporaryRegistationUser(email.value);
-    history.push(`/register/send`);
+    temporaryRegistationUser(email.value).then((boolean) => {
+      if (boolean) history.push(`/register/send`);
+    });
   };
   const [state, setState] = useState({
     info: {
@@ -24,7 +25,10 @@ const Register: React.FC = (props) => {
     },
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const container = document.querySelector(".container");
+    container?.classList.add("page-login");
+  }, []);
   const inputChangeHandler = (e: any) => {
     handleChange(state, setState, e);
   };
@@ -36,7 +40,7 @@ const Register: React.FC = (props) => {
     }
   };
   return (
-    <div className="register">
+    <div className="register-mail">
       <div className="formBox">
         <div className="contentBox contentBox--big">
           <h1 className="heading4">会員登録</h1>
@@ -60,7 +64,9 @@ const Register: React.FC = (props) => {
           />
           <p>
             すでにアカウントをお持ちの方は
-            <Link to="/login">こちら</Link>
+            <Link to="/login" className="cLink">
+              こちら
+            </Link>
           </p>
         </div>
       </div>

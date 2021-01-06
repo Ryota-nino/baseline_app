@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Primary } from "../Atoms/TextInput";
 import { CheckboxWithText } from "../Molecules/Input";
 import { PrimaryBtn } from "../Atoms/Btn/index";
-import { handleChange, validator } from "../../assets/script/validation";
+import { handleChange } from "../../assets/script/validation";
 import { login } from "../../assets/script/index";
 
 const Login: React.FC = (props) => {

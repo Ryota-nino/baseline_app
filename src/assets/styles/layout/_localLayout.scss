@@ -235,6 +235,9 @@
   .company-bar {
     margin-bottom: 24px;
   }
+  &.full {
+    justify-content: center;
+  }
   .user-card {
     margin-bottom: 8px;
     img {

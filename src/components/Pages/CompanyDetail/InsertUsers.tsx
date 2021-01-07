@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { AboutBar } from "../../Organisms/CompanyDetail";
 import { detailCompany, indexJob } from "../../../assets/script";
 import { rikuma } from "../../../assets/images/index";
+import { UserList } from "../../../components/Organisms/Window";
 interface Props {
   thisPage: string;
   match?: any;
@@ -26,10 +27,10 @@ const InsertUsers: React.FC<Props> = (props) => {
       }
     });
   }, []);
-  const graduationYearConversion = (txt: string) => {
-    const text = txt;
-    return text.substr(2, 2);
-  };
+  // const graduationYearConversion = (txt: string) => {
+  //   const text = txt;
+  //   return text.substr(2, 2);
+  // };
   let pageTtl: string;
   if (props.thisPage === "insert-users") {
     pageTtl = "情報提供に協力した方";
@@ -76,10 +77,7 @@ const InsertUsers: React.FC<Props> = (props) => {
                             </h1>
                             <div className="user-card__wrap">
                               <p>
-                                {graduationYearConversion(
-                                  data.user.year_of_graduation
-                                )}
-                                卒 |&nbsp;
+                                {data.user.year_of_graduation}卒 |&nbsp;
                                 <span>
                                   {jobs![data.user.desired_occupations].name}
                                   希望
@@ -96,14 +94,14 @@ const InsertUsers: React.FC<Props> = (props) => {
             </section>
           </div>
 
-          <div className="right-col">
-            {/* {props.thisPage === "insert-users" && (
-            <UserList thisPage="insert-users" />
-          )}
-          {props.thisPage === "company-users" && (
-            <UserList thisPage="company-users" />
-          )} */}
-          </div>
+          {/* <div className="right-col">
+            {props.thisPage === "insert-users" && (
+              <UserList thisPage="insert-users" />
+            )}
+            {props.thisPage === "company-users" && (
+              <UserList thisPage="company-users" />
+            )}
+          </div> */}
         </section>
       </>
     );

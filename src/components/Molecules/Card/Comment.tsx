@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
 import {
-  Avatar,
   ArrowIcon,
   PencilIcon,
   TrashIcon,
@@ -18,6 +17,7 @@ interface Props {
   type?: "user" | "mypage";
   clickFunc?: any;
   clickFunc2?: any;
+  icon?: string;
 }
 
 const Comment: React.FC<Props> = (props) => {
@@ -47,7 +47,6 @@ const Comment: React.FC<Props> = (props) => {
     };
     return texts;
   };
-
   useEffect((): void => {
     setUrlText();
   }, []);
@@ -75,7 +74,7 @@ const Comment: React.FC<Props> = (props) => {
       exit="out"
       variants={pageTransitionNormal}
     >
-      <img className="userIcon" src={rikuma} alt="" />
+      <img className="userIcon" src={props.icon ? props.icon : rikuma} alt="" />
       <div className="activity-item__content">
         <div className="activity-item__head">
           <h1 className="activity-item__name">{props.name}</h1>

@@ -31,8 +31,6 @@ const Header: React.FC<Props> = (props) => {
     getMyData(notLoginFunc).then((mydata: any) => {
       // 10文字まで表示
       if (mydata?.data) {
-        // mydata.data.first_name.substr(0, 5) +
-        // mydata.data.last_name.substr(0, 5);
         setMyData({
           profile: {
             id: mydata.data.id,
@@ -40,7 +38,7 @@ const Header: React.FC<Props> = (props) => {
             last_name: mydata.data.last_name,
             student_number: mydata.data.student_number,
             year_of_graduation: mydata.data.year_of_graduation,
-            icon_image_path: mydata.data.icon_image_path,
+            icon_image_url: mydata.data.icon_image_url,
             sex: mydata.data.sex,
             email: mydata.data.email,
             desired_occupations: mydata.data.desired_occupations,
@@ -118,7 +116,7 @@ const Header: React.FC<Props> = (props) => {
           />
         </div>
         <MyAvatar
-          iconPath={rikuma}
+          iconPath={myData.profile.icon_image_url}
           name={myData.profile.first_name + " " + myData.profile.last_name}
           student_number={myData.profile.student_number}
           ml=""

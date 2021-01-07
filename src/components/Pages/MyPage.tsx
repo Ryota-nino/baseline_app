@@ -33,6 +33,7 @@ const MyPage: React.FC<Props> = (props) => {
           company_information: getData.data.company_information,
         });
       }
+      console.log(getData.data);
       setLoading(true);
     });
   }, []);
@@ -72,6 +73,7 @@ const MyPage: React.FC<Props> = (props) => {
           type={"mypage"}
           clickFunc={commentEdit}
           clickFunc2={commentDelete}
+          icon={props.myData.data.icon_image_url}
         />
       ));
     }

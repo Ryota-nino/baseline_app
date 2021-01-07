@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { RoundedBtn } from "../../Atoms/Btn";
 import { Avatar } from "../../../assets/images/index";
+import { mypage } from "../../../assets/script/";
 import axios from "axios";
 const modal = {
   hidden: {
@@ -34,6 +35,8 @@ const CommentWindow: React.FC<Props> = (props) => {
     textValue: "initial value",
   });
   const [draft, setDraft] = useState<any>();
+  const [myData, setMyData] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     const url = "./draft.json";
     axios.get(url).then((res) => {
@@ -46,7 +49,12 @@ const CommentWindow: React.FC<Props> = (props) => {
         textValue: props.content,
       });
     }
+    mypage().then((getData: any) => {
+      setMyData(getData.data);
+      setLoading(true);
+    });
   }, []);
+  // console.log(myData);
 
   const handleTextChange = (textValue: string) => {
     setInputText({
@@ -87,6 +95,15 @@ const CommentWindow: React.FC<Props> = (props) => {
     props.setShowModal(false);
   };
 
+  const renderDOM = () => {
+    return (
+      <img
+        src={myData.icon_image_url ? myData.icon_image_url : Avatar}
+        alt=""
+      />
+    );
+  };
+
   return (
     <>
       <motion.form
@@ -104,7 +121,7 @@ const CommentWindow: React.FC<Props> = (props) => {
           onClick={() => props.setShowModal(false)}
         ></div>
         <div className="modal__input-area">
-          <img src={Avatar} alt="" />
+          {loading && renderDOM()}
           <textarea
             name="content"
             className="modal__textarea"

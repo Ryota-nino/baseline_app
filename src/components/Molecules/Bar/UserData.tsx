@@ -13,14 +13,14 @@ const UserData: React.FC<Props> = (props) => {
     const gender = ["男性", "女性", "その他"];
     return gender[num];
   };
-  
+
   return (
     <div className="userDetail-window">
       <div className="userDetail-window__container">
         <img
           src={
-            props.userData.icon_image_path
-              ? props.userData.icon_image_path
+            props.userData.icon_image_url
+              ? props.userData.icon_image_url
               : rikuma
           }
           alt=""

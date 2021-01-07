@@ -25,7 +25,6 @@ const ProfileEdit: React.FC<Props> = (props) => {
     mypage().then((getData: any) => {
       setMyData(getData.data);
       console.log(getData.data);
-      console.log(getData.data.year_of_graduation);
     });
 
     indexJob().then((getData: any) => {
@@ -168,7 +167,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                     <img
                       className="select-image__avatar"
                       src={
-                        myData.icon_image_path ? myData.icon_image_path : rikuma
+                        myData.icon_image_url ? myData.icon_image_url : rikuma
                       }
                       alt=""
                     />

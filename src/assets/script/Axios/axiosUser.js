@@ -36,4 +36,43 @@ export const editProfile = (user_id,postData) => {
         });
     });
   };
+
+export const passwordResetMail = (postData) => {
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
+        .post(`/api/auth/password_reset_mail`,postData)
+        .then((response) => {
+          if (response.status !== 200) {
+            return false;
+          }
+          console.log(response)
+          return true;
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+          }
+        });
+    });
+  };
   
+export const passwordReset = (postData) => {
+    return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+      return apiClient
+        .post(`/api/auth/password_reset`,postData)
+        .then((response) => {
+          if (response.status !== 200) {
+            return false;
+          }
+          console.log(response)
+          return true;
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.status === 401 || error.response.status === 422 || error.response.status === 500) {
+          }
+        });
+    });
+  };
+  
+

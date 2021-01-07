@@ -114,9 +114,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
                   type="number"
                   ttl="卒業年次"
                   placeholder={""}
-                  defaultValue={graduationYearConversion(
-                    myData.profile.year_of_graduation
-                  )}
+                  defaultValue={myData.profile.year_of_graduation}
                   unit="卒"
                   isRequired={false}
                   maxLength={3}

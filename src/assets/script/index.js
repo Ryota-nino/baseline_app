@@ -1,6 +1,6 @@
 export {default as apiClient} from './Axios/apiClient';
 export {login, logout} from './Axios/axiosLogin';
-export {getMyData,editProfile} from './Axios/axiosUser';
+export {getMyData,editProfile,passwordResetMail,passwordReset} from './Axios/axiosUser';
 export {getHomeData} from './Axios/getHomeData';
 export {searchCompany} from './Axios/seachCompany';
 export {searchUser} from './Axios/searchUser';

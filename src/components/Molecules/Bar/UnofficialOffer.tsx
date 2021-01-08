@@ -32,7 +32,15 @@ const StudentAboutCompanyBar: React.FC<Props> = (props) => {
         <div className="aboutCompany-bar__wrapper">
           <div className="aboutCompany-bar__wrap">
             <div className="aboutCompany-bar__avatar">
-              <img className="userIcon" src={rikuma} alt="" />
+              <img
+                className="userIcon"
+                src={
+                  props.userData.icon_image_url
+                    ? props.userData.icon_image_url
+                    : rikuma
+                }
+                alt=""
+              />
               {/* <PassTag txt="内定" /> */}
             </div>
 

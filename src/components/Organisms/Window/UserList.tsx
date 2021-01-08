@@ -24,7 +24,7 @@ const UserList: React.FC<Props> = (props) => {
             name: data.user.last_name + " " + data.user.first_name,
             desiredOccupations: data.user.desired_occupations,
             graduationYear: data.user.year_of_graduation,
-            icon: data.user.icon_image_path,
+            icon: data.user.icon_image_url,
           };
           userArray.push(user);
         }
@@ -57,12 +57,7 @@ const UserList: React.FC<Props> = (props) => {
             return (
               <li className="user-excerpt">
                 <Link to={`/user/${data.id}`}>
-                  <img
-                    src={
-                      data.icon ? "http://localhost:8000/" + data.icon : rikuma
-                    }
-                    alt=""
-                  />
+                  <img src={data.icon ? data.icon : rikuma} alt="" />
                   <div className="user-excerpt__wrap">
                     <p className="user-excerpt__name">{data.name}</p>
                     <div>

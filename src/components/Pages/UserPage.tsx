@@ -61,6 +61,7 @@ const UserPage: React.FC<Props> = (props) => {
           updateTime={data.updated_at}
           isArrow={true}
           type={"user"}
+          icon={userData.icon_image_url}
         />
       ));
     }

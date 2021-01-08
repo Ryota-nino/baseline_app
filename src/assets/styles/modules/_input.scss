@@ -391,6 +391,17 @@
   }
   &__wrap {
     position: relative;
+    &::before {
+      content: "";
+      display: block;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
   &__avatar {
     width: 200px;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { rikuma, DocumentIcon2 } from "../../../assets/images/index";
 import { PassTag } from "../../Atoms/Tag";
@@ -15,6 +15,13 @@ interface Props {
 }
 
 const PostStudent: React.FC<Props> = (props) => {
+  console.log(props.icon);
+  const [loading, setLoading] = useState<boolean>(false);
+  const renderDOM = () => {
+    console.log("A");
+    // return <img src={props.icon ? props.icon : rikuma} alt="" />;
+  };
+
   return (
     <article className="company-detailItem">
       <Link
@@ -32,8 +39,8 @@ const PostStudent: React.FC<Props> = (props) => {
         </div>
         <p className="company-detailItem__job">{props.job}希望</p>
         <p className="company-detailItem__user">
-          <img src={props.icon ? props.icon : rikuma} alt="" />
           <span>{props.userName}</span>
+          {/* <img src={props.icon ? props.icon : rikuma} alt="" /> */}
         </p>
       </Link>
     </article>

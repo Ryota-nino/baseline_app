@@ -18,5 +18,7 @@ export const getHomeData = (notLoginFunc) => {
             notLoginFunc();
           }
         });
-    });
+    }).catch(()=>{
+      notLoginFunc();
+    }) 
   };

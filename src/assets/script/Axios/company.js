@@ -62,7 +62,7 @@ export const editCompany = (id, postData) => {
           error.response.status === 422 ||
           error.response.status === 500
         ) {
-          alert("失敗");
+          alert("企業を登録したユーザーしか編集できません");
           return false;
         }
         return false;

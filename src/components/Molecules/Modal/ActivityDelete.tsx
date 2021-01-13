@@ -18,6 +18,8 @@ interface Props {
   setShowModal: any;
   deleteId: number;
   btnClickFunc: any;
+  text: string;
+  ttl: string;
 }
 
 const ActivityDelete: React.FC<Props> = (props) => {
@@ -32,21 +34,13 @@ const ActivityDelete: React.FC<Props> = (props) => {
       variants={modal}
       onClick={(event) => event.stopPropagation()}
     >
-      <p className="heading4">この活動履歴を削除しますか？</p>
-      <p className="txt">
-        今まで投稿した活動履歴が全て削除されます。
-        <br />
-        投稿した企業情報については削除されません。
-      </p>
+      <p className="heading4">{props.ttl}</p>
+      <p className="txt">{props.text}</p>
       <div className="flex">
         <p className="cansel" onClick={() => props.setShowModal(false)}>
           キャンセル
         </p>
-        <RoundedBtn
-          txt="アカウントを削除"
-          isDelete={"true"}
-          Func={btnClickHandler}
-        />
+        <RoundedBtn txt="削除する" isDelete={"true"} Func={btnClickHandler} />
       </div>
     </motion.div>
   );

@@ -15,9 +15,11 @@ interface Props {
 const About: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
+  const [showModal3, setShowModal3] = useState<boolean>(false);
   const [companyComments, setCompanyComments] = useState<any>(null);
   const [editContent, setEditContent] = useState<any>();
   const [editId, setEditId] = useState<number>();
+  const [deleteId, setDeleteId] = useState<number>();
   useEffect(() => {
     console.log(props.companyData);
     getComment(props.companyData);
@@ -46,6 +48,12 @@ const About: React.FC<Props> = (props) => {
     setShowModal2(isOpen);
     setEditContent(content);
     setEditId(edit_id);
+  };
+
+  const commentDelete = (delete_id: number, isOpen: boolean) => {
+    console.log(delete_id);
+    setShowModal3(isOpen);
+    setDeleteId(delete_id);
   };
 
   return (
@@ -89,6 +97,7 @@ const About: React.FC<Props> = (props) => {
                       updateTime={data.updated_at}
                       isArrow={true}
                       clickFunc={commentEdit}
+                      clickFunc2={commentDelete}
                     />
                   );
                 })
@@ -115,6 +124,14 @@ const About: React.FC<Props> = (props) => {
         getComment={getComment}
         content={editContent}
         editId={editId}
+      />
+      <Modal
+        type="company-comment-delete"
+        showModal={showModal3}
+        setShowModal={setShowModal3}
+        companyId={props.companyId}
+        getCompanyData={props.getCompanyData}
+        deleteId={deleteId}
       />
     </>
   );

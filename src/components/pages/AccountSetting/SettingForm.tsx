@@ -4,7 +4,12 @@ import { Secondary } from "../../Atoms/TextInput";
 import { RoundedBtn } from "../../Atoms/Btn";
 import { motion } from "framer-motion";
 import { pageTransitionNormal } from "../../../assets/script/pageTransition";
-import { editProfile, mypage } from "../../../assets/script";
+import {
+  editProfile,
+  mypage,
+  passwordChange,
+  deleteAccount,
+} from "../../../assets/script";
 interface Props {
   thisPage: string;
   myData: any;
@@ -13,6 +18,7 @@ interface Props {
 const SettingForm: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [myData, setMyData] = useState<any>();
+  const history = useHistory();
   // const [sendObj, setSendObj] = useState<any>();
 
   useEffect(() => {
@@ -21,16 +27,6 @@ const SettingForm: React.FC<Props> = (props) => {
         data: getData.data,
         company_information: getData.data.company_information,
       });
-      // setSendObj({
-      //   student_number: getData.data.student_number,
-      //   first_name: getData.data.first_name,
-      //   last_name: getData.data.last_name,
-      //   sex: getData.data.sex,
-      //   annual: getData.data.annual,
-      //   year_of_graduation: String(getData.data.year_of_graduation),
-      //   desired_occupations: Number(getData.data.desired_occupations),
-      //   icon: getData.data.icon_image_url,
-      // });
       console.log(getData);
       console.log(sendObj);
       setIsLoading(true);
@@ -62,11 +58,6 @@ const SettingForm: React.FC<Props> = (props) => {
     const studentNum = (document.querySelector(
       'input[name="student_number"]'
     ) as HTMLInputElement).value;
-
-    // setSendObj({ ...sendObj, student_number: String(studentNum) });
-    // console.log({ ...sendObj, student_number: String(studentNum) });
-    // console.log(myData.data.id);
-
     sendObj = {
       ...sendObj,
       student_number: studentNum,
@@ -76,31 +67,58 @@ const SettingForm: React.FC<Props> = (props) => {
       sex: myData.data.sex,
       desired_occupations: Number(myData.data.desired_occupations),
       year_of_graduation: String(myData.data.year_of_graduation),
-      icon: myData.data.icon_image_url,
+      // icon: myData.data.icon_image_url,
     };
     console.log(sendObj);
-    editProfile(myData.data.id, sendObj);
+    editProfile(myData.data.id, sendObj).then((boolean) => {
+      if (boolean) {
+        history.push(`/mypage`);
+      }
+    });
   };
 
   const changePassword = () => {
-    const password = (document.querySelector(
-      'input[name="password"]'
+    const now_password = (document.querySelector(
+      'input[name="now_password"]'
     ) as HTMLInputElement).value;
-    // setSendObj({ ...sendObj, password: password });
-    console.log({ ...sendObj, password: password });
-    // editProfile(myData.data.id, { ...sendObj, student_number: studentNum });
+    const new_password = (document.querySelector(
+      'input[name="new_password"]'
+    ) as HTMLInputElement).value;
+    const new_password_confirm = (document.querySelector(
+      'input[name="new_password_confirm"]'
+    ) as HTMLInputElement).value;
+    if (new_password !== new_password_confirm) {
+      alert("新しいパスワードと再入力が一致しません");
+      return;
+    }
+    const sendObj = {
+      current_password: now_password,
+      new_password: new_password,
+      new_password_confirmation: new_password_confirm,
+    };
+    passwordChange(sendObj).then((boolean) => {
+      if (boolean) {
+        history.push(`/mypage`);
+      }
+    });
   };
 
-  const changeMail = () => {
-    const mail = (document.querySelector(
-      'input[name="mail"]'
-    ) as HTMLInputElement).value;
-    // setSendObj({ ...sendObj, student_number: mail });
-    console.log({ ...sendObj, student_number: mail });
-    // editProfile(myData.data.id, { ...sendObj, student_number: studentNum });
-  };
+  // const changeMail = () => {
+  //   const mail = (document.querySelector(
+  //     'input[name="mail"]'
+  //   ) as HTMLInputElement).value;
+  //   sendObj = {
+  //     student_number: myData.data.student_number,
+  //     annual: myData.data.annual,
+  //     first_name: myData.data.first_name,
+  //     last_name: myData.data.last_name,
+  //     sex: myData.data.sex,
+  //     desired_occupations: Number(myData.data.desired_occupations),
+  //     year_of_graduation: String(myData.data.year_of_graduation),
+  //     // icon: myData.data.icon_image_url,
+  //   };
+  // };
 
-  const history = useHistory();
   const isError = [
     { isEmpty1: false },
     { isEmpty2: false },
@@ -143,8 +161,7 @@ const SettingForm: React.FC<Props> = (props) => {
             placeholderTxt=""
             isError={isError}
             isIcon={false}
-            defaultValue="21800098"
-            readonly={true}
+            defaultValue=""
           />
           <Secondary
             name="new_password"
@@ -172,7 +189,7 @@ const SettingForm: React.FC<Props> = (props) => {
             <p>
               <Link to="/:user/account-setting">キャンセル</Link>
             </p>
-            <RoundedBtn txt="保存" />
+            <RoundedBtn txt="保存" Func={changePassword} />
           </div>
         </section>
       );

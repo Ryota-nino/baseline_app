@@ -30,14 +30,21 @@
 
 .pagenation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   max-width: 800px;
-  margin: 0 0 0 auto;
+  margin: 24px 0 30px auto;
+  .page-prevBtn {
+    margin-right: 24px;
+  }
+  .page-nextBtn {
+    margin-left: 24px;
+  }
 }
 .pagination-number {
   display: flex;
   align-items: center;
+
   li {
     width: 32px;
     height: 32px;

@@ -19,7 +19,9 @@ const InsertUsers: React.FC<Props> = (props) => {
     indexJob().then((getData: any) => {
       setJobs(getData.data);
     });
+
     detailCompany(companyId).then((getData: any) => {
+      console.log("A");
       if (getData.data) {
         setCompanyData(getData.data);
         setLoading(true);
@@ -27,10 +29,6 @@ const InsertUsers: React.FC<Props> = (props) => {
       }
     });
   }, []);
-  // const graduationYearConversion = (txt: string) => {
-  //   const text = txt;
-  //   return text.substr(2, 2);
-  // };
   let pageTtl: string;
   if (props.thisPage === "insert-users") {
     pageTtl = "情報提供に協力した方";

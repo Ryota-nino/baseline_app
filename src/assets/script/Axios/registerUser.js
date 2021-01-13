@@ -2,7 +2,7 @@ import { apiClient } from "../index";
 export const temporaryRegistationUser = (email) => {
   return apiClient.get("/sanctum/csrf-cookie").then((response) => {
     return apiClient
-      .post("/api/user/", {email: email})
+      .post("/api/user/1", {email: email})
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

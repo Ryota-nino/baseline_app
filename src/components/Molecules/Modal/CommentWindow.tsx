@@ -26,7 +26,7 @@ interface Props {
   setCurrentText?: any;
   btnClickFunc?: any;
   editId?: number;
-  type?: "regist" | "edit" | "company-comment";
+  type?: string;
 }
 
 const CommentWindow: React.FC<Props> = (props) => {
@@ -89,6 +89,9 @@ const CommentWindow: React.FC<Props> = (props) => {
       props.btnClickFunc(props.editId, currentText.value);
     }
     if (props.type === "company-comment") {
+      props.btnClickFunc(currentText.value);
+    }
+    if (props.type === "company-comment-edit") {
       props.btnClickFunc(currentText.value);
     }
 

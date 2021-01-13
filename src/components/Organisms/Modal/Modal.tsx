@@ -57,13 +57,18 @@ const Modal: React.FC<Props> = (props) => {
       props.getComment(getData);
     });
   };
-
-  const editComment = (id: number, text: string) => {
+  const onEditComment = (id: number, text: string) => {
     console.log(id);
-    // editComment(id, text);
+    editComment(id, text);
+    props.getCompanyData();
+
     // props.getCompanyData().then((getData: any) => {
     //   props.getComment(getData);
     // });
+  };
+  const onDeleteComment = (id: number) => {
+    deleteMyActivity(id);
+    props.getCompanyData();
   };
 
   const rootingModalRender = () => {
@@ -108,10 +113,20 @@ const Modal: React.FC<Props> = (props) => {
           setShowModal={props.setShowModal}
           setSaveTextModal={setSaveTextModal}
           setCurrentText={setCurrentText}
-          btnClickFunc={editActivity}
+          btnClickFunc={onEditComment}
           content={props.content}
           editId={props.editId}
           type="edit"
+        />
+      );
+    } else if (props.type === "company-comment-delete") {
+      return (
+        <ActivityDelete
+          ttl="このコメントを削除しますか？"
+          text="削除したデータは元に戻せません。"
+          setShowModal={props.setShowModal}
+          deleteId={Number(props.deleteId)}
+          btnClickFunc={onDeleteComment}
         />
       );
     } else if (props.type === "activity-edit") {
@@ -131,6 +146,8 @@ const Modal: React.FC<Props> = (props) => {
     } else if (props.type === "activity-delete") {
       return (
         <ActivityDelete
+          ttl="この活動履歴を削除しますか？"
+          text="削除したデータは元に戻せません。"
           setShowModal={props.setShowModal}
           deleteId={Number(props.deleteId)}
           btnClickFunc={deleteActivity}

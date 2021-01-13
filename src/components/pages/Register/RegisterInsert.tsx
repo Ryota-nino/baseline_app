@@ -20,7 +20,7 @@ const RegisterInsert: React.FC = (props) => {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
-  const token = "85a6198c-9017-35c2-92f3-09c341b6e9f0";
+  const token = "7359445a-7db4-3d29-8567-a9aa4c1a1ac5";
   useEffect(() => {
     const main = document.querySelector(".main") as HTMLElement;
     main.classList.add("register");

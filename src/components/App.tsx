@@ -185,7 +185,7 @@ const App: React.FC = () => {
                 {/* <Route><h2>ページは存在しません</h2></Route> */}
 
                 <Route
-                  path="/insert-users"
+                  path="/insert-users/:companyId"
                   render={(props) => (
                     <Page.InsertUsers thisPage="insert-users" {...props} />
                   )}

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 import { RoundedBtn } from "../../Atoms/Btn";
 import { Avatar } from "../../../assets/images/index";
+import { getMyData, deleteAccount } from "../../../assets/script/";
 const modal = {
   hidden: {
     left: "50vw",
@@ -20,6 +22,23 @@ interface Props {
 }
 
 const AccountDelete: React.FC<Props> = (props) => {
+  const [myData, setMyData] = useState<any>({});
+  const history = useHistory();
+  useEffect(() => {
+    getMyData().then((getData: any) => {
+      setMyData(getData.data);
+      console.log(getData.data);
+    });
+  }, []);
+
+  const deleteAccout = () => {
+    deleteAccount(myData.id).then((boolean) => {
+      if (boolean) {
+        history.push(`/login`);
+      }
+    });
+  };
+
   return (
     <motion.div
       className="modal modal--normal modal--accountDelete"
@@ -39,7 +58,11 @@ const AccountDelete: React.FC<Props> = (props) => {
       </p>
       <div className="flex">
         <p onClick={() => props.setShowModal(false)}>キャンセル</p>
-        <RoundedBtn txt="アカウントを削除" isDelete={"true"} />
+        <RoundedBtn
+          txt="アカウントを削除"
+          isDelete={"true"}
+          Func={deleteAccout}
+        />
       </div>
     </motion.div>
   );

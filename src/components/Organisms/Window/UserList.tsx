@@ -40,11 +40,11 @@ const UserList: React.FC<Props> = (props) => {
 
   let pageTtl: string, linkTo: string;
   if (props.thisPage === "insert-users") {
-    pageTtl = "この会社に就職した方";
-    linkTo = "company-users";
-  } else if (props.thisPage === "company-users") {
     pageTtl = "情報提供に協力した方";
     linkTo = "insert-users";
+  } else if (props.thisPage === "company-users") {
+    pageTtl = "この会社に就職した方";
+    linkTo = "company-users";
   }
 
   const renderUserList = () => {

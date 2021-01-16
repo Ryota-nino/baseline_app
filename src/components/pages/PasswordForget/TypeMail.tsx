@@ -7,9 +7,11 @@ import { useHistory } from "react-router-dom";
 const TypeMail: React.FC = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
+  
   useEffect(() => {
     const container = document.querySelector(".container");
     container?.classList.add("page-login");
+    
   }, []);
 
   const onSubmit = (data: any) => {

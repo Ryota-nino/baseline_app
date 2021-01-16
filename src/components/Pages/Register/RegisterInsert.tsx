@@ -5,7 +5,6 @@ import {
   CheckIcon,
 } from "../../../assets/images/index";
 import { useHistory } from "react-router-dom";
-import { SelectPrimary } from "../../Atoms/Input";
 import {
   indexJob,
   registerUser,
@@ -20,7 +19,6 @@ const RegisterInsert: React.FC = (props) => {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
-  const token = "7359445a-7db4-3d29-8567-a9aa4c1a1ac5";
   useEffect(() => {
     const main = document.querySelector(".main") as HTMLElement;
     main.classList.add("register");
@@ -41,7 +39,6 @@ const RegisterInsert: React.FC = (props) => {
 
   const selectBtnChanges = () => {
     const selectBtns = document.querySelectorAll(".select-btn");
-    console.log(selectBtns);
     selectBtns.forEach((btn: any) => {
       btn.addEventListener("click", () => {
         selectBtns.forEach((item) => {
@@ -76,10 +73,14 @@ const RegisterInsert: React.FC = (props) => {
     } else {
       data.icon = null;
     }
+    let token: any;
+    token = window.location.href;
+    token = token.match(/(?<==)([^=]+$)/)[0];
     delete data.agree_check;
     data.token = token;
+    console.log(token);
     registerUser(data).then((boolean) => {
-      if (boolean) history.push(`/register/send`);
+      if (boolean) history.push(`/register/complete`);
     });
   };
   const [image, setImage] = useState("");
@@ -143,6 +144,24 @@ const RegisterInsert: React.FC = (props) => {
                     </span>
                   )}
               </label>
+
+              {/* メールアドレス */}
+              {/* <label className="free-word">
+                <h3 className="heading6">
+                  メールアドレス<span className="cAttention">*</span>
+                </h3>
+                <input
+                  name={"email"}
+                  type={"email"}
+                  placeholder={"メールアドレス"}
+                  ref={register({ required: true })}
+                />
+                {errors.email && errors.email.type === "required" && (
+                  <span className="error-message">
+                    {"メールアドレスを入力してください"}
+                  </span>
+                )}
+              </label> */}
 
               {/* パスワード */}
               <label className="free-word">

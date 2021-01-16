@@ -21,7 +21,6 @@ const About: React.FC<Props> = (props) => {
   const [editId, setEditId] = useState<number>();
   const [deleteId, setDeleteId] = useState<number>();
   useEffect(() => {
-    console.log(props.companyData);
     getComment(props.companyData);
   }, []);
 
@@ -30,6 +29,7 @@ const About: React.FC<Props> = (props) => {
     const companyCommentsArray: any = [];
     companyData.company_information.forEach((data: any) => {
       const user = {
+        id: data.id,
         name: data.user.last_name + " " + data.user.first_name,
         annual: data.user.annual,
         comments: [] as any,
@@ -90,7 +90,7 @@ const About: React.FC<Props> = (props) => {
                 data.comments.map((comment: any) => {
                   return (
                     <Comment
-                      id={comment.id}
+                      id={data.id}
                       name={data.name}
                       year={data.annual + "年次"}
                       txt={comment.comment_content}
@@ -115,24 +115,29 @@ const About: React.FC<Props> = (props) => {
         getCompanyData={props.getCompanyData}
         getComment={getComment}
       />
-      <Modal
-        type="company-comment-edit"
-        showModal={showModal2}
-        setShowModal={setShowModal2}
-        companyId={props.companyId}
-        getCompanyData={props.getCompanyData}
-        getComment={getComment}
-        content={editContent}
-        editId={editId}
-      />
-      <Modal
-        type="company-comment-delete"
-        showModal={showModal3}
-        setShowModal={setShowModal3}
-        companyId={props.companyId}
-        getCompanyData={props.getCompanyData}
-        deleteId={deleteId}
-      />
+      {companyComments && (
+        <>
+          <Modal
+            type="company-comment-edit"
+            showModal={showModal2}
+            setShowModal={setShowModal2}
+            companyId={companyComments.id}
+            getCompanyData={props.getCompanyData}
+            getComment={getComment}
+            content={editContent}
+            editId={editId}
+          />
+          <Modal
+            type="company-comment-delete"
+            showModal={showModal3}
+            setShowModal={setShowModal3}
+            companyId={companyComments.id}
+            getCompanyData={props.getCompanyData}
+            getComment={getComment}
+            deleteId={deleteId}
+          />
+        </>
+      )}
     </>
   );
 };

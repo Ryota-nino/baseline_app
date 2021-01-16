@@ -62,13 +62,15 @@ const Modal: React.FC<Props> = (props) => {
     editComment(id, text);
     props.getCompanyData();
 
-    // props.getCompanyData().then((getData: any) => {
-    //   props.getComment(getData);
-    // });
+    props.getCompanyData().then((getData: any) => {
+      props.getComment(getData);
+    });
   };
   const onDeleteComment = (id: number) => {
     deleteMyActivity(id);
-    props.getCompanyData();
+    props.getCompanyData().then((getData: any) => {
+      props.getComment(getData);
+    });
   };
 
   const rootingModalRender = () => {

@@ -3,10 +3,18 @@ import { passwordReset } from "../../../assets/script";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 const Setting: React.FC = (props) => {
-  const token = "e3b3bbdf-7abc-47b3-b02e-b27048695fcf";
+  let token: any;
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
   const [isSame, setIsSame] = useState<boolean>(false);
+
+  useEffect(() => {
+    const container = document.querySelector(".container");
+    container?.classList.add("page-login");
+    token = window.location.href;
+    token = token.match(/(?<==)([^=]+$)/)[0];
+  }, []);
+
   const onSubmit = (data: any) => {
     // パスワードが一緒か判断
     const span = document.getElementById("isSame") as HTMLSpanElement;
@@ -25,11 +33,6 @@ const Setting: React.FC = (props) => {
       span.textContent = "メールアドレスを入力してください";
     }
   };
-
-  useEffect(() => {
-    const container = document.querySelector(".container");
-    container?.classList.add("page-login");
-  }, []);
   return (
     <div className="register">
       <form

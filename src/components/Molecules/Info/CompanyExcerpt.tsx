@@ -5,6 +5,12 @@ interface Props {
 }
 
 const CompanyExcerpt: React.FC<Props> = (props) => {
+  const checkTextLength = (MAX_LENGTH: number, el: any) => {
+    if (el.length > MAX_LENGTH) {
+      return el.substr(0, MAX_LENGTH) + "...";
+    }
+    return el;
+  };
   return (
     <article className="companyExcerpt-card">
       <img
@@ -19,7 +25,7 @@ const CompanyExcerpt: React.FC<Props> = (props) => {
         <h1 className="heading5">{props.companyData.company_name}</h1>
         <p className="companyExcerpt-card__link">
           <a href={props.companyData.company_url}>
-            {props.companyData.company_url}/
+            {checkTextLength(30, props.companyData.company_url)}
           </a>
         </p>
       </div>

@@ -29,8 +29,14 @@ const CompanyCard: React.FC<Props> = (props) => {
     let output = String(prefArray).replace(/,/g, " ");
     const MAX_LENGTH = 4;
     if (props.pref.length > MAX_LENGTH) {
-      const output = String(props.pref.slice(0, MAX_LENGTH) + "...");
-      return output.replace(/,/g, " ");
+      const output = props.pref.slice(0, MAX_LENGTH);
+      const array: any = [];
+      output.forEach((item: any) => {
+        array.push(String(item.name));
+      });
+
+      // output = array.slice(0, MAX_LENGTH)
+      return String(array).replace(/,/g, " ") + "...";
     }
     return output;
   };

@@ -58,6 +58,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
       })
       .then((userData) => {
         companyDetailUser(companyId, userData.id).then((getData: any) => {
+          console.log(getData.data);
           const myCompanyData = getData.data.user.company_information.filter(
             (item: any) => {
               return item.company_id == companyId;

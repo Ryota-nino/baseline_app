@@ -71,6 +71,7 @@ const About: React.FC<Props> = (props) => {
         </section>
         <section className="companyDetail-contents__section">
           <h2 className="heading6">従業員数</h2>
+          {console.log(props.companyData)}
           <p>{props.companyData.number_of_employees + "人以上"}</p>
         </section>
         <section className="companyDetail-contents__section">

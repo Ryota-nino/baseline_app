@@ -101,7 +101,7 @@ const MyPage: React.FC<Props> = (props) => {
             <img src={GearIcon} alt="" />
             アカウント設定へ
           </Link>
-          <ActivityMeter />
+          {/* <ActivityMeter /> */}
           <div className="activity-list">{renderMyActivities()}</div>
         </motion.section>
         <Modal

@@ -12,7 +12,7 @@ const News: React.FC = () => {
           </p>
         </div>
         <p className="newsBar__time">
-          <time dateTime="">2020.09.12</time>
+          <time dateTime="">2021.1.21</time>
         </p>
       </Link>
     </article>

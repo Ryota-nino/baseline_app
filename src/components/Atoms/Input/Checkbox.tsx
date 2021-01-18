@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CheckIcon } from "../../../assets/images/index";
 
 interface Props {
@@ -46,9 +46,14 @@ const Checkbox: React.FC<Props> = (props) => {
       }
     }
   };
-
   const isCheckedPref = () => {
-    return props.checkedPref?.some((pref: any) => props.id == pref.id);
+    return props.checkedPref?.some((pref: any) => {
+      if (props.id == pref.id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   };
   return (
     <>
@@ -60,7 +65,7 @@ const Checkbox: React.FC<Props> = (props) => {
         type={props.type}
         value={props.txt}
         name={props.keyName}
-        checked={isCheckedPref()}
+        defaultChecked={isCheckedPref()}
       />
       <label htmlFor={`input-${props.id}`} className={`${typeClass}`}>
         <img src={CheckIcon} alt="" />

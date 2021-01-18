@@ -30,6 +30,7 @@ const ImageUpload: React.FC<Props> = (props) => {
         name={props.name}
         id="PhotoUpaload"
         type="file"
+        accept="image/*"
         onChange={handleImage}
       />
     </div>

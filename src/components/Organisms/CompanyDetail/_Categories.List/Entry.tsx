@@ -29,10 +29,10 @@ const Entry: React.FC<Props> = (props) => {
     const entriesArray: any = [];
     console.log(props.companyData);
     props.companyData.company_information.forEach((data: any) => {
-      console.log(data);
+      let entryCard = {};
       data.entries.forEach((entry: any) => {
         if (entry) {
-          const entryCard = {
+          entryCard = {
             id: entry.company_information_id,
             user_id: data.user.id,
             userName: data.user.last_name + " " + data.user.first_name,
@@ -42,9 +42,11 @@ const Entry: React.FC<Props> = (props) => {
             internship: data.internship.name,
             graduationYear: data.user.year_of_graduation,
           };
-          entriesArray.push(entryCard);
         }
       });
+      if (data.entries.length != 0) {
+        entriesArray.push(entryCard);
+      }
     });
 
     setEntries(entriesArray);

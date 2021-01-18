@@ -57,11 +57,12 @@ const CompanyInsert: React.FC<Props> = (props) => {
     { isEmpty3: false },
   ];
   const employeesObj = [
-    { id: 100, name: "100人" },
-    { id: 300, name: "300人" },
-    { id: 500, name: "500人" },
-    { id: 800, name: "800人" },
-    { id: 1000, name: "1000人" },
+    { id: 1, name: "1人以上" },
+    { id: 30, name: "30人以上" },
+    { id: 100, name: "100人以上" },
+    { id: 500, name: "500人以上" },
+    { id: 800, name: "800人以上" },
+    { id: 1000, name: "1000人以上" },
   ];
 
   const inputChangeHandler = (e: any) => {
@@ -83,6 +84,7 @@ const CompanyInsert: React.FC<Props> = (props) => {
     const prefecture = document
       .querySelector(".prefecture-accordion")
       ?.querySelectorAll('input[type="checkbox"]')!;
+
     prefecture.forEach((item: any) => {
       if (item.checked) {
         const numberPref: number = Number(item.dataset.key);
@@ -95,7 +97,7 @@ const CompanyInsert: React.FC<Props> = (props) => {
       company_name: company_name.value,
       business_description: business,
       prefecture_id: prefArray,
-      number_of_employees: 1000,
+      number_of_employees: employee_number,
       logo_image: "",
       company_url: url.value,
     };

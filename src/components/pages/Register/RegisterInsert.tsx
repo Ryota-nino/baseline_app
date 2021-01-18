@@ -308,7 +308,12 @@ const RegisterInsert: React.FC = (props) => {
               {/* サムネイル画像 */}
               <div className="label-input">
                 <p>サムネイル画像</p>
-                <input type="file" name="icon" ref={register} />
+                <input
+                  type="file"
+                  name="icon"
+                  accept="image/*"
+                  ref={register}
+                />
                 <img className="image-preview" src={image} alt="" />
               </div>
 

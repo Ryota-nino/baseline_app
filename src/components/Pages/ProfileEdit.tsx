@@ -180,7 +180,7 @@ const ProfileEdit: React.FC<Props> = (props) => {
                       <span className="select-image__txt">画像を選択</span>
                     </div>
                   </div>
-                  <input type="file" onChange={handleImage} />
+                  <input type="file" accept="image/*" onChange={handleImage} />
                 </label>
               </div>
 

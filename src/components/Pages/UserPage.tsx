@@ -59,7 +59,7 @@ const UserPage: React.FC<Props> = (props) => {
           year={data.activity.posted_year}
           txt={data.activity.content}
           updateTime={data.updated_at}
-          isArrow={true}
+          isArrow={false}
           type={"user"}
           icon={userData.icon_image_url}
         />

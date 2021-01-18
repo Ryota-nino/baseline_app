@@ -13,6 +13,7 @@ const PrefectureSelector: React.FC<Props> = (props) => {
     //   ".check-radio-input"
     // ) as NodeListOf<HTMLInputElement>;
     // console.log(checkboxes);
+    console.log("A");
   };
 
   const prefSelectorToggle = () => {
@@ -36,6 +37,7 @@ const PrefectureSelector: React.FC<Props> = (props) => {
                       txt={data.name}
                       checkboxFunc={onCheckHandler}
                       checkedPref={props.companyPref}
+                      category="prefectures"
                     />
                   </li>
                 );

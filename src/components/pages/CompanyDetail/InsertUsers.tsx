@@ -21,7 +21,6 @@ const InsertUsers: React.FC<Props> = (props) => {
     });
 
     detailCompany(companyId).then((getData: any) => {
-      console.log("A");
       if (getData.data) {
         setCompanyData(getData.data);
         setLoading(true);
@@ -77,7 +76,8 @@ const InsertUsers: React.FC<Props> = (props) => {
                               <p>
                                 {data.user.year_of_graduation}卒 |&nbsp;
                                 <span>
-                                  {jobs![data.user.desired_occupations].name}
+                                  {jobs![data.user.desired_occupations] &&
+                                    jobs![data.user.desired_occupations].name}
                                   希望
                                 </span>
                               </p>

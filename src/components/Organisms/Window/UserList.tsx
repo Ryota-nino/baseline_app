@@ -63,7 +63,11 @@ const UserList: React.FC<Props> = (props) => {
                     <div>
                       <p className="user-excerpt__year">
                         {data.graduationYear}卒 |&nbsp;
-                        <span>{jobs[data.desiredOccupations].name}希望</span>
+                        <span>
+                          {jobs[data.desiredOccupations] &&
+                            jobs[data.desiredOccupations].name}
+                          希望
+                        </span>
                       </p>
                     </div>
                   </div>

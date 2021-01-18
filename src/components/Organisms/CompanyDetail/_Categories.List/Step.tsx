@@ -25,10 +25,12 @@ const Step: React.FC<Props> = (props) => {
   const [steps, setSteps] = useState<any>(null);
   useEffect(() => {
     const stepArray: any = [];
+    console.log(props.companyData);
     props.companyData.company_information.forEach((data: any) => {
+      let stepCard = {};
       data.selections.forEach((step: any) => {
         if (step) {
-          const stepCard = {
+          stepCard = {
             id: step.id,
             user_id: data.user.id,
             userName: data.user.last_name + " " + data.user.first_name,
@@ -38,9 +40,11 @@ const Step: React.FC<Props> = (props) => {
             internship: data.internship.name,
             graduationYear: data.user.year_of_graduation,
           };
-          stepArray.push(stepCard);
         }
       });
+      if (data.selections.length != 0) {
+        stepArray.push(stepCard);
+      }
     });
     setSteps(stepArray);
   }, []);

@@ -11,9 +11,6 @@ interface Props {
 }
 
 const AccountSetting: React.FC<Props> = (props) => {
-
-  
-
   const history = useHistory();
   const [showModal, setShowModal] = useState<boolean>(false);
   const renderDOM = () => {
@@ -56,7 +53,7 @@ const AccountSetting: React.FC<Props> = (props) => {
                   </p>
                 </Link>
               </li>
-              <li className="setting-item">
+              {/* <li className="setting-item">
                 <Link to="/01/account-setting/mail">
                   <p className="setting-item__label">メールアドレス</p>
                   <p className="setting-item__value">
@@ -66,7 +63,7 @@ const AccountSetting: React.FC<Props> = (props) => {
                     <img src={ArrowIcon} alt="" />
                   </p>
                 </Link>
-              </li>
+              </li> */}
               <li
                 className="setting-item delete"
                 onClick={() => setShowModal(true)}

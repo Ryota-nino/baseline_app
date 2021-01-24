@@ -10,6 +10,7 @@ interface Props {
   keyName?: string;
   className?: string;
   category?: string;
+  isChecked?: boolean;
 }
 
 const CheckboxWithText: React.FC<Props> = (props) => {
@@ -24,6 +25,7 @@ const CheckboxWithText: React.FC<Props> = (props) => {
         checkboxFunc={props.checkboxFunc ? props.checkboxFunc : ""}
         txt={props.txt}
         checkedPref={props.checkedPref}
+        isChecked={props.isChecked}
       />
       <span>{props.txt}</span>
     </label>

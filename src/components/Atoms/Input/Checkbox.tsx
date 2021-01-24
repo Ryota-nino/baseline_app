@@ -10,6 +10,7 @@ interface Props {
   className?: string;
   txt?: string;
   checkedPref?: string[];
+  isChecked?: boolean;
 }
 
 const Checkbox: React.FC<Props> = (props) => {
@@ -55,6 +56,15 @@ const Checkbox: React.FC<Props> = (props) => {
       }
     });
   };
+  const onDefaultCheckedFunc = ()=> {
+    if(props.checkedPref){
+      isCheckedPref()
+    }
+    if(props.isChecked){
+      return true;
+    }
+  }
+  
   return (
     <>
       <input
@@ -65,7 +75,7 @@ const Checkbox: React.FC<Props> = (props) => {
         type={props.type}
         value={props.txt}
         name={props.keyName}
-        defaultChecked={isCheckedPref()}
+        defaultChecked={onDefaultCheckedFunc()}
       />
       <label htmlFor={`input-${props.id}`} className={`${typeClass}`}>
         <img src={CheckIcon} alt="" />

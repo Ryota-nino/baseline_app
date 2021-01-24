@@ -163,3 +163,50 @@ export const editComment = (comment_id, comment_content) => {
       })
   });
 };
+
+export const employmentstatusEdit =(content) => {
+  return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    return apiClient
+      .post(`/api/employmentstatus/edit`, 
+        content
+      )
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+
+          return true;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response.status === 401 || error.response.status === 422 || error.response.status === 402) {
+          alert("失敗");
+          return false;
+        }
+        return false;
+      })
+  });
+};
+
+export const showEmploymentStatus = (id) => {
+  return apiClient.get("/sanctum/csrf-cookie").then((response) => {
+    return apiClient
+      .get(`/api/employmentstatus/show/${id}`)
+      .then((response) => {
+        if (response.status !== 200) {
+          return false;
+        }
+        return response;
+      })
+      .catch((error) => {
+        console.error(error);
+        if (
+          error.response.status === 401 ||
+          error.response.status === 422 ||
+          error.response.status === 500
+        ) {
+          alert("データ取得失敗");
+        }
+      });
+  });
+};

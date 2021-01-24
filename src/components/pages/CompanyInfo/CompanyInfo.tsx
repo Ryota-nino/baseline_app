@@ -13,6 +13,8 @@ import {
   detailCompany,
   companyDetailUser,
   getMyData,
+  employmentstatusEdit,
+  showEmploymentStatus
 } from "../../../assets/script";
 interface Props {
   myData: any;
@@ -27,8 +29,19 @@ const CompanyInfo: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [myData, setMyData] = useState<any>();
   const [myCompanyInfo, setMyCompanyInfo] = useState([]);
+  const [occupationalCategoryId, setOccupationalCategoryId] = useState();
+  const [isOfferd, setIsOfferd] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(companyId)
+    showEmploymentStatus(companyId).then((getData:any) => {
+      if(getData) {
+        if(getData.data.decision_offer) {
+          setIsOfferd(true);
+        }
+      }
+      
+    })
     detailCompany(companyId).then((getData: any) => {
       if (getData.data) {
         setCompanyData({
@@ -59,6 +72,7 @@ const CompanyInfo: React.FC<Props> = (props) => {
       .then((userData) => {
         companyDetailUser(companyId, userData.id).then((getData: any) => {
           console.log(getData.data);
+          setOccupationalCategoryId(getData.data.user.desired_occupations);
           const myCompanyData = getData.data.user.company_information.filter(
             (item: any) => {
               return item.company_id == companyId;
@@ -74,6 +88,23 @@ const CompanyInfo: React.FC<Props> = (props) => {
     const text = txt;
     return text.substr(2, 2);
   };
+
+  const onEmploymentsEdit = ((content:any)=> {
+    console.log(occupationalCategoryId);
+    const decisionOffer = document.querySelector('input[name="decision_offer"]')! as HTMLInputElement;
+    
+    let decisionOfferNum = 0;
+    if(decisionOffer.checked) decisionOfferNum = 1;
+    const sendObj = {
+      company_id: companyData.id,
+      decision_offer: decisionOfferNum,
+      occupational_category_id: Number(occupationalCategoryId)
+    }
+    console.log(sendObj)
+    employmentstatusEdit(sendObj).then(boolean => {
+      history.push(`/company-detail/${companyData.id}/about`);
+    });
+  });
 
   const isType = (item: any) => {
     if (item.interviews.length != 0) {
@@ -124,9 +155,11 @@ const CompanyInfo: React.FC<Props> = (props) => {
                 <div>
                   <CheckboxWithText
                     type="checkbox"
+                    keyName="decision_offer"
                     txt="あなたはこの企業に入社予定ですか？"
+                    isChecked={isOfferd}
                   />
-                  <RoundedBtn txt="保存" isType="button" />
+                  <RoundedBtn Func={onEmploymentsEdit} txt="保存" isType="button" />
                 </div>
               </form>
             </div>

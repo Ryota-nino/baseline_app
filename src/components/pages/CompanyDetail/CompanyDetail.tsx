@@ -17,6 +17,9 @@ const CompanyDetail: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   useEffect(() => {
+    showCompany(1).then(getData => {
+      console.log(getData)
+    })
     getCompanyData();
   }, []);
   const getCompanyData = () => {

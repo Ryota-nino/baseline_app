@@ -139,7 +139,19 @@ const CompanyInsert: React.FC<Props> = (props) => {
         <h2 className="heading1">企業登録</h2>
         <div className="companyInsert-window">
           <form action="#" method="POST">
-         　　
+          　　            <Secondary
+              defaultValue={companyData.company_name}
+              name="company_name"
+              type="text"
+              labelTxt="企業名"
+              isRequired={true}
+              isRequiredTxt={true}
+              placeholderTxt="ビジョナル株式会社"
+              isError={true}
+              isIcon={false}
+              onChange={inputChangeHandler}
+              errorMessage={state.message.company_name}
+            />
             <Secondary
               defaultValue={companyData.frigana}
               name="furigana"

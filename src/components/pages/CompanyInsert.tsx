@@ -146,7 +146,7 @@ const CompanyInsert: React.FC<Props> = (props) => {
               labelTxt="企業名"
               isRequired={true}
               isRequiredTxt={true}
-              placeholderTxt="ビジョナル株式会社"
+              placeholderTxt="ヤフー株式会社"
               isError={true}
               isIcon={false}
               onChange={inputChangeHandler}
@@ -159,7 +159,7 @@ const CompanyInsert: React.FC<Props> = (props) => {
               labelTxt="フリガナ"
               isRequired={true}
               isRequiredTxt={true}
-              placeholderTxt="カブシキガイシャビジョナル"
+              placeholderTxt="カブシキガイシャヤフー"
               isError={true}
               isIcon={false}
               onChange={inputChangeHandler}

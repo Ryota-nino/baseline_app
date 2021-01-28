@@ -14,7 +14,7 @@ interface Props {
 
 const CompanyCard: React.FC<Props> = (props) => {
   const checkTextLength = () => {
-    const MAX_LENGTH = 60;
+    const MAX_LENGTH = 30;
     if (props.business.length > MAX_LENGTH) {
       return props.business.substr(0, MAX_LENGTH) + "...";
     }

@@ -61,7 +61,7 @@ const SearchStudent: React.FC = () => {
             graduationYear={data.year_of_graduation}
             job={data.desired_occupation.name}
             updateTime={data.updated_at}
-            iconPath={data.icon_image_path}
+            iconPath={data.icon_image_url}
           />
         ))}
       </motion.div>

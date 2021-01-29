@@ -56,7 +56,7 @@ const SearchStudent: React.FC = () => {
         {usersData.users.map((data: any) => (
           <StudentList
             id={data.id}
-            name={`${data.last_name} ${data.first_name}`}
+            name={`${data.first_name} ${data.last_name}`}
             student_number={data.student_number}
             graduationYear={data.year_of_graduation}
             job={data.desired_occupation.name}

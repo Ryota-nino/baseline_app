@@ -43,7 +43,7 @@ const CompanyDetail: React.FC<Props> = (props) => {
         exit="out"
         variants={pageTransitionNormal}
       >
-        <button className="btn pageBack-link" onClick={() => history.goBack()}>
+        <button className="btn pageBack-link" onClick={() => history.push(`/search-company`)}>
           <span className="heading4">戻る</span>
         </button>
         <div className="company-detail">

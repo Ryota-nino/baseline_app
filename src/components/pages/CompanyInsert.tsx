@@ -205,6 +205,7 @@ const CompanyInsert: React.FC<Props> = (props) => {
               name="employee_number"
               ttl="従業員数"
               selectObj={employeesObj}
+              defaultValue={companyData.number_of_employees}
             />
 
             <div className="company-insert__enter">

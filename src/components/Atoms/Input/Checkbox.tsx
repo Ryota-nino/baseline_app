@@ -18,6 +18,8 @@ const Checkbox: React.FC<Props> = (props) => {
   if (props.type === "checkbox") {
     typeClass = "input-checkbox input-checkbox--normal";
   }
+  useEffect(()=> {
+  },[]);
   const checkHandler = (e: any) => {
     e.stopPropagation();
     // 卒業生の在籍
@@ -32,8 +34,10 @@ const Checkbox: React.FC<Props> = (props) => {
         props.checkboxFunc(e.currentTarget.name, false);
       }
     }
+    
     // 都道府県
     if (props.category == "prefectures" && props.checkboxFunc) {
+      console.log("B")
       if (e.currentTarget.checked) {
         props.checkboxFunc(e.currentTarget.name, true);
       } else {
@@ -58,7 +62,7 @@ const Checkbox: React.FC<Props> = (props) => {
   };
   const onDefaultCheckedFunc = ()=> {
     if(props.checkedPref){
-      isCheckedPref()
+      return isCheckedPref();
     }
     if(props.isChecked){
       return true;
